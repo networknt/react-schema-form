@@ -1,0 +1,20 @@
+# EditorConfig: http://EditorConfig.org
+# all files defaults
+[**]
+# Unix-style newlines with a newline ending
+end_of_line = lf
+insert_final_newline = true
+# Set default charset
+charset = utf-8
+# 4 space indentation
+indent_style = space
+indent_size = 4
+# trim whitespaces
+trim_trailing_whitespace = true
+# always insert final newline
+insert_final_newline = true
+
+# 2 spaces indent for config files
+[{package.json}]
+indent_style = space
+indent_size = 2
