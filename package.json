@@ -1,0 +1,67 @@
+{
+  "name": "react-schema-form",
+  "version": "0.1.0",
+  "description": "React json schema form",
+  "keywords": [
+    "json schema",
+    "schema form",
+    "react",
+    "react-component",
+    "form"
+  ],
+  "author": "Steve Hu",
+  "license": "MIT",
+  "main": "./lib/index",
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "css",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/networknt/react-schema-form.git"
+  },
+  "babel": {
+    "stage": 0
+  },
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "object-assign": "^4.0.1",
+    "objectpath": "^1.2.1",
+    "react": "^0.13.3",
+    "tv4": "^1.2.7"
+  },
+  "devDependencies": {
+    "babel": "^5.8.21",
+    "babel-eslint": "^4.0.8",
+    "babel-jest": "^5.3.0",
+    "babel-loader": "^5.3.1",
+    "chai": "^3.2.0",
+    "d3": "^3.5.6",
+    "eslint": "^1.1.0",
+    "eslint-plugin-react": "^3.2.2",
+    "flux": "^2.0.3",
+    "jest-cli": "^0.5.0",
+    "rimraf": "^2.4.2",
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.10.1"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "preversion": "webpack -p && git add dist",
+    "prepublish": "rimraf lib && babel src -d lib",
+    "start": "webpack-dev-server -d --config example/webpack.config.js",
+    "test": "npm run lint && jest"
+  },
+  "jest": {
+    "testPathDirs": [
+      "src"
+    ],
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  }
+}
