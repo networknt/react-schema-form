@@ -5,9 +5,11 @@ var React = require('react');
 var { SchemaForm } = require('react-schema-form');
 require('react-select/less/select.less');
 var Select = require('react-select');
+var $ = require('jquery');
+var Ace = require('react-ace');
+
 
 var ExamplePage = React.createClass({
-
     getInitialState: function() {
         return {
             tests: [
@@ -20,6 +22,9 @@ var ExamplePage = React.createClass({
                 { label: "TitleMap Examples", value: 'data/titlemaps.json' },
                 { label: "Kitchen Sink", value: 'data/sink.json' }
             ],
+            schema: '',
+            form: '',
+            selected: '',
             itParsesSchema: true,
             itParsesForm: true
         };
@@ -27,6 +32,21 @@ var ExamplePage = React.createClass({
 
     onSelectChange: function(val) {
         console.log("Selected:" + val);
+        $.ajax({
+            type: 'GET',
+            url: val
+        }).done(function(data) {
+            console.log('done', data);
+            this.setState({schema: JSON.stringify(data.schema, undefined, 2), form: JSON.stringify(data.form, undefined, 2), selected : val})
+        }.bind(this));
+    },
+
+    onFormChange: function(val) {
+        console.log("onFormChange:" + val);
+    },
+
+    onSchemaChange: function(val) {
+        console.log("onSchemaChange:" + val);
     },
 
     render: function() {
@@ -45,17 +65,15 @@ var ExamplePage = React.createClass({
                         <div className="form-group">
                             <Select
                                 name="selectTest"
-                                value="data/simple.json"
+                                value={this.state.selected}
                                 options={this.state.tests}
                                 onChange={this.onSelectChange}>
                             </Select>
                         </div>
                         <h3>Form</h3>
-                        <div ui-ace="{ theme: 'monokai',mode:'json'}"
-                             ng-className="{red: !itParsesForm}" ng-model="formJson" className="form-control form"></div>
+                        <Ace mode="json" theme="github" onChange={this.onFormChange} name="aceForm" value={this.state.form} editorProps={{$blockScrolling: true}}/>
                         <h3>Schema</h3>
-                        <div ui-ace="{ theme: 'monokai',mode:'json'}"
-                             ng-className="{red: !itParses}" ng-model="schemaJson" className="form-control schema"></div>
+                        <Ace mode="json" theme="github" onChange={this.onSchemaChange} name="aceSchema" value={this.state.schema} editorProps={{$blockScrolling: true}}/>
                     </div>
                 </div>
             </div>
