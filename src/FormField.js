@@ -55,6 +55,27 @@ var FormField = React.createClass({
                         return <FormField key={item.key} schema ={item} />
                     }.bind(this))
                 )
+        } else if (this.props.schema.type === 'array') {
+            field =
+                React.createElement("div", {className: "schema-form-array"},
+                    React.createElement("h3", null, this.props.schema.title),
+                    React.createElement("ol", {className: "list-group"},
+                        React.createElement("li", {className: "list-group-item"},
+                            this.props.schema.items.map(function(item){
+                                React.createElement("button", {type: "button", className: "close pull-right"},
+                                    React.createElement("span", {"aria-hidden": "true"}, "×"), React.createElement("span", {class: "sr-only"}, "Close")
+                                )
+                            })
+                        )
+                    ),
+                    React.createElement("div", {className: "clearfix"},
+                        React.createElement("button", {type: "button",
+                                className: "btn btn-default pull-right"},
+                            React.createElement("i", {class: "glyphicon glyphicon-plus"}),
+                            "Add"
+                        )
+                    )
+                )
         } else if (this.props.schema.type === 'submit') {
             field = (
                 <div className="form-group schema-form-submit">
