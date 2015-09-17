@@ -45,6 +45,7 @@ var ExamplePage = React.createClass({
                 formJson: JSON.stringify(data.form, undefined, 2),
                 selected : val,
                 schema: data.schema,
+                model: {},
                 form: data.form
             })
         }.bind(this));

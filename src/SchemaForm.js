@@ -24,19 +24,21 @@ var SchemaForm = React.createClass({
         this.props.onModelChange(this.state.model);
     },
 
-    renderSchema: function (form, index) {
+    renderSchema: function(form, model, index, onChange) {
         var result;
         switch (form.type) {
             case 'number':
-                result = <Number model={this.state.model} form={form} key={index} onChange={this.onChange} />
+                result = <Number model={model} form={form} key={index} onChange={onChange} />
                 break;
             case 'text':
-                result = <Text model={this.state.model} form={form} key={index} onChange={this.onChange} />
+                result = <Text model={model} form={form} key={index} onChange={onChange} />
                 break;
             case 'textarea':
-                result = <Textarea model={this.state.model} form={form} key={index} onChange={this.onChange} />
+                result = <Textarea model={model} form={form} key={index} onChange={onChange} />
                 break;
-
+            case 'array':
+                result = <Array model={model} form={form} key={index} onChange={onChange} />
+                break;
         }
         return result;
     },
@@ -45,7 +47,7 @@ var SchemaForm = React.createClass({
         var merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
         console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         var forms = merged.map(function(form, index) {
-            return this.renderSchema(form, index);
+            return this.renderSchema(form, this.state.model, index, this.onChange);
         }.bind(this))
 
         return (
