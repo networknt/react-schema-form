@@ -24,6 +24,7 @@ var ExamplePage = React.createClass({
             ],
             schema: {},
             form: [],
+            model: {},
             schemaJson: '',
             formJson: '',
             selected: '',
@@ -49,6 +50,10 @@ var ExamplePage = React.createClass({
         }.bind(this));
     },
 
+    onModelChange: function(model) {
+        console.log('onModelChange:', model);
+        this.setState({model: model});
+    },
     onFormChange: function(val) {
         //console.log("onFormChange:" + val);
     },
@@ -62,7 +67,7 @@ var ExamplePage = React.createClass({
         var schemaForm = '';
         if (this.state.form.length > 0) {
             schemaForm = (
-                <SchemaForm schema={this.state.schema} form={this.state.form} />
+                <SchemaForm schema={this.state.schema} form={this.state.form} onModelChange={this.onModelChange} />
             )
         }
 
@@ -74,7 +79,7 @@ var ExamplePage = React.createClass({
                         <h3>The Generated Form</h3>
                         {schemaForm}
                         <h3>Model</h3>
-                        <pre>pretty</pre>
+                        <pre>{JSON.stringify(this.state.model,undefined,2,2)}</pre>
                     </div>
                     <div className="col-sm-8">
                         <h3>Select Example</h3>

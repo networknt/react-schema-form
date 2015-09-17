@@ -5,7 +5,8 @@
     "properties": {
       "name":  {
         "title": "Name",
-        "type": "string"
+        "type": "string",
+        "default": "Steve"
       },
       "email":  {
         "title": "Email",
