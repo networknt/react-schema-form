@@ -68,7 +68,7 @@ var ExamplePage = React.createClass({
         var schemaForm = '';
         if (this.state.form.length > 0) {
             schemaForm = (
-                <SchemaForm schema={this.state.schema} form={this.state.form} onModelChange={this.onModelChange} />
+                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} />
             )
         }
 

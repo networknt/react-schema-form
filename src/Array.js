@@ -2,14 +2,12 @@
  * Created by steve on 14/09/15.
  */
 var React = require('react');
+var classNames = require('classnames');
 var utils = require('./utils');
 var _ = require('lodash');
 
-var formDefCache = {};
-var model = {};
-
 var Array = React.createClass({
-
+    /*
     setIndex: function(index) {
         return function() {
             if (this.props.schema.key) {
@@ -83,13 +81,34 @@ var Array = React.createClass({
         }
         return list;
     },
-
+    */
     render: function() {
-        var field;
-
+        let arrayClasses = classNames('schema-form-array', this.props.form.htmlClass);
+        let listClasses = classNames('list-group-item', this.props.form.fieldHtmlClass);
+        console.log('array classes', arrayClasses);
+        console.log('array = ', this.props.form.items);
         return (
-            <div>{field}</div>
-        );
+            React.createElement("div", {className: {arrayClasses}},
+                React.createElement("h3", null, this.props.form.title),
+                React.createElement("ol", {className: "list-group"},
+                    React.createElement("li", {className: {listClasses}},
+                        this.props.form.items.map(function(item, index){
+                            React.createElement("button", {type: "button", className: "close pull-right"},
+                                React.createElement("span", {"aria-hidden": "true"}, "×"), React.createElement("span", {className: "sr-only"}, "Close")
+                            )
+                            return this.props.renderSchema(item, this.props.model, index, this.props.onChange);
+                        }.bind(this))
+                    )
+                ),
+                React.createElement("div", {className: "clearfix"},
+                    React.createElement("button", {type: "button",
+                            className: "btn btn-default pull-right"},
+                        React.createElement("i", {className: "glyphicon glyphicon-plus"}),
+                        "Add"
+                    )
+                )
+            )
+        )
     }
 });
 

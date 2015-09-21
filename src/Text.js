@@ -3,6 +3,7 @@
  */
 var React = require('react');
 var utils = require('./utils');
+var classNames = require('classnames');
 
 var Text = React.createClass({
     onChange: function(e) {
@@ -26,22 +27,29 @@ var Text = React.createClass({
         if(!value && this.props.form.schema && this.props.form.schema['default']) {
             value = this.props.form.schema['default'];
         }
+        //this.props.onChange(this.props.form.key, value);
         return value;
     },
 
     render: function() {
 
         let value = this.defaultValue();
-
+        let formClasses = classNames('form-group', this.props.form.htmlClass);
+        let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
+        let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);
         console.log('value', value);
         console.log('id', this.props.form.key.slice(-1)[0]);
+        console.log('formClasses', formClasses);
+        console.log('labelClasses', labelClasses);
+        console.log('fieldClasses', fieldClasses);
+
         return (
-            <div className="form-group">
-                <label className="control-label">{this.props.form.title}</label>
+            <div className={formClasses}>
+                <label className={labelClasses}>{this.props.form.title}</label>
                 <input type={this.props.form.type}
                     onChange={this.onChange}
                     placeholder={this.props.form.placeholder}
-                    className="form-control"
+                    className={fieldClasses}
                     defaultValue={value}
                     id={this.props.form.key.slice(-1)[0]}
                     name={this.props.form.key.slice(-1)[0]}/>
