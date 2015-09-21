@@ -6,22 +6,24 @@ var classNames = require('classnames');
 var utils = require('./utils');
 var _ = require('lodash');
 
+var formDefCache = {};
+
 var Array = React.createClass({
-    /*
+
     setIndex: function(index) {
         return function() {
-            if (this.props.schema.key) {
-                this.props.schema.key[this.props.schema.key.indexOf('')] = index;
+            if (this.props.form.key) {
+                this.props.form.key[this.props.form.key.indexOf('')] = index;
             }
         };
     },
 
     getSubForm: function() {
-        var subForm = this.props.schema.items[0];
-        if(this.props.schema.items.length > 1) {
+        var subForm = this.props.form.items[0];
+        if(this.props.form.items.length > 1) {
             subForm = {
                 type: 'section',
-                items: this.props.schema.items.map(function(item) {
+                items: this.props.form.items.map(function(item) {
                     return item;
                 })
             }
@@ -81,7 +83,17 @@ var Array = React.createClass({
         }
         return list;
     },
-    */
+
+    deleteFromArray: function(index) {
+        list.splice(index, 1);
+
+        // Trigger validation.
+        if (scope.validateArray) {
+            scope.validateArray();
+        }
+        return list;
+    },
+
     render: function() {
         let arrayClasses = classNames('schema-form-array', this.props.form.htmlClass);
         let listClasses = classNames('list-group-item', this.props.form.fieldHtmlClass);
