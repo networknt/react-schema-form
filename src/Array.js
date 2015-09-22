@@ -7,13 +7,16 @@ var utils = require('./utils');
 var _ = require('lodash');
 
 var formDefCache = {};
+var list = [];
+var subForm;
 
 var Array = React.createClass({
 
     setIndex: function(index) {
-        return function() {
-            if (this.props.form.key) {
-                this.props.form.key[this.props.form.key.indexOf('')] = index;
+        return function(form) {
+            console.log('form', form);
+            if (form.key) {
+                form.key[form.key.indexOf('')] = index;
             }
         };
     },
@@ -36,7 +39,7 @@ var Array = React.createClass({
             if (this.getSubForm()) {
                 var copy = _.cloneDeep(subForm);
                 copy.arrayIndex = index;
-                utils.traverseForm(copy, setIndex(index));
+                utils.traverseForm(copy, this.setIndex(index));
                 formDefCache[index] = copy;
             }
         }
@@ -45,29 +48,30 @@ var Array = React.createClass({
 
     appendToArray: function() {
         var len = list.length;
-        var copy = scope.copyWithIndex(len);
-        schemaForm.traverseForm(copy, function(part) {
+        console.log('before copywithindex this.props.form.items', this.props.form.items);
+        var copy = this.copyWithIndex(len);
+        utils.traverseForm(copy, function(part) {
 
             if (part.key) {
                 var def;
-                if (angular.isDefined(part['default'])) {
+                if (part['default']) {
                     def = part['default'];
                 }
-                if (angular.isDefined(part.schema) &&
-                    angular.isDefined(part.schema['default'])) {
+                if (part.schema &&
+                    part.schema['default']) {
                     def = part.schema['default'];
                 }
 
-                if (angular.isDefined(def)) {
-                    sfSelect(part.key, scope.model, def);
+                if (def) {
+                    utils.selectOrSet(part.key, this.props.model, def);
                 }
             }
-        });
+        }.bind(this));
 
         // If there are no defaults nothing is added so we need to initialize
         // the array. undefined for basic values, {} or [] for the others.
         if (len === list.length) {
-            var type = sfSelect('schema.items.type', form);
+            var type = utils.selectOrSet('schema.items.type', this.props.form);
             var dflt;
             if (type === 'object') {
                 dflt = {};
@@ -75,11 +79,6 @@ var Array = React.createClass({
                 dflt = [];
             }
             list.push(dflt);
-        }
-
-        // Trigger validation.
-        if (scope.validateArray) {
-            scope.validateArray();
         }
         return list;
     },
@@ -92,6 +91,39 @@ var Array = React.createClass({
             scope.validateArray();
         }
         return list;
+    },
+
+    componentWillMount: function () {
+        console.log('this.props.form.items', this.props.form.items);
+        if (this.props.form.items) {
+
+            // To be more compatible with JSON Form we support an array of items
+            // in the form definition of "array" (the schema just a value).
+            // for the subforms code to work this means we wrap everything in a
+            // section. Unless there is just one.
+            subForm = this.props.form.items[0];
+            if (this.props.form.items.length > 1) {
+                subForm = {
+                    type: 'section',
+                    items: this.props.form.items.map(function(item) {
+                        return item;
+                    })
+                };
+            }
+
+        }
+
+        list = utils.selectOrSet(this.props.form.key, this.props.model);
+        console.log('componentWillMount list ', list);
+        if(!list) {
+            list = [];
+        }
+        console.log('componentWillMount list =', list);
+        if(list.length === 0) {
+            console.log('before appendToArray this.props.form.items', this.props.form.items);
+            this.appendToArray();
+        }
+
     },
 
     render: function() {

@@ -330,9 +330,11 @@ function traverseSchema(schema, fn, path, ignoreArrays) {
 
 function traverseForm(form, fn) {
     fn(form);
-    form.items.forEach(function(f) {
-        traverseForm(f, fn);
-    });
+    if(form.items) {
+        form.items.forEach(function(f) {
+            traverseForm(f, fn);
+        });
+    }
 
     if (form.tabs) {
         form.tabs.forEach(function(tab) {
