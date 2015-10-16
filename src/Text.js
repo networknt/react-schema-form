@@ -12,6 +12,14 @@ var Text = React.createClass({
         this.props.onChange(this.props.form.key, e.target.value);
     },
 
+    componentDidMount() {
+        // update parent model
+        let value = this.defaultValue();
+        if(value) {
+            this.props.onChange(this.props.form.key, this.defaultValue());
+        }
+    },
+
     defaultValue: function() {
         // check if there is a value in the model, if there is, display it. Otherwise, check if
         // there is a default value, display it.
