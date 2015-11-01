@@ -78,6 +78,7 @@ var Array = React.createClass({
             } else if (type === 'array') {
                 dflt = [];
             }
+            console.log('list = ', list);
             list.push(dflt);
         }
         return list;
@@ -126,27 +127,37 @@ var Array = React.createClass({
 
     },
 
+    handleAdd: function() {
+        console.log('handleAdd is called');
+        this.appendToArray();
+    },
+
     render: function() {
         let arrayClasses = classNames('schema-form-array', this.props.form.htmlClass);
         let listClasses = classNames('list-group-item', this.props.form.fieldHtmlClass);
         console.log('array classes', arrayClasses);
         console.log('array = ', this.props.form.items);
+        console.log('render list = ', list);
         return (
             React.createElement("div", {className: {arrayClasses}},
                 React.createElement("h3", null, this.props.form.title),
-                React.createElement("ol", {className: "list-group"},
-                    React.createElement("li", {className: {listClasses}},
-                        this.props.form.items.map(function(item, index){
-                            React.createElement("button", {type: "button", className: "close pull-right"},
-                                React.createElement("span", {"aria-hidden": "true"}, "×"), React.createElement("span", {className: "sr-only"}, "Close")
-                            )
-                            return this.props.renderSchema(item, this.props.model, index, this.props.onChange);
-                        }.bind(this))
+                list.map(function(listItem, listIndex) {
+                    console.log('listItem = ', listItem);
+                    React.createElement("ol", {className: "list-group"},
+                        React.createElement("li", {className: {listClasses}},
+                            listItem.map(function(item, index){
+                                React.createElement("button", {type: "button", className: "close pull-right"},
+                                    React.createElement("span", {"aria-hidden": "true"}, "×"), React.createElement("span", {className: "sr-only"}, "Close")
+                                );
+                                return this.props.renderSchema(item, this.props.model, index, this.props.onChange);
+                            }.bind(this))
+                        )
+
                     )
-                ),
+                }.bind(this)),
                 React.createElement("div", {className: "clearfix"},
                     React.createElement("button", {type: "button",
-                            className: "btn btn-default pull-right"},
+                            className: "btn btn-default pull-right", onClick: this.handleAdd},
                         React.createElement("i", {className: "glyphicon glyphicon-plus"}),
                         "Add"
                     )
