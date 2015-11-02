@@ -7,17 +7,27 @@ var classNames = require('classnames');
 
 var Checkbox = React.createClass({
 
-    onChange: function(e) {
-        console.log('name = ', e.target.name);
-        console.log('value = ', e.target.value);
-        this.props.onChange(this.props.form.key, e.target.value);
+    getInitialState: function () {
+        let state = this.defaultValue();
+        return {checked: state};
+    },
+
+    onChange: function() {
+        let state = null;
+        if(this.state.checked == true) {
+            state = false;
+        } else {
+            state = true;
+        }
+        this.setState({checked: state});
+        this.props.onChange(this.props.form.key, state);
     },
 
     componentDidMount() {
         // update parent model
         let value = this.defaultValue();
         if(value) {
-            this.props.onChange(this.props.form.key, this.defaultValue());
+            this.props.onChange(this.props.form.key, value);
         }
     },
 
@@ -50,7 +60,7 @@ var Checkbox = React.createClass({
                 <label className={labelClasses}>
                     <input type="checkbox"
                            className={fieldClasses}
-                           defaultValue={value}
+                           checked={value}
                            onChange={this.onChange}
                            name={this.props.form.key.slice(-1)[0]}/>
                     <span>{this.props.form.title}</span>
