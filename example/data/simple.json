@@ -14,6 +14,19 @@
         "pattern": "^\\S+@\\S+$",
         "description": "Email will be used for evil."
       },
+      "environment": {
+        "type": "string",
+        "title": "Environment",
+        "enum": [
+          "LOCAL",
+          "IDT5N",
+          "SIT1N",
+          "SIT2N",
+          "SIT3N",
+          "UAT1N",
+          "UAT2N"
+        ]
+      },
       "comment": {
         "title": "Comment",
         "type": "string",
@@ -26,6 +39,7 @@
   "form": [
     "name",
     "email",
+    "environment",
     {
       "key": "comment",
       "type": "textarea",

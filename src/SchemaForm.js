@@ -12,6 +12,8 @@ var Help = require('./Help');
 var Checkbox = require('./Checkbox');
 var Submit = require('./Submit');
 var Array = require('./Array');
+var Select = require('./Select');
+
 /*
 var SchemaForm = React.createClass({
 
@@ -81,6 +83,7 @@ class SchemaForm extends React.Component {
 
     renderSchema (form, model, index, onChange) {
         var result;
+        console.log('form = ', form);
         switch (form.type) {
             case 'number':
                 result = <Number model={model} form={form} key={index} onChange={onChange} />
@@ -105,6 +108,9 @@ class SchemaForm extends React.Component {
                 break;
             case 'array':
                 result = <Array model={model} form={form} key={index} onChange={onChange} renderSchema={this.renderSchema} />
+                break;
+            case 'select':
+                result = <Select model={model} form={form} key={index} onChange={onChange} />
                 break;
         }
         console.log('renderSchema', result);
