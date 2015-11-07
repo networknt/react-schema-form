@@ -1,6 +1,8 @@
 /**
  * Created by steve on 12/09/15.
  */
+'use strict';
+
 var React = require('react');
 var { SchemaForm } = require('react-schema-form');
 require('react-select/less/select.less');
@@ -8,19 +10,12 @@ var Select = require('react-select');
 var $ = require('jquery');
 var Ace = require('react-ace');
 
-
 var ExamplePage = React.createClass({
     getInitialState: function() {
         return {
             tests: [
                 { label: "Simple", value: 'data/simple.json' },
-                { label: "Basic JSON Schema Type", value: 'data/types.json' },
-                { label: "Bootstrap Grid", value: 'data/grid.json' },
-                { label: "Complex Key Support", value: 'data/complex-keys.json' },
-                { label: "Array", value: 'data/array.json' },
-                { label: "Tab Array", value: 'data/tabarray.json' },
-                { label: "TitleMap Examples", value: 'data/titlemaps.json' },
-                { label: "Kitchen Sink", value: 'data/sink.json' }
+                { label: "Basic JSON Schema Type", value: 'data/types.json' }
             ],
             schema: {},
             form: [],

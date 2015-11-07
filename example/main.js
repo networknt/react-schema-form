@@ -1,4 +1,6 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
+
 var ExamplePage  = require('./ExamplePage');
 
 var warn = console.warn;
@@ -8,4 +10,4 @@ console.warn = function(warning) {
     warn.apply(console, arguments);
 };
 
-React.render(<ExamplePage />, document.body);
+ReactDOM.render(<ExamplePage />, document.body);

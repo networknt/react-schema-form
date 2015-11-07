@@ -4,7 +4,6 @@
 'use strict';
 
 var React = require('react');
-
 var TestSelect = React.createClass({
     displayName: 'TestSelect',
 
