@@ -43,6 +43,11 @@ var Select = React.createClass({
         if(!value && this.props.form.schema && this.props.form.schema['default']) {
             value = this.props.form.schema['default'];
         }
+
+        // The first value in the option will be the default.
+        if(!value && this.props.form.titleMap && this.props.form.titleMap[0].value) {
+            value = this.props.form.titleMap[0].value;
+        }
         //this.props.onChange(this.props.form.key, value);
         return value;
     },

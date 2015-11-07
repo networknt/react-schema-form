@@ -19,12 +19,11 @@
         "title": "Environment",
         "enum": [
           "LOCAL",
-          "IDT5N",
-          "SIT1N",
-          "SIT2N",
-          "SIT3N",
-          "UAT1N",
-          "UAT2N"
+          "SIT1",
+          "SIT2",
+          "SIT3",
+          "UAT1",
+          "UAT2"
         ]
       },
       "comment": {
