@@ -10,7 +10,7 @@ var Submit = React.createClass({
     render: function() {
         let formClasses = classNames('form-group', 'schema-form-submit', this.props.form.htmlClass);
         let fieldClasses = classNames('btn', 'btn-primary', this.props.form.fieldHtmlClass);
-        console.log('Submit formclasses', formClasses);
+        //console.log('Submit formclasses', formClasses);
         return (
             <div className={formClasses}>
                 <input type="submit"

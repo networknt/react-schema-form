@@ -217,8 +217,8 @@ var defaults = {
 
 function defaultFormDefinition(name, schema, options) {
     var rules = defaults[stripNullType(schema.type)];
-    console.log('defaultFormDefinition:defaults = ', defaults);
-    console.log('defaultFormDefinition:rules = ', rules);
+    //console.log('defaultFormDefinition:defaults = ', defaults);
+    //console.log('defaultFormDefinition:rules = ', rules);
     if (rules) {
         var def;
         for (var i = 0; i < rules.length; i++) {
@@ -242,16 +242,16 @@ function getDefaults(schema, ignore, globalOptions) {
     var lookup = {}; //Map path => form obj for fast lookup in merging
     ignore = ignore || {};
     globalOptions = globalOptions || {};
-    console.log('getDefaults:schema.type = ', schema.type);
+    //console.log('getDefaults:schema.type = ', schema.type);
     if (stripNullType(schema.type) === 'object') {
-        console.log('getDefaults:schema.properties = ', schema.properties);
+        //console.log('getDefaults:schema.properties = ', schema.properties);
         for(var k in schema.properties) {
             if(schema.properties.hasOwnProperty(k)) {
                 if (ignore[k] !== true) {
                     var required = schema.required && schema.required.indexOf(k) !== -1;
-                    console.log('getDefaults:required = ', required);
-                    console.log('getDefaults: k = ', k);
-                    console.log('getDefaults: v = ', schema.properties[k]);
+                    //console.log('getDefaults:required = ', required);
+                    //console.log('getDefaults: k = ', k);
+                    //console.log('getDefaults: v = ', schema.properties[k]);
                     var def = defaultFormDefinition(k, schema.properties[k], {
                         path: [k],         // Path to this property in bracket notation.
                         lookup: lookup,    // Extra map to register with. Optimization for merger.
@@ -259,7 +259,7 @@ function getDefaults(schema, ignore, globalOptions) {
                         required: required, // Is it required? (v4 json schema style)
                         global: globalOptions // Global options, including form defaults
                     });
-                    console.log('getDefaults:def = ', def);
+                    //console.log('getDefaults:def = ', def);
                     if (def) {
                         form.push(def);
                     }
@@ -493,15 +493,16 @@ function selectOrSet(projection, obj, valueToSet) {
 
 
 function validate(form, value) {
+    console.log('utils validate form ', form);
+    console.log('utils validate value = ', value);
     if (!form) {
         return {valid: true};
     }
     var schema = form.schema;
-
     if (!schema) {
         return {valid: true};
     }
-
+    console.log('utils validate schema = ', schema);
     // Input of type text and textareas will give us a viewValue of ''
     // when empty, this is a valid value in a schema and does not count as something
     // that breaks validation of 'required'. But for our own sanity an empty field should
@@ -512,6 +513,7 @@ function validate(form, value) {
 
     // Numbers fields will give a null value, which also means empty field
     if (form.type === 'number' && value === null) {
+        console.log('utils validate form.type is number');
         value = undefined;
     }
 
@@ -529,6 +531,8 @@ function validate(form, value) {
     if (typeof value !== 'undefined') {
         valueWrap[propName] = value;
     }
+    console.log('utils validate valueWrap = ', valueWrap);
+    console.log('utils validate wrap = ', wrap);
     return tv4.validateResult(valueWrap, wrap);
 
 }

@@ -14,7 +14,7 @@ var Array = React.createClass({
 
     setIndex: function(index) {
         return function(form) {
-            console.log('form', form);
+            //console.log('form', form);
             if (form.key) {
                 form.key[form.key.indexOf('')] = index;
             }
@@ -48,7 +48,7 @@ var Array = React.createClass({
 
     appendToArray: function() {
         var len = list.length;
-        console.log('before copywithindex this.props.form.items', this.props.form.items);
+        //console.log('before copywithindex this.props.form.items', this.props.form.items);
         var copy = this.copyWithIndex(len);
         utils.traverseForm(copy, function(part) {
 
@@ -78,7 +78,7 @@ var Array = React.createClass({
             } else if (type === 'array') {
                 dflt = [];
             }
-            console.log('list = ', list);
+            //console.log('list = ', list);
             list.push(dflt);
         }
         return list;
@@ -95,7 +95,7 @@ var Array = React.createClass({
     },
 
     componentWillMount: function () {
-        console.log('this.props.form.items', this.props.form.items);
+        //console.log('this.props.form.items', this.props.form.items);
         if (this.props.form.items) {
 
             // To be more compatible with JSON Form we support an array of items
@@ -115,34 +115,34 @@ var Array = React.createClass({
         }
 
         list = utils.selectOrSet(this.props.form.key, this.props.model);
-        console.log('componentWillMount list ', list);
+        //console.log('componentWillMount list ', list);
         if(!list) {
             list = [];
         }
-        console.log('componentWillMount list =', list);
+        //console.log('componentWillMount list =', list);
         if(list.length === 0) {
-            console.log('before appendToArray this.props.form.items', this.props.form.items);
+            //console.log('before appendToArray this.props.form.items', this.props.form.items);
             this.appendToArray();
         }
 
     },
 
     handleAdd: function() {
-        console.log('handleAdd is called');
+        //console.log('handleAdd is called');
         this.appendToArray();
     },
 
     render: function() {
         let arrayClasses = classNames('schema-form-array', this.props.form.htmlClass);
         let listClasses = classNames('list-group-item', this.props.form.fieldHtmlClass);
-        console.log('array classes', arrayClasses);
-        console.log('array = ', this.props.form.items);
-        console.log('render list = ', list);
+        //console.log('array classes', arrayClasses);
+        //console.log('array = ', this.props.form.items);
+        //console.log('render list = ', list);
         return (
             React.createElement("div", {className: {arrayClasses}},
                 React.createElement("h3", null, this.props.form.title),
                 list.map(function(listItem, listIndex) {
-                    console.log('listItem = ', listItem);
+                    //console.log('listItem = ', listItem);
                     React.createElement("ol", {className: "list-group"},
                         React.createElement("li", {className: {listClasses}},
                             listItem.map(function(item, index){

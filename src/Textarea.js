@@ -8,8 +8,8 @@ var utils = require('./utils');
 var Textarea = React.createClass({
 
     onChange: function(e) {
-        console.log('name = ', e.target.name);
-        console.log('value = ', e.target.value);
+        //console.log('name = ', e.target.name);
+        //console.log('value = ', e.target.value);
         this.props.onChange(this.props.form.key, e.target.value);
     },
 

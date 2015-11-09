@@ -9,7 +9,7 @@ var Section = React.createClass({
 
     render: function() {
         let classes = classNames('schema-form-section', this.props.form.htmlClass);
-        console.log('section classes', classes);
+        //console.log('section classes', classes);
         return (
             React.DOM.div( {className:{classes}},
                 this.props.form.items.map(function(item, index) {

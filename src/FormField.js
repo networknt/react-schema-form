@@ -85,7 +85,7 @@ var FormField = React.createClass({
                 </div>
             )
         } else {
-            console.log('the type is not implemented yet', this.props.schema.type);
+            //console.log('the type is not implemented yet', this.props.schema.type);
             field = (
                 <div className="form-group">Not implemented yet</div>
             )

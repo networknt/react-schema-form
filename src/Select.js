@@ -13,8 +13,8 @@ var Select = React.createClass({
     },
 
     onChange: function(e) {
-        console.log('name = ', e.target.name);
-        console.log('value = ', e.target.value);
+        //console.log('name = ', e.target.name);
+        //console.log('value = ', e.target.value);
         let state = e.target.value;
         this.setState({selected: state});
         this.props.onChange(this.props.form.key, state);
@@ -58,10 +58,10 @@ var Select = React.createClass({
         let formClasses = classNames('form-group', 'schema-form-select', this.props.form.htmlClass);
         let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
         let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);
-        console.log('id', this.props.form.key.slice(-1)[0]);
-        console.log('formClasses', formClasses);
-        console.log('labelClasses', labelClasses);
-        console.log('fieldClasses', fieldClasses);
+        //console.log('id', this.props.form.key.slice(-1)[0]);
+        //console.log('formClasses', formClasses);
+        //console.log('labelClasses', labelClasses);
+        //console.log('fieldClasses', fieldClasses);
 
         return (
             <div className={formClasses}>

@@ -74,16 +74,14 @@ class SchemaForm extends React.Component {
     }
 
     onChange(key, val) {
-        console.log('onChange val', val);
-        console.log('onChange key', key);
+        //console.log('onChange val', val);
+        //console.log('onChange key', key);
         this.setState({model: utils.selectOrSet(key, this.state.model, val)});
-        console.log('model = ', this.state.model);
         this.props.onModelChange(this.state.model);
     }
 
     renderSchema (form, model, index, onChange) {
         var result;
-        console.log('form = ', form);
         switch (form.type) {
             case 'number':
                 result = <Number model={model} form={form} key={index} onChange={onChange} />
@@ -113,16 +111,17 @@ class SchemaForm extends React.Component {
                 result = <Select model={model} form={form} key={index} onChange={onChange} />
                 break;
         }
-        console.log('renderSchema', result);
+        //console.log('renderSchema', result);
         return result;
     }
 
     render() {
         var merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
-        console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
+        //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
+        //console.log('SchemaForm render merged ', merged);
         var forms = merged.map(function(form, index) {
             return this.renderSchema(form, this.state.model, index, this.onChange);
-        }.bind(this))
+        }.bind(this));
 
         return (
             <div>{forms}</div>
