@@ -2,14 +2,19 @@
  * Created by steve on 15/09/15.
  */
 var React = require('react');
-
 var utils = require('./utils');
+var classNames = require('classnames');
 
 var Textarea = React.createClass({
 
     onChange: function(e) {
         //console.log('name = ', e.target.name);
         //console.log('value = ', e.target.value);
+        var result = utils.validate(this.props.form, e.target.value);
+        this.valid = result.valid;
+        if(this.valid === false) {
+            this.error = result.error.message;
+        }
         this.props.onChange(this.props.form.key, e.target.value);
     },
 
@@ -41,16 +46,30 @@ var Textarea = React.createClass({
 
     render: function() {
         let value = this.defaultValue();
+
+        let formClasses = classNames('form-group', 'schema-form-textarea', { 'has-error': this.valid === false }, this.props.form.htmlClass);
+        let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
+        let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);
+        let help = this.props.form.description || '';
+        if(!this.valid || this.props.form.description) {
+            help = (
+                <div className="help-block">
+                    {this.error || this.props.form.description}
+                </div>
+            )
+        }
+
         return (
-            <div className="form-group schema-form-textarea">
-                <label>{this.props.form.title}</label>
-                <textarea className="form-control"
+            <div className={formClasses}>
+                <label className={labelClasses}>{this.props.form.title}</label>
+                <textarea className={fieldClasses}
                     id={this.props.form.key.slice(-1)[0]}
                     onChange={this.onChange}
                     defaultValue={value}
                     placeholder={this.props.form.placeholder}
                     name={this.props.form.key.slice(-1)[0]}>
                 </textarea>
+                {help}
             </div>
         );
     }

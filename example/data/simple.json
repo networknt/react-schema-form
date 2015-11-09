@@ -30,7 +30,8 @@
         "title": "Comment",
         "type": "string",
         "maxLength": 20,
-        "validationMessage": "Don't be greedy!"
+        "validationMessage": "Don't be greedy!",
+        "description": "Please write your comment here."
       }
     },
     "required": ["name","email","comment"]

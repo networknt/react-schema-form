@@ -494,7 +494,6 @@ function selectOrSet(projection, obj, valueToSet) {
 
 function validate(form, value) {
     console.log('utils validate form ', form);
-    console.log('utils validate value = ', value);
     if (!form) {
         return {valid: true};
     }
@@ -531,6 +530,7 @@ function validate(form, value) {
     if (typeof value !== 'undefined') {
         valueWrap[propName] = value;
     }
+    console.log('utils validate value = ', typeof value);
     console.log('utils validate valueWrap = ', valueWrap);
     console.log('utils validate wrap = ', wrap);
     return tv4.validateResult(valueWrap, wrap);

@@ -8,9 +8,23 @@ var classNames = require('classnames');
 var Number = React.createClass({
 
     onChange: function(e) {
-        //console.log('name = ', e.target.name);
-        //console.log('value = ', e.target.value);
-        this.props.onChange(this.props.form.key, e.target.value);
+        console.log('value =', e.target.value);
+        console.log('value type = ', typeof e.target.value);
+        // convert e.target.value to number
+        console.log('this.props.form', this.props.form);
+        let value = null;
+        if(this.props.form.schema.type === 'integer' && e.target.value.indexOf(".") == -1) {
+            value = parseInt(e.target.value);
+        } else {
+            value = parseFloat(e.target.value);
+        }
+        console.log('value after conversion', typeof value);
+        var result = utils.validate(this.props.form, value);
+        this.valid = result.valid;
+        if(this.valid === false) {
+            this.error = result.error.message;
+        }
+        this.props.onChange(this.props.form.key, value);
     },
 
     componentDidMount() {
@@ -42,9 +56,18 @@ var Number = React.createClass({
 
     render: function() {
         let value = this.defaultValue();
-        let formClasses = classNames('form-group', this.props.form.htmlClass);
+        let formClasses = classNames('form-group', { 'has-error': this.valid === false }, this.props.form.htmlClass);
         let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
         let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);
+
+        let help = this.props.form.description || '';
+        if(!this.valid || this.props.form.description) {
+            help = (
+                <div className="help-block">
+                    {this.error || this.props.form.description}
+                </div>
+            )
+        }
 
         return (
             <div className={formClasses}>
@@ -56,6 +79,7 @@ var Number = React.createClass({
                        defaultValue={value}
                        id={this.props.form.key.slice(-1)[0]}
                        name={this.props.form.key.slice(-1)[0]}/>
+                {help}
             </div>
         );
     }
