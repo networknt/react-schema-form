@@ -35,6 +35,7 @@ var ExamplePage = React.createClass({
             type: 'GET',
             url: val
         }).done(function(data) {
+
             //console.log('done', data);
             //console.log('data.schema = ', data.schema);
             //console.log('data.form = ', data.form);
