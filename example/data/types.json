@@ -7,6 +7,10 @@
         "type": "string",
         "minLength": 3
       },
+      "anotherstring":  {
+        "type": "string",
+        "minLength": 3
+      },
       "integer":  {
         "type": "integer"
       },

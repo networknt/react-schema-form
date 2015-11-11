@@ -67,7 +67,7 @@ class SchemaForm extends React.Component {
         //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         //console.log('SchemaForm render merged ', merged);
         let forms = merged.map(function(form, index) {
-            return this.renderSchema(form, this.props.model, index, this.onChange);
+            return this.renderSchema(form, this.props.model, form.key[0], this.onChange);
         }.bind(this));
 
         return (
