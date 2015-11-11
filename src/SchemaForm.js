@@ -14,70 +14,17 @@ var Submit = require('./Submit');
 var Array = require('./Array');
 var Select = require('./Select');
 
-/*
-var SchemaForm = React.createClass({
-
-    getInitialState: function() {
-        return {
-            model: this.props.model || {}
-        };
-    },
-
-    onChange : function(key, val) {
-        console.log('onChange val', val);
-        console.log('onChange key', key);
-        this.setState({model: utils.selectOrSet(key, this.state.model, val)});
-        console.log('model = ', this.state.model);
-        this.props.onModelChange(this.state.model);
-    },
-
-    renderSchema: function(form, model, index, onChange) {
-        var result;
-        switch (form.type) {
-            case 'number':
-                result = <Number model={model} form={form} key={index} onChange={onChange} />
-                break;
-            case 'text':
-                result = <Text model={model} form={form} key={index} onChange={onChange} />
-                break;
-            case 'textarea':
-                result = <Textarea model={model} form={form} key={index} onChange={onChange} />
-                break;
-            case 'array':
-                result = <Array model={model} form={form} key={index} onChange={onChange} />
-                break;
-        }
-        return result;
-    },
-
-    render: function() {
-        var merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
-        console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
-        var forms = merged.map(function(form, index) {
-            return this.renderSchema(form, this.state.model, index, this.onChange);
-        }.bind(this))
-
-        return (
-            <div>{forms}</div>
-        );
-    }
-});
-*/
-
 class SchemaForm extends React.Component {
 
     constructor(props) {
         super();
-
-        this.state = {model: {}};
         this.onChange = this.onChange.bind(this);
     }
 
     onChange(key, val) {
-        //console.log('onChange val', val);
-        //console.log('onChange key', key);
-        this.setState({model: utils.selectOrSet(key, this.state.model, val)});
-        this.props.onModelChange(this.state.model);
+        console.log('SchemaForm onChange val', val);
+        console.log('SchemaForm onChange key', key);
+        this.props.onModelChange(key, val);
     }
 
     renderSchema (form, model, index, onChange) {
@@ -116,11 +63,11 @@ class SchemaForm extends React.Component {
     }
 
     render() {
-        var merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
+        let merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
         //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         //console.log('SchemaForm render merged ', merged);
-        var forms = merged.map(function(form, index) {
-            return this.renderSchema(form, this.state.model, index, this.onChange);
+        let forms = merged.map(function(form, index) {
+            return this.renderSchema(form, this.props.model, index, this.onChange);
         }.bind(this));
 
         return (

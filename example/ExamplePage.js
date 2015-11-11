@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react');
+var utils = require('../src/utils');
 var { SchemaForm } = require('react-schema-form');
 require('react-select/less/select.less');
 var Select = require('react-select');
@@ -48,9 +49,10 @@ var ExamplePage = React.createClass({
         }.bind(this));
     },
 
-    onModelChange: function(model) {
-        console.log('onModelChange:', model);
-        this.setState({model: model});
+    onModelChange: function(key, val) {
+        console.log('ExamplePage.onModelChange:', key);
+        console.log('ExamplePage.onModelChange:', val);
+        this.setState({model: utils.selectOrSet(key, this.state.model, val)});
     },
 
     onFormChange: function(val) {

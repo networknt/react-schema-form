@@ -31,6 +31,8 @@ var Text = React.createClass({
     defaultValue: function() {
         // check if there is a value in the model, if there is, display it. Otherwise, check if
         // there is a default value, display it.
+        console.log('Text.defaultValue key', this.props.form.key);
+        console.log('Text.defaultValue model', this.props.model);
         let value = utils.selectOrSet(this.props.form.key, this.props.model);
         console.log('Text defaultValue value = ', value);
 
