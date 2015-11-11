@@ -6,26 +6,28 @@ var utils = require('./utils');
 var classNames = require('classnames');
 
 var Text = React.createClass({
-    onChange: function(e) {
-        //console.log('name = ', e.target.name);
-        //console.log('value = ', e.target.value);
-        var result = utils.validate(this.props.form, e.target.value);
-        this.valid = result.valid;
-        if(this.valid === false) {
-            this.error = result.error.message;
-        }
-        //console.log('valid = ', this.valid);
-        this.props.onChange(this.props.form.key, e.target.value);
+    getInitialState: function() {
+        var value = this.defaultValue();
+        let validationResult = utils.validate(this.props.form, value);
+        return {
+            value: value,
+            valid: !!(validationResult.valid || !value),
+            error: !validationResult.valid && value ? validationResult.error.message : null
+        };
     },
 
-    componentDidMount() {
-        //console.log('Text ', this.props.form);
-        // update parent model
-        let value = this.defaultValue();
-        //console.log('Text.componentDidMount defaultValue = ' + value + ' key= ' + this.props.form.key);
-        if(value) {
-            this.props.onChange(this.props.form.key, this.defaultValue());
-        }
+    /**
+     * Called when <input> value changes.
+     * @param e
+     */
+    onChange: function(e) {
+        let validationResult = utils.validate(this.props.form, e.target.value);
+        this.setState({
+            value: e.target.value,
+            valid: validationResult.valid,
+            error: validationResult.valid ? null : validationResult.error.message
+        });
+        this.props.onChange(this.props.form.key, e.target.value);
     },
 
     defaultValue: function() {
@@ -50,23 +52,15 @@ var Text = React.createClass({
     },
 
     render: function() {
-
-        let value = this.defaultValue();
-        //console.log('Text.render defaultValue = ' +  value + ' key = ' + this.props.form.key);
-        let formClasses = classNames('form-group', { 'has-error': this.valid === false }, this.props.form.htmlClass);
+        let formClasses = classNames('form-group', { 'has-error' : this.state.valid === false }, this.props.form.htmlClass, { 'has-success' : this.state.valid === true && this.state.value != null});
         let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
         let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);
-        //console.log('value', value);
-        //console.log('id', this.props.form.key.slice(-1)[0]);
-        //console.log('formClasses', formClasses);
-        //console.log('labelClasses', labelClasses);
-        //console.log('fieldClasses', fieldClasses);
-        //console.log('this.props.form.description', this.props.form.description);
+
         let help = this.props.form.description || '';
-        if(!this.valid || this.props.form.description) {
+        if(!this.state.valid || this.props.form.description) {
             help = (
                 <div className="help-block">
-                    {this.error || this.props.form.description}
+                    {this.state.error || this.props.form.description}
                 </div>
             )
         }
@@ -78,7 +72,7 @@ var Text = React.createClass({
                     onChange={this.onChange}
                     placeholder={this.props.form.placeholder}
                     className={fieldClasses}
-                    defaultValue={value}
+                    defaultValue={this.state.value}
                     id={this.props.form.key.slice(-1)[0]}
                     name={this.props.form.key.slice(-1)[0]}/>
                 {help}
