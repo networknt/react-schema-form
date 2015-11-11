@@ -36,8 +36,8 @@ var ExamplePage = React.createClass({
             url: val
         }).done(function(data) {
             //console.log('done', data);
-            console.log('data.schema = ', data.schema);
-            console.log('data.form = ', data.form);
+            //console.log('data.schema = ', data.schema);
+            //console.log('data.form = ', data.form);
             this.setState({
                 schemaJson: JSON.stringify(data.schema, undefined, 2),
                 formJson: JSON.stringify(data.form, undefined, 2),
@@ -50,8 +50,8 @@ var ExamplePage = React.createClass({
     },
 
     onModelChange: function(key, val) {
-        console.log('ExamplePage.onModelChange:', key);
-        console.log('ExamplePage.onModelChange:', val);
+        //console.log('ExamplePage.onModelChange:', key);
+        //console.log('ExamplePage.onModelChange:', val);
         this.setState({model: utils.selectOrSet(key, this.state.model, val)});
     },
 
@@ -79,9 +79,9 @@ var ExamplePage = React.createClass({
 
         var schemaForm = '';
         if (this.state.form.length > 0) {
-            console.log('schema = ', this.state.schema);
-            console.log('form = ', this.state.schema);
-            console.log('model = ', this.state.model);
+            //console.log('schema = ', this.state.schema);
+            //console.log('form = ', this.state.schema);
+            //console.log('model = ', this.state.model);
             schemaForm = (
                 <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} />
             )

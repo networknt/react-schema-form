@@ -22,7 +22,7 @@ var Text = React.createClass({
         //console.log('Text ', this.props.form);
         // update parent model
         let value = this.defaultValue();
-        console.log('Text.componentDidMount defaultValue = ' + value + ' key= ' + this.props.form.key);
+        //console.log('Text.componentDidMount defaultValue = ' + value + ' key= ' + this.props.form.key);
         if(value) {
             this.props.onChange(this.props.form.key, this.defaultValue());
         }
@@ -52,7 +52,7 @@ var Text = React.createClass({
     render: function() {
 
         let value = this.defaultValue();
-        console.log('Text.render defaultValue = ' +  value + ' key = ' + this.props.form.key);
+        //console.log('Text.render defaultValue = ' +  value + ' key = ' + this.props.form.key);
         let formClasses = classNames('form-group', { 'has-error': this.valid === false }, this.props.form.htmlClass);
         let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
         let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);

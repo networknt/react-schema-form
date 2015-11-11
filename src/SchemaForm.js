@@ -22,8 +22,8 @@ class SchemaForm extends React.Component {
     }
 
     onChange(key, val) {
-        console.log('SchemaForm onChange val', val);
-        console.log('SchemaForm onChange key', key);
+        //console.log('SchemaForm onChange val', val);
+        //console.log('SchemaForm onChange key', key);
         this.props.onModelChange(key, val);
     }
 
