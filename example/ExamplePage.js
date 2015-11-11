@@ -52,14 +52,25 @@ var ExamplePage = React.createClass({
         console.log('onModelChange:', model);
         this.setState({model: model});
     },
+
     onFormChange: function(val) {
-        console.log("onFormChange:" + val);
-        this.setState({formJson: val, form: JSON.parse(val)});
+        //console.log("onFormChange:" + val);
+        try {
+            let f = JSON.parse(val);
+            this.setState({formJson: val, form: f});
+        } catch (e) {
+            this.setState({formJson: val})
+        }
     },
 
     onSchemaChange: function(val) {
-        console.log("onSchemaChange:" + val);
-        this.setState({schemaJson: val, schema: JSON.parse(val)});
+        //console.log("onSchemaChange:" + val);
+        try {
+            let s = JSON.parse(val);
+            this.setState({schemaJson: val, schema: s});
+        } catch (e) {
+            this.setState({schemaJson: val})
+        }
     },
 
     render: function() {
