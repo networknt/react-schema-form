@@ -14,15 +14,16 @@ var Text = React.createClass({
         if(this.valid === false) {
             this.error = result.error.message;
         }
-        console.log('valid = ', this.valid);
+        //console.log('valid = ', this.valid);
         this.props.onChange(this.props.form.key, e.target.value);
     },
 
     componentDidMount() {
-        console.log('Text ', this.props.form);
+        //console.log('Text ', this.props.form);
         // update parent model
         let value = this.defaultValue();
         if(value) {
+            console.log('default value is set here.ta')
             this.props.onChange(this.props.form.key, this.defaultValue());
         }
     },
@@ -31,7 +32,7 @@ var Text = React.createClass({
         // check if there is a value in the model, if there is, display it. Otherwise, check if
         // there is a default value, display it.
         let value = utils.selectOrSet(this.props.form.key, this.props.model);
-        //console.log('value', value);
+        console.log('Text defaultValue value = ', value);
 
         // check if there is a default value
         if(!value && this.props.form['default']) {
@@ -49,6 +50,7 @@ var Text = React.createClass({
     render: function() {
 
         let value = this.defaultValue();
+        console.log('render value = ', value);
         let formClasses = classNames('form-group', { 'has-error': this.valid === false }, this.props.form.htmlClass);
         let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
         let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);
@@ -57,7 +59,7 @@ var Text = React.createClass({
         //console.log('formClasses', formClasses);
         //console.log('labelClasses', labelClasses);
         //console.log('fieldClasses', fieldClasses);
-        console.log('this.props.form.description', this.props.form.description);
+        //console.log('this.props.form.description', this.props.form.description);
         let help = this.props.form.description || '';
         if(!this.valid || this.props.form.description) {
             help = (

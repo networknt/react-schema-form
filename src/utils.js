@@ -493,7 +493,7 @@ function selectOrSet(projection, obj, valueToSet) {
 
 
 function validate(form, value) {
-    console.log('utils validate form ', form);
+    //console.log('utils validate form ', form);
     if (!form) {
         return {valid: true};
     }
@@ -501,7 +501,7 @@ function validate(form, value) {
     if (!schema) {
         return {valid: true};
     }
-    console.log('utils validate schema = ', schema);
+    //console.log('utils validate schema = ', schema);
     // Input of type text and textareas will give us a viewValue of ''
     // when empty, this is a valid value in a schema and does not count as something
     // that breaks validation of 'required'. But for our own sanity an empty field should
@@ -512,7 +512,7 @@ function validate(form, value) {
 
     // Numbers fields will give a null value, which also means empty field
     if (form.type === 'number' && value === null) {
-        console.log('utils validate form.type is number');
+        //console.log('utils validate form.type is number');
         value = undefined;
     }
 
@@ -530,9 +530,9 @@ function validate(form, value) {
     if (typeof value !== 'undefined') {
         valueWrap[propName] = value;
     }
-    console.log('utils validate value = ', typeof value);
-    console.log('utils validate valueWrap = ', valueWrap);
-    console.log('utils validate wrap = ', wrap);
+    //console.log('utils validate value = ', typeof value);
+    //console.log('utils validate valueWrap = ', valueWrap);
+    //console.log('utils validate wrap = ', wrap);
     return tv4.validateResult(valueWrap, wrap);
 
 }

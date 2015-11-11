@@ -8,17 +8,17 @@ var classNames = require('classnames');
 var Number = React.createClass({
 
     onChange: function(e) {
-        console.log('value =', e.target.value);
-        console.log('value type = ', typeof e.target.value);
+        //console.log('value =', e.target.value);
+        //console.log('value type = ', typeof e.target.value);
         // convert e.target.value to number
-        console.log('this.props.form', this.props.form);
+        //console.log('this.props.form', this.props.form);
         let value = null;
         if(this.props.form.schema.type === 'integer' && e.target.value.indexOf(".") == -1) {
             value = parseInt(e.target.value);
         } else {
             value = parseFloat(e.target.value);
         }
-        console.log('value after conversion', typeof value);
+        //console.log('value after conversion', typeof value);
         var result = utils.validate(this.props.form, value);
         this.valid = result.valid;
         if(this.valid === false) {

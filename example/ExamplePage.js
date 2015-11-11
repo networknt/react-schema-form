@@ -9,6 +9,8 @@ require('react-select/less/select.less');
 var Select = require('react-select');
 var $ = require('jquery');
 var Ace = require('react-ace');
+require('brace/mode/json');
+require('brace/theme/github');
 
 var ExamplePage = React.createClass({
     getInitialState: function() {
@@ -22,9 +24,7 @@ var ExamplePage = React.createClass({
             model: {},
             schemaJson: '',
             formJson: '',
-            selected: '',
-            itParsesSchema: true,
-            itParsesForm: true
+            selected: ''
         };
     },
 
@@ -35,6 +35,8 @@ var ExamplePage = React.createClass({
             url: val
         }).done(function(data) {
             //console.log('done', data);
+            console.log('data.schema = ', data.schema);
+            console.log('data.form = ', data.form);
             this.setState({
                 schemaJson: JSON.stringify(data.schema, undefined, 2),
                 formJson: JSON.stringify(data.form, undefined, 2),
@@ -51,17 +53,22 @@ var ExamplePage = React.createClass({
         this.setState({model: model});
     },
     onFormChange: function(val) {
-        //console.log("onFormChange:" + val);
+        console.log("onFormChange:" + val);
+        this.setState({form: JSON.parse(val)});
     },
 
     onSchemaChange: function(val) {
-        //console.log("onSchemaChange:" + val);
+        console.log("onSchemaChange:" + val);
+        this.setState({schema: JSON.parse(val)});
     },
 
     render: function() {
 
         var schemaForm = '';
         if (this.state.form.length > 0) {
+            console.log('schema = ', this.state.schema);
+            console.log('form = ', this.state.schema);
+            console.log('model = ', this.state.model);
             schemaForm = (
                 <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} />
             )
