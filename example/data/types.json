@@ -20,6 +20,15 @@
       "boolean":  {
         "type": "boolean"
       },
+      "radios": {
+        "title": "Basic radio button example",
+        "type": "string",
+        "enum": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
       "comment": {
         "title": "Comment",
         "type": "string",
