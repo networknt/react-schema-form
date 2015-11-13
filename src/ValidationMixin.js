@@ -12,6 +12,12 @@ var ValidationMixin = {
         };
     },
 
+    componentDidMount: function() {
+        if (this.state.value != undefined) {
+            this.props.onChange(this.props.form.key, this.state.value);
+        }
+    },
+
     /**
      * Called when <input> value changes.
      * @param e The input element, or something.
@@ -53,7 +59,6 @@ var ValidationMixin = {
         if(!value && this.props.form.schema && this.props.form.schema['default']) {
             value = this.props.form.schema['default'];
         }
-        //this.props.onChange(this.props.form.key, value);
         return value;
     }
 };
