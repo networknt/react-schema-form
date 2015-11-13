@@ -1,0 +1,17 @@
+# ignore git
+.git/
+.gitignore
+
+# ignore submodule files
+common-files/
+.gitmodules
+
+# ignore tests
+ui-test/
+test/
+
+# ignore coverage report
+coverage/
+
+# ignore symlinks
+.editorconfig
