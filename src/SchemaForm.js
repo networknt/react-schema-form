@@ -1,12 +1,12 @@
 /**
  * Created by steve on 11/09/15.
  */
-var React = require('react');
+import React from 'react';
 var utils = require('./utils');
 var FormField = require('./FormField');
-var Number = require('./Number');
-var Text = require('./Text');
-var Textarea = require('./Textarea');
+import Number from './Number';
+import Text from './Text';
+import TextArea from './Textarea';
 var Section = require('./Section');
 var Help = require('./Help');
 var Checkbox = require('./Checkbox');
@@ -33,34 +33,34 @@ class SchemaForm extends React.Component {
         //console.log('form = ', form);
         switch (form.type) {
             case 'number':
-                result = <Number model={model} form={form} key={index} onChange={onChange} />
+                result = <Number model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'text':
-                result = <Text model={model} form={form} key={index} onChange={onChange} />
+                result = <Text model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'textarea':
-                result = <Textarea model={model} form={form} key={index} onChange={onChange} />
+                result = <TextArea model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'help':
-                result = <Help model={model} form={form} key={index} onChange={onChange} />
+                result = <Help model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'checkbox':
-                result = <Checkbox model={model} form={form} key={index} onChange={onChange} />
+                result = <Checkbox model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'submit':
-                result = <Submit model={model} form={form} key={index} onChange={onChange} />
+                result = <Submit model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'section':
-                result = <Section model={model} form={form} key={index} onChange={onChange} renderSchema={this.renderSchema} />
+                result = <Section model={model} form={form} key={index} onChange={onChange} renderSchema={this.renderSchema} />;
                 break;
             case 'array':
-                result = <Array model={model} form={form} key={index} onChange={onChange} renderSchema={this.renderSchema} />
+                result = <Array model={model} form={form} key={index} onChange={onChange} renderSchema={this.renderSchema} />;
                 break;
             case 'select':
-                result = <Select model={model} form={form} key={index} onChange={onChange} />
+                result = <Select model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'radios':
-                result = <Radios model={model} form={form} key={index} onChange={onChange} />
+                result = <Radios model={model} form={form} key={index} onChange={onChange} />;
                 break;
         }
         //console.log('renderSchema', result);

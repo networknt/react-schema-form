@@ -10,4 +10,5 @@ console.warn = function(warning) {
     warn.apply(console, arguments);
 };
 
-ReactDOM.render(<ExamplePage />, document.body);
+
+ReactDOM.render(<ExamplePage />, document.getElementById("app"));

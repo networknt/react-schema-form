@@ -1,28 +1,31 @@
-var React = require('react');
+//var React = require('react');
+import React from 'react';
 var utils = require('./utils');
 
-var ValidationMixin = {
-    getInitialState: function() {
-        var value = this.defaultValue();
+export var ValidationMixin = ComposedComponent => class extends React.Component {
+
+    constructor(props) {
+        super(props);
+        let value = this.defaultValue();
         let validationResult = utils.validate(this.props.form, value);
-        return {
+        this.state = {
             value: value,
             valid: !!(validationResult.valid || !value),
             error: !validationResult.valid && value ? validationResult.error.message : null
         };
-    },
+    }
 
-    componentDidMount: function() {
+    componentDidMount() {
         if (this.state.value != undefined) {
             this.props.onChange(this.props.form.key, this.state.value);
         }
-    },
+    }
 
     /**
      * Called when <input> value changes.
      * @param e The input element, or something.
      */
-    onChange: function(e) {
+    onChange(e) {
         let value = null;
         if (this.props.form.schema.type === 'integer' || this.props.form.schema.type === 'number') {
             if (e.target.value.indexOf('.') == -1) {
@@ -40,9 +43,9 @@ var ValidationMixin = {
             error: validationResult.valid ? null : validationResult.error.message
         });
         this.props.onChange(this.props.form.key, value);
-    },
+    }
 
-    defaultValue: function() {
+    defaultValue() {
         // check if there is a value in the model, if there is, display it. Otherwise, check if
         // there is a default value, display it.
         //console.log('Text.defaultValue key', this.props.form.key);
@@ -61,5 +64,8 @@ var ValidationMixin = {
         }
         return value;
     }
+
+    render() {
+        return <ComposedComponent {...this.props} {...this.state} />;
+    }
 };
-module.exports = ValidationMixin;
