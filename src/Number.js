@@ -26,7 +26,7 @@ class Number extends React.Component {
             <div className={formClasses}>
                 <label className={labelClasses}>{this.props.form.title}</label>
                 <input type={this.props.form.type}
-                       onChange={this.onChange}
+                       onChange={this.props.onChangeValidate}
                        step={this.props.form.step}
                        className={fieldClasses}
                        defaultValue={this.props.value}

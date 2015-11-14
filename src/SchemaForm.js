@@ -18,7 +18,7 @@ var Radios = require('./Radios');
 class SchemaForm extends React.Component {
 
     constructor(props) {
-        super();
+        super(props);
         this.onChange = this.onChange.bind(this);
     }
 

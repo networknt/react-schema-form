@@ -26,7 +26,7 @@ class TextArea extends React.Component {
                 <label className={labelClasses}>{this.props.form.title}</label>
                 <textarea className={fieldClasses}
                     id={this.props.form.key.slice(-1)[0]}
-                    onChange={this.onChange}
+                    onChange={this.props.onChangeValidate}
                     defaultValue={this.props.value}
                     placeholder={this.props.form.placeholder}
                     name={this.props.form.key.slice(-1)[0]}>

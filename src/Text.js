@@ -7,6 +7,9 @@ var classNames = require('classnames');
 import {ValidationMixin} from './ValidationMixin';
 
 class Text extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         let formClasses = classNames('form-group', { 'has-error' : this.props.valid === false }, this.props.form.htmlClass, { 'has-success' : this.props.valid === true && this.props.value != null});
         let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
@@ -25,7 +28,7 @@ class Text extends React.Component {
             <div className={formClasses}>
                 <label className={labelClasses}>{this.props.form.title}</label>
                 <input type={this.props.form.type}
-                    onChange={this.onChange}
+                    onChange={this.props.onChangeValidate}
                     placeholder={this.props.form.placeholder}
                     className={fieldClasses}
                     defaultValue={this.props.value}

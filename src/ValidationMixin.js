@@ -6,6 +6,7 @@ export var ValidationMixin = ComposedComponent => class extends React.Component 
 
     constructor(props) {
         super(props);
+        this.onChangeValidate = this.onChangeValidate.bind(this);
         let value = this.defaultValue();
         let validationResult = utils.validate(this.props.form, value);
         this.state = {
@@ -25,7 +26,7 @@ export var ValidationMixin = ComposedComponent => class extends React.Component 
      * Called when <input> value changes.
      * @param e The input element, or something.
      */
-    onChange(e) {
+    onChangeValidate(e) {
         let value = null;
         if (this.props.form.schema.type === 'integer' || this.props.form.schema.type === 'number') {
             if (e.target.value.indexOf('.') == -1) {
@@ -66,6 +67,6 @@ export var ValidationMixin = ComposedComponent => class extends React.Component 
     }
 
     render() {
-        return <ComposedComponent {...this.props} {...this.state} />;
+        return <ComposedComponent {...this.props} {...this.state} onChangeValidate={this.onChangeValidate}/>;
     }
 };
