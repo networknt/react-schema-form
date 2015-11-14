@@ -13,12 +13,7 @@ var Checkbox = React.createClass({
     },
 
     onChange: function() {
-        let state = null;
-        if(this.state.checked == true) {
-            state = false;
-        } else {
-            state = true;
-        }
+        let state = !this.state.checked;
         this.setState({checked: state});
         this.props.onChange(this.props.form.key, state);
     },

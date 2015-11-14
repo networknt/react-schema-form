@@ -12,6 +12,7 @@
         "title": "Email",
         "type": "string",
         "pattern": "^\\S+@\\S+$",
+        "validationMessage": "Email must be of proper format: example@example",
         "description": "Email will be used for evil."
       },
       "environment": {
@@ -30,7 +31,7 @@
         "title": "Comment",
         "type": "string",
         "maxLength": 20,
-        "validationMessage": "Don't be greedy!",
+        "validationMessage": "Don't be greedy! 20 Characters max please :)",
         "description": "Please write your comment here."
       }
     },

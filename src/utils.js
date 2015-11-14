@@ -533,7 +533,11 @@ function validate(form, value) {
     //console.log('utils validate value = ', typeof value);
     //console.log('utils validate valueWrap = ', valueWrap);
     //console.log('utils validate wrap = ', wrap);
-    return tv4.validateResult(valueWrap, wrap);
+    let tv4Result = tv4.validateResult(valueWrap, wrap);
+    if (tv4Result != null && !tv4Result.valid && form.validationMessage != null) {
+        tv4Result.error.message = form.validationMessage;
+    }
+    return tv4Result;
 
 }
 
