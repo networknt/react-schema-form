@@ -6,7 +6,6 @@ var classNames = require('classnames');
 
 var Section = React.createClass({
 
-
     render: function() {
         let classes = classNames('schema-form-section', this.props.form.htmlClass);
         //console.log('section classes', classes);

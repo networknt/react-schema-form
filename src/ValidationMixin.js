@@ -63,7 +63,6 @@ export default ComposedComponent => class extends React.Component {
         if(!value && this.props.form.schema && this.props.form.schema['default']) {
             value = this.props.form.schema['default'];
         }
-        console.log('form', this.props.form);
 
         // Support for Select
         // The first value in the option will be the default.
