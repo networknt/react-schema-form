@@ -10,7 +10,6 @@ import TextArea from './material-ui/MuiTextArea';
 class MuiSchemaForm extends React.Component {
 
     constructor(props) {
-        console.log('HELLO WORLD!');
         super(props);
         this.onChange = this.onChange.bind(this);
     }
@@ -20,6 +19,7 @@ class MuiSchemaForm extends React.Component {
     }
 
     renderSchema (form, model, index, onChange) {
+        /*
         var result;
         switch (form.type) {
             case 'number':
@@ -33,6 +33,10 @@ class MuiSchemaForm extends React.Component {
                 break;
         }
         return result;
+        */
+        return (
+            <span>Hello World!</span>
+        );
     }
 
     render() {

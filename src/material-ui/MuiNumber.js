@@ -38,4 +38,4 @@ class MuiNumber extends React.Component {
     }
 }
 
-export default ValidationMixin(Number);
+export default ValidationMixin(MuiNumber);
