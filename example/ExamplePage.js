@@ -5,7 +5,8 @@
 
 var React = require('react');
 var utils = require('../src/utils');
-var { SchemaForm, MuiSchemaForm } = require('react-schema-form');
+var { SchemaForm } = require('react-schema-form');
+import {MuiSchemaForm} from 'react-schema-form';
 require('react-select/less/select.less');
 var Select = require('react-select');
 var $ = require('jquery');

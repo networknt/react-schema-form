@@ -2,7 +2,7 @@
  * Created by steve on 11/09/15.
  */
 import React from 'react';
-var utils = require('utils');
+import utils from './utils';
 import Number from './material-ui/MuiNumber';
 import Text from './material-ui/MuiText';
 import TextArea from './material-ui/MuiTextArea';
@@ -10,6 +10,7 @@ import TextArea from './material-ui/MuiTextArea';
 class MuiSchemaForm extends React.Component {
 
     constructor(props) {
+        console.log("MuiSchemaForm - constructor - props", props);
         super(props);
         this.onChange = this.onChange.bind(this);
     }
