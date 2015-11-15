@@ -2,7 +2,7 @@
 import React from 'react';
 var utils = require('./utils');
 
-export var ValidationMixin = ComposedComponent => class extends React.Component {
+export default ComposedComponent => class extends React.Component {
 
     constructor(props) {
         super(props);
@@ -17,7 +17,7 @@ export var ValidationMixin = ComposedComponent => class extends React.Component 
     }
 
     componentDidMount() {
-        if (this.state.value != undefined) {
+        if (typeof this.state.value !== 'undefined') {
             this.props.onChange(this.props.form.key, this.state.value);
         }
     }
@@ -62,6 +62,13 @@ export var ValidationMixin = ComposedComponent => class extends React.Component 
 
         if(!value && this.props.form.schema && this.props.form.schema['default']) {
             value = this.props.form.schema['default'];
+        }
+        console.log('form', this.props.form);
+
+        // Support for Select
+        // The first value in the option will be the default.
+        if(!value && this.props.form.titleMap && this.props.form.titleMap[0].value) {
+            value = this.props.form.titleMap[0].value;
         }
         return value;
     }

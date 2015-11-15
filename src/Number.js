@@ -4,7 +4,7 @@
 import React from 'react';
 var utils = require('./utils');
 var classNames = require('classnames');
-import {ValidationMixin} from './ValidationMixin';
+import ValidationMixin from './ValidationMixin';
 
 class Number extends React.Component {
 

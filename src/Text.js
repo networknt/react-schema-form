@@ -4,12 +4,9 @@
 import React from 'react';
 var utils = require('./utils');
 var classNames = require('classnames');
-import {ValidationMixin} from './ValidationMixin';
+import ValidationMixin from './ValidationMixin';
 
 class Text extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         let formClasses = classNames('form-group', { 'has-error' : this.props.valid === false }, this.props.form.htmlClass, { 'has-success' : this.props.valid === true && this.props.value != null});
         let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
