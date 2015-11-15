@@ -9,7 +9,7 @@ import ValidationMixin from './ValidationMixin';
 class Select extends React.Component {
 
     render() {
-        let formClasses = classNames('form-group', 'schema-form-select', this.props.form.htmlClass);
+        let formClasses = classNames('form-group', 'schema-form-select', this.props.form.htmlClass, { 'has-error' : this.props.valid === false }, this.props.form.htmlClass, { 'has-success' : this.props.valid === true && this.props.value != null});
         let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
         let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);
 
