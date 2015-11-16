@@ -121,7 +121,6 @@ var ExamplePage = React.createClass({
                 schemaForm = (
                     <MuiSchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} />
                 );
-                console.log("Using Mui schemaform", schemaForm);
             }
         }
 
@@ -133,6 +132,7 @@ var ExamplePage = React.createClass({
                         <h3 style={{display:'inline-block'}}>The Generated Form</h3>
                         <span style={{width: '150px', position: 'absolute', top: '20px', right: '15px'}}>
                             <Select name="selectLibrary"
+                                    value={this.state.selectedLibrary}
                                     onChange={this.onLibraryChange}
                                     options={this.state.libraryOptions}>
                             </Select>

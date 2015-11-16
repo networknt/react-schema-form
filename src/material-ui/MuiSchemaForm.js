@@ -2,16 +2,15 @@
  * Created by steve on 11/09/15.
  */
 import React from 'react';
-import utils from './utils';
-import Number from './material-ui/MuiNumber';
-import Text from './material-ui/MuiText';
-import TextArea from './material-ui/MuiTextArea';
-import Select from './material-ui/MuiSelect';
+import utils from './../utils';
+import Number from './MuiNumber';
+import Text from './MuiText';
+import TextArea from './MuiTextArea';
+import Select from './MuiSelect';
 
 class MuiSchemaForm extends React.Component {
 
     constructor(props) {
-        console.log("MuiSchemaForm - constructor - props", props);
         super(props);
         this.onChange = this.onChange.bind(this);
     }
