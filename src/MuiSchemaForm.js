@@ -20,7 +20,6 @@ class MuiSchemaForm extends React.Component {
     }
 
     renderSchema (form, model, index, onChange) {
-        /*
         var result;
         switch (form.type) {
             case 'number':
@@ -34,10 +33,6 @@ class MuiSchemaForm extends React.Component {
                 break;
         }
         return result;
-        */
-        return (
-            <span>Hello World!</span>
-        );
     }
 
     render() {

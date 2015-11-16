@@ -14,7 +14,21 @@ var Ace = require('react-ace');
 require('brace/mode/json');
 require('brace/theme/github');
 
+const ThemeManager = require('material-ui/lib/styles/theme-manager');
+const LightRawTheme = require('material-ui/lib/styles/raw-themes/light-raw-theme');
+
 var ExamplePage = React.createClass({
+
+    childContextTypes: {
+        muiTheme: React.PropTypes.object
+    },
+
+    getChildContext() {
+        return {
+            muiTheme: this.state.muiTheme
+        };
+    },
+
     getInitialState: function() {
         return {
             tests: [
@@ -33,7 +47,8 @@ var ExamplePage = React.createClass({
                 {label: 'Bootstrap', value: 'bootstrap'},
                 {label: 'Material-UI', value: 'material-ui'}
             ],
-            selectedLibrary: 'bootstrap'
+            selectedLibrary: 'bootstrap',
+            muiTheme: ThemeManager.getMuiTheme(LightRawTheme)
         };
     },
 

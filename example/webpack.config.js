@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
-var nodeModulesPath = path.resolve(__dirname, 'node_modules');
+//var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
   context: __dirname,
@@ -27,7 +27,7 @@ module.exports = {
           {
               test: /\.js$/,
               loader: 'babel',
-              exclude: [nodeModulesPath]
+              exclude: [/node_modules/]
           },
           {test: /\.less$/, loader: "style!css!less"},
           {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }

@@ -2,37 +2,19 @@
  * Created by steve on 15/09/15.
  */
 import React from 'react';
-var utils = require('../utils');
-var classNames = require('classnames');
 import ValidationMixin from '../ValidationMixin';
+const TextField = require('material-ui/lib/text-field');
 
 class MuiText extends React.Component {
     render() {
-        let formClasses = classNames('form-group', { 'has-error' : this.props.valid === false }, this.props.form.htmlClass, { 'has-success' : this.props.valid === true && this.props.value != null});
-        let labelClasses = classNames('control-label', this.props.form.labelHtmlClass);
-        let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);
-
-        let help = this.props.form.description || '';
-        if(!this.props.valid || this.props.form.description) {
-            help = (
-                <div className="help-block">
-                    {this.props.error || this.props.form.description}
-                </div>
-            )
-        }
-
         return (
-            <div className={formClasses}>
-                <label className={labelClasses}>{this.props.form.title}</label>
-                <input type={this.props.form.type}
-                       onChange={this.props.onChangeValidate}
-                       placeholder={this.props.form.placeholder}
-                       className={fieldClasses}
-                       defaultValue={this.props.value}
-                       id={this.props.form.key.slice(-1)[0]}
-                       name={this.props.form.key.slice(-1)[0]}/>
-                {help}
-            </div>
+            <TextField
+                type={this.props.form.type}
+                floatingLabelText={this.props.form.title}
+                hintText={this.props.form.placeholder}
+                errorText={this.props.error}
+                onChange={this.props.onChangeValidate}
+                defaultValue={this.props.value} />
         );
     }
 }
