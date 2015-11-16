@@ -6,6 +6,7 @@ import utils from './utils';
 import Number from './material-ui/MuiNumber';
 import Text from './material-ui/MuiText';
 import TextArea from './material-ui/MuiTextArea';
+import Select from './material-ui/MuiSelect';
 
 class MuiSchemaForm extends React.Component {
 
@@ -30,6 +31,9 @@ class MuiSchemaForm extends React.Component {
                 break;
             case 'textarea':
                 result = <TextArea model={model} form={form} key={index} onChange={onChange} />;
+                break;
+            case 'select':
+                result = <Select model={model} form={form} key={index} onChange={onChange} />;
                 break;
         }
         return result;
