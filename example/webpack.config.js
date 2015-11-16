@@ -25,9 +25,9 @@ module.exports = {
           // I highly recommend using the babel-loader as it gives you
           // ES6/7 syntax and JSX transpiling out of the box
           {
-              test: /\.js$/,
-              loader: 'babel',
-              exclude: [/node_modules/]
+              test: /\.(js|jsx)$/,
+              loaders: ['babel-loader?optional=runtime&stage=0'],
+              exclude: /node_modules/
           },
           {test: /\.less$/, loader: "style!css!less"},
           {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
