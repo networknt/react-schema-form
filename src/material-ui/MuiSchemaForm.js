@@ -7,6 +7,7 @@ import Number from './MuiNumber';
 import Text from './MuiText';
 import TextArea from './MuiTextArea';
 import Select from './MuiSelect';
+import Radios from './MuiRadios';
 
 class MuiSchemaForm extends React.Component {
 
@@ -33,6 +34,9 @@ class MuiSchemaForm extends React.Component {
                 break;
             case 'select':
                 result = <Select model={model} form={form} key={index} onChange={onChange} />;
+                break;
+            case 'radios':
+                result = <Radios model={model} form={form} key={index} onChange={onChange} />;
                 break;
         }
         return result;
