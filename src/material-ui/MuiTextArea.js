@@ -10,16 +10,19 @@ class MuiTextArea extends React.Component {
     render() {
         // FIXME: Obviously fix rowsMax eventually..
         return (
-            <TextField
-                type={this.props.form.type}
-                floatingLabelText={this.props.form.title}
-                hintText={this.props.form.placeholder}
-                onChange={this.props.onChangeValidate}
-                errorText={this.props.error}
-                defaultValue={this.props.value}
-                multiLine={true}
-                rowsMax={5}>
-            </TextField>
+            <div>
+                <TextField
+                    type={this.props.form.type}
+                    floatingLabelText={this.props.form.title}
+                    hintText={this.props.form.placeholder}
+                    onChange={this.props.onChangeValidate}
+                    errorText={this.props.error}
+                    defaultValue={this.props.value}
+                    multiLine={true}
+                    rowsMax={5}
+                    style={{width: '100%'}}>
+                </TextField>
+            </div>
         );
     }
 }

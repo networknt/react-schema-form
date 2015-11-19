@@ -12,7 +12,7 @@ var Section = React.createClass({
         return (
             React.DOM.div( {className:{classes}},
                 this.props.form.items.map(function(item, index) {
-                    return this.props.renderSchema(item, this.props.model, index, this.props.onChange);
+                    return MuiSchemaForm.renderSchema(item, this.props.model, index, this.props.onChange);
                 }.bind(this))
             )
         )

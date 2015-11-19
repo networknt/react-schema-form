@@ -149,7 +149,7 @@ var Array = React.createClass({
                                 React.createElement("button", {type: "button", className: "close pull-right"},
                                     React.createElement("span", {"aria-hidden": "true"}, "×"), React.createElement("span", {className: "sr-only"}, "Close")
                                 );
-                                return this.props.renderSchema(item, this.props.model, index, this.props.onChange);
+                                return MuiSchemaForm.renderSchema(item, this.props.model, index, this.props.onChange);
                             }.bind(this))
                         )
 

@@ -30,6 +30,7 @@ module.exports = {
               exclude: /node_modules/
           },
           {test: /\.less$/, loader: "style!css!less"},
+          {test: /\.css?$/, loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'},
           {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
       ]
   }

@@ -6,7 +6,7 @@ import ValidationMixin from '../ValidationMixin';
 const RadioButton = require('material-ui/lib/radio-button');
 const RadioButtonGroup = require('material-ui/lib/radio-button-group');
 
-class Radios extends React.Component {
+class MuiRadios extends React.Component {
 
     render() {
         let items = this.props.form.titleMap.map(function(item) {
@@ -25,4 +25,4 @@ class Radios extends React.Component {
     }
 }
 
-export default ValidationMixin(Radios);
+export default ValidationMixin(MuiRadios);

@@ -49,7 +49,8 @@ class MuiNumber extends React.Component {
                 errorText={this.props.error}
                 onChange={this.preValidationCheck}
                 defaultValue={this.state.lastSuccessfulValue}
-                ref="numberField"/>
+                ref="numberField"
+                style={{width: '100%'}}/>
         );
     }
 }

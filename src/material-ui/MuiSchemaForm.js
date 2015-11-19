@@ -3,11 +3,14 @@
  */
 import React from 'react';
 import utils from './../utils';
-import Number from './MuiNumber';
-import Text from './MuiText';
-import TextArea from './MuiTextArea';
-import Select from './MuiSelect';
-import Radios from './MuiRadios';
+import MuiNumber from './MuiNumber';
+import MuiText from './MuiText';
+import MuiTextArea from './MuiTextArea';
+import MuiSelect from './MuiSelect';
+import MuiRadios from './MuiRadios';
+import MuiDate from './MuiDate';
+
+import styles from './MuiStyle.css';
 
 class MuiSchemaForm extends React.Component {
 
@@ -20,23 +23,26 @@ class MuiSchemaForm extends React.Component {
         this.props.onModelChange(key, val);
     }
 
-    renderSchema (form, model, index, onChange) {
+    static renderSchema (form, model, index, onChange) {
         var result;
         switch (form.type) {
             case 'number':
-                result = <Number model={model} form={form} key={index} onChange={onChange} />;
+                result = <MuiNumber model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'text':
-                result = <Text model={model} form={form} key={index} onChange={onChange} />;
+                result = <MuiText model={model} form={form} key={index} onChange={onChange} className={styles.muiSchemaForm}/>;
                 break;
             case 'textarea':
-                result = <TextArea model={model} form={form} key={index} onChange={onChange} />;
+                result = <MuiTextArea model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'select':
-                result = <Select model={model} form={form} key={index} onChange={onChange} />;
+                result = <MuiSelect model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'radios':
-                result = <Radios model={model} form={form} key={index} onChange={onChange} />;
+                result = <MuiRadios model={model} form={form} key={index} onChange={onChange} />;
+                break;
+            case 'date':
+                result = <MuiDate model={model} form={form} key={index} onChange={onChange} />;
                 break;
         }
         return result;
@@ -47,11 +53,11 @@ class MuiSchemaForm extends React.Component {
         //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         //console.log('SchemaForm render merged ', merged);
         let forms = merged.map(function(form, index) {
-            return this.renderSchema(form, this.props.model, form.key[0], this.onChange);
+            return MuiSchemaForm.renderSchema(form, this.props.model, form.key[0], this.onChange);
         }.bind(this));
 
         return (
-            <div>{forms}</div>
+            <div style={{width: '100%'}} className={styles.muiSchemaForm}>{forms}</div>
         );
     }
 }

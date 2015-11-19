@@ -8,13 +8,16 @@ const TextField = require('material-ui/lib/text-field');
 class MuiText extends React.Component {
     render() {
         return (
-            <TextField
-                type={this.props.form.type}
-                floatingLabelText={this.props.form.title}
-                hintText={this.props.form.placeholder}
-                errorText={this.props.error}
-                onChange={this.props.onChangeValidate}
-                defaultValue={this.props.value} />
+            <div>
+                <TextField
+                    type={this.props.form.type}
+                    floatingLabelText={this.props.form.title}
+                    hintText={this.props.form.placeholder}
+                    errorText={this.props.error}
+                    onChange={this.props.onChangeValidate}
+                    defaultValue={this.props.value}
+                    style={{width: '100%'}} />
+            </div>
         );
     }
 }
