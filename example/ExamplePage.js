@@ -45,7 +45,7 @@ var ExamplePage = React.createClass({
             selected: '',
             libraryOptions: [
                 {label: 'Bootstrap', value: 'bootstrap'},
-                {label: 'Material-UI', value: 'material-ui'}
+                {label: 'Material-UI (beta)', value: 'material-ui'}
             ],
             selectedLibrary: 'bootstrap',
             muiTheme: ThemeManager.getMuiTheme(LightRawTheme)
