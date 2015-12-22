@@ -2,24 +2,29 @@
  * Created by steve on 15/09/15.
  */
 import React from 'react';
-import ValidationMixin from '../ValidationMixin';
+import ValidationMixin from './ValidationMixin';
 const TextField = require('material-ui/lib/text-field');
 
-class MuiText extends React.Component {
+class TextArea extends React.Component {
+
     render() {
+        // FIXME: Obviously fix rowsMax eventually..
         return (
             <div>
                 <TextField
                     type={this.props.form.type}
                     floatingLabelText={this.props.form.title}
                     hintText={this.props.form.placeholder}
-                    errorText={this.props.error}
                     onChange={this.props.onChangeValidate}
+                    errorText={this.props.error}
                     defaultValue={this.props.value}
-                    style={{width: '100%'}} />
+                    multiLine={true}
+                    rowsMax={5}
+                    style={{width: '100%'}}>
+                </TextField>
             </div>
         );
     }
 }
 
-export default ValidationMixin(MuiText);
+export default ValidationMixin(TextArea);

@@ -1,17 +1,17 @@
 /**
- * Created by steve on 15/09/15.
+ * Created by steve on 22/12/15.
  */
 import React from 'react';
-var utils = require('../utils');
+var utils = require('./utils');
 var classNames = require('classnames');
-import ValidationMixin from '../ValidationMixin';
+import ValidationMixin from './ValidationMixin';
 const DatePicker = require('material-ui/lib/date-picker/date-picker');
 
 /**
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
-class MuiDate extends React.Component {
+class Date extends React.Component {
 
     constructor(props) {
         super(props);
@@ -39,4 +39,4 @@ class MuiDate extends React.Component {
     }
 }
 
-export default ValidationMixin(MuiDate);
+export default ValidationMixin(Date);

@@ -6,7 +6,6 @@
 var React = require('react');
 var utils = require('../src/utils');
 var { SchemaForm } = require('react-schema-form');
-import {MuiSchemaForm} from 'react-schema-form';
 require('react-select/less/select.less');
 var Select = require('react-select');
 var $ = require('jquery');
@@ -44,23 +43,18 @@ var ExamplePage = React.createClass({
             schemaJson: '',
             formJson: '',
             selected: '',
-            libraryOptions: [
-                {label: 'Bootstrap', value: 'bootstrap'},
-                {label: 'Material-UI (beta)', value: 'material-ui'}
-            ],
-            selectedLibrary: 'bootstrap',
             muiTheme: ThemeManager.getMuiTheme(LightRawTheme)
         };
     },
 
     onSelectChange: function(val) {
-        //console.log("Selected:" + val);
+        console.log("Selected:" + val);
         $.ajax({
             type: 'GET',
             url: val
         }).done(function(data) {
 
-            //console.log('done', data);
+            console.log('done', data);
             //console.log('data.schema = ', data.schema);
             //console.log('data.form = ', data.form);
             this.setState({
@@ -100,13 +94,6 @@ var ExamplePage = React.createClass({
         }
     },
 
-    onLibraryChange: function(val) {
-        console.log("Library change:", val);
-        this.setState({
-            selectedLibrary: val
-        });
-    },
-
     render: function() {
 
         var schemaForm = '';
@@ -114,15 +101,9 @@ var ExamplePage = React.createClass({
             //console.log('schema = ', this.state.schema);
             //console.log('form = ', this.state.schema);
             //console.log('model = ', this.state.model);
-            if (typeof this.state.selectedLibrary === 'undefined' || this.state.selectedLibrary === 'bootstrap') {
-                schemaForm = (
-                    <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} />
-                );
-            } else {
-                schemaForm = (
-                    <MuiSchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} />
-                );
-            }
+            schemaForm = (
+                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} />
+            );
         }
 
         return (
@@ -131,13 +112,6 @@ var ExamplePage = React.createClass({
                 <div className="row">
                     <div className="col-sm-4">
                         <h3 style={{display:'inline-block'}}>The Generated Form</h3>
-                        <span style={{width: '150px', position: 'absolute', top: '20px', right: '15px'}}>
-                            <Select name="selectLibrary"
-                                    value={this.state.selectedLibrary}
-                                    onChange={this.onLibraryChange}
-                                    options={this.state.libraryOptions}>
-                            </Select>
-                        </span>
                         {schemaForm}
                         <h3>Model</h3>
                         <pre>{JSON.stringify(this.state.model,undefined,2,2)}</pre>
