@@ -5,6 +5,7 @@ import React from 'react';
 import utils from './utils';
 import classNames from 'classnames';
 import ValidationMixin from './ValidationMixin';
+require('react-select/less/default.less');
 var ReactSelect = require('react-select');
 
 class Select extends React.Component {
@@ -25,7 +26,7 @@ class Select extends React.Component {
         let fieldClasses = classNames('form-control', this.props.form.fieldHtmlClass);
 
         return (
-            <div style={{display: 'block', position: 'relative', marginBottom: '20px'}}>
+            <div className={formClasses}>
                 <label className={labelClasses}>{this.props.form.title}</label>
                 <ReactSelect
                         value={this.props.value}
