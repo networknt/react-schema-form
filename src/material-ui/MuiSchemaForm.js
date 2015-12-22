@@ -10,8 +10,6 @@ import MuiSelect from './MuiSelect';
 import MuiRadios from './MuiRadios';
 import MuiDate from './MuiDate';
 
-import styles from './MuiStyle.css';
-
 class MuiSchemaForm extends React.Component {
 
     constructor(props) {
@@ -30,7 +28,7 @@ class MuiSchemaForm extends React.Component {
                 result = <MuiNumber model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'text':
-                result = <MuiText model={model} form={form} key={index} onChange={onChange} className={styles.muiSchemaForm}/>;
+                result = <MuiText model={model} form={form} key={index} onChange={onChange} className='muiSchemaForm'/>;
                 break;
             case 'textarea':
                 result = <MuiTextArea model={model} form={form} key={index} onChange={onChange} />;
@@ -57,7 +55,7 @@ class MuiSchemaForm extends React.Component {
         }.bind(this));
 
         return (
-            <div style={{width: '100%'}} className={styles.muiSchemaForm}>{forms}</div>
+            <div style={{width: '100%'}} className='muiSchemaForm'>{forms}</div>
         );
     }
 }
