@@ -27,6 +27,7 @@ export default ComposedComponent => class extends React.Component {
      * @param e The input element, or something.
      */
     onChangeValidate(e) {
+        console.log('onChangeValidate e', e);
         let value = null;
         if (this.props.form.schema.type === 'integer' || this.props.form.schema.type === 'number') {
             if (e.target.value.indexOf('.') == -1) {
