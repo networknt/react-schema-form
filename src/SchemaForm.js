@@ -30,7 +30,10 @@ class SchemaForm extends React.Component {
                 result = <Number model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'text':
-                result = <Text model={model} form={form} key={index} onChange={onChange} className='muiSchemaForm'/>;
+                result = <Text model={model} form={form} key={index} onChange={onChange} />;
+                break;
+            case 'password':
+                result = <Text model={model} form={form} key={index} onChange={onChange} />;
                 break;
             case 'textarea':
                 result = <TextArea model={model} form={form} key={index} onChange={onChange} />;

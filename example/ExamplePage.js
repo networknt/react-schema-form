@@ -35,7 +35,8 @@ var ExamplePage = React.createClass({
                 { label: "Basic JSON Schema Type", value: 'data/types.json' },
                 { label: 'Basic Radios', value: 'data/radio.json'},
                 { label: 'Address', value: 'data/address.json'},
-                { label: "Kitchen Sink", value: 'data/kitchenSink.json'}
+                { label: "Kitchen Sink", value: 'data/kitchenSink.json'},
+                { label: "Login", value: 'data/login.json'}
             ],
             schema: {},
             form: [],
