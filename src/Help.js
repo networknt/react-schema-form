@@ -1,18 +1,17 @@
 /**
  * Created by steve on 20/09/15.
  */
-var React = require('react');
-var classNames = require('classnames');
+import React from 'react';
+import classNames from 'classnames';
 
-var Help = React.createClass({
-
-    render: function() {
-        let classes = classNames('helpvalue', 'schema-form-helpvalue', this.props.form.htmlClass);
-        //console.log('help classes', classes);
+class Help extends React.Component{
+    render() {
+        let classes = classNames(this.props.form.htmlClass);
+        //console.log('Help:', this.props);
         return (
-            <div className={classes} dangerouslySetInnerHTML={{__html: this.props.form.helpvalue}} ></div>
+            <div className={classes} dangerouslySetInnerHTML={{__html: this.props.form.description}} ></div>
         )
     }
-});
+}
 
-module.exports = Help;
+export default Help;

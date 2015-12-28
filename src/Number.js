@@ -2,8 +2,6 @@
  * Created by steve on 15/09/15.
  */
 import React from 'react';
-var utils = require('./utils');
-var classNames = require('classnames');
 import ValidationMixin from './ValidationMixin';
 const TextField = require('material-ui/lib/text-field');
 

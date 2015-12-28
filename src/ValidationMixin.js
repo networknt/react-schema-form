@@ -27,7 +27,7 @@ export default ComposedComponent => class extends React.Component {
      * @param e The input element, or something.
      */
     onChangeValidate(e) {
-        console.log('onChangeValidate e', e);
+        //console.log('onChangeValidate e', e);
         let value = null;
         if (this.props.form.schema.type === 'integer' || this.props.form.schema.type === 'number') {
             if (e.target.value.indexOf('.') == -1) {
@@ -35,6 +35,8 @@ export default ComposedComponent => class extends React.Component {
             } else {
                 value = parseFloat(e.target.value);
             }
+        } else if(this.props.form.schema.type === 'boolean') {
+            value = e.target.checked;
         } else { // string
             value = e.target.value;
         }
@@ -59,7 +61,6 @@ export default ComposedComponent => class extends React.Component {
         if(!value && this.props.form['default']) {
             value = this.props.form['default'];
         }
-        //console.log('value', value);
 
         if(!value && this.props.form.schema && this.props.form.schema['default']) {
             value = this.props.form.schema['default'];
@@ -70,6 +71,7 @@ export default ComposedComponent => class extends React.Component {
         if(!value && this.props.form.titleMap && this.props.form.titleMap[0].value) {
             value = this.props.form.titleMap[0].value;
         }
+        //console.log('value', value);
         return value;
     }
 

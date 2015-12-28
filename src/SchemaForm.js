@@ -9,6 +9,8 @@ import TextArea from './TextArea';
 import Select from './Select';
 import Radios from './Radios';
 import Date from './Date';
+import Checkbox from './Checkbox';
+import Help from './Help';
 
 class SchemaForm extends React.Component {
 
@@ -41,6 +43,12 @@ class SchemaForm extends React.Component {
                 break;
             case 'date':
                 result = <Date model={model} form={form} key={index} onChange={onChange} />;
+                break;
+            case 'checkbox':
+                result = <Checkbox model={model} form={form} key={index} onChange={onChange} />;
+                break;
+            case 'help':
+                result = <Help model={model} form={form} key={index} onChange={onChange} />;
                 break;
         }
         return result;
