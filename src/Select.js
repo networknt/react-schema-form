@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import ValidationMixin from './ValidationMixin';
+import MenuItem from 'material-ui/lib/menus/menu-item';
 const SelectField = require('material-ui/lib/select-field');
 
 class Select extends React.Component {
@@ -16,23 +17,29 @@ class Select extends React.Component {
     }
 
     onSelected(event, selectedIndex, menuItem) {
+
         this.setState({
-            currentValue: menuItem.value
+            currentValue: menuItem
         });
         event.target.value = event.target.textContent;
         this.props.onChangeValidate(event);
     }
 
     render() {
+        const menuItems = this.props.form.titleMap.map((item, idx) => (
+            <MenuItem key={idx}
+                      primaryText={item.name}
+                      value={item.value} />
+        ));
+
         return (
             <SelectField
-                menuItems={this.props.form.titleMap}
                 value={this.state.currentValue}
-                displayMember="name"
-                valueMember="value"
                 floatingLabelText={this.props.form.title}
                 onChange={this.onSelected}
-                fullWidth={true} />
+                fullWidth={true} >
+                {menuItems}
+            </SelectField>
         );
     }
 }
