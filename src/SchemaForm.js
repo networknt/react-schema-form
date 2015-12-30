@@ -25,6 +25,7 @@ class SchemaForm extends React.Component {
 
     static renderSchema (form, model, index, onChange) {
         var result;
+        //console.log('form.type', form.type);
         switch (form.type) {
             case 'number':
                 result = <Number model={model} form={form} key={index} onChange={onChange} />;

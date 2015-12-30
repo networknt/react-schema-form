@@ -105,6 +105,16 @@ var integer = function(name, schema, options) {
     }
 };
 
+var date = function(name, schema, options) {
+    if (stripNullType(schema.type) === 'date') {
+        var f = stdFormObj(name, schema, options);
+        f.key  = options.path;
+        f.type = 'date';
+        options.lookup[ObjectPath.stringify(options.path)] = f;
+        return f;
+    }
+};
+
 var checkbox = function(name, schema, options) {
     if (stripNullType(schema.type) === 'boolean') {
         var f = stdFormObj(name, schema, options);
@@ -212,7 +222,8 @@ var defaults = {
     number:  [number],
     integer: [integer],
     boolean: [checkbox],
-    array:   [checkboxes, array]
+    array:   [checkboxes, array],
+    date:    [date]
 };
 
 function defaultFormDefinition(name, schema, options) {
@@ -346,6 +357,8 @@ function traverseForm(form, fn) {
 }
 
 function merge(schema, form, ignore, options, readonly) {
+    //console.log('merge schema', schema);
+    //console.log('merge form', form);
     form  = form || ['*'];
     options = options || {};
 
@@ -353,7 +366,7 @@ function merge(schema, form, ignore, options, readonly) {
     readonly = readonly || schema.readonly || schema.readOnly;
 
     var stdForm = getDefaults(schema, ignore, options);
-
+    //console.log('merge stdForm', stdForm);
     //simple case, we have a "*", just put the stdForm there
     var idx = form.indexOf('*');
     if (idx !== -1) {

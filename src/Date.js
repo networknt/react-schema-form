@@ -15,11 +15,12 @@ class Date extends React.Component {
 
     constructor(props) {
         super(props);
+        this.onDatePicked = this.onDatePicked.bind(this);
     }
 
 
     onDatePicked(empty, date) {
-        console.log("onDatePicked", empty, date);
+        this.props.onChangeValidate(date);
     }
 
     render() {
