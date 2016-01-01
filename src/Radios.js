@@ -13,6 +13,7 @@ class Radios extends React.Component {
             return (
                 <RadioButton label={item.name}
                              value={item.value}
+                             disabled={this.props.form.readonly}
                     />
             )
         }.bind(this));

@@ -48,6 +48,7 @@ class Number extends React.Component {
                 onChange={this.preValidationCheck}
                 defaultValue={this.state.lastSuccessfulValue}
                 ref="numberField"
+                disabled={this.props.form.readonly}
                 style={{width: '100%'}}/>
         );
     }

@@ -7,6 +7,7 @@ const TextField = require('material-ui/lib/text-field');
 
 class Text extends React.Component {
     render() {
+        //console.log('Text props', this.props.form.readonly);
         return (
             <div>
                 <TextField
@@ -16,6 +17,7 @@ class Text extends React.Component {
                     errorText={this.props.error}
                     onChange={this.props.onChangeValidate}
                     defaultValue={this.props.value}
+                    disabled={this.props.form.readonly}
                     style={{width: '100%'}} />
             </div>
         );

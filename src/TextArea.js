@@ -9,6 +9,7 @@ class TextArea extends React.Component {
 
     render() {
         // FIXME: Obviously fix rowsMax eventually..
+        console.log('TextArea', this.props.form);
         return (
             <div>
                 <TextField
@@ -19,7 +20,9 @@ class TextArea extends React.Component {
                     errorText={this.props.error}
                     defaultValue={this.props.value}
                     multiLine={true}
-                    rowsMax={5}
+                    rows={this.props.form.rows}
+                    rowsMax={this.props.form.rowsMax}
+                    disabled={this.props.form.readonly}
                     style={{width: '100%'}}>
                 </TextField>
             </div>

@@ -13,6 +13,7 @@ class Checkbox extends React.Component {
                 value={this.props.form.key.slice(-1)[0]}
                 defaultChecked={this.props.value || false}
                 label={this.props.form.title}
+                disabled={this.props.form.readonly}
                 onCheck={(e, checked) => {this.props.onChangeValidate(e)}}
                 />
         );

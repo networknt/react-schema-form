@@ -37,7 +37,8 @@ var ExamplePage = React.createClass({
                 { label: 'Address', value: 'data/address.json'},
                 { label: "Kitchen Sink", value: 'data/kitchenSink.json'},
                 { label: "Login", value: 'data/login.json'},
-                { label: "Date", value: 'data/date.json'}
+                { label: "Date", value: 'data/date.json'},
+                { label: "Readonly", value: 'data/readonly.json'}
             ],
             schema: {},
             form: [],
