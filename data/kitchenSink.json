@@ -45,6 +45,10 @@
       "checkbox": {
         "title": "Checkbox",
         "type": "boolean"
+      },
+      "date": {
+        "title": "Date",
+        "type": "date"
       }
     },
     "required": ["name","email","comment"]
@@ -67,6 +71,10 @@
     {
       "key": "checkbox",
       "type": "checkbox"
-    }
+    },
+      {
+          "key": "date",
+          "type": "date"
+      }
   ]
 }
