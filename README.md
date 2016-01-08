@@ -5,7 +5,7 @@
 [React](http://facebook.github.io/react/) forms based on json schema for form generation and validation. This is a port of the [angular schema form](https://github.com/Textalk/angular-schema-form) project using
 [material-ui](http://www.material-ui.com/) for underline components.
 
-Some of the component (like array and section) are still working in progress.
+Some of the components (like array and section) are still work in progresses.
 
 # [Live demo](http://networknt.github.io/react-schema-form/)
 
