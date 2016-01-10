@@ -1,0 +1,35 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Comment",
+        "required": ["comments"],
+        "properties": {
+            "comments": {
+                "type": "array",
+                "maxItems": 2,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name":  {
+                            "title": "Name",
+                            "type": "string"
+                        }
+                    },
+                    "required": ["name"]
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "key": "comments",
+            "add": "New",
+            "style": {
+                "add": "btn-success"
+            },
+            "items": [
+                "comments[].name"
+            ]
+        }
+    ]
+}
