@@ -1,0 +1,120 @@
+[
+    {
+        "key": [
+            "name"
+        ],
+        "title": "Name",
+        "description": "Gimme yea name lad",
+        "required": true,
+        "minlength": 2,
+        "schema": {
+            "title": "Name",
+            "description": "Gimme yea name lad",
+            "type": "string",
+            "pattern": "^[^/]*$",
+            "minLength": 2
+        },
+        "ngModelOptions": {},
+        "type": "text"
+    },
+    {
+        "key": [
+            "attributes"
+        ],
+        "title": "Attributes",
+        "schema": {
+            "type": "object",
+            "title": "Attributes",
+            "required": [
+                "haircolor"
+            ],
+            "properties": {
+                "haircolor": {
+                    "type": "string",
+                    "title": "Hair color"
+                },
+                "shoulders": {
+                    "type": "object",
+                    "title": "Shoulders",
+                    "properties": {
+                        "left": {
+                            "type": "string",
+                            "title": "Left"
+                        },
+                        "right": {
+                            "type": "string",
+                            "title": "Right"
+                        }
+                    }
+                }
+            }
+        },
+        "ngModelOptions": {},
+        "type": "fieldset",
+        "items": [
+            {
+                "title": "Hair color",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "title": "Hair color"
+                },
+                "ngModelOptions": {},
+                "key": [
+                    "attributes",
+                    "haircolor"
+                ],
+                "type": "text"
+            },
+            {
+                "title": "Shoulders",
+                "schema": {
+                    "type": "object",
+                    "title": "Shoulders",
+                    "properties": {
+                        "left": {
+                            "type": "string",
+                            "title": "Left"
+                        },
+                        "right": {
+                            "type": "string",
+                            "title": "Right"
+                        }
+                    }
+                },
+                "ngModelOptions": {},
+                "type": "fieldset",
+                "items": [
+                    {
+                        "title": "Left",
+                        "schema": {
+                            "type": "string",
+                            "title": "Left"
+                        },
+                        "ngModelOptions": {},
+                        "key": [
+                            "attributes",
+                            "shoulders",
+                            "left"
+                        ],
+                        "type": "text"
+                    },
+                    {
+                        "title": "Right",
+                        "schema": {
+                            "type": "string",
+                            "title": "Right"
+                        },
+                        "ngModelOptions": {},
+                        "key": [
+                            "attributes",
+                            "shoulders",
+                            "right"
+                        ],
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
+    }
+]

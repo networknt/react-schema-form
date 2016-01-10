@@ -9,7 +9,7 @@ class TextArea extends React.Component {
 
     render() {
         // FIXME: Obviously fix rowsMax eventually..
-        console.log('TextArea', this.props.form);
+        //console.log('TextArea', this.props.form);
         return (
             <div>
                 <TextField

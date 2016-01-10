@@ -32,13 +32,16 @@ var ExamplePage = React.createClass({
         return {
             tests: [
                 { label: "Simple", value: 'data/simple.json' },
+                { label: "Simple Array", value: 'data/simplearray.json'},
                 { label: "Basic JSON Schema Type", value: 'data/types.json' },
                 { label: 'Basic Radios', value: 'data/radio.json'},
                 { label: 'Address', value: 'data/address.json'},
                 { label: "Kitchen Sink", value: 'data/kitchenSink.json'},
                 { label: "Login", value: 'data/login.json'},
                 { label: "Date", value: 'data/date.json'},
-                { label: "Readonly", value: 'data/readonly.json'}
+                { label: "Readonly", value: 'data/readonly.json'},
+                { label: "Array", value: 'data/array.json'},
+                { label: "Object", value: 'data/object.json'}
             ],
             schema: {},
             form: [],
@@ -74,7 +77,12 @@ var ExamplePage = React.createClass({
     onModelChange: function(key, val) {
         //console.log('ExamplePage.onModelChange:', key);
         //console.log('ExamplePage.onModelChange:', val);
-        this.setState({model: utils.selectOrSet(key, this.state.model, val)});
+
+
+        var newModel = this.state.model;
+        utils.selectOrSet(key, newModel, val);
+        this.setState({ model: newModel });
+
     },
 
     onFormChange: function(val) {

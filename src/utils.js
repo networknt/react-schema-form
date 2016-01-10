@@ -454,6 +454,7 @@ function merge(schema, form, ignore, options, readonly) {
 }
 
 function selectOrSet(projection, obj, valueToSet) {
+    //console.log('selectOrSet', projection, obj, valueToSet);
     var numRe = /^\d+$/;
 
     if (!obj) {

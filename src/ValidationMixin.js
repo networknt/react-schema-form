@@ -37,17 +37,19 @@ export default ComposedComponent => class extends React.Component {
             }
         } else if(this.props.form.schema.type === 'boolean') {
             value = e.target.checked;
-        } else if(this.props.form.schema.type === 'date') {
+        } else if(this.props.form.schema.type === 'date' || this.props.form.schema.type === 'array') {
             value = e;
         } else { // string
             value = e.target.value;
         }
+        //console.log('onChangeValidate this.props.form, value', this.props.form, value);
         let validationResult = utils.validate(this.props.form, value);
         this.setState({
             value: value,
             valid: validationResult.valid,
             error: validationResult.valid ? null : validationResult.error.message
         });
+        //console.log('conhangeValidate this.props.form.key, value', this.props.form.key, value);
         this.props.onChange(this.props.form.key, value);
     }
 

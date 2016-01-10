@@ -1,0 +1,48 @@
+{
+    "schema": {
+        "type": "object",
+        "required": [
+            "name"
+        ],
+        "properties": {
+            "name": {
+                "title": "Name",
+                "description": "Gimme yea name lad",
+                "type": "string",
+                "pattern": "^[^/]*$",
+                "minLength": 2
+            },
+            "attributes": {
+                "type": "object",
+                "title": "Attributes",
+                "required": [
+                    "haircolor"
+                ],
+                "properties": {
+                    "haircolor": {
+                        "type": "string",
+                        "title": "Hair color"
+                    },
+                    "shoulders": {
+                        "type": "object",
+                        "title": "Shoulders",
+                        "properties": {
+                            "left": {
+                                "type": "string",
+                                "title": "Left"
+                            },
+                            "right": {
+                                "type": "string",
+                                "title": "Right"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "form": [
+        "name",
+        "attributes"
+    ]
+}

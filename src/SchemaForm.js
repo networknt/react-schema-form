@@ -11,6 +11,9 @@ import Radios from './Radios';
 import Date from './Date';
 import Checkbox from './Checkbox';
 import Help from './Help';
+import Array from './Array';
+import FieldSet from './FieldSet';
+
 
 class SchemaForm extends React.Component {
 
@@ -23,7 +26,7 @@ class SchemaForm extends React.Component {
         this.props.onModelChange(key, val);
     }
 
-    static renderSchema (form, model, index, onChange) {
+    builder(form, model, index, onChange) {
         var result;
         //console.log('form.type', form.type);
         switch (form.type) {
@@ -54,16 +57,23 @@ class SchemaForm extends React.Component {
             case 'help':
                 result = <Help model={model} form={form} key={index} onChange={onChange} />;
                 break;
+            case 'array':
+                // TODO potentially, this can be rendered as multiple select if items are strings.
+                result = <Array model={model} form={form} key={index} onChange={onChange} builder={this.builder} />;
+                break;
+            case 'fieldset':
+                result = <FieldSet model={model} form={form} key={index} onChange={onChange} builder={this.builder} />;
+                break;
         }
         return result;
     }
 
     render() {
         let merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
-        console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
+        //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         //console.log('SchemaForm render merged ', merged);
         let forms = merged.map(function(form, index) {
-            return SchemaForm.renderSchema(form, this.props.model, form.key[0], this.onChange);
+            return this.builder(form, this.props.model, index, this.onChange);
         }.bind(this));
 
         return (
