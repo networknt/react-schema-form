@@ -1,24 +1,44 @@
 # react-schema-form
-react form based on json schema for form generation and validation. This is the port of angualr schema form from https://github.com/Textalk/angular-schema-form
-with material-ui for underline components. Some of the component like array and section are still working in progress.
 
-# Live demo
-http://networknt.github.io/react-schema-form/
+[![npm package](https://img.shields.io/npm/v/react-schema-form.svg?style=flat-square)](https://www.npmjs.org/package/react-schema-form)
+
+[React](http://facebook.github.io/react/) forms based on json schema for form generation and validation. This is a port of the [angular schema form](https://github.com/Textalk/angular-schema-form) project using
+[material-ui](http://www.material-ui.com/) for underline components.
+
+Some of the components (like array and section) are still work in progress.
+
+# [Live demo](http://networknt.github.io/react-schema-form/)
 
 # Examples
-clone the project and run
+Clone the project and run
+
 ```
 npm install
 npm start
 ```
+
 Then open localhost:8080 in a browser.
 
 # Installation
+
+```sh
+npm install react-schema-form@latest --save
 ```
-npm install react-schema-form --save
 
 # Usage
+```js
+var { SchemaForm } = require('react-schema-form');
 
+<SchemaForm schema={this.state.schema} form={this.state.form} model={this.props.model} onModelChange={this.props.onModelChange} />
+
+// for example:
+_onChange: function() {
+    this.setState({
+        schema: FormStore.getForm('com.networknt.light.example').schema,
+        form: FormStore.getForm('com.networknt.light.example').form
+    });
+}
+```
 
 # Contributing
 
