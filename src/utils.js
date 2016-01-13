@@ -202,15 +202,19 @@ var array = function(name, schema, options) {
 
         var arrPath = options.path.slice();
         arrPath.push('');
-
-        f.items = [defaultFormDefinition(name, schema.items, {
+        var def = defaultFormDefinition(name, schema.items, {
             path: arrPath,
             required: required || false,
             lookup: options.lookup,
             ignore: options.ignore,
             global: options.global
-        })];
-
+        });
+        if(def) {
+            f.items = [def];
+        } else {
+            // This is the case that item only contains key value pair for rc-select multipel
+            f.items = schema.items;
+        }
         return f;
     }
 
@@ -227,6 +231,7 @@ var defaults = {
 };
 
 function defaultFormDefinition(name, schema, options) {
+    //console.log("defaultFormDefinition name, schema", name, schema);
     var rules = defaults[stripNullType(schema.type)];
     //console.log('defaultFormDefinition:defaults = ', defaults);
     //console.log('defaultFormDefinition:rules = ', rules);
@@ -378,14 +383,14 @@ function merge(schema, form, ignore, options, readonly) {
     //ok let's merge!
     //We look at the supplied form and extend it with schema standards
     var lookup = stdForm.lookup;
-
+    //console.log('form', form);
     return postProcessFn(form.map(function(obj) {
 
         //handle the shortcut with just a name
         if (typeof obj === 'string') {
             obj = {key: obj};
         }
-
+        //console.log('obj', obj);
         if (obj.key) {
             if (typeof obj.key === 'string') {
                 obj.key = ObjectPath.parse(obj.key);
@@ -431,7 +436,10 @@ function merge(schema, form, ignore, options, readonly) {
         }
 
         //if it's a type with items, merge 'em!
-        if (obj.items) {
+        if (obj.items && obj.items.length > 0) {
+            //console.log('items is not empty schema', schema);
+            //console.log('items is not empty obj.items', obj.items);
+
             obj.items = merge(schema, obj.items, ignore, options, obj.readonly);
         }
 
