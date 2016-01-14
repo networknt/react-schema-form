@@ -13,9 +13,23 @@ import Checkbox from './Checkbox';
 import Help from './Help';
 import Array from './Array';
 import FieldSet from './FieldSet';
-
+import _ from 'lodash';
 
 class SchemaForm extends React.Component {
+
+    mapper = {
+        "number": Number,
+        "text": Text,
+        "password": Text,
+        "textarea": TextArea,
+        "select": Select,
+        "radios": Radios,
+        "date": Date,
+        "checkbox": Checkbox,
+        "help": Help,
+        "array": Array,
+        "fieldset": FieldSet
+    };
 
     constructor(props) {
         super(props);
@@ -26,54 +40,24 @@ class SchemaForm extends React.Component {
         this.props.onModelChange(key, val);
     }
 
-    builder(form, model, index, onChange) {
-        var result;
-        //console.log('form.type', form.type);
-        switch (form.type) {
-            case 'number':
-                result = <Number model={model} form={form} key={index} onChange={onChange} />;
-                break;
-            case 'text':
-                result = <Text model={model} form={form} key={index} onChange={onChange} />;
-                break;
-            case 'password':
-                result = <Text model={model} form={form} key={index} onChange={onChange} />;
-                break;
-            case 'textarea':
-                result = <TextArea model={model} form={form} key={index} onChange={onChange} />;
-                break;
-            case 'select':
-                result = <Select model={model} form={form} key={index} onChange={onChange} />;
-                break;
-            case 'radios':
-                result = <Radios model={model} form={form} key={index} onChange={onChange} />;
-                break;
-            case 'date':
-                result = <Date model={model} form={form} key={index} onChange={onChange} />;
-                break;
-            case 'checkbox':
-                result = <Checkbox model={model} form={form} key={index} onChange={onChange} />;
-                break;
-            case 'help':
-                result = <Help model={model} form={form} key={index} onChange={onChange} />;
-                break;
-            case 'array':
-                // TODO potentially, this can be rendered as multiple select if items are strings.
-                result = <Array model={model} form={form} key={index} onChange={onChange} builder={this.builder} />;
-                break;
-            case 'fieldset':
-                result = <FieldSet model={model} form={form} key={index} onChange={onChange} builder={this.builder} />;
-                break;
-        }
-        return result;
+    builder(form, model, index, onChange, mapper) {
+        var type = form.type;
+        console.log('type', type);
+        console.log('mapper', this.mapper);
+        let Field = this.mapper[type];
+        return <Field model={model} form={form} key={index} onChange={onChange} mapper={mapper} builder={this.builder}/>
     }
 
     render() {
         let merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
         console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
-        //console.log('SchemaForm render merged ', merged);
+        let mapper = this.mapper;
+        if(this.props.mapper) {
+            mapper = _.merge(this.mapper, this.props.mapper);
+        }
+        console.log('mapper ', mapper);
         let forms = merged.map(function(form, index) {
-            return this.builder(form, this.props.model, index, this.onChange);
+            return this.builder(form, this.props.model, index, this.onChange, mapper);
         }.bind(this));
 
         return (

@@ -129,7 +129,7 @@ class Array extends React.Component {
             let boundOnDelete = this.onDelete.bind(this, i);
             let forms = this.props.form.items.map(function(form, index){
                 var copy = this.copyWithIndex(form, i);
-                return this.props.builder(copy, this.props.model, index, this.props.onChange);
+                return this.props.builder(copy, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
