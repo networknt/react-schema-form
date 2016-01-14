@@ -40,6 +40,34 @@ _onChange: function() {
 }
 ```
 
+# Customization
+react-schema-form provides most fields including FieldSet and Array and they might cover most use cases; however, you might have requirement that needs something that is not built in. In this case, you
+can implement your own field and inject it into the generic mapper for the builder to leverage your component. By passing a mapper as a props to the SchemaForm, you can replace built in component with
+yours or you can define a brand new type and provide your component to render it.
+
+[react-schema-form-rc-select](https://github.com/networknt/react-schema-form-rc-select) is an example to provide multiple select to the react schema form.
+
+```js
+require('rc-select/assets/index.css');
+import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
+
+...
+
+        var mapper = {
+            "rc-select": RcSelect
+        };
+
+        var schemaForm = '';
+        if (this.state.form.length > 0) {
+            schemaForm = (
+                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} mapper={mapper} />
+            );
+        }
+
+
+```
+
+
 # Contributing
 
 See our [CONTRIBUTING.md](https://github.com/networknt/react-schema-form/CONTRIBUTING.md) for information on how to contribute.

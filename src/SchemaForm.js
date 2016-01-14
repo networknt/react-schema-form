@@ -42,20 +42,20 @@ class SchemaForm extends React.Component {
 
     builder(form, model, index, onChange, mapper) {
         var type = form.type;
-        console.log('type', type);
-        console.log('mapper', this.mapper);
+        //console.log('type', type);
+        //console.log('mapper', this.mapper);
         let Field = this.mapper[type];
         return <Field model={model} form={form} key={index} onChange={onChange} mapper={mapper} builder={this.builder}/>
     }
 
     render() {
         let merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
-        console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
+        //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         let mapper = this.mapper;
         if(this.props.mapper) {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
-        console.log('mapper ', mapper);
+        //console.log('mapper ', mapper);
         let forms = merged.map(function(form, index) {
             return this.builder(form, this.props.model, index, this.onChange, mapper);
         }.bind(this));
