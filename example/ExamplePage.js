@@ -12,6 +12,8 @@ var $ = require('jquery');
 var Ace = require('react-ace');
 require('brace/mode/json');
 require('brace/theme/github');
+require('rc-select/assets/index.css');
+import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 
 const ThemeManager = require('material-ui/lib/styles/theme-manager');
 const LightRawTheme = require('material-ui/lib/styles/raw-themes/light-raw-theme');
@@ -107,6 +109,9 @@ var ExamplePage = React.createClass({
     },
 
     render: function() {
+        var mapper = {
+            "rc-select": RcSelect
+        };
 
         var schemaForm = '';
         if (this.state.form.length > 0) {
@@ -114,7 +119,7 @@ var ExamplePage = React.createClass({
             //console.log('form = ', this.state.schema);
             //console.log('model = ', this.state.model);
             schemaForm = (
-                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} />
+                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} mapper={mapper} />
             );
         }
 

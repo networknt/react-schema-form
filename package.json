@@ -55,6 +55,7 @@
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
     "react-ace": "git+https://github.com/networknt/react-ace.git",
+    "react-schema-form-rc-select": "^0.1.0",
     "react-select": "^0.6.7",
     "rimraf": "^2.4.2",
     "style-loader": "^0.12.4",
