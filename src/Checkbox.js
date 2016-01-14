@@ -2,7 +2,7 @@
  * Created by steve on 20/09/15.
  */
 import React from 'react';
-import ValidationMixin from './ValidationMixin';
+import ComposedComponent from './ComposedComponent';
 const Switch = require('material-ui/lib/checkbox');
 
 class Checkbox extends React.Component {
@@ -20,4 +20,4 @@ class Checkbox extends React.Component {
     }
 }
 
-export default ValidationMixin(Checkbox);
+export default ComposedComponent(Checkbox);

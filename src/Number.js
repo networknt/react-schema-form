@@ -2,7 +2,7 @@
  * Created by steve on 15/09/15.
  */
 import React from 'react';
-import ValidationMixin from './ValidationMixin';
+import ComposedComponent from './ComposedComponent';
 const TextField = require('material-ui/lib/text-field');
 
 /**
@@ -49,9 +49,9 @@ class Number extends React.Component {
                 defaultValue={this.state.lastSuccessfulValue}
                 ref="numberField"
                 disabled={this.props.form.readonly}
-                style={{width: '100%'}}/>
+                style={this.props.form.style || {width: '100%'}}/>
         );
     }
 }
 
-export default ValidationMixin(Number);
+export default ComposedComponent(Number);

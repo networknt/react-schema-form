@@ -4,7 +4,7 @@
 import React from 'react';
 var utils = require('./utils');
 var classNames = require('classnames');
-import ValidationMixin from './ValidationMixin';
+import ComposedComponent from './ComposedComponent';
 const DatePicker = require('material-ui/lib/date-picker/date-picker');
 
 /**
@@ -34,11 +34,11 @@ class Date extends React.Component {
                     onShow={null}
                     onDismiss={null}
                     disabled={this.props.form.readonly}
-                    style={{width: '100%'}}/>
+                    style={this.props.form.style || {width: '100%'}}/>
 
             </div>
         );
     }
 }
 
-export default ValidationMixin(Date);
+export default ComposedComponent(Date);

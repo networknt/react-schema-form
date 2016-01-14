@@ -1,7 +1,7 @@
 import React from 'react';
 import utils from './utils';
 import classNames from 'classnames';
-import ValidationMixin from './ValidationMixin';
+import ComposedComponent from './ComposedComponent';
 
 const RadioButton = require('material-ui/lib/radio-button');
 const RadioButtonGroup = require('material-ui/lib/radio-button-group');
@@ -9,10 +9,11 @@ const RadioButtonGroup = require('material-ui/lib/radio-button-group');
 class Radios extends React.Component {
 
     render() {
-        let items = this.props.form.titleMap.map(function(item) {
+        let items = this.props.form.titleMap.map(function(item, index) {
             return (
                 <RadioButton label={item.name}
                              value={item.value}
+                             key={index}
                              disabled={this.props.form.readonly}
                     />
             )
@@ -26,4 +27,4 @@ class Radios extends React.Component {
     }
 }
 
-export default ValidationMixin(Radios);
+export default ComposedComponent(Radios);

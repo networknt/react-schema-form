@@ -2,7 +2,7 @@
  * Created by steve on 15/09/15.
  */
 import React from 'react';
-import ValidationMixin from './ValidationMixin';
+import ComposedComponent from './ComposedComponent';
 const TextField = require('material-ui/lib/text-field');
 
 class Text extends React.Component {
@@ -18,10 +18,10 @@ class Text extends React.Component {
                     onChange={this.props.onChangeValidate}
                     defaultValue={this.props.value}
                     disabled={this.props.form.readonly}
-                    style={{width: '100%'}} />
+                    style={this.props.form.style || {width: '100%'}} />
             </div>
         );
     }
 }
 
-export default ValidationMixin(Text);
+export default ComposedComponent(Text);

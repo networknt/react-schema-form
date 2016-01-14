@@ -11,7 +11,7 @@ import Radios from './Radios';
 import Date from './Date';
 import Checkbox from './Checkbox';
 import Help from './Help';
-import ValidationMixin from './ValidationMixin';
+import ComposedComponent from './ComposedComponent';
 import RaisedButton from 'material-ui/lib/raised-button';
 import _ from 'lodash';
 import SchemaForm from './SchemaForm';
@@ -153,4 +153,4 @@ class Array extends React.Component {
     }
 }
 
-export default ValidationMixin(Array);
+export default ComposedComponent(Array);

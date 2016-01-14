@@ -2,7 +2,7 @@
  * Created by steve on 15/09/15.
  */
 import React from 'react';
-import ValidationMixin from './ValidationMixin';
+import ComposedComponent from './ComposedComponent';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 const SelectField = require('material-ui/lib/select-field');
 
@@ -46,4 +46,4 @@ class Select extends React.Component {
     }
 }
 
-export default ValidationMixin(Select);
+export default ComposedComponent(Select);

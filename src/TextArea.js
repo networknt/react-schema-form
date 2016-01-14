@@ -2,7 +2,7 @@
  * Created by steve on 15/09/15.
  */
 import React from 'react';
-import ValidationMixin from './ValidationMixin';
+import ComposedComponent from './ComposedComponent';
 const TextField = require('material-ui/lib/text-field');
 
 class TextArea extends React.Component {
@@ -23,11 +23,11 @@ class TextArea extends React.Component {
                     rows={this.props.form.rows}
                     rowsMax={this.props.form.rowsMax}
                     disabled={this.props.form.readonly}
-                    style={{width: '100%'}}>
+                    style={this.props.form.style || {width: '100%'}}>
                 </TextField>
             </div>
         );
     }
 }
 
-export default ValidationMixin(TextArea);
+export default ComposedComponent(TextArea);
