@@ -1,0 +1,39 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Update Access Control",
+        "required": [
+            "accessLevel"
+        ],
+        "properties": {
+            "name": {
+                "title": "Name",
+                "type": "string"
+            },
+            "accessLevel": {
+                "title": "Access Level",
+                "type": "array",
+                "items": [
+                    {"value": "A", "label": "Authorized to anyone"},
+                    {"value": "N", "label": "Not Accessible"},
+                    {"value": "C", "label": "Client Based"},
+                    {"value": "R", "label": "Role Based"},
+                    {"value": "U", "label": "User Based"},
+                    {"value": "CR", "label": "Client and Role Based"},
+                    {"value": "CU", "label": "Client and User Based"},
+                    {"value": "RU", "label": "Role and User Based"},
+                    {"value": "CRU", "label": "Client, Role and User Based"}
+                ]
+            }
+        }
+    },
+
+    "form": [
+        "name",
+        {
+            "key": "accessLevel",
+            "type": "rc-select",
+            "multiple": true
+        }
+    ]
+}
