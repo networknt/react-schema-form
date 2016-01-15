@@ -513,6 +513,10 @@ function selectOrSet(projection, obj, valueToSet) {
     return value;
 }
 
+function validateBySchema(schema, value) {
+    return tv4.validateResult(value, schema);
+}
+
 
 function validate(form, value) {
     //console.log('utils validate form ', form);
@@ -587,5 +591,6 @@ module.exports = {
     stripNullType:stripNullType,
     merge: merge,
     validate: validate,
+    validateBySchema: validateBySchema,
     selectOrSet: selectOrSet
 };

@@ -21,7 +21,6 @@ class Array extends React.Component {
 
     constructor(props) {
         super(props);
-        this.onChange = this.onChange.bind(this);
         this.onAppend = this.onAppend.bind(this);
         this.onDelete = this.onDelete.bind(this);
         // we have the model here for the entire form, get the model for this array only
@@ -37,12 +36,6 @@ class Array extends React.Component {
         if(this.props.form.startEmpty !== true && this.state.model.length === 0) {
             this.onAppend();
         }
-    }
-
-    onChange(key, val) {
-        console.log('onChange', key, val);
-
-        //this.props.onModelChange(key, val);
     }
 
     onAppend() {

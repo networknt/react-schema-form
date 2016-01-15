@@ -5,7 +5,7 @@
 
 var React = require('react');
 var utils = require('../src/utils');
-var { SchemaForm } = require('react-schema-form');
+var SchemaForm = require('../src/SchemaForm');
 require('react-select/less/select.less');
 var Select = require('react-select');
 var $ = require('jquery');
@@ -14,6 +14,7 @@ require('brace/mode/json');
 require('brace/theme/github');
 require('rc-select/assets/index.css');
 import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 const ThemeManager = require('material-ui/lib/styles/theme-manager');
 const LightRawTheme = require('material-ui/lib/styles/raw-themes/light-raw-theme');
@@ -46,6 +47,7 @@ var ExamplePage = React.createClass({
                 { label: "Object", value: 'data/object.json'},
                 { label: "ArraySelect", value: 'data/arrayselect.json'}
             ],
+            validationResult: {},
             schema: {},
             form: [],
             model: {},
@@ -57,13 +59,13 @@ var ExamplePage = React.createClass({
     },
 
     onSelectChange: function(val) {
-        console.log("Selected:" + val);
+        //console.log("Selected:" + val);
         $.ajax({
             type: 'GET',
             url: val
         }).done(function(data) {
 
-            console.log('done', data);
+            //console.log('done', data);
             //console.log('data.schema = ', data.schema);
             //console.log('data.form = ', data.form);
             this.setState({
@@ -78,14 +80,16 @@ var ExamplePage = React.createClass({
     },
 
     onModelChange: function(key, val) {
-        //console.log('ExamplePage.onModelChange:', key);
-        //console.log('ExamplePage.onModelChange:', val);
-
-
+        console.log('ExamplePage.onModelChange:', key, val);
         var newModel = this.state.model;
         utils.selectOrSet(key, newModel, val);
         this.setState({ model: newModel });
+    },
 
+    onValidate: function() {
+        console.log('ExamplePage.onValidate is called');
+        let result = utils.validateBySchema(this.state.schema, this.state.model);
+        this.setState({ validationResult: result });
     },
 
     onFormChange: function(val) {
@@ -114,12 +118,16 @@ var ExamplePage = React.createClass({
         };
 
         var schemaForm = '';
+        var validate = '';
         if (this.state.form.length > 0) {
-            //console.log('schema = ', this.state.schema);
-            //console.log('form = ', this.state.schema);
-            //console.log('model = ', this.state.model);
             schemaForm = (
                 <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} mapper={mapper} />
+            );
+            validate = (
+                <div>
+                    <RaisedButton primary={true} label="Validate" onTouchTap={this.onValidate} />
+                    <pre>{JSON.stringify(this.state.validationResult,undefined,2,2)}</pre>
+                </div>
             );
         }
 
@@ -132,6 +140,7 @@ var ExamplePage = React.createClass({
                         {schemaForm}
                         <h3>Model</h3>
                         <pre>{JSON.stringify(this.state.model,undefined,2,2)}</pre>
+                        {validate}
                     </div>
                     <div className="col-sm-8">
                         <h3>Select Example</h3>

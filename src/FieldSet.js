@@ -16,19 +16,8 @@ import _ from 'lodash';
 
 class FieldSet extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.onChange = this.onChange.bind(this);
-    }
-
-    onChange(key, val) {
-        console.log('onChange', key, val, key.slice(0, key.length - 1));
-
-        //this.props.onChange(key.slice(0, key.length - 1), val);
-    }
-
     render() {
-        console.log('FieldSet.render', this.props);
+        //console.log('FieldSet.render', this.props);
         // now render all the items in the fieldset
         let forms = this.props.form.items.map(function(form, index){
             return this.props.builder(form, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
