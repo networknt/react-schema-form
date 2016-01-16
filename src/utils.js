@@ -184,40 +184,41 @@ var fieldset = function(name, schema, options) {
 
 };
 
-var array = function(name, schema, options) {
+var array = function array(name, schema, options) {
 
     if (stripNullType(schema.type) === 'array') {
-        var f   = stdFormObj(name, schema, options);
-        f.type  = 'array';
-        f.key   = options.path;
+        var f = stdFormObj(name, schema, options);
+        f.type = 'array';
+        f.key = options.path;
         options.lookup[ObjectPath.stringify(options.path)] = f;
 
-        var required = schema.required &&
-            schema.required.indexOf(options.path[options.path.length - 1]) !== -1;
+        // don't do anything if items is not defined.
+        if(typeof schema.items !== 'undefined') {
+            var required = schema.required && schema.required.indexOf(options.path[options.path.length - 1]) !== -1;
 
-        // The default is to always just create one child. This works since if the
-        // schemas items declaration is of type: "object" then we get a fieldset.
-        // We also follow json form notatation, adding empty brackets "[]" to
-        // signify arrays.
+            // The default is to always just create one child. This works since if the
+            // schemas items declaration is of type: "object" then we get a fieldset.
+            // We also follow json form notatation, adding empty brackets "[]" to
+            // signify arrays.
 
-        var arrPath = options.path.slice();
-        arrPath.push('');
-        var def = defaultFormDefinition(name, schema.items, {
-            path: arrPath,
-            required: required || false,
-            lookup: options.lookup,
-            ignore: options.ignore,
-            global: options.global
-        });
-        if(def) {
-            f.items = [def];
-        } else {
-            // This is the case that item only contains key value pair for rc-select multipel
-            f.items = schema.items;
+            var arrPath = options.path.slice();
+            arrPath.push('');
+            var def = defaultFormDefinition(name, schema.items, {
+                path: arrPath,
+                required: required || false,
+                lookup: options.lookup,
+                ignore: options.ignore,
+                global: options.global
+            });
+            if (def) {
+                f.items = [def];
+            } else {
+                // This is the case that item only contains key value pair for rc-select multipel
+                f.items = schema.items;
+            }
         }
         return f;
     }
-
 };
 
 var defaults = {
