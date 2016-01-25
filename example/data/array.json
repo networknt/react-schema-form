@@ -62,11 +62,6 @@
           "type": "textarea"
         }
       ]
-    },
-    {
-      "type": "submit",
-      "style": "btn-info",
-      "title": "OK"
     }
   ]
 }
