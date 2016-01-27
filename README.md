@@ -7,7 +7,8 @@
 
 Some of the components (like array and section) are still work in progress.
 
-# [Live demo](http://networknt.github.io/react-schema-form/)
+# Live demo
+[demo](http://networknt.github.io/react-schema-form/)
 
 # Examples
 Clone the project and run
