@@ -5,10 +5,10 @@
 [React](http://facebook.github.io/react/) forms based on json schema for form generation and validation. This is a port of the [angular schema form](https://github.com/Textalk/angular-schema-form) project using
 [material-ui](http://www.material-ui.com/) for underline components.
 
-Some of the components (like array and section) are still work in progress.
-
 # Live demo
 [demo](http://networknt.github.io/react-schema-form/)
+
+While you are trying the demo forms, you can update the schema and form in the json editor to see the instant re-rendered form. This is a way to build form interactively.
 
 # Examples
 Clone the project and run
@@ -23,7 +23,12 @@ Then open localhost:8080 in a browser.
 # Installation
 
 ```sh
-npm install react-schema-form@latest --save
+npm install react-schema-form --save
+```
+
+There is one added on component react-schema-form-rc-select for multiple select and dynamically loading dropdown from server. To install it.
+```
+npm install react-schema-form-rc-select --save
 ```
 
 # Usage
