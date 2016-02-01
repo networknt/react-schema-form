@@ -45,6 +45,18 @@ _onChange: function() {
     });
 }
 ```
+# Examples
+
+There are some simple forms in the demo to show how each fields to be rendered.
+For more real world exmaples, please check [Light Framework Forms](https://github.com/networknt/light/tree/master/server/src/main/resources/form)
+
+There are still some angular schema form in this folder and migration is in progress.
+
+If you are interested in how these forms are utilized in the framework, please take a look at a react component [Form.jsx](https://github.com/networknt/light/blob/master/edibleforestgarden/src/app/components/Form.jsx)
+
+Basically, All forms in this folder will be loaded to an Graph Database and UI is rendered by formId and form model will be validated on the browser as well as
+backend APIs.
+
 
 # Customization
 react-schema-form provides most fields including FieldSet and Array and they might cover most use cases; however, you might have requirement that needs something that is not built in. In this case, you
@@ -56,7 +68,6 @@ yours or you can define a brand new type and provide your component to render it
 ```js
 require('rc-select/assets/index.css');
 import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
-
 ...
 
         var mapper = {
