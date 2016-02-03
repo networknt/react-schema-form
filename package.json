@@ -9,7 +9,7 @@
     "react-component",
     "form"
   ],
-  "author": "Steve Hu",
+  "author": "Steve Hu, Nicholas Azar",
   "license": "MIT",
   "main": "./lib/index",
   "files": [
