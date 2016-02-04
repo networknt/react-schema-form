@@ -140,7 +140,7 @@ class Array extends React.Component {
         return (
             <div>
                 {arrays}
-                <RaisedButton label={this.props.form.add || 'Add'} primary={true} onTouchTap={this.onAppend}/>
+                <RaisedButton label={this.props.form.add || 'Add'} secondary={true} onTouchTap={this.onAppend}/>
             </div>
         );
     }
