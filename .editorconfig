@@ -6,9 +6,9 @@ end_of_line = lf
 insert_final_newline = true
 # Set default charset
 charset = utf-8
-# 4 space indentation
+# 2 space indentation
 indent_style = space
-indent_size = 4
+indent_size = 2
 # trim whitespaces
 trim_trailing_whitespace = true
 # always insert final newline
