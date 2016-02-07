@@ -11,9 +11,6 @@ console.warn = function(warning) {
     warn.apply(console, arguments);
 };
 
-//Needed for React Developer Tools
-window.React = React;
-
 //Needed for onTouchTap
 //Can go away when react 1.0 release
 //Check this repo:

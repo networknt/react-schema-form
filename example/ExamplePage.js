@@ -19,6 +19,7 @@ import RaisedButton from 'material-ui/lib/raised-button';
 const ThemeManager = require('material-ui/lib/styles/theme-manager');
 const LightRawTheme = require('material-ui/lib/styles/raw-themes/light-raw-theme');
 
+
 var ExamplePage = React.createClass({
 
     childContextTypes: {
@@ -60,9 +61,20 @@ var ExamplePage = React.createClass({
 
     onSelectChange: function(val) {
         //console.log("Selected:" + val);
+        if(!val) {
+            this.setState({
+                schemaJson: '',
+                formJson: '',
+                selected : '',
+                schema: {},
+                model: {},
+                form: []
+            });
+            return;
+        }
         $.ajax({
             type: 'GET',
-            url: val
+            url: val.value
         }).done(function(data) {
 
             //console.log('done', data);
