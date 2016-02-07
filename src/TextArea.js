@@ -23,8 +23,8 @@ class TextArea extends React.Component {
                     rows={this.props.form.rows}
                     rowsMax={this.props.form.rowsMax}
                     disabled={this.props.form.readonly}
-                    style={this.props.form.style || {width: '100%'}}>
-                </TextField>
+                    style={this.props.form.style || {width: '100%'}}
+                />
             </div>
         );
     }
