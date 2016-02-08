@@ -72,22 +72,22 @@ var ExamplePage = React.createClass({
             });
             return;
         }
+
         $.ajax({
             type: 'GET',
             url: val.value
         }).done(function(data) {
-
             //console.log('done', data);
             //console.log('data.schema = ', data.schema);
             //console.log('data.form = ', data.form);
             this.setState({
                 schemaJson: JSON.stringify(data.schema, undefined, 2),
                 formJson: JSON.stringify(data.form, undefined, 2),
-                selected : val,
+                selected : val.value,
                 schema: data.schema,
                 model: {},
                 form: data.form
-            })
+            });
         }.bind(this));
     },
 
@@ -105,23 +105,17 @@ var ExamplePage = React.createClass({
     },
 
     onFormChange: function(val) {
-        //console.log("onFormChange:" + val);
         try {
             let f = JSON.parse(val);
             this.setState({formJson: val, form: f});
-        } catch (e) {
-            this.setState({formJson: val})
-        }
+        } catch (e) {}
     },
 
     onSchemaChange: function(val) {
-        //console.log("onSchemaChange:" + val);
         try {
             let s = JSON.parse(val);
             this.setState({schemaJson: val, schema: s});
-        } catch (e) {
-            this.setState({schemaJson: val})
-        }
+        } catch (e) {}
     },
 
     render: function() {

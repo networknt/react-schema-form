@@ -223,7 +223,7 @@ describe('utils', function () {
             }
         ];
         var f = utils.getDefaults(schema);
-        console.log('f = ', f);
+        //console.log('f = ', f);
         expect(f.form).toEqual(form);
     });
 
@@ -294,7 +294,7 @@ describe('utils', function () {
                     'enum': [
                         'undefined',
                         'null',
-                        'NaN',
+                        'NaN'
                     ]
                 }
             }
@@ -359,7 +359,7 @@ describe('utils', function () {
                     'enum': [
                         'undefined',
                         'null',
-                        'NaN',
+                        'NaN'
                     ]
                 }
             }
@@ -560,7 +560,7 @@ describe('utils', function () {
 
         var model = {
 
-        }
+        };
         var list = utils.selectOrSet(schema, [{key: 'sub', readonly: true}]);
 
         //sub
