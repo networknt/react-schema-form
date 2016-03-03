@@ -39,7 +39,7 @@ var ExamplePage = React.createClass({
                 { label: "Simple Array", value: 'data/simplearray.json'},
                 { label: "Basic JSON Schema Type", value: 'data/types.json' },
                 { label: 'Basic Radios', value: 'data/radio.json'},
-                { label: 'Address', value: 'data/address.json'},
+                { label: 'Condition', value: 'data/condition.json'},
                 { label: "Kitchen Sink", value: 'data/kitchenSink.json'},
                 { label: "Login", value: 'data/login.json'},
                 { label: "Date", value: 'data/date.json'},
