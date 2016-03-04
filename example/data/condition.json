@@ -16,11 +16,7 @@
         "properties": {
           "delivery": {
             "title": "Select delivery option",
-            "type": "string",
-            "enum": [
-              "S",
-              "P"
-            ]
+            "type": "string"
           },
           "firstName": {
               "title": "First Name",
@@ -78,14 +74,6 @@
               "type": "string",
               "description": "Please include area code"
           },
-          "pickupPayment": {
-            "title": "Select payment option for pick up order",
-            "type": "string",
-            "enum": [
-              "PickupWithCash",
-              "PayNowPickupLater"
-            ]
-          },
           "pickupAddress": {
             "title": "Select a pickup address",
             "type": "string"
@@ -108,23 +96,8 @@
         ]
       },
       {
-        "key": "pickupPayment",
-        "condition": "model.delivery === 'P'",
-        "type": "radios",
-        "titleMap": [
-          {
-            "value": "PickupWithCash",
-            "name": "Pick up with Cash"
-          },
-          {
-            "value": "PayNowPickupLater",
-            "name": "Pay now and pick up later"
-          }
-        ]
-      },
-      {
         "key": "pickupAddress",
-        "condition": "model.delivery === 'P' && model.pickupPayment === 'PickupWithCash'",
+        "condition": "model.delivery === 'P'",
         "type": "radios",
         "titleMap": [
           {
@@ -139,39 +112,39 @@
       },
       {
         "key": "firstName",
-        "condition": "model.delivery === 'S' || model.pickupPayment === 'PayNowPickupLater'"
+        "condition": "model.delivery === 'S'"
       },
       {
         "key": "lastName",
-        "condition": "model.delivery === 'S' || model.pickupPayment === 'PayNowPickupLater'"
+        "condition": "model.delivery === 'S'"
       },
       {
         "key": "apartmentSuiteNumber",
-        "condition": "model.delivery === 'S' || model.pickupPayment === 'PayNowPickupLater'"
+        "condition": "model.delivery === 'S'"
       },
       {
         "key": "address",
-        "condition": "model.delivery === 'S' || model.pickupPayment === 'PayNowPickupLater'"
+        "condition": "model.delivery === 'S'"
       },
       {
         "key": "city",
-        "condition": "model.delivery === 'S' || model.pickupPayment === 'PayNowPickupLater'"
+        "condition": "model.delivery === 'S'"
       },
       {
         "key": "postalCode",
-        "condition": "model.delivery === 'S' || model.pickupPayment === 'PayNowPickupLater'"
+        "condition": "model.delivery === 'S'"
       },
       {
         "key": "phone",
-        "condition": "model.delivery === 'S' || model.pickupPayment === 'PayNowPickupLater'"
+        "condition": "model.delivery === 'S'"
       },
       {
         "key": "country",
-        "condition": "model.delivery === 'S' || model.pickupPayment === 'PayNowPickupLater'"
+        "condition": "model.delivery === 'S'"
       },
       {
         "key": "province",
-        "condition": "model.delivery === 'S' || model.pickupPayment === 'PayNowPickupLater'"
+        "condition": "model.delivery === 'S'"
       }
     ]
 }
