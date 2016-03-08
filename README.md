@@ -1,5 +1,7 @@
 # react-schema-form
 
+[![Join the chat at https://gitter.im/networknt/react-schema-form](https://badges.gitter.im/networknt/react-schema-form.svg)](https://gitter.im/networknt/react-schema-form?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![npm package](https://img.shields.io/npm/v/react-schema-form.svg?style=flat-square)](https://www.npmjs.org/package/react-schema-form)
 
 [React](http://facebook.github.io/react/) forms based on json schema for form generation and validation. This is a port of the [angular schema form](https://github.com/Textalk/angular-schema-form) project using
