@@ -59,6 +59,11 @@ If you are interested in how these forms are utilized in the framework, please t
 Basically, All forms in this folder will be loaded to an Graph Database and UI is rendered by formId and form model will be validated on the browser as well as
 backend APIs.
 
+# Form format
+
+React-schema-form implements the form format as defined by the json-schema-form standard.
+
+The documentation for that format is located at the [json-schema-form wiki](https://github.com/json-schema-form/json-schema-form/wiki/Documentation).
 
 # Customization
 react-schema-form provides most fields including FieldSet and Array and they might cover most use cases; however, you might have requirement that needs something that is not built in. In this case, you
