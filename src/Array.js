@@ -126,20 +126,20 @@ class Array extends React.Component {
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-                <div key={i}>
-                    <label className="control-lable">{this.props.form.title}</label>
-                    <ol className="list-group">
-                        <li className="list-group-item">
-                            <IconButton iconClassName="material-icons" tooltip="Remove" onTouchTap={boundOnDelete}>clear</IconButton>
-                            {forms}
-                        </li>
-                    </ol>
-                </div>
+              <li key={i} className="list-group-item">
+                  <IconButton iconClassName="material-icons" tooltip="Remove" onTouchTap={boundOnDelete}>clear</IconButton>
+                  {forms}
+              </li>
             );
         }
         return (
             <div>
-                {arrays}
+                <div>
+                    <label className="control-lable">{this.props.form.title}</label>
+                    <ol className="list-group">
+                        {arrays}
+                    </ol>
+                </div>
                 <RaisedButton label={this.props.form.add || 'Add'} secondary={true} onTouchTap={this.onAppend}/>
             </div>
         );
