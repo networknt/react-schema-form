@@ -7,7 +7,7 @@ export default ComposedComponent => class extends React.Component {
     constructor(props) {
         super(props);
         this.onChangeValidate = this.onChangeValidate.bind(this);
-        let value = this.defaultValue();
+        let value = this.defaultValue(this.props);
         let validationResult = utils.validate(this.props.form, value);
         this.state = {
             value: value,
@@ -16,10 +16,14 @@ export default ComposedComponent => class extends React.Component {
         };
     }
 
-    componentDidMount() {
-        if (typeof this.state.value !== 'undefined') {
-            this.props.onChange(this.props.form.key, this.state.value);
-        }
+    componentWillReceiveProps(nextProps) {
+      let value = this.defaultValue(nextProps);
+      let validationResult = utils.validate(nextProps.form, value);
+      this.setState({
+        value: value,
+        valid: !!(validationResult.valid || !value),
+        error: !validationResult.valid && value ? validationResult.error.message : null
+      });
     }
 
     /**
@@ -59,27 +63,27 @@ export default ComposedComponent => class extends React.Component {
         this.props.onChange(this.props.form.key, value);
     }
 
-    defaultValue() {
+    defaultValue(props) {
         // check if there is a value in the model, if there is, display it. Otherwise, check if
         // there is a default value, display it.
         //console.log('Text.defaultValue key', this.props.form.key);
         //console.log('Text.defaultValue model', this.props.model);
-        let value = utils.selectOrSet(this.props.form.key, this.props.model);
+        let value = utils.selectOrSet(props.form.key, props.model);
         //console.log('Text defaultValue value = ', value);
 
         // check if there is a default value
-        if(!value && this.props.form['default']) {
-            value = this.props.form['default'];
+        if(!value && props.form['default']) {
+            value = props.form['default'];
         }
 
-        if(!value && this.props.form.schema && this.props.form.schema['default']) {
-            value = this.props.form.schema['default'];
+        if(!value && props.form.schema && props.form.schema['default']) {
+            value = props.form.schema['default'];
         }
 
         // Support for Select
         // The first value in the option will be the default.
-        if(!value && this.props.form.titleMap && this.props.form.titleMap[0].value) {
-            value = this.props.form.titleMap[0].value;
+        if(!value && props.form.titleMap && props.form.titleMap[0].value) {
+            value = props.form.titleMap[0].value;
         }
         //console.log('value', value);
         return value;

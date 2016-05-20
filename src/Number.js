@@ -19,6 +19,12 @@ class Number extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+      this.setState({
+        lastSuccessfulValue: nextProps.value
+      });
+    }
+
     isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
@@ -47,7 +53,7 @@ class Number extends React.Component {
                     hintText={this.props.form.placeholder}
                     errorText={this.props.error}
                     onChange={this.preValidationCheck}
-                    defaultValue={this.state.lastSuccessfulValue}
+                    value={this.state.lastSuccessfulValue}
                     ref="numberField"
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}/>

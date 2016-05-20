@@ -16,7 +16,7 @@ class Text extends React.Component {
                     hintText={this.props.form.placeholder}
                     errorText={this.props.error}
                     onChange={this.props.onChangeValidate}
-                    defaultValue={this.props.value}
+                    value={this.props.value}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}} />
             </div>
