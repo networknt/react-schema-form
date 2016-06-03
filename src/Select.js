@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-const SelectField = require('material-ui/lib/select-field');
+import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
 
 class Select extends React.Component {
 
