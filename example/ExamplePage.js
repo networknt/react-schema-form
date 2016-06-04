@@ -170,4 +170,3 @@ var ExamplePage = React.createClass({
 });
 
 module.exports = ExamplePage;
-
