@@ -14,10 +14,10 @@ require('brace/mode/json');
 require('brace/theme/github');
 require('rc-select/assets/index.css');
 import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
-import RaisedButton from 'material-ui/lib/raised-button';
+import RaisedButton from 'material-ui/RadioButton';
 
-const ThemeManager = require('material-ui/lib/styles/theme-manager');
-const LightRawTheme = require('material-ui/lib/styles/raw-themes/light-raw-theme');
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import lightRawTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 
 var ExamplePage = React.createClass({
@@ -55,7 +55,7 @@ var ExamplePage = React.createClass({
             schemaJson: '',
             formJson: '',
             selected: '',
-            muiTheme: ThemeManager.getMuiTheme(LightRawTheme)
+            muiTheme: getMuiTheme(lightRawTheme)
         };
     },
 
