@@ -9,7 +9,8 @@ var SchemaForm = require('../src/SchemaForm');
 require('react-select/less/select.less');
 var Select = require('react-select');
 var $ = require('jquery');
-var Ace = require('react-ace');
+import AceEditor from 'react-ace';
+require('brace/ext/language_tools');
 require('brace/mode/json');
 require('brace/theme/github');
 require('rc-select/assets/index.css');
@@ -159,9 +160,9 @@ var ExamplePage = React.createClass({
                             </Select>
                         </div>
                         <h3>Form</h3>
-                        <Ace mode="json" theme="github" height="300px" width="800px" onChange={this.onFormChange} name="aceForm" value={this.state.formJson} editorProps={{$blockScrolling: true}}/>
+                        <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onFormChange} name="aceForm" value={this.state.formJson} editorProps={{$blockScrolling: true}}/>
                         <h3>Schema</h3>
-                        <Ace mode="json" theme="github" height="300px" width="800px" onChange={this.onSchemaChange} name="aceSchema" value={this.state.schemaJson} editorProps={{$blockScrolling: true}}/>
+                        <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onSchemaChange} name="aceSchema" value={this.state.schemaJson} editorProps={{$blockScrolling: true}}/>
                     </div>
                 </div>
             </div>
