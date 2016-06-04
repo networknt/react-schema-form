@@ -3,12 +3,12 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import {Checkbox as Switch} from 'material-ui/Checkbox';
+import Checkbox from 'material-ui/Checkbox';
 
-class Checkbox extends React.Component {
+class Checkbox2 extends React.Component {
     render() {
         return (
-            <Switch
+            <Checkbox
                 name={this.props.form.key.slice(-1)[0]}
                 value={this.props.form.key.slice(-1)[0]}
                 defaultChecked={this.props.value || false}
@@ -20,4 +20,4 @@ class Checkbox extends React.Component {
     }
 }
 
-export default ComposedComponent(Checkbox);
+export default ComposedComponent(Checkbox2);
