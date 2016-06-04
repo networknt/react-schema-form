@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-const TextField = require('material-ui/lib/text-field');
+import TextField from 'material-ui/TextField';
 
 class Text extends React.Component {
     render() {
