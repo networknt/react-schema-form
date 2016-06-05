@@ -15,7 +15,7 @@ require('brace/mode/json');
 require('brace/theme/github');
 require('rc-select/assets/index.css');
 import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
-import RaisedButton from 'material-ui/RadioButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightRawTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
