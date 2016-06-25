@@ -12,7 +12,8 @@ class Select extends React.Component {
         super(props);
         this.onSelected = this.onSelected.bind(this);
         this.state = {
-            currentValue: this.props.form.default || this.props.form.titleMap[0].value
+            currentValue: this.props.model[this.props.form.key]
+            || (this.props.form.titleMap != null ? this.props.form.titleMap[0].value : "")
         };
     }
 
