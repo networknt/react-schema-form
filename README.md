@@ -5,7 +5,7 @@
 [![npm package](https://img.shields.io/npm/v/react-schema-form.svg?style=flat-square)](https://www.npmjs.org/package/react-schema-form)
 
 [React](http://facebook.github.io/react/) forms based on json schema for form generation and validation. This is a port of the [angular schema form](https://github.com/Textalk/angular-schema-form) project using
-[material-ui](http://www.material-ui.com/) for underline components.
+[material-ui](http://www.material-ui.com/) for the underlying components.
 
 # Live demo
 [demo](http://networknt.github.io/react-schema-form/)
