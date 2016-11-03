@@ -13,7 +13,7 @@ class Select extends React.Component {
         this.onSelected = this.onSelected.bind(this);
         this.state = {
             currentValue: this.props.model[this.props.form.key]
-            || (this.props.form.titleMap != null ? this.props.form.titleMap[0].value : "")
+            || (this.props.form.titleMap != null ? this.props.form.titleMap[0].value : '')
         };
     }
 
@@ -46,5 +46,9 @@ class Select extends React.Component {
         );
     }
 }
+
+// Select.propTypes = {
+//
+// };
 
 export default ComposedComponent(Select);

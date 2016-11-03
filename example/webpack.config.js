@@ -26,7 +26,7 @@ module.exports = {
           // ES6/7 syntax and JSX transpiling out of the box
           {
               test: /\.(js|jsx)$/,
-              loaders: ['babel-loader?optional=runtime&stage=0'],
+              loaders: ['babel'],
               exclude: /node_modules/
           },
           {test: /\.less$/, loader: "style!css!less"},
