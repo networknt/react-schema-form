@@ -442,120 +442,120 @@ describe('utils', function () {
 
     it('should select and set into objects and arrays', function() {
         var schema = {
-            "key": [
-                "comments"
+            'key': [
+                'comments'
             ],
-            "add": "New",
-            "style": {
-                "add": "btn-success"
+            'add': 'New',
+            'style': {
+                'add': 'btn-success'
             },
-            "items": [
+            'items': [
                 {
-                    "key": [
-                        "comments",
-                        "",
-                        "name"
+                    'key': [
+                        'comments',
+                        '',
+                        'name'
                     ],
-                    "title": "Name",
-                    "required": true,
-                    "schema": {
-                        "title": "Name",
-                        "type": "string"
+                    'title': 'Name',
+                    'required': true,
+                    'schema': {
+                        'title': 'Name',
+                        'type': 'string'
                     },
-                    "ngModelOptions": {},
-                    "type": "text"
+                    'ngModelOptions': {},
+                    'type': 'text'
                 },
                 {
-                    "key": [
-                        "comments",
-                        "",
-                        "email"
+                    'key': [
+                        'comments',
+                        '',
+                        'email'
                     ],
-                    "title": "Email",
-                    "description": "Email will be used for evil.",
-                    "schema": {
-                        "title": "Email",
-                        "type": "string",
-                        "pattern": "^\\S+@\\S+$",
-                        "description": "Email will be used for evil."
+                    'title': 'Email',
+                    'description': 'Email will be used for evil.',
+                    'schema': {
+                        'title': 'Email',
+                        'type': 'string',
+                        'pattern': '^\\S+@\\S+$',
+                        'description': 'Email will be used for evil.'
                     },
-                    "ngModelOptions": {},
-                    "type": "text"
+                    'ngModelOptions': {},
+                    'type': 'text'
                 },
                 {
-                    "key": [
-                        "comments",
-                        "",
-                        "spam"
+                    'key': [
+                        'comments',
+                        '',
+                        'spam'
                     ],
-                    "type": "checkbox",
-                    "title": "Yes I want spam.",
-                    "condition": "model.comments[arrayIndex].email",
-                    "schema": {
-                        "title": "Spam",
-                        "type": "boolean",
-                        "default": true
+                    'type': 'checkbox',
+                    'title': 'Yes I want spam.',
+                    'condition': 'model.comments[arrayIndex].email',
+                    'schema': {
+                        'title': 'Spam',
+                        'type': 'boolean',
+                        'default': true
                     },
-                    "ngModelOptions": {}
+                    'ngModelOptions': {}
                 },
                 {
-                    "key": [
-                        "comments",
-                        "",
-                        "comment"
+                    'key': [
+                        'comments',
+                        '',
+                        'comment'
                     ],
-                    "type": "textarea",
-                    "title": "Comment",
-                    "required": true,
-                    "maxlength": 20,
-                    "validationMessage": "Don't be greedy!",
-                    "schema": {
-                        "title": "Comment",
-                        "type": "string",
-                        "maxLength": 20,
-                        "validationMessage": "Don't be greedy!"
+                    'type': 'textarea',
+                    'title': 'Comment',
+                    'required': true,
+                    'maxlength': 20,
+                    'validationMessage': 'Don\'t be greedy!',
+                    'schema': {
+                        'title': 'Comment',
+                        'type': 'string',
+                        'maxLength': 20,
+                        'validationMessage': 'Don\'t be greedy!'
                     },
-                    "ngModelOptions": {}
+                    'ngModelOptions': {}
                 }
             ],
-            "title": "comments",
-            "required": true,
-            "schema": {
-                "type": "array",
-                "maxItems": 2,
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "title": "Name",
-                            "type": "string"
+            'title': 'comments',
+            'required': true,
+            'schema': {
+                'type': 'array',
+                'maxItems': 2,
+                'items': {
+                    'type': 'object',
+                    'properties': {
+                        'name': {
+                            'title': 'Name',
+                            'type': 'string'
                         },
-                        "email": {
-                            "title": "Email",
-                            "type": "string",
-                            "pattern": "^\\S+@\\S+$",
-                            "description": "Email will be used for evil."
+                        'email': {
+                            'title': 'Email',
+                            'type': 'string',
+                            'pattern': '^\\S+@\\S+$',
+                            'description': 'Email will be used for evil.'
                         },
-                        "spam": {
-                            "title": "Spam",
-                            "type": "boolean",
-                            "default": true
+                        'spam': {
+                            'title': 'Spam',
+                            'type': 'boolean',
+                            'default': true
                         },
-                        "comment": {
-                            "title": "Comment",
-                            "type": "string",
-                            "maxLength": 20,
-                            "validationMessage": "Don't be greedy!"
+                        'comment': {
+                            'title': 'Comment',
+                            'type': 'string',
+                            'maxLength': 20,
+                            'validationMessage': 'Don\'t be greedy!'
                         }
                     },
-                    "required": [
-                        "name",
-                        "comment"
+                    'required': [
+                        'name',
+                        'comment'
                     ]
                 }
             },
-            "ngModelOptions": {},
-            "type": "array"
+            'ngModelOptions': {},
+            'type': 'array'
         };
 
         var model = {

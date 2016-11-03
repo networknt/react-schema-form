@@ -18,17 +18,17 @@ import _ from 'lodash';
 class SchemaForm extends React.Component {
 
     mapper = {
-        "number": Number,
-        "text": Text,
-        "password": Text,
-        "textarea": TextArea,
-        "select": Select,
-        "radios": Radios,
-        "date": Date,
-        "checkbox": Checkbox,
-        "help": Help,
-        "array": Array,
-        "fieldset": FieldSet
+        'number': Number,
+        'text': Text,
+        'password': Text,
+        'textarea': TextArea,
+        'select': Select,
+        'radios': Radios,
+        'date': Date,
+        'checkbox': Checkbox,
+        'help': Help,
+        'array': Array,
+        'fieldset': FieldSet
     };
 
     constructor(props) {
@@ -45,7 +45,7 @@ class SchemaForm extends React.Component {
         var type = form.type;
         let Field = this.mapper[type];
         if(!Field) {
-          console.log("Invalid field: \"" + form.key[0] + "\"!");
+          console.log('Invalid field: \"' + form.key[0] + '\"!');
           return null;
         }
         if(form.condition && eval(form.condition) === false) {
