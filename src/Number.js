@@ -34,8 +34,10 @@ class Number extends React.Component {
             });
             this.props.onChangeValidate(e);
         } else {
-            this.refs.numberField.setValue(this.state.lastSuccessfulValue);
+                this.refs.numberField.value = this.state.lastSuccessfulValue;
+
         }
+        this.props.onChangeValidate(e);
     }
 
     render() {
