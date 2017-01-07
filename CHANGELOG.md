@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.3.2 - 2017-01-07
+### Added
+
+### Changed
+- Fixes #40 number validation (@maplechori)
+
 ## 0.3.1 - 2016-11-06
 ### Added
 
