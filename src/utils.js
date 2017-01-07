@@ -533,6 +533,7 @@ function validate(form, value) {
     // when empty, this is a valid value in a schema and does not count as something
     // that breaks validation of 'required'. But for our own sanity an empty field should
     // not validate if it's required.
+
     if (value === '') {
         value = undefined;
     }
@@ -542,6 +543,11 @@ function validate(form, value) {
         //console.log('utils validate form.type is number');
         value = undefined;
     }
+
+    if (form.type === 'number' && isNaN(parseFloat(value))) {
+        value = undefined;
+      }
+
 
     // Version 4 of JSON Schema has the required property not on the
     // property itself but on the wrapping object. Since we like to test

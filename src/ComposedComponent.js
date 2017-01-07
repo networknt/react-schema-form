@@ -35,6 +35,12 @@ export default ComposedComponent => class extends React.Component {
             } else {
                 value = parseFloat(e.target.value);
             }
+
+            if (isNaN(value)) {
+              value = undefined;
+            }
+
+
         } else if(this.props.form.schema.type === 'boolean') {
             value = e.target.checked;
         } else if(this.props.form.schema.type === 'date' || this.props.form.schema.type === 'array') {
