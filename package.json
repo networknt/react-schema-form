@@ -26,7 +26,6 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.16.6",
-    "material-ui": "^0.16.1",
     "objectpath": "^1.2.1",
     "tv4": "^1.2.7"
   },
@@ -64,6 +63,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "peerDependencies": {
+    "material-ui": ">=0.16.1",
     "react": "^15.3.2"
   },
   "scripts": {
