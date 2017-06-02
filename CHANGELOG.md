@@ -9,11 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.3.4 - 2017-06-02
+### Added
+
+### Changed
+- Fixes #45 Number: onChangeValidate called twice (Thanks @stropitek)
+- Fixes #44 Move react to peer dependencies, react-dom to dev dependencies (Thanks @stropitek)
+ 
+
 ## 0.3.2 - 2017-01-07
 ### Added
 
 ### Changed
-- Fixes #40 number validation (@maplechori)
+- Fixes #40 number validation (Thanks @maplechori)
 
 ## 0.3.1 - 2016-11-06
 ### Added
@@ -25,6 +33,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
-- Upgrade to react 15.3.2 (Paul Apostol)
-- Upgrade to babel 6.5.2  (Paul Apostol)
-- Upgrade to webpack 1.13.3 (Paul Apostol)
+- Upgrade to react 15.3.2 (Thanks Paul Apostol)
+- Upgrade to babel 6.5.2  (Thanks Paul Apostol)
+- Upgrade to webpack 1.13.3 (Thanks Paul Apostol)
