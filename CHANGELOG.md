@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.3.5 - 2017-06-02
+### Added
+
+### Changed
+- Sync react and react-dom version
+
 ## 0.3.4 - 2017-06-02
 ### Added
 
