@@ -53,6 +53,13 @@ _onChange: function() {
     });
 }
 ```
+
+# Form format
+
+React-schema-form implements the form format as defined by the json-schema-form standard.
+
+The documentation for that format is located at the [json-schema-form wiki](https://github.com/json-schema-form/json-schema-form/wiki/Documentation).
+
 # Examples
 
 There are some simple forms in the demo to show how each fields to be rendered.
