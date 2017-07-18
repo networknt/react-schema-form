@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.3.6 - 2017-07-17
+### Added
+
+### Changed
+- Adding htmlClass from the json-schema-form specification (Thanks @curtiswilkinson)
+
 ## 0.3.5 - 2017-06-02
 ### Added
 
