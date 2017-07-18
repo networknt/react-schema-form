@@ -11,7 +11,7 @@ class TextArea extends React.Component {
         // FIXME: Obviously fix rowsMax eventually..
         //console.log('TextArea', this.props.form);
         return (
-            <div>
+            <div className={this.props.form.htmlClass}>
                 <TextField
                     type={this.props.form.type}
                     floatingLabelText={this.props.form.title}
