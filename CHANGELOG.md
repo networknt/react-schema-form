@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.3.7 - 2017-07-18
+### Added
+
+### Changed
+- Adding top-level className for better framework support (Thanks @curtiswilkinson)
+
 ## 0.3.6 - 2017-07-17
 ### Added
 
