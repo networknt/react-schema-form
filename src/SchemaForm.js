@@ -66,7 +66,7 @@ class SchemaForm extends React.Component {
         }.bind(this));
 
         return (
-            <div style={{width: '100%'}} className='SchemaForm'>{forms}</div>
+            <div style={{width: '100%'}} className={'SchemaForm ' + this.props.className}>{forms}</div>
         );
     }
 }
