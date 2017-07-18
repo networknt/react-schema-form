@@ -20,7 +20,7 @@ class Radios extends React.Component {
         }.bind(this));
 
         return (
-            <span>
+            <span className={this.props.form.htmlClass}>
               <label className="control-lable">{this.props.form.title}</label>
               <RadioButtonGroup defaultSelected={this.props.value} name={this.props.form.title} onChange={this.props.onChangeValidate}>
                   {items}

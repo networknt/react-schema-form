@@ -40,16 +40,18 @@ class Number extends React.Component {
 
     render() {
         return (
-            <TextField
-                type={this.props.form.type}
-                floatingLabelText={this.props.form.title}
-                hintText={this.props.form.placeholder}
-                errorText={this.props.error}
-                onChange={this.preValidationCheck}
-                defaultValue={this.state.lastSuccessfulValue}
-                ref="numberField"
-                disabled={this.props.form.readonly}
-                style={this.props.form.style || {width: '100%'}}/>
+            <div className={this.props.form.htmlClass}>
+                <TextField
+                    type={this.props.form.type}
+                    floatingLabelText={this.props.form.title}
+                    hintText={this.props.form.placeholder}
+                    errorText={this.props.error}
+                    onChange={this.preValidationCheck}
+                    defaultValue={this.state.lastSuccessfulValue}
+                    ref="numberField"
+                    disabled={this.props.form.readonly}
+                    style={this.props.form.style || {width: '100%'}}/>
+            </div>
         );
     }
 }

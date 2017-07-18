@@ -34,15 +34,17 @@ class Select extends React.Component {
         ));
 
         return (
-            <SelectField
-                value={this.state.currentValue}
-                floatingLabelText={this.props.form.title}
-                disabled={this.props.form.readonly}
-                onChange={this.onSelected}
-                fullWidth={true} >
+            <div className={this.props.form.htmlClass}>
+                <SelectField
+                    value={this.state.currentValue}
+                    floatingLabelText={this.props.form.title}
+                    disabled={this.props.form.readonly}
+                    onChange={this.onSelected}
+                    fullWidth={true} >
 
-                {menuItems}
-            </SelectField>
+                    {menuItems}
+                </SelectField>
+            </div>
         );
     }
 }
