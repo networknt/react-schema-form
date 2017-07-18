@@ -9,7 +9,7 @@ class Text extends React.Component {
     render() {
         //console.log('Text props', this.props.form.readonly);
         return (
-            <div>
+            <div className={this.props.form.htmlClass}>
                 <TextField
                     type={this.props.form.type}
                     floatingLabelText={this.props.form.title}
