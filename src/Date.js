@@ -29,6 +29,7 @@ class Date extends React.Component {
                 <DatePicker
                     mode={'landscape'}
                     autoOk={true}
+                    floatingLabelText={this.props.form.title}
                     hintText={this.props.form.title}
                     onChange={this.onDatePicked}
                     onShow={null}
