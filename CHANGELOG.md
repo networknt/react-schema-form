@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.3.8 - 2017-07-22
+### Added
+
+### Changed
+- added floatingLabelType to Date (Thanks @gtaschuk)
+- Made FieldSet into a proper fieldset tag with a legend (Thanks @gtaschuk)
+
 ## 0.3.7 - 2017-07-18
 ### Added
 
