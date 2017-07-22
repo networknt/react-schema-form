@@ -24,14 +24,12 @@ class FieldSet extends React.Component {
         }.bind(this));
 
         return (
-            <div>
-                <div>
-                    <strong>{this.props.form.title}</strong>
-                </div>
+            <fieldset>
+                <legend>{this.props.form.title}</legend>
                 <div>
                     {forms}
                 </div>
-            </div>
+            </fieldset>
         );
     }
 }
