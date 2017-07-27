@@ -33,7 +33,9 @@ export default ComposedComponent => class extends React.Component {
     onChangeValidate(e) {
         //console.log('onChangeValidate e', e);
         let value = null;
-        if (this.props.form.schema.type === 'integer' || this.props.form.schema.type === 'number') {
+        switch(this.props.form.schema.type) {
+          case 'integer':
+          case 'number':
             if (e.target.value.indexOf('.') == -1) {
                 value = parseInt(e.target.value);
             } else {
@@ -43,13 +45,15 @@ export default ComposedComponent => class extends React.Component {
             if (isNaN(value)) {
               value = undefined;
             }
-
-
-        } else if(this.props.form.schema.type === 'boolean') {
+            break;
+          case 'boolean':
             value = e.target.checked;
-        } else if(this.props.form.schema.type === 'date' || this.props.form.schema.type === 'array') {
+            break;
+          case 'date':
+          case 'array':
             value = e;
-        } else { // string
+            break
+          default:
             value = e.target.value;
         }
         //console.log('onChangeValidate this.props.form, value', this.props.form, value);
