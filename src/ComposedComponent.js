@@ -49,7 +49,7 @@ export default ComposedComponent => class extends React.Component {
           case 'boolean':
             value = e.target.checked;
             break;
-          case 'date':
+          case 'object':
           case 'array':
             value = e;
             break

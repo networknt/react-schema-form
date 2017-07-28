@@ -24,6 +24,11 @@ class Date extends React.Component {
     }
 
     render() {
+        var value = null;
+        if (this.props && this.props.value) {
+            value = this.props.value;
+        }
+
         return (
             <div style={{width: '100%', display: 'block'}} className={this.props.form.htmlClass}>
                 <DatePicker
@@ -34,6 +39,7 @@ class Date extends React.Component {
                     onChange={this.onDatePicked}
                     onShow={null}
                     onDismiss={null}
+                    value={value}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}/>
 
