@@ -18,7 +18,7 @@ class TextArea extends React.Component {
                     hintText={this.props.form.placeholder}
                     onChange={this.props.onChangeValidate}
                     errorText={this.props.error}
-                    defaultValue={this.props.value}
+                    value={this.props.value}
                     multiLine={true}
                     rows={this.props.form.rows}
                     rowsMax={this.props.form.rowsMax}
