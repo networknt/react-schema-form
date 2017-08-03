@@ -17,6 +17,7 @@ module.exports = {
     alias: {
       // Use uncompiled version
       //'react-schema-form': '../src'
+      react: path.resolve('./node_modules/react'),
     }
   },
   module: {
