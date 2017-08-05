@@ -27,11 +27,11 @@ module.exports = {
           // ES6/7 syntax and JSX transpiling out of the box
           {
               test: /\.(js|jsx)$/,
-              loaders: ['babel'],
+              loaders: ['babel-loader'],
               exclude: /node_modules/
           },
-          {test: /\.less$/, loader: "style!css!less"},
-          {test: /\.css?$/, loader: 'style!css'},
+          {test: /\.less$/, loader: "style-loader!css-loader!less-loader"},
+          {test: /\.css?$/, loader: 'style-loader!css-loader'},
           {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
       ]
   }

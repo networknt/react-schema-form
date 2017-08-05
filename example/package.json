@@ -50,8 +50,8 @@
     "react-select": "^1.0.0-rc.5",
     "react-tap-event-plugin": "^2.0.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2"
+    "webpack": "^2.7.0",
+    "webpack-dev-server": "^2.6.1"
   },
   "devDependencies": {},
   "scripts": {
