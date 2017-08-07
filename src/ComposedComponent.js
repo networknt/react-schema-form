@@ -50,6 +50,7 @@ export default ComposedComponent => class extends React.Component {
             value = e.target.checked;
             break;
           case 'object':
+          case 'date':
           case 'array':
             value = e;
             break
