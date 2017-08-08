@@ -1,6 +1,6 @@
-var _ = require('lodash');
-var ObjectPath = require('objectpath');
-var tv4 = require('tv4');
+import _ from'lodash';
+import ObjectPath from 'objectpath';
+import tv4 from 'tv4';
 
 function stripNullType(type) {
     if (Array.isArray(type) && type.length == 2) {

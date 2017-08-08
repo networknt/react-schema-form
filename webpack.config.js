@@ -13,6 +13,12 @@ module.exports = {
       amd: 'react',
       commonjs: 'react',
       commonjs2: 'react'
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      amd: 'react-dom',
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom'
     }
   },
   plugins: [
@@ -20,9 +26,8 @@ module.exports = {
   ],
   module: {
     loaders: [
-        { test: /\.js?$/, loader: "babel", exclude: /node_modules/ },
-      //{test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
-      {test: /\.css?$/, exclude: /node_modules/, loader: 'style!css'},
+      {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
+      {test: /\.css?$/, exclude: /node_modules/, loader: 'style-loader!css-loader'},
     ]
   }
 };

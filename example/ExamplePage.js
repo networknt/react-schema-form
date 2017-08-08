@@ -3,11 +3,11 @@
  */
 'use strict';
 
-var React = require('react');
-var utils = require('../src/utils');
-var SchemaForm = require('../src/SchemaForm');
+import React from 'react';
+import { utils } from 'react-schema-form';
+import { SchemaForm } from 'react-schema-form';
 require('react-select/less/select.less');
-var Select = require('react-select');
+import Select from 'react-select';
 var $ = require('jquery');
 import AceEditor from 'react-ace';
 require('brace/ext/language_tools');

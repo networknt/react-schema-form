@@ -17,6 +17,8 @@ module.exports = {
     alias: {
       // Use uncompiled version
       //'react-schema-form': '../src'
+      react: path.resolve('./node_modules/react'),
+      'react-dom': path.resolve('./node_modules/react-dom')
     }
   },
   module: {
@@ -26,11 +28,11 @@ module.exports = {
           // ES6/7 syntax and JSX transpiling out of the box
           {
               test: /\.(js|jsx)$/,
-              loaders: ['babel'],
+              loaders: ['babel-loader'],
               exclude: /node_modules/
           },
-          {test: /\.less$/, loader: "style!css!less"},
-          {test: /\.css?$/, loader: 'style!css'},
+          {test: /\.less$/, loader: "style-loader!css-loader!less-loader"},
+          {test: /\.css?$/, loader: 'style-loader!css-loader'},
           {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
       ]
   }
