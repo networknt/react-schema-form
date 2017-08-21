@@ -17,6 +17,15 @@ class Select extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.model) {
+            this.setState({
+                currentValue: nextProps.model[nextProps.form.key]
+                || (nextProps.form.titleMap != null ? nextProps.form.titleMap[0].value : '')
+            });
+        }
+    }
+
     onSelected(event, selectedIndex, menuItem) {
 
         this.setState({
