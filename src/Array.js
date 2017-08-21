@@ -26,9 +26,17 @@ class Array extends React.Component {
         // we have the model here for the entire form, get the model for this array only
         // and add to the state. if is empty, add an entry by calling onAppend directly.
         this.state = {
-            model:  utils.selectOrSet(this.props.form.key, this.props.model) || []
+            model: utils.selectOrSet(this.props.form.key, this.props.model) || []
         };
         //console.log('constructor', this.props.form.key, this.props.model, this.state.model);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.model) {
+            this.setState({
+                model: utils.selectOrSet(nextProps.form.key, nextProps.model) || []
+            });
+        }
     }
 
     componentDidMount() {
