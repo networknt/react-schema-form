@@ -18,7 +18,7 @@ class Select extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.model) {
+        if (nextProps.model && nextProps.form.key && nextProps.model[nextProps.form.key]) {
             this.setState({
                 currentValue: nextProps.model[nextProps.form.key]
                 || (nextProps.form.titleMap != null ? nextProps.form.titleMap[0].value : '')
