@@ -32,7 +32,7 @@ class Array extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.model) {
+        if (nextProps.model && nextProps.form && nextProps.form.key) {
             this.setState({
                 model: utils.selectOrSet(nextProps.form.key, nextProps.model) || []
             });
