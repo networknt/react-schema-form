@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.3.9 - 2017-10-18
+### Added
+
+### Changed
+- Fixes #70 "cannot read property" error when using an enum in an object. (Thanks @MrSaints) 
+
 ## 0.3.8 - 2017-07-22
 ### Added
 
