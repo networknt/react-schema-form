@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.3.10 - 2017-10-19
+### Added
+
+### Changed
+- Fixes #71 Fix Select when it is in an array. (Thanks @oceanic815recovery)
+
 ## 0.3.9 - 2017-10-18
 ### Added
 
