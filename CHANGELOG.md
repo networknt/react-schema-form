@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Fixes #73 fix Select when param is missing. (Thanks @oceanic815recovery)
+- Add `yarn.lock` / Use Yarn for package management (Thanks @MrSaints)
 
 ## 0.3.10 - 2017-10-19
 ### Added
