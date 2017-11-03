@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.3.11 - 2017-11-03
+### Added
+
+### Changed
+- Fixes #73 fix Select when param is missing. (Thanks @oceanic815recovery)
+
 ## 0.3.10 - 2017-10-19
 ### Added
 
