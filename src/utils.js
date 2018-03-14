@@ -569,7 +569,11 @@ function validate(form, value) {
 
     let tv4Result = tv4.validateResult(valueWrap, wrap);
     if (tv4Result != null && !tv4Result.valid && form.validationMessage != null && typeof value !== 'undefined') {
-        tv4Result.error.message = form.validationMessage;
+        if (typeof form.validationMessage === 'function') {
+            tv4Result.error.message = form.validationMessage(tv4Result.error);
+        } else {
+            tv4Result.error.message = form.validationMessage;
+        }
     }
     return tv4Result;
 
