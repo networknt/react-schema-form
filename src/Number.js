@@ -29,6 +29,10 @@ class Number extends React.Component {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
+    isEmpty(n) {
+        return (!n || 0 === n.length);
+    }
+
     /**
      * Prevent the field from accepting non-numeric characters.
      * @param e
@@ -39,8 +43,12 @@ class Number extends React.Component {
                 lastSuccessfulValue: e.target.value
             });
             this.props.onChangeValidate(e);
+        } else if (this.isEmpty(e.target.value)) {
+            this.setState({
+                lastSuccessfulValue: e.target.value
+            });
         } else {
-                this.refs.numberField.value = this.state.lastSuccessfulValue;
+            this.refs.numberField.value = this.state.lastSuccessfulValue;
         }
     }
 
