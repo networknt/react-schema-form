@@ -47,6 +47,7 @@ class Number extends React.Component {
             this.setState({
                 lastSuccessfulValue: e.target.value
             });
+            this.props.onChangeValidate(e);
         } else {
             this.refs.numberField.value = this.state.lastSuccessfulValue;
         }
