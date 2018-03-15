@@ -36,9 +36,9 @@ class SchemaForm extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    onChange(key, val) {
+    onChange(key, val, type) {
         //console.log('SchemaForm.onChange', key, val);
-        this.props.onModelChange(key, val);
+        this.props.onModelChange(key, val, type);
     }
 
     builder(form, model, index, onChange, mapper) {

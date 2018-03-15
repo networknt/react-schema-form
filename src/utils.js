@@ -462,7 +462,7 @@ function merge(schema, form, ignore, options, readonly) {
     }));
 }
 
-function selectOrSet(projection, obj, valueToSet) {
+function selectOrSet(projection, obj, valueToSet, type) {
     //console.log('selectOrSet', projection, obj, valueToSet);
     var numRe = /^\d+$/;
 
@@ -482,6 +482,14 @@ function selectOrSet(projection, obj, valueToSet) {
         typeof obj[parts[0]] === 'undefined') {
         // We need to look ahead to check if array is appropriate
         obj[parts[0]] = parts.length > 2 && numRe.test(parts[1]) ? [] : {};
+    }
+
+    if (typeof type !== 'undefined' &&
+        ['number','integer'].indexOf(type) > -1 &&
+        typeof valueToSet === 'undefined') {
+        // number or integer can undefined
+        obj[parts[0]] = valueToSet;
+        return obj;
     }
 
     var value = obj[parts[0]];
