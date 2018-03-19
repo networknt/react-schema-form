@@ -44,11 +44,13 @@ class Date extends React.Component {
                     value={value}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '90%', display: 'inline-block'}}/>
-                <IconButton ref="button"
-                    onClick={() => this.props.onChangeValidate("")}
-                    style={{position: 'relative', display: 'inline-block', top: '6px',right: '4px', padding: '0', width: '24px', height: '24px'}}>
-                    <Clear />
-                </IconButton>
+                {this.props.value &&
+                    <IconButton ref="button"
+                        onClick={() => this.props.onChangeValidate("")}
+                        style={{position: 'relative', display: 'inline-block', top: '6px',right: '4px', padding: '0', width: '24px', height: '24px'}}>
+                        <Clear />
+                    </IconButton>
+                }
             </div>
         );
     }
