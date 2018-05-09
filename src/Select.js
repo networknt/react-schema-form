@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
+import { MenuItem } from 'material-ui/Menu';
+import MuiSelect from 'material-ui/Select';
 
 class Select extends React.Component {
 
@@ -52,15 +52,15 @@ class Select extends React.Component {
 
         return (
             <div className={this.props.form.htmlClass}>
-                <SelectField
+                <MuiSelect
                     value={this.state.currentValue}
-                    floatingLabelText={this.props.form.title}
+                    placeholder={this.props.form.title}
                     disabled={this.props.form.readonly}
                     onChange={this.onSelected}
                     fullWidth={true} >
 
                     {menuItems}
-                </SelectField>
+                </MuiSelect>
             </div>
         );
     }

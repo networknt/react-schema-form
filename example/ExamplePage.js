@@ -1,9 +1,7 @@
 /**
  * Created by steve on 12/09/15.
  */
-'use strict';
-
-import React from 'react';
+import React, { Component } from 'react';
 import { utils } from 'react-schema-form';
 import { SchemaForm } from 'react-schema-form';
 require('react-select/less/select.less');
@@ -13,54 +11,35 @@ import AceEditor from 'react-ace';
 require('brace/ext/language_tools');
 require('brace/mode/json');
 require('brace/theme/github');
-require('rc-select/assets/index.css');
-import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import lightRawTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+class ExamplePage extends Component{
 
+    state = {
+      tests: [
+        { label: "Simple", value: 'data/simple.json' },
+        { label: "Simple Array", value: 'data/simplearray.json'},
+        { label: "Basic JSON Schema Type", value: 'data/types.json' },
+        { label: 'Basic Radios', value: 'data/radio.json'},
+        { label: 'Condition', value: 'data/condition.json'},
+        { label: "Kitchen Sink", value: 'data/kitchenSink.json'},
+        { label: "Login", value: 'data/login.json'},
+        { label: "Date", value: 'data/date.json'},
+        { label: "Readonly", value: 'data/readonly.json'},
+        { label: "Array", value: 'data/array.json'},
+        { label: "Object", value: 'data/object.json'},
+        { label: "ArraySelect", value: 'data/arrayselect.json'}
+      ],
+      validationResult: {},
+      schema: {},
+      form: [],
+      model: {},
+      schemaJson: '',
+      formJson: '',
+      selected: ''
+    };
 
-var ExamplePage = React.createClass({
-
-    childContextTypes: {
-        muiTheme: React.PropTypes.object
-    },
-
-    getChildContext() {
-        return {
-            muiTheme: this.state.muiTheme
-        };
-    },
-
-    getInitialState: function() {
-        return {
-            tests: [
-                { label: "Simple", value: 'data/simple.json' },
-                { label: "Simple Array", value: 'data/simplearray.json'},
-                { label: "Basic JSON Schema Type", value: 'data/types.json' },
-                { label: 'Basic Radios', value: 'data/radio.json'},
-                { label: 'Condition', value: 'data/condition.json'},
-                { label: "Kitchen Sink", value: 'data/kitchenSink.json'},
-                { label: "Login", value: 'data/login.json'},
-                { label: "Date", value: 'data/date.json'},
-                { label: "Readonly", value: 'data/readonly.json'},
-                { label: "Array", value: 'data/array.json'},
-                { label: "Object", value: 'data/object.json'},
-                { label: "ArraySelect", value: 'data/arrayselect.json'}
-            ],
-            validationResult: {},
-            schema: {},
-            form: [],
-            model: {},
-            schemaJson: '',
-            formJson: '',
-            selected: '',
-            muiTheme: getMuiTheme(lightRawTheme)
-        };
-    },
-
-    onSelectChange: function(val) {
+    onSelectChange = (val) => {
         //console.log("Selected:" + val);
         if(!val) {
             this.setState({
@@ -90,40 +69,38 @@ var ExamplePage = React.createClass({
                 form: data.form
             });
         }.bind(this));
-    },
+    };
 
-    onModelChange: function(key, val) {
+    onModelChange(key, val) {
         console.log('ExamplePage.onModelChange:', key, val);
         var newModel = this.state.model;
         utils.selectOrSet(key, newModel, val);
         this.setState({ model: newModel });
-    },
+    }
 
-    onValidate: function() {
+    onValidate() {
         console.log('ExamplePage.onValidate is called');
         let result = utils.validateBySchema(this.state.schema, this.state.model);
         this.setState({ validationResult: result });
-    },
+    }
 
-    onFormChange: function(val) {
+    onFormChange(val) {
         try {
             let f = JSON.parse(val);
             this.setState({formJson: val, form: f});
         } catch (e) {}
-    },
+    }
 
-    onSchemaChange: function(val) {
+    onSchemaChange(val) {
         try {
             let s = JSON.parse(val);
             this.setState({schemaJson: val, schema: s});
         } catch (e) {}
-    },
+    }
 
-    render: function() {
-        var mapper = {
-            "rc-select": RcSelect
-        };
+    render() {
 
+        var mapper = {};
         var schemaForm = '';
         var validate = '';
         if (this.state.form.length > 0) {
@@ -132,7 +109,7 @@ var ExamplePage = React.createClass({
             );
             validate = (
                 <div>
-                    <RaisedButton primary={true} label="Validate" onTouchTap={this.onValidate} />
+                    <Button variant="raised" primary={true} label="Validate" onTouchTap={this.onValidate} />
                     <pre>{JSON.stringify(this.state.validationResult,undefined,2,2)}</pre>
                 </div>
             );
@@ -168,6 +145,6 @@ var ExamplePage = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = ExamplePage;
+export default ExamplePage;
