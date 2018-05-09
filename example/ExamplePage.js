@@ -71,27 +71,27 @@ class ExamplePage extends Component{
         }.bind(this));
     };
 
-    onModelChange(key, val) {
+    onModelChange = (key, val) => {
         console.log('ExamplePage.onModelChange:', key, val);
         var newModel = this.state.model;
         utils.selectOrSet(key, newModel, val);
         this.setState({ model: newModel });
-    }
+    };
 
-    onValidate() {
+    onValidate = () => {
         console.log('ExamplePage.onValidate is called');
         let result = utils.validateBySchema(this.state.schema, this.state.model);
         this.setState({ validationResult: result });
-    }
+    };
 
-    onFormChange(val) {
+    onFormChange = (val) => {
         try {
             let f = JSON.parse(val);
             this.setState({formJson: val, form: f});
         } catch (e) {}
-    }
+    };
 
-    onSchemaChange(val) {
+    onSchemaChange = (val) => {
         try {
             let s = JSON.parse(val);
             this.setState({schemaJson: val, schema: s});
