@@ -45,9 +45,7 @@ class Select extends React.Component {
 
     render() {
         const menuItems = this.props.form.titleMap.map((item, idx) => (
-            <MenuItem key={idx}
-                      primaryText={item.name}
-                      value={item.value} />
+          <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
         ));
 
         return (
@@ -58,7 +56,6 @@ class Select extends React.Component {
                     disabled={this.props.form.readonly}
                     onChange={this.onSelected}
                     fullWidth={true} >
-
                     {menuItems}
                 </MuiSelect>
             </div>

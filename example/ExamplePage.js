@@ -96,7 +96,7 @@ class ExamplePage extends Component{
             let s = JSON.parse(val);
             this.setState({schemaJson: val, schema: s});
         } catch (e) {}
-    }
+    };
 
     render() {
 
