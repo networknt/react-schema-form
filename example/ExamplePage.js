@@ -24,6 +24,7 @@ class ExamplePage extends Component {
             { label: "Kitchen Sink", value: "data/kitchenSink.json" },
             { label: "Login", value: "data/login.json" },
             { label: "Date", value: "data/date.json" },
+            { label: "DateTime", value: "data/datetime.json" },
             { label: "Readonly", value: "data/readonly.json" },
             { label: "Array", value: "data/array.json" },
             { label: "Object", value: "data/object.json" },

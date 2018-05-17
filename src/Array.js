@@ -139,7 +139,7 @@ class Array extends React.Component {
                         {arrays}
                     </ol>
                 </div>
-                <Button variant="raised" label={this.props.form.add || 'Add'} secondary={true} onTouchTap={this.onAppend}/>
+                <Button variant="raised" label={this.props.form.add || 'Add'} secondary onTouchTap={this.onAppend}/>
             </div>
         );
     }
