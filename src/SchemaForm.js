@@ -9,6 +9,7 @@ import TextArea from './TextArea';
 import Select from './Select';
 import Radios from './Radios';
 import Date from './Date';
+import DateTime from './DateTime';
 import Checkbox from './Checkbox';
 import Help from './Help';
 import Array from './Array';
@@ -16,19 +17,19 @@ import FieldSet from './FieldSet';
 import _ from 'lodash';
 
 class SchemaForm extends React.Component {
-
     mapper = {
-        'number': Number,
-        'text': Text,
-        'password': Text,
-        'textarea': TextArea,
-        'select': Select,
-        'radios': Radios,
-        'date': Date,
-        'checkbox': Checkbox,
-        'help': Help,
-        'array': Array,
-        'fieldset': FieldSet
+        number: Number,
+        text: Text,
+        password: Text,
+        textarea: TextArea,
+        select: Select,
+        radios: Radios,
+        date: Date,
+        datetime: DateTime,
+        checkbox: Checkbox,
+        help: Help,
+        array: Array,
+        fieldset: FieldSet
     };
 
     constructor(props) {
@@ -44,29 +45,56 @@ class SchemaForm extends React.Component {
     builder(form, model, index, onChange, mapper) {
         var type = form.type;
         let Field = this.mapper[type];
-        if(!Field) {
-          console.log('Invalid field: \"' + form.key[0] + '\"!');
-          return null;
+        if (!Field) {
+            console.log('Invalid field: "' + form.key[0] + '"!');
+            return null;
         }
-        if(form.condition && eval(form.condition) === false) {
-          return null;
+        if (form.condition && eval(form.condition) === false) {
+            return null;
         }
-        return <Field model={model} form={form} key={index} onChange={onChange} mapper={mapper} builder={this.builder}/>
+        return (
+            <Field
+                model={model}
+                form={form}
+                key={index}
+                onChange={onChange}
+                mapper={mapper}
+                builder={this.builder}
+            />
+        );
     }
 
     render() {
-        let merged = utils.merge(this.props.schema, this.props.form, this.props.ignore, this.props.option);
+        let merged = utils.merge(
+            this.props.schema,
+            this.props.form,
+            this.props.ignore,
+            this.props.option
+        );
         //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         let mapper = this.mapper;
-        if(this.props.mapper) {
+        if (this.props.mapper) {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
-        let forms = merged.map(function(form, index) {
-            return this.builder(form, this.props.model, index, this.onChange, mapper);
-        }.bind(this));
+        let forms = merged.map(
+            function(form, index) {
+                return this.builder(
+                    form,
+                    this.props.model,
+                    index,
+                    this.onChange,
+                    mapper
+                );
+            }.bind(this)
+        );
 
         return (
-            <div style={{width: '100%'}} className={'SchemaForm ' + this.props.className}>{forms}</div>
+            <div
+                style={{ width: '100%' }}
+                className={'SchemaForm ' + this.props.className}
+            >
+                {forms}
+            </div>
         );
     }
 }
