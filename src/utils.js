@@ -1,4 +1,4 @@
-import _ from'lodash';
+import _ from 'lodash';
 import ObjectPath from 'objectpath';
 import tv4 from 'tv4';
 
@@ -24,22 +24,15 @@ var enumToTitleMap = function(enm) {
 // Takes a titleMap in either object or list format and returns one in
 // in the list format.
 var canonicalTitleMap = function(titleMap, originalEnum) {
-    if (!_.isArray(titleMap)) {
-        var canonical = [];
-        if (originalEnum) {
-            originalEnum.forEach(function(value) {
-                canonical.push({name: titleMap[value], value: value});
-            });
-        } else {
-            for(var k in titleMap) {
-                if (titleMap.hasOwnProperty(k)) {
-                    canonical.push({name: k, value: titleMap[k]});
-                }
-            }
-        }
-        return canonical;
-    }
-    return titleMap;
+    if (!originalEnum)
+        return titleMap;
+
+    const canonical = [];
+    const _enum = (Object.keys(titleMap).length == 0)? originalEnum : titleMap;
+    originalEnum.forEach(function (value, idx) {
+        canonical.push({ name: _enum[idx], value: value });
+    });
+    return canonical;
 };
 
 //Creates a form object with all common properties
