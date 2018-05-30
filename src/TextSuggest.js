@@ -5,6 +5,11 @@ import React from 'react';
 import ComposedComponent from './ComposedComponent';
 import AutoComplete from 'material-ui/AutoComplete';
 
+const dataSourceConfig = {
+  text: 'name',
+  value: 'value',
+};
+
 class TextSuggest extends React.Component {
     render() {
         // console.log('TextSuggest', this.props.form);
