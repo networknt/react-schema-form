@@ -40,10 +40,11 @@ class TextSuggest extends React.Component {
                     defaultValue={this.props.value}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}
-                    dataSource={datasource}
                     openOnFocus={true}
+                    dataSource={this.props.form.titleMap || ['Loading...']}
                     filter={filter}
                     maxSearchResults={this.props.form.maxSearchResults || 5}
+                    dataSourceConfig={dataSourceConfig}
                 />
             </div>
         );
