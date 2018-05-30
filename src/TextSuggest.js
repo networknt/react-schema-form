@@ -12,7 +12,6 @@ const dataSourceConfig = {
 
 class TextSuggest extends React.Component {
     handleUpdate = (newValue, index) => {
-      console.log("changing", newValue, index);
       const {key} = this.props.form
       const {type} = this.props.form.schema
       this.props.onChange(key, newValue[dataSourceConfig['value']], type)
