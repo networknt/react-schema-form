@@ -11,12 +11,15 @@ const dataSourceConfig = {
 };
 
 class TextSuggest extends React.Component {
+    handleUpdate = (newValue, index) => {
+      console.log("changing", newValue, index);
+      const {key} = this.props.form
+      const {type} = this.props.form.schema
+      this.props.onChange(key, newValue[dataSourceConfig['value']], type)
+    };
+
     render() {
-        // console.log('TextSuggest', this.props.form);
-
-        // assign the source list to autocomplete
-        const datasource = this.props.form.schema.enumNames || this.props.form.schema.enum || ['Loading...'];
-
+        // console.log('TextSuggest', this.props);
         // assign the filter, by default case insensitive
         const filter = ((filter) => {
             switch (filter) {
@@ -36,8 +39,7 @@ class TextSuggest extends React.Component {
                     floatingLabelText={this.props.form.title}
                     hintText={this.props.form.placeholder}
                     errorText={this.props.error}
-                    onChange={this.props.onChangeValidate}
-                    defaultValue={this.props.value}
+                    onNewRequest={this.handleUpdate}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}
                     openOnFocus={true}
