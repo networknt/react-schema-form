@@ -48,6 +48,8 @@ class TextSuggest extends React.Component {
             }
         })(this.props.form.filter)
 
+        const value = this.props.value && this.handleInit(this.props.value);
+
         return (
             <div className={this.props.form.htmlClass}>
                 <AutoComplete
@@ -59,6 +61,7 @@ class TextSuggest extends React.Component {
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}
                     openOnFocus={true}
+                    searchText={value}
                     dataSource={this.props.form.titleMap || ['Loading...']}
                     filter={filter}
                     maxSearchResults={this.props.form.maxSearchResults || 5}
