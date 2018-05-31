@@ -14,8 +14,25 @@ class TextSuggest extends React.Component {
     handleUpdate = (newValue, index) => {
       const {key} = this.props.form
       const {type} = this.props.form.schema
-      this.props.onChange(key, newValue[dataSourceConfig['value']], type)
+      return this.props.onChange(key, newValue[dataSourceConfig['value']], type)
     };
+
+    handleInit = (init_value) => {
+        if (!this.props.form.schema || !this.props.form.schema.enum)
+            return init_value.toString()
+
+        const names = this.props.form.schema.enumNames || this.props.form.schema.enum;
+        const values = this.props.form.schema.enum;
+
+        console.log(names, values);
+        console.log("indexOf", values.indexOf(init_value));
+        console.log("names[values.indexOf(init_value)]", names[values.indexOf(init_value)]);
+        const init_value_name = names[values.indexOf(init_value)];
+
+        // this.handleUpdate({[dataSourceConfig['value']]: init_value, [dataSourceConfig['text']]: init_value_name})
+
+        return init_value_name || init_value.toString()
+    }
 
     render() {
         // console.log('TextSuggest', this.props);
