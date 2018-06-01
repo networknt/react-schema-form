@@ -49,7 +49,7 @@ class SchemaForm extends React.Component {
           return null;
         }
 
-        if(form.condition && eval(form.condition) === false) {
+        if(form.condition && utils.safeEval(form.condition, {model}) === false) {
           return null;
         }
 
