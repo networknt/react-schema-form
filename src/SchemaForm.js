@@ -48,10 +48,13 @@ class SchemaForm extends React.Component {
           console.log('Invalid field: \"' + form.key[0] + '\"!');
           return null;
         }
+
         if(form.condition && eval(form.condition) === false) {
           return null;
         }
-        return <Field model={model} form={form} key={index} onChange={onChange} mapper={mapper} builder={this.builder}/>
+
+        const key = form.key && form.key.join(".") || index;
+        return <Field model={model} form={form} key={key} onChange={onChange} mapper={mapper} builder={this.builder}/>
     }
 
     render() {
