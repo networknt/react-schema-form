@@ -5,8 +5,12 @@ import notevil from 'notevil';
 
 //Evaluates an expression in a safe way
 function safeEval(condition, scope) {
-    const scope_safe = _.cloneDeep(scope);
-    return notevil(condition, scope_safe);
+    try {
+        const scope_safe = _.cloneDeep(scope);
+        return notevil(condition, scope_safe);
+    } catch (error) {
+        return undefined
+    }
 }
 
 function stripNullType(type) {
