@@ -27,7 +27,8 @@
     "classnames": "^2.2.5",
     "lodash": "^4.16.6",
     "objectpath": "^1.2.1",
-    "tv4": "^1.2.7"
+    "tv4": "^1.2.7",
+    "notevil": "^1.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
