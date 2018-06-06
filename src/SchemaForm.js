@@ -12,6 +12,7 @@ import Date from './Date';
 import Checkbox from './Checkbox';
 import Help from './Help';
 import Array from './Array';
+import Binary from './Binary';
 import FieldSet from './FieldSet';
 import _ from 'lodash';
 
@@ -28,6 +29,7 @@ class SchemaForm extends React.Component {
         'checkbox': Checkbox,
         'help': Help,
         'array': Array,
+        'binary': Binary,
         'fieldset': FieldSet
     };
 
