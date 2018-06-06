@@ -4,6 +4,7 @@
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
 import RaisedButton from 'material-ui/RaisedButton';
+import FileIcon from 'material-ui/svg-icons/editor/attach-file';
 
 
 class Binary extends React.Component {
@@ -40,6 +41,7 @@ class Binary extends React.Component {
                     label={this.props.form.placeholder || "Puja un fitxer"}
                     style={this.props.form.style || {width: '100%'}}
                 >
+                    <FileIcon/>
                     <input
                         type="file"
                         // accept="image/*"
