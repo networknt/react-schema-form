@@ -35,12 +35,6 @@ class SchemaForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.onChange = this.onChange.bind(this);
-    }
-
-    onChange(key, val, type) {
-        //console.log('SchemaForm.onChange', key, val);
-        this.props.onModelChange(key, val, type);
     }
 
     builder(form, model, index, onChange, mapper) {
@@ -67,7 +61,7 @@ class SchemaForm extends React.Component {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(function(form, index) {
-            return this.builder(form, this.props.model, index, this.onChange, mapper);
+            return this.builder(form, this.props.model, index, this.props.onModelChange, mapper);
         }.bind(this));
 
         return (
