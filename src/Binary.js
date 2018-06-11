@@ -8,29 +8,17 @@ import FileIcon from 'material-ui/svg-icons/editor/attach-file';
 
 
 class Binary extends React.Component {
+
     handleUpdate(selectorFiles: FileList)
     {
-        const {key} = this.props.form
-        const {type} = this.props.form.schema
-
-        console.log(key, type);
-
+        const {key, type} = this.props.form
         const file_attachment = selectorFiles[0];
-        console.log(file_attachment);
 
-        // let data = new FormData();
-        // data.append('file', file_attachment);
-        // data.append('name', 'some value user types');
-        // data.append('description', 'some value user types');
-        // console.log(data.keys());
-        // console.dir(data.values());
-
-        return this.props.onChange(key, file_attachment, type)
+        return this.props.onChange(key, file_attachment, type, this.props.form)
     }
 
     render() {
         // console.log('Binary', this.props);
-        // assign the filter, by default case insensitive
 
         return (
             <div className={this.props.form.htmlClass}>
@@ -47,7 +35,7 @@ class Binary extends React.Component {
                         // accept="image/*"
                         // style={{"display":"none"}}
                         onChange={ (e) => this.handleUpdate(e.target.files) }
-                        label={this.props.form.title || "Selecciona una factura"}
+                        label={this.props.form.title || "Upload a file"}
                     />
                 </RaisedButton>
 
