@@ -13,6 +13,7 @@ import Date from './Date';
 import Checkbox from './Checkbox';
 import Help from './Help';
 import Array from './Array';
+import Binary from './Binary';
 import FieldSet from './FieldSet';
 import _ from 'lodash';
 
@@ -30,17 +31,12 @@ class SchemaForm extends React.Component {
         'checkbox': Checkbox,
         'help': Help,
         'array': Array,
+        'binary': Binary,
         'fieldset': FieldSet
     };
 
     constructor(props) {
         super(props);
-        this.onChange = this.onChange.bind(this);
-    }
-
-    onChange(key, val, type) {
-        //console.log('SchemaForm.onChange', key, val);
-        this.props.onModelChange(key, val, type);
     }
 
     builder(form, model, index, onChange, mapper) {
@@ -67,7 +63,7 @@ class SchemaForm extends React.Component {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(function(form, index) {
-            return this.builder(form, this.props.model, index, this.onChange, mapper);
+            return this.builder(form, this.props.model, index, this.props.onModelChange, mapper);
         }.bind(this));
 
         return (
