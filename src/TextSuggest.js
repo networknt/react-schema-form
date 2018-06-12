@@ -56,7 +56,7 @@ class TextSuggest extends React.Component {
                     type={this.props.form.type}
                     floatingLabelText={this.props.form.title}
                     hintText={this.props.form.placeholder}
-                    errorText={this.props.error}
+                    errorText={this.props.error || this.props.errorText}
                     onNewRequest={this.handleUpdate}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}
