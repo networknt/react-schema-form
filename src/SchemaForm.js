@@ -41,7 +41,7 @@ class SchemaForm extends React.Component {
         this.props.onModelChange(key, val, type);
     }
 
-    builder(form, model, index, onChange, mapper) {
+    builder(form, model, index, onChange, mapper, errors) {
         var type = form.type;
         let Field = this.mapper[type];
         if(!Field) {
@@ -54,7 +54,9 @@ class SchemaForm extends React.Component {
         }
 
         const key = form.key && form.key.join(".") || index;
-        return <Field model={model} form={form} key={key} onChange={onChange} mapper={mapper} builder={this.builder}/>
+
+        let error = (key in errors)? errors[key] : null;
+        return <Field model={model} form={form} key={key} onChange={onChange} mapper={mapper} builder={this.builder} errorText={error}/>
     }
 
     render() {
@@ -65,7 +67,7 @@ class SchemaForm extends React.Component {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(function(form, index) {
-            return this.builder(form, this.props.model, index, this.onChange, mapper);
+            return this.builder(form, this.props.model, index, this.onChange, mapper, this.props.errors);
         }.bind(this));
 
         return (
