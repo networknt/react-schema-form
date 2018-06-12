@@ -12,7 +12,7 @@ export default ComposedComponent => class extends React.Component {
         this.state = {
             value: value,
             valid: !!(validationResult.valid || !value),
-            error: !validationResult.valid && value ? validationResult.error.message : null
+            error: !validationResult.valid && (value ? validationResult.error.message : null) || this.props.errorText
         };
     }
 
