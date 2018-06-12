@@ -17,7 +17,7 @@ class TextArea extends React.Component {
                     floatingLabelText={this.props.form.title}
                     hintText={this.props.form.placeholder}
                     onChange={this.props.onChangeValidate}
-                    errorText={this.props.error}
+                    errorText={this.props.error || this.props.errorText}
                     defaultValue={this.props.value}
                     multiLine={true}
                     rows={this.props.form.rows}
