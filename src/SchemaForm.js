@@ -49,8 +49,19 @@ class SchemaForm extends React.Component {
 
         const key = form.key && form.key.join(".") || index;
 
+        const {errors} = this.props;
         let error = (key in errors)? errors[key] : null;
-        return <Field model={model} form={form} key={key} onChange={onChange} mapper={mapper} builder={this.builder} errorText={error}/>
+
+        return <Field
+                    model={model}
+                    form={form}
+                    key={key}
+                    onChange={this.props.onModelChange}
+                    setDefault={this.setDefault}
+                    mapper={mapper}
+                    builder={this.builder}
+                    errorText={error}
+                />
     }
 
     render() {
@@ -62,7 +73,7 @@ class SchemaForm extends React.Component {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(function(form, index) {
-            return this.builder(form, this.props.model, index, this.props.onModelChange, mapper, this.props.errors);
+            return this.builder(form, this.props.model, index, mapper);
         }.bind(this));
 
         return (
