@@ -13,11 +13,16 @@ class Select extends React.Component {
         super(props);
         this.onSelected = this.onSelected.bind(this);
 
-        const storedValue = this.props.model && this.getModelKey(this.props.model, this.props.form.key) || false;
-        const defaultValue = this.props.form.schema.default || false;
+        const {model, form} = this.props;
+        const {key} = form;
 
+        const storedValue = model && this.getModelKey(model, key) || false;
+        const defaultValue = form.schema.default || false;
+        const value = !(_.isEmpty(storedValue)) && storedValue || defaultValue;
+
+        this.props.setDefault(key, model, form, value)
         this.state = {
-            currentValue: !(_.isEmpty(storedValue)) && storedValue || defaultValue
+            currentValue: value,
         };
     }
 
