@@ -38,6 +38,15 @@ class SchemaForm extends React.Component {
     builder(form, model, index, onChange, mapper, errors) {
         var type = form.type;
         let Field = this.mapper[type];
+    // Assign default values and save it to the model
+    setDefault = (key, model, form, value) => {
+        const currentValue = utils.selectOrSet(key, model);
+
+        // If current value is not setted, apply the default over the model
+        if (!currentValue)
+            this.props.onModelChange(key, value, form.type, form);
+    }
+
         if(!Field) {
           console.log('Invalid field: \"' + form.key[0] + '\"!');
           return null;
