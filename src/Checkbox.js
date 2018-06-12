@@ -11,22 +11,12 @@ class Checkbox2 extends React.Component {
         super(props);
         const {model, form} = this.props;
         const {key} = form;
-
-        const storedValue = (!_.isNil(this.props.value) && _.isBoolean(this.props.value) )? this.props.value : undefined;
-        const defaultValue = (!_.isNil(form.schema.default) && _.isBoolean(form.schema.default))? form.schema.default : undefined;
-        // TODO:  deal with it boolean comparision //join isNil
-        const value =  storedValue || defaultValue;
-
+        //If a boolean is stored, use it; if not, if a boolean is defined as schema's default, use it.
+        const value = _.isBoolean(this.props.value)? this.props.value : (_.isBoolean(form.schema.default)? form.schema.default : undefined);
         this.props.setDefault(key, model, form, value)
-        this.state = {
-            currentValue: value,
-        };
     }
 
     render() {
-
-        console.log(this.state.currentValue);
-
         return (
             <div className={this.props.form.className}>
                 <Checkbox
