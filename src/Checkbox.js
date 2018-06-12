@@ -14,6 +14,7 @@ class Checkbox2 extends React.Component {
 
         const storedValue = (!_.isNil(this.props.value) && _.isBoolean(this.props.value) )? this.props.value : undefined;
         const defaultValue = (!_.isNil(form.schema.default) && _.isBoolean(form.schema.default))? form.schema.default : undefined;
+        // TODO:  deal with it boolean comparision //join isNil
         const value =  storedValue || defaultValue;
 
         this.props.setDefault(key, model, form, value)
@@ -31,7 +32,7 @@ class Checkbox2 extends React.Component {
                 <Checkbox
                     name={this.props.form.key.slice(-1)[0]}
                     value={this.props.form.key.slice(-1)[0]}
-                    checked={this.state.currentValue}
+                    checked={this.props.value}
                     label={this.props.form.title}
                     disabled={this.props.form.readonly}
                     onCheck={(e, checked) => {this.props.onChangeValidate(e)}}
