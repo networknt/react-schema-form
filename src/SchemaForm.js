@@ -39,22 +39,42 @@ class SchemaForm extends React.Component {
         super(props);
     }
 
-    builder(form, model, index, onChange, mapper, errors) {
-        var type = form.type;
-        let Field = this.mapper[type];
+    // Assign default values and save it to the model
+    setDefault = (key, model, form, value) => {
+        const currentValue = utils.selectOrSet(key, model);
+
+        // If current value is not setted, apply the default over the model
+        if (!currentValue)
+            this.props.onModelChange(key, value, form.type, form);
+    }
+
+    builder(form, model, index, mapper) {
+        const Field = this.mapper[form.type];
         if(!Field) {
-          console.log('Invalid field: \"' + form.key[0] + '\"!');
-          return null;
+            console.log('Invalid field: \"' + form.key[0] + '\"!');
+            return null;
         }
 
+        // Apply conditionals to review if this field must be rendered
         if(form.condition && utils.safeEval(form.condition, {model}) === false) {
-          return null;
+            return null;
         }
 
         const key = form.key && form.key.join(".") || index;
 
+        const {errors} = this.props;
         let error = (key in errors)? errors[key] : null;
-        return <Field model={model} form={form} key={key} onChange={onChange} mapper={mapper} builder={this.builder} errorText={error}/>
+
+        return <Field
+                    model={model}
+                    form={form}
+                    key={key}
+                    onChange={this.props.onModelChange}
+                    setDefault={this.setDefault}
+                    mapper={mapper}
+                    builder={this.builder}
+                    errorText={error}
+                />
     }
 
     render() {
@@ -66,7 +86,7 @@ class SchemaForm extends React.Component {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(function(form, index) {
-            return this.builder(form, this.props.model, index, this.props.onModelChange, mapper, this.props.errors);
+            return this.builder(form, this.props.model, index, mapper);
         }.bind(this));
 
         return (
