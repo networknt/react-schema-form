@@ -5,6 +5,19 @@ import React from 'react';
 import ComposedComponent from './ComposedComponent';
 import Checkbox from 'material-ui/Checkbox';
 
+const styles = {
+    error: {
+        color: "rgb(244, 67, 54)",
+        fontSize: "12px",
+        lineHeight: "12px",
+    },
+    checkbox: {
+        marginTop: "14px",
+        marginBottom: "0px",
+        height: "72px",
+    },
+};
+
 class Checkbox2 extends React.Component {
 
     constructor (props) {
@@ -18,7 +31,7 @@ class Checkbox2 extends React.Component {
 
     render() {
         return (
-            <div className={this.props.form.className}>
+            <div className={this.props.form.className} style={styles.checkbox}>
                 <Checkbox
                     name={this.props.form.key.slice(-1)[0]}
                     value={this.props.form.key.slice(-1)[0]}
@@ -27,6 +40,7 @@ class Checkbox2 extends React.Component {
                     disabled={this.props.form.readonly}
                     onCheck={(e, checked) => {this.props.onChangeValidate(e)}}
                     />
+                <span style={styles.error}>{this.props.errorText}</span>
              </div>
         );
     }
