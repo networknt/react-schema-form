@@ -29,7 +29,7 @@ class TextSuggest extends React.Component {
 
     getModelKey(model, key) {
         if (Array.isArray(key)) {
-            return key.reduce((cur, nxt) => (cur[nxt] || {}), model);
+            return key.reduce((cur, nxt) => (cur[nxt] || undefined), model);
         } else {
             return model[key];
         }
