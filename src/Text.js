@@ -7,14 +7,14 @@ import TextField from 'material-ui/TextField';
 
 class Text extends React.Component {
     render() {
-        //console.log('Text props', this.props.form.readonly);
+        //console.log('Text props', this.props);
         return (
             <div className={this.props.form.htmlClass}>
                 <TextField
                     type={this.props.form.type}
                     floatingLabelText={this.props.form.title}
                     hintText={this.props.form.placeholder}
-                    errorText={this.props.error}
+                    errorText={this.props.error || this.props.errorText}
                     onChange={this.props.onChangeValidate}
                     defaultValue={this.props.value}
                     disabled={this.props.form.readonly}
