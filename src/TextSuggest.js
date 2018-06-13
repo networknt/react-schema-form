@@ -17,8 +17,8 @@ class TextSuggest extends React.Component {
         const {model, form} = this.props;
         const {key} = form;
 
-        const storedValue = model && this.getModelKey(model, key) || false;
-        const defaultValue = form.schema.default || false;
+        const storedValue = model && this.getModelKey(model, key) || undefined;
+        const defaultValue = form.schema.default || undefined;
         const value = !(_.isEmpty(storedValue)) && storedValue || defaultValue;
 
         this.props.setDefault(key, model, form, value)
@@ -41,40 +41,33 @@ class TextSuggest extends React.Component {
       return this.props.onChange(key, newValue[dataSourceConfig['value']], type, this.props.form)
     };
 
-    handleInit = (init_value) => {
+    /*
+    Try to reach the related enum title, if not return the ID as an string
+
+    Useful to show the title (enumName) instead of the code (enum)
+    */
+    reachTitle = (init_value) => {
         if (!this.props.form.schema || !this.props.form.schema.enum)
             return init_value.toString()
 
         const names = this.props.form.schema.enumNames || this.props.form.schema.enum;
         const values = this.props.form.schema.enum;
 
-        // console.log(names, values);
-        // console.log("indexOf", values.indexOf(init_value));
-        // console.log("names[values.indexOf(init_value)]", names[values.indexOf(init_value)]);
         const init_value_name = names[values.indexOf(init_value)];
-
-        // this.handleUpdate({[dataSourceConfig['value']]: init_value, [dataSourceConfig['text']]: init_value_name})
 
         return init_value_name || init_value.toString()
     }
 
     render() {
         // console.log('TextSuggest', this.props);
+
         // assign the filter, by default case insensitive
-        const filter = ((filter) => {
-            switch (filter) {
-                case 'fuzzy':
-                    return AutoComplete.fuzzyFilter;
-                    break;
-                default:
-                    return AutoComplete.caseInsensitiveFilter;
-                    break;
-            }
-        })(this.props.form.filter)
+        const filter = (this.props.form.filter == "fuzzy")?
+            AutoComplete.fuzzyFilter
+            :
+            AutoComplete.caseInsensitiveFilter
 
-        // console.log("TEXTSUG", this.props);
-
-        const value = this.props.value && this.handleInit(this.props.value);
+        const value = this.props.value && this.reachTitle(this.props.value);
 
         return (
             <div className={this.props.form.htmlClass}>
