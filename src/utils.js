@@ -1,6 +1,17 @@
-import _ from'lodash';
+import _ from 'lodash';
 import ObjectPath from 'objectpath';
 import tv4 from 'tv4';
+import notevil from 'notevil';
+
+//Evaluates an expression in a safe way
+function safeEval(condition, scope) {
+    try {
+        const scope_safe = _.cloneDeep(scope);
+        return notevil(condition, scope_safe);
+    } catch (error) {
+        return undefined
+    }
+}
 
 function stripNullType(type) {
     if (Array.isArray(type) && type.length == 2) {
@@ -24,22 +35,15 @@ var enumToTitleMap = function(enm) {
 // Takes a titleMap in either object or list format and returns one in
 // in the list format.
 var canonicalTitleMap = function(titleMap, originalEnum) {
-    if (!_.isArray(titleMap)) {
-        var canonical = [];
-        if (originalEnum) {
-            originalEnum.forEach(function(value) {
-                canonical.push({name: titleMap[value], value: value});
-            });
-        } else {
-            for(var k in titleMap) {
-                if (titleMap.hasOwnProperty(k)) {
-                    canonical.push({name: k, value: titleMap[k]});
-                }
-            }
-        }
-        return canonical;
-    }
-    return titleMap;
+    if (!originalEnum)
+        return titleMap;
+
+    const canonical = [];
+    const _enum = (Object.keys(titleMap).length == 0)? originalEnum : titleMap;
+    originalEnum.forEach(function (value, idx) {
+        canonical.push({ name: _enum[idx], value: value });
+    });
+    return canonical;
 };
 
 //Creates a form object with all common properties
@@ -120,6 +124,16 @@ var checkbox = function(name, schema, options) {
         var f = stdFormObj(name, schema, options);
         f.key  = options.path;
         f.type = 'checkbox';
+        options.lookup[ObjectPath.stringify(options.path)] = f;
+        return f;
+    }
+};
+
+var binary = function(name, schema, options) {
+    if (stripNullType(schema.type) === 'binary') {
+        var f = stdFormObj(name, schema, options);
+        f.key  = options.path;
+        f.type = 'binary';
         options.lookup[ObjectPath.stringify(options.path)] = f;
         return f;
     }
@@ -228,7 +242,8 @@ var defaults = {
     integer: [integer],
     boolean: [checkbox],
     array:   [checkboxes, array],
-    date:    [date]
+    date:    [date],
+    binary: [binary]
 };
 
 function defaultFormDefinition(name, schema, options) {
@@ -398,9 +413,9 @@ function merge(schema, form, ignore, options, readonly) {
             }
         }
 
-        //If it has a titleMap make sure it's a list
+        //If it has a titleMap make sure to update it with latest enum and names
         if (obj.titleMap) {
-            obj.titleMap = canonicalTitleMap(obj.titleMap);
+            obj.titleMap = canonicalTitleMap(obj.schema.enumNames, obj.schema.enum);
         }
 
         //
@@ -607,5 +622,6 @@ module.exports = {
     merge: merge,
     validate: validate,
     validateBySchema: validateBySchema,
+    safeEval: safeEval,
     selectOrSet: selectOrSet
 };
