@@ -11,12 +11,17 @@ const styles = {
         fontSize: "12px",
         lineHeight: "12px",
     },
+    checkbox: {
+        marginTop: "14px",
+        marginBottom: "0px",
+        height: "72px",
+    },
 };
 
 class Checkbox2 extends React.Component {
     render() {
         return (
-            <div className={this.props.form.className}>
+            <div className={this.props.form.className} style={styles.checkbox}>
                 <Checkbox
                     name={this.props.form.key.slice(-1)[0]}
                     value={this.props.form.key.slice(-1)[0]}
