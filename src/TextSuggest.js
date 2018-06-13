@@ -43,7 +43,7 @@ class TextSuggest extends React.Component {
 
     /*
     Try to reach the related enum title, if not return the ID as an string
-    
+
     Useful to show the title (enumName) instead of the code (enum)
     */
     reachTitle = (init_value) => {
@@ -60,17 +60,12 @@ class TextSuggest extends React.Component {
 
     render() {
         // console.log('TextSuggest', this.props);
+
         // assign the filter, by default case insensitive
-        const filter = ((filter) => {
-            switch (filter) {
-                case 'fuzzy':
-                    return AutoComplete.fuzzyFilter;
-                    break;
-                default:
-                    return AutoComplete.caseInsensitiveFilter;
-                    break;
-            }
-        })(this.props.form.filter)
+        const filter = (this.props.form.filter == "fuzzy")?
+            AutoComplete.fuzzyFilter
+            :
+            AutoComplete.caseInsensitiveFilter
 
         const value = this.props.value && this.reachTitle(this.props.value);
 
