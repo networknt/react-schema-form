@@ -29,7 +29,7 @@ class TextSuggest extends React.Component {
 
     getModelKey(model, key) {
         if (Array.isArray(key)) {
-            return key.reduce((cur, nxt) => (cur[nxt] || undefined), model);
+            return key.reduce((cur, nxt) => (cur[nxt] || false), model);
         } else {
             return model[key];
         }
@@ -59,15 +59,13 @@ class TextSuggest extends React.Component {
     }
 
     render() {
-        // console.log('TextSuggest', this.props);
-
         // assign the filter, by default case insensitive
         const filter = (this.props.form.filter == "fuzzy")?
             AutoComplete.fuzzyFilter
             :
             AutoComplete.caseInsensitiveFilter
 
-        const value = this.props.value && this.reachTitle(this.props.value);
+        const value = !_.isNil(this.state.currentValue) && this.reachTitle(this.state.currentValue) || undefined;
 
         return (
             <div className={this.props.form.htmlClass}>
