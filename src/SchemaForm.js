@@ -43,8 +43,8 @@ class SchemaForm extends React.Component {
     setDefault = (key, model, form, value) => {
         const currentValue = utils.selectOrSet(key, model);
 
-        // If current value is not setted, apply the default over the model
-        if (!currentValue)
+        // If current value is not setted and exist a default, apply the default over the model
+        if (_.isNil(currentValue) && !_.isNil(value))
             this.props.onModelChange(key, value, form.type, form);
     }
 
