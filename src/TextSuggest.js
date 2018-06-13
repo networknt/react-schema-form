@@ -41,19 +41,19 @@ class TextSuggest extends React.Component {
       return this.props.onChange(key, newValue[dataSourceConfig['value']], type)
     };
 
-    handleInit = (init_value) => {
+    /*
+    Try to reach the related enum title, if not return the ID as an string
+    
+    Useful to show the title (enumName) instead of the code (enum)
+    */
+    reachTitle = (init_value) => {
         if (!this.props.form.schema || !this.props.form.schema.enum)
             return init_value.toString()
 
         const names = this.props.form.schema.enumNames || this.props.form.schema.enum;
         const values = this.props.form.schema.enum;
 
-        console.log(names, values);
-        console.log("indexOf", values.indexOf(init_value));
-        console.log("names[values.indexOf(init_value)]", names[values.indexOf(init_value)]);
         const init_value_name = names[values.indexOf(init_value)];
-
-        // this.handleUpdate({[dataSourceConfig['value']]: init_value, [dataSourceConfig['text']]: init_value_name})
 
         return init_value_name || init_value.toString()
     }
@@ -72,7 +72,7 @@ class TextSuggest extends React.Component {
             }
         })(this.props.form.filter)
 
-        const value = this.props.value && this.handleInit(this.props.value);
+        const value = this.props.value && this.reachTitle(this.props.value);
 
         return (
             <div className={this.props.form.htmlClass}>
