@@ -11,6 +11,30 @@ const dataSourceConfig = {
 };
 
 class TextSuggest extends React.Component {
+    constructor(props) {
+        super(props);
+
+        const {model, form} = this.props;
+        const {key} = form;
+
+        const storedValue = model && this.getModelKey(model, key) || false;
+        const defaultValue = form.schema.default || false;
+        const value = !(_.isEmpty(storedValue)) && storedValue || defaultValue;
+
+        this.props.setDefault(key, model, form, value)
+        this.state = {
+            currentValue: value,
+        };
+    }
+
+    getModelKey(model, key) {
+        if (Array.isArray(key)) {
+            return key.reduce((cur, nxt) => (cur[nxt] || {}), model);
+        } else {
+            return model[key];
+        }
+    }
+
     handleUpdate = (newValue, index) => {
       const {key} = this.props.form
       const {type} = this.props.form.schema
