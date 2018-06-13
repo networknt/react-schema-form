@@ -5,6 +5,14 @@ import React from 'react';
 import ComposedComponent from './ComposedComponent';
 import Checkbox from 'material-ui/Checkbox';
 
+const styles = {
+    error: {
+        color: "rgb(244, 67, 54)",
+        fontSize: "12px",
+        lineHeight: "12px",
+    },
+};
+
 class Checkbox2 extends React.Component {
     render() {
         return (
@@ -17,6 +25,7 @@ class Checkbox2 extends React.Component {
                     disabled={this.props.form.readonly}
                     onCheck={(e, checked) => {this.props.onChangeValidate(e)}}
                     />
+                <span style={styles.error}>{this.props.errorText}</span>
              </div>
         );
     }
