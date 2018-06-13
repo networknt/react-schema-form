@@ -19,7 +19,7 @@ class TextSuggest extends React.Component {
 
         const storedValue = model && this.getModelKey(model, key) || undefined;
         const defaultValue = form.schema.default || undefined;
-        const value = !(_.isEmpty(storedValue)) && storedValue || defaultValue;
+        const value = !_.isNil(storedValue) && storedValue || defaultValue;
 
         this.props.setDefault(key, model, form, value)
         this.state = {
