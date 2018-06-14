@@ -6,6 +6,16 @@ import ComposedComponent from './ComposedComponent';
 import TextField from 'material-ui/TextField';
 
 class Text extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        const {model, form, value} = this.props;
+        const {key} = form;
+
+        this.props.setDefault(key, model, form, value)
+    }
+
     render() {
         //console.log('Text props', this.props);
         return (
