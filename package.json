@@ -27,8 +27,9 @@
     "classnames": "^2.2.5",
     "lodash": "^4.16.6",
     "objectpath": "^1.2.1",
-    "tv4": "^1.2.7",
-    "notevil": "^1.1.0"
+    "react-autosuggest": "^9.3.4",
+    "notevil": "^1.1.0",
+    "tv4": "^1.2.7"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
