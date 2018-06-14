@@ -1,6 +1,17 @@
 import _ from 'lodash';
 import ObjectPath from 'objectpath';
 import tv4 from 'tv4';
+import notevil from 'notevil';
+
+//Evaluates an expression in a safe way
+function safeEval(condition, scope) {
+    try {
+        const scope_safe = _.cloneDeep(scope);
+        return notevil(condition, scope_safe);
+    } catch (error) {
+        return undefined
+    }
+}
 
 function stripNullType(type) {
     if (Array.isArray(type) && type.length == 2) {
@@ -600,5 +611,6 @@ module.exports = {
     merge: merge,
     validate: validate,
     validateBySchema: validateBySchema,
+    safeEval: safeEval,
     selectOrSet: selectOrSet
 };
