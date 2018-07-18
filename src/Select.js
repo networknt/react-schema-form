@@ -5,15 +5,24 @@ import React from 'react';
 import ComposedComponent from './ComposedComponent';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
+import _ from 'lodash';
 
 class Select extends React.Component {
 
     constructor(props) {
         super(props);
         this.onSelected = this.onSelected.bind(this);
-        var possibleValue = this.getModelKey(this.props.model, this.props.form.key);
+
+        const {model, form} = this.props;
+        const {key} = form;
+
+        const storedValue = model && this.getModelKey(model, key) || false;
+        const defaultValue = form.schema.default || false;
+        const value = !(_.isEmpty(storedValue)) && storedValue || defaultValue;
+
+        this.props.setDefault(key, model, form, value)
         this.state = {
-            currentValue: this.props.model !== undefined && possibleValue ? possibleValue : this.props.form.titleMap != null ? this.props.form.titleMap[0].value : ''
+            currentValue: value,
         };
     }
 

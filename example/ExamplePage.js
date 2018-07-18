@@ -92,10 +92,10 @@ var ExamplePage = React.createClass({
         }.bind(this));
     },
 
-    onModelChange: function(key, val) {
+    onModelChange: function(key, val, type) {
         console.log('ExamplePage.onModelChange:', key, val);
         var newModel = this.state.model;
-        utils.selectOrSet(key, newModel, val);
+        utils.selectOrSet(key, newModel, val, type);
         this.setState({ model: newModel });
     },
 

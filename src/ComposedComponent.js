@@ -12,7 +12,7 @@ export default ComposedComponent => class extends React.Component {
         this.state = {
             value: value,
             valid: !!(validationResult.valid || !value),
-            error: !validationResult.valid && value ? validationResult.error.message : null
+            error: !validationResult.valid && (value ? validationResult.error.message : null) || this.props.errorText
         };
     }
 
@@ -31,7 +31,7 @@ export default ComposedComponent => class extends React.Component {
      * @param e The input element, or something.
      */
     onChangeValidate(e) {
-        //console.log('onChangeValidate e', e);
+        // console.log('onChangeValidate e', e);
         let value = null;
         switch(this.props.form.schema.type) {
           case 'integer':
@@ -65,7 +65,7 @@ export default ComposedComponent => class extends React.Component {
             error: validationResult.valid ? null : validationResult.error.message
         });
         //console.log('conhangeValidate this.props.form.key, value', this.props.form.key, value);
-        this.props.onChange(this.props.form.key, value);
+        this.props.onChange(this.props.form.key, value, this.props.form.schema.type);
     }
 
     defaultValue(props) {

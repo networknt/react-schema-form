@@ -1,6 +1,17 @@
-import _ from'lodash';
+import _ from 'lodash';
 import ObjectPath from 'objectpath';
 import tv4 from 'tv4';
+import notevil from 'notevil';
+
+//Evaluates an expression in a safe way
+function safeEval(condition, scope) {
+    try {
+        const scope_safe = _.cloneDeep(scope);
+        return notevil(condition, scope_safe);
+    } catch (error) {
+        return undefined
+    }
+}
 
 function stripNullType(type) {
     if (Array.isArray(type) && type.length == 2) {
@@ -24,22 +35,15 @@ var enumToTitleMap = function(enm) {
 // Takes a titleMap in either object or list format and returns one in
 // in the list format.
 var canonicalTitleMap = function(titleMap, originalEnum) {
-    if (!_.isArray(titleMap)) {
-        var canonical = [];
-        if (originalEnum) {
-            originalEnum.forEach(function(value) {
-                canonical.push({name: titleMap[value], value: value});
-            });
-        } else {
-            for(var k in titleMap) {
-                if (titleMap.hasOwnProperty(k)) {
-                    canonical.push({name: k, value: titleMap[k]});
-                }
-            }
-        }
-        return canonical;
-    }
-    return titleMap;
+    if (!originalEnum)
+        return titleMap;
+
+    const canonical = [];
+    const _enum = (Object.keys(titleMap).length == 0)? originalEnum : titleMap;
+    originalEnum.forEach(function (value, idx) {
+        canonical.push({ name: _enum[idx], value: value });
+    });
+    return canonical;
 };
 
 //Creates a form object with all common properties
@@ -398,9 +402,9 @@ function merge(schema, form, ignore, options, readonly) {
             }
         }
 
-        //If it has a titleMap make sure it's a list
+        //If it has a titleMap make sure to update it with latest enum and names
         if (obj.titleMap) {
-            obj.titleMap = canonicalTitleMap(obj.titleMap);
+            obj.titleMap = canonicalTitleMap(obj.schema.enumNames, obj.schema.enum);
         }
 
         //
@@ -462,7 +466,7 @@ function merge(schema, form, ignore, options, readonly) {
     }));
 }
 
-function selectOrSet(projection, obj, valueToSet) {
+function selectOrSet(projection, obj, valueToSet, type) {
     //console.log('selectOrSet', projection, obj, valueToSet);
     var numRe = /^\d+$/;
 
@@ -482,6 +486,14 @@ function selectOrSet(projection, obj, valueToSet) {
         typeof obj[parts[0]] === 'undefined') {
         // We need to look ahead to check if array is appropriate
         obj[parts[0]] = parts.length > 2 && numRe.test(parts[1]) ? [] : {};
+    }
+
+    if (typeof type !== 'undefined' &&
+        ['number','integer'].indexOf(type) > -1 &&
+        typeof valueToSet === 'undefined') {
+        // number or integer can undefined
+        obj[parts[0]] = valueToSet;
+        return obj;
     }
 
     var value = obj[parts[0]];
@@ -599,5 +611,6 @@ module.exports = {
     merge: merge,
     validate: validate,
     validateBySchema: validateBySchema,
+    safeEval: safeEval,
     selectOrSet: selectOrSet
 };
