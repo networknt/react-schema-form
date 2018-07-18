@@ -1,6 +1,6 @@
 {
   "name": "react-schema-form",
-  "version": "0.3.11",
+  "version": "0.4.0",
   "description": "React json schema form",
   "keywords": [
     "json schema",
@@ -9,7 +9,7 @@
     "react-component",
     "form"
   ],
-  "author": "Steve Hu, Nicholas Azar",
+  "author": "Steve Hu, Nicholas Azar, Xavi Torelló",
   "license": "MIT",
   "main": "./lib/index",
   "files": [
