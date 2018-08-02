@@ -35,7 +35,7 @@ class Date extends React.Component {
             <div style={{width: '100%', display: 'block'}} className={this.props.form.htmlClass}>
                 <DatePicker
                     mode={'landscape'}
-                    autoOk={true}
+                    autoOk
                     floatingLabelText={this.props.form.title}
                     hintText={this.props.form.title}
                     onChange={this.onDatePicked}
@@ -46,7 +46,7 @@ class Date extends React.Component {
                     style={this.props.form.style || {width: '90%', display: 'inline-block'}}/>
                 {this.props.value &&
                     <IconButton ref="button"
-                        onClick={() => this.props.onChangeValidate("")}
+                        onClick={() => this.props.onChangeValidate('')}
                         style={{position: 'relative', display: 'inline-block', top: '6px',right: '4px', padding: '0', width: '24px', height: '24px'}}>
                         <Clear />
                     </IconButton>

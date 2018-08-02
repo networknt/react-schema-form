@@ -20,7 +20,7 @@ class FieldSet extends React.Component {
         //console.log('FieldSet.render', this.props);
         // now render all the items in the fieldset
         let forms = this.props.form.items.map(function(form, index){
-            return this.props.builder(form, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
+            return this.props.builder(form, this.props.model, index, this.props.mapper, this.props.onChange, this.props.builder);
         }.bind(this));
 
         return (

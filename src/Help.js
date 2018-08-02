@@ -9,7 +9,7 @@ class Help extends React.Component{
         let classes = classNames(this.props.form.htmlClass);
         //console.log('Help:', this.props);
         return (
-            <div className={classes} dangerouslySetInnerHTML={{__html: this.props.form.description}} ></div>
+            <div className={classes} dangerouslySetInnerHTML={{__html: this.props.form.description}}  />
         )
     }
 }
