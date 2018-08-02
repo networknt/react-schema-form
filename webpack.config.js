@@ -3,7 +3,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: ['react-hot-loader/patch', './src/index'],
   output: {
-    filename: 'dist/react-schema-form.min.js',
+    filename: './dist/react-schema-form.min.js',
     library: 'ReactSchemaForm',
     libraryTarget: 'umd'
   },
@@ -21,9 +21,6 @@ module.exports = {
       commonjs2: 'react-dom'
     }
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
   module: {
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},

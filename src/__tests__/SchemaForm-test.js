@@ -31,6 +31,6 @@ describe('SchemaForm', function() {
 
     var result = shallowRenderer.getRenderOutput();
     console.log('result = ', result.props);
-    expect(result.props.children).toEqual('SchemaForm');
+    expect(result.props.className).toEqual('SchemaForm');
   });
 });

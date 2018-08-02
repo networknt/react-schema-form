@@ -35,18 +35,26 @@ class SchemaForm extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.onChange = this.onChange.bind(this);
+        console.log('1234',props);
     }
 
     // Assign default values and save it to the model
     setDefault = (key, model, form, value) => {
-        const currentValue = utils.selectOrSet(key, model);
+         const currentValue = utils.selectOrSet(key, model);
 
         // If current value is not setted and exist a default, apply the default over the model
         if (_.isNil(currentValue) && !_.isNil(value))
             this.props.onModelChange(key, value, form.type, form);
     }
 
-    builder(form, model, index, mapper) {
+    onChange(key, val) {
+        //console.log('SchemaForm.onChange', key, val);
+        this.props.onModelChange(key, val);
+    }
+
+    builder(form, model, index, mapper, onChange, builder) {
         const Field = this.mapper[form.type];
         if(!Field) {
             console.log('Invalid field: \"' + form.key[0] + '\"!');
@@ -58,21 +66,21 @@ class SchemaForm extends React.Component {
             return null;
         }
 
-        const key = form.key && form.key.join(".") || index;
+        const key = form.key && form.key.join('.') || index;
 
-        const {errors} = this.props;
+        const errors = this.props && this.props.errors ? this.props.errors : {};
         let error = (key in errors)? errors[key] : null;
 
-        return <Field
+        return (<Field
                     model={model}
                     form={form}
                     key={key}
-                    onChange={this.props.onModelChange}
+                    onChange={onChange}
                     setDefault={this.setDefault}
                     mapper={mapper}
-                    builder={this.builder}
+                    builder={builder}
                     errorText={error}
-                />
+                />)
     }
 
     render() {
@@ -84,11 +92,11 @@ class SchemaForm extends React.Component {
             mapper = _.merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(function(form, index) {
-            return this.builder(form, this.props.model, index, mapper);
+            return this.builder(form, this.props.model, index, mapper, this.onChange, this.builder);
         }.bind(this));
 
         return (
-            <div style={{width: '100%'}} className={'SchemaForm ' + this.props.className}>{forms}</div>
+            <div style={{width: '100%'}} className={this.props.className ? 'SchemaForm '  + this.props.className : 'SchemaForm'}>{forms}</div>
         );
     }
 }

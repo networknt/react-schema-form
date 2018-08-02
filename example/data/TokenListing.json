@@ -1,0 +1,58 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "Token Listings",
+    "properties": {
+      "listingsList": {
+        "title": "Listings",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "delistingDate": {
+              "title": "Delisting Date",
+              "type": "date"
+            },
+            "exchangeSymbol": {
+              "title": "Exchange Symbol",
+              "type": "string"
+            },
+            "listingDate": {
+              "title": "Listing Date",
+              "type": "date"
+            },
+            "marketName": {
+              "title": "Market Name",
+              "type": "string"
+            },
+            "status": {
+              "title": "Listing Status",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "type": "fieldset",
+      "items": [
+        {
+          "key": "listingsList",
+          "add": "New Listing",
+          "style": {
+            "add": "listingsList"
+          },
+          "items": [
+            "listingsList[].marketName",
+            "listingsList[].status",
+            "listingsList[].exchangeSymbol",
+            "listingsList[].listingDate",
+            "listingsList[].delistingDate"
+          ]
+        }
+      ]
+    }
+  ]
+}

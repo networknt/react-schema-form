@@ -65,7 +65,8 @@ export default ComposedComponent => class extends React.Component {
             error: validationResult.valid ? null : validationResult.error.message
         });
         //console.log('conhangeValidate this.props.form.key, value', this.props.form.key, value);
-        this.props.onChange(this.props.form.key, value, this.props.form.schema.type);
+        
+        this.props.onChange(this.props.form.key, value);
     }
 
     defaultValue(props) {

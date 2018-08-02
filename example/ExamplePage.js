@@ -14,7 +14,7 @@ require('brace/ext/language_tools');
 require('brace/mode/json');
 require('brace/theme/github');
 require('rc-select/assets/index.css');
-import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
+//import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -36,6 +36,10 @@ var ExamplePage = React.createClass({
     getInitialState: function() {
         return {
             tests: [
+                { label: "provided for test 1", value: 'data/Token.json' },
+                { label: "provided for test 2", value: 'data/TokenListing.json' },
+                { label: "provided for test 3", value: 'data/TokenProject.json' },
+                { label: "provided for test 4", value: 'data/TokenProjectLegalEntities.json' },
                 { label: "Simple", value: 'data/simple.json' },
                 { label: "Simple Array", value: 'data/simplearray.json'},
                 { label: "Basic JSON Schema Type", value: 'data/types.json' },
@@ -120,9 +124,7 @@ var ExamplePage = React.createClass({
     },
 
     render: function() {
-        var mapper = {
-            "rc-select": RcSelect
-        };
+        var mapper = SchemaForm.mapper;
 
         var schemaForm = '';
         var validate = '';

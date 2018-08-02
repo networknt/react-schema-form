@@ -130,7 +130,7 @@ class Array extends React.Component {
             let boundOnDelete = this.onDelete.bind(this, i);
             let forms = this.props.form.items.map(function(form, index){
                 var copy = this.copyWithIndex(form, i);
-                return this.props.builder(copy, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
+                return this.props.builder(copy, this.props.model, index, this.props.mapper, this.props.onChange, this.props.builder);
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
@@ -148,7 +148,7 @@ class Array extends React.Component {
                         {arrays}
                     </ol>
                 </div>
-                <RaisedButton label={this.props.form.add || 'Add'} secondary={true} onTouchTap={this.onAppend}/>
+                <RaisedButton label={this.props.form.add || 'Add'} secondary onTouchTap={this.onAppend}/>
             </div>
         );
     }
