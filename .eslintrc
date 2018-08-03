@@ -35,12 +35,6 @@
     "react/self-closing-comp": 1,
     "react/jsx-wrap-multilines": 1
   },
-
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
-  },
-
   "plugins": [
     "react"
   ]
