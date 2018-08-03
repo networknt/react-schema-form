@@ -8,46 +8,42 @@ import MuiSelect from '@material-ui/core/Select';
 
 class Select extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.onSelected = this.onSelected.bind(this);
-        var possibleValue = this.getModelKey(this.props.model, this.props.form.key);
-        this.state = {
-            currentValue: this.props.model !== undefined && possibleValue ? possibleValue : this.props.form.titleMap != null ? this.props.form.titleMap[0].value : ''
-        };
+    state = {
+        currentValue: this.getInitialValue(this.props.model, this.props.form)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.model && nextProps.form.key) {
             this.setState({
-                currentValue: this.getModelKey(nextProps.model, nextProps.form.key)
-                || (nextProps.form.titleMap != null ? nextProps.form.titleMap[0].value : '')
+                currentValue: this.getInitialValue(nextProps.model, nextProps.form)
             });
         }
     }
 
-    getModelKey(model, key) {
+    getInitialValue (model, form) {
+        return this.getModelValue(model, form.key) || (form.titleMap != null ? form.titleMap[0].value : '')
+    }
+
+    getModelValue(model, key) {
         if (Array.isArray(key)) {
-            return key.reduce((cur, nxt) => (cur[nxt] || {}), model);
+            return key.reduce((cur, nxt) => cur && cur[nxt], model);
         } else {
             return model[key];
         }
     }
 
-    onSelected(event, selectedIndex, menuItem) {
-
+    onSelected = (event) => {
+        let currentValue = event.target.value
         this.setState({
-            currentValue: menuItem
+            currentValue
         });
-        event.target.value = menuItem;
         this.props.onChangeValidate(event);
     }
 
     render() {
         const menuItems = this.props.form.titleMap.map((item, idx) => (
-          <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
+            <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
         ));
-
         return (
             <div className={this.props.form.htmlClass}>
                 <MuiSelect
