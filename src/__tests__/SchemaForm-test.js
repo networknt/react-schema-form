@@ -3,7 +3,7 @@ jest.dontMock('../utils');
 jest.dontMock('lodash');
 
 var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+var ShallowRenderer = require('react-test-renderer/shallow');
 var SchemaForm = require('../SchemaForm');
 
 describe('SchemaForm', function() {
@@ -13,7 +13,7 @@ describe('SchemaForm', function() {
   });
 
   it('shows SchemaForm', function() {
-    var shallowRenderer = TestUtils.createRenderer();
+    const shallowRenderer = new ShallowRenderer();
     var cfg = {
       form: {},
       schema: {
@@ -31,6 +31,7 @@ describe('SchemaForm', function() {
 
     var result = shallowRenderer.getRenderOutput();
     console.log('result = ', result.props);
-    expect(result.props.children).toEqual('SchemaForm');
+    expect(result.type).toEqual('div');
+    expect(result.props.children).toEqual([]);
   });
 });
