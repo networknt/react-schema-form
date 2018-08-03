@@ -4,9 +4,9 @@
 import React from 'react';
 import utils from './utils';
 import ComposedComponent from './ComposedComponent';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import _ from 'lodash';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '@material-ui/core/IconButton';
 
 class Array extends React.Component {
 

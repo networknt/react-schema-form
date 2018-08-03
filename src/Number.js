@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 
 /**
  * There is no default number picker as part of Material-UI.

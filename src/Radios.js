@@ -1,6 +1,7 @@
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import Radio, { RadioGroup } from 'material-ui/Radio';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 class Radios extends React.Component {
 
