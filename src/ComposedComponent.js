@@ -72,9 +72,11 @@ export default ComposedComponent => class extends React.Component {
     defaultValue(props) {
         // check if there is a value in the model, if there is, display it. Otherwise, check if
         // there is a default value, display it.
-        //console.log('Text.defaultValue key', this.props.form.key);
-        //console.log('Text.defaultValue model', this.props.model);
-        let value = utils.selectOrSet(props.form.key, props.model);
+        // console.log('Text.defaultValue key', this.props.form.key);
+        // console.log('Text.defaultValue model', this.props.model);
+        let value;
+        if(props.form.key)
+            value = utils.selectOrSet(props.form.key, props.model);
         //console.log('Text defaultValue value = ', value);
 
         // check if there is a default value

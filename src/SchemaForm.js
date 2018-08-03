@@ -37,7 +37,6 @@ class SchemaForm extends React.Component {
         super(props);
 
         this.onChange = this.onChange.bind(this);
-        console.log('1234',props);
     }
 
     // Assign default values and save it to the model
