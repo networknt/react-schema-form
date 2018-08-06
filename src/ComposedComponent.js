@@ -30,7 +30,7 @@ export default ComposedComponent => class extends React.Component {
      * Called when <input> value changes.
      * @param e The input element, or something.
      */
-    onChangeValidate(e) {
+    onChangeValidate(e,v) {
         // console.log('onChangeValidate e', e);
         let value = null;
         switch(this.props.form.schema.type) {
@@ -49,6 +49,11 @@ export default ComposedComponent => class extends React.Component {
           case 'boolean':
             value = e.target.checked;
             break;
+          case 'tBoolean':
+            if(e.target.value != 'yes' || e.target.value != 'no') {
+                value = v;
+            }
+            break
           case 'object':
           case 'date':
           case 'array':
@@ -93,7 +98,6 @@ export default ComposedComponent => class extends React.Component {
         if(!value && props.form.titleMap && props.form.titleMap[0].value) {
             value = props.form.titleMap[0].value;
         }
-        //console.log('value', value);
         return value;
     }
 

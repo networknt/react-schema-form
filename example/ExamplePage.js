@@ -37,6 +37,7 @@ var ExamplePage = React.createClass({
         return {
             tests: [
                 { label: "Simple", value: 'data/simple.json' },
+                { label: "Triple Boolean", value: 'data/noanswer.json' },
                 { label: "Simple Array", value: 'data/simplearray.json'},
                 { label: "Basic JSON Schema Type", value: 'data/types.json' },
                 { label: 'Basic Radios', value: 'data/radio.json'},

@@ -14,6 +14,7 @@ import Checkbox from './Checkbox';
 import Help from './Help';
 import Array from './Array';
 import FieldSet from './FieldSet';
+import TripleBoolean from './TripleBoolean';
 import _ from 'lodash';
 
 class SchemaForm extends React.Component {
@@ -30,6 +31,7 @@ class SchemaForm extends React.Component {
         'checkbox': Checkbox,
         'help': Help,
         'array': Array,
+        'tBoolean': TripleBoolean,
         'fieldset': FieldSet
     };
 
