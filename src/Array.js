@@ -117,7 +117,7 @@ class Array extends React.Component {
         var model = this.state.model;
         //console.log('fields', fields);
         for (var i = 0; i < model.length; i++) {
-            let boundOnDelete = this.onDelete.bind(this, i);
+            let onItemDelete = this.onDelete.bind(this, i);
             let forms = this.props.form.items.map(function (form, index) {
                 var copy = this.copyWithIndex(form, i);
                 return this.props.builder(copy, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
@@ -125,7 +125,7 @@ class Array extends React.Component {
             //console.log('forms', i, forms);
             arrays.push(
                 <li key={i} className="list-group-item">
-                    <IconButton onClick={boundOnDelete}>
+                    <IconButton onClick={onItemDelete}>
                         <DeleteIcon />
                     </IconButton>
                     {forms}
