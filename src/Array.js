@@ -5,8 +5,9 @@ import React from 'react';
 import utils from './utils';
 import ComposedComponent from './ComposedComponent';
 import Button from '@material-ui/core/Button';
-import _ from 'lodash';
 import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import _ from 'lodash';
 
 class Array extends React.Component {
 
@@ -32,7 +33,7 @@ class Array extends React.Component {
 
     componentDidMount() {
         // Always start with one empty form unless configured otherwise.
-        if(this.props.form.startEmpty !== true && this.state.model.length === 0) {
+        if (this.props.form.startEmpty !== true && this.state.model.length === 0) {
             this.onAppend();
         }
     }
@@ -40,7 +41,7 @@ class Array extends React.Component {
     onAppend() {
         //console.log('onAppend is called this.state.model', this.state.model);
         var empty;
-        if(this.props.form && this.props.form.schema && this.props.form.schema.items) {
+        if (this.props.form && this.props.form.schema && this.props.form.schema.items) {
             var items = this.props.form.schema.items;
             if (items.type && items.type.indexOf('object') !== -1) {
                 empty = {};
@@ -53,7 +54,7 @@ class Array extends React.Component {
                     // If the default instance sets the new array item to something falsy, i.e. null
                     // then there is no need to go further down.
                     if (empty) {
-                        utils.traverseSchema(items, function(prop, path) {
+                        utils.traverseSchema(items, function (prop, path) {
                             if (typeof prop['default'] !== 'undefined') {
                                 utils.selectOrSet(path, empty, prop['default']);
                             }
@@ -76,8 +77,8 @@ class Array extends React.Component {
         var newModel = this.state.model;
         newModel.push(empty);
         this.setState({
-                model: newModel
-            }
+            model: newModel
+        }
         );
         this.props.onChangeValidate(this.state.model);
         //console.log('After append this.state.model', newModel);
@@ -96,39 +97,39 @@ class Array extends React.Component {
     }
 
     setIndex(index) {
-        return function(form) {
+        return function (form) {
             if (form.key) {
                 form.key[form.key.indexOf('')] = index;
             }
         };
-    };
+    }
 
     copyWithIndex(form, index) {
         var copy = _.cloneDeep(form);
         copy.arrayIndex = index;
         utils.traverseForm(copy, this.setIndex(index));
         return copy;
-    };
+    }
 
     render() {
         //console.log('Array.render', this.props.form.items, this.props.model, this.state.model);
         var arrays = [];
-        var fields = [];
         var model = this.state.model;
-        var items = this.props.form.items;
         //console.log('fields', fields);
-        for(var i = 0; i < model.length; i++ ) {
+        for (var i = 0; i < model.length; i++) {
             let boundOnDelete = this.onDelete.bind(this, i);
-            let forms = this.props.form.items.map(function(form, index){
+            let forms = this.props.form.items.map(function (form, index) {
                 var copy = this.copyWithIndex(form, i);
                 return this.props.builder(copy, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-              <li key={i} className="list-group-item">
-                  <IconButton iconClassName="material-icons" tooltip="Remove" onTouchTap={boundOnDelete}>clear</IconButton>
-                  {forms}
-              </li>
+                <li key={i} className="list-group-item">
+                    <IconButton onClick={boundOnDelete}>
+                        <DeleteIcon />
+                    </IconButton>
+                    {forms}
+                </li>
             );
         }
         return (
@@ -139,7 +140,9 @@ class Array extends React.Component {
                         {arrays}
                     </ol>
                 </div>
-                <Button variant="raised" label={this.props.form.add || 'Add'} secondary onTouchTap={this.onAppend}/>
+                <Button variant="contained" color="secondary" onClick={this.onAppend}>
+                    {this.props.form.add || 'Add'}
+                </Button>
             </div>
         );
     }
