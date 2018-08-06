@@ -2,12 +2,20 @@
  * Created by steve on 11/09/15.
  */
 import React from 'react';
-import utils from './utils';
-import ComposedComponent from './ComposedComponent';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import _ from 'lodash';
+import utils from './utils';
+import ComposedComponent from './ComposedComponent';
+
+
+const styles = theme => ({
+    addButton: {
+      marginTop: theme.spacing.unit
+    },
+  });
 
 class Array extends React.Component {
 
@@ -85,7 +93,7 @@ class Array extends React.Component {
     }
 
     onDelete(index) {
-        //console.log('onDelete is called', index);
+        console.log('onDelete is called', index);
         var newModel = this.state.model;
         newModel.splice(index, 1);
         this.setState(
@@ -113,6 +121,7 @@ class Array extends React.Component {
 
     render() {
         //console.log('Array.render', this.props.form.items, this.props.model, this.state.model);
+        let {classes} = this.props;
         var arrays = [];
         var model = this.state.model;
         //console.log('fields', fields);
@@ -124,23 +133,23 @@ class Array extends React.Component {
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-                <li key={i} className="list-group-item">
+                <div key={i}>
                     <IconButton onClick={onItemDelete}>
                         <DeleteIcon />
                     </IconButton>
                     {forms}
-                </li>
+                </div>
             );
         }
         return (
             <div>
                 <div>
-                    <label className="control-lable">{this.props.form.title}</label>
-                    <ol className="list-group">
+                    <label>{this.props.form.title}</label>
+                    <div>
                         {arrays}
-                    </ol>
+                    </div>
                 </div>
-                <Button variant="contained" color="secondary" onClick={this.onAppend}>
+                <Button className={classes.addButton} variant="contained" color="primary" onClick={this.onAppend}>
                     {this.props.form.add || 'Add'}
                 </Button>
             </div>
@@ -148,4 +157,4 @@ class Array extends React.Component {
     }
 }
 
-export default ComposedComponent(Array);
+export default ComposedComponent(withStyles(styles)(Array));
