@@ -119,6 +119,12 @@ class Array extends React.Component {
         return copy;
     }
 
+    makeUniqueListItemKey (index) {
+        // not the best possible approach but allows to delete correct list items
+        // when user added several items to the Array
+        return index + Date.now()
+    }
+
     render() {
         //console.log('Array.render', this.props.form.items, this.props.model, this.state.model);
         let {classes} = this.props;
@@ -133,7 +139,7 @@ class Array extends React.Component {
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-                <div key={i}>
+                <div key={this.makeUniqueListItemKey(i)}>
                     <IconButton onClick={onItemDelete}>
                         <DeleteIcon />
                     </IconButton>
