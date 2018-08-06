@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.4.1 - 2018-08-06
+### Added
+
+### Changed
+- fix some issues with 0.4.0 release(Thanks @gtaschuk)
+
 ## 0.4.0 - 2018-07-17
 ### Added
 
