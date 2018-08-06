@@ -4,9 +4,9 @@
         "title": "Issues",
         "properties": {
             "issues": {
-                "title": "did you have any issues?",
+                "title": "Did you have any issues?",
                 "type": "tBoolean",
-                "default": "no"
+                "default": "unanswered"
             }
         }
     },
