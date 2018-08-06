@@ -7,14 +7,14 @@ import Checkbox from 'material-ui/Checkbox';
 
 const styles = {
     error: {
-        color: "rgb(244, 67, 54)",
-        fontSize: "12px",
-        lineHeight: "12px",
+        color: 'rgb(244, 67, 54)',
+        fontSize: '12px',
+        lineHeight: '12px',
     },
     checkbox: {
-        marginTop: "14px",
-        marginBottom: "0px",
-        height: "72px",
+        marginTop: '14px',
+        marginBottom: '0px',
+        height: '72px',
     },
 };
 

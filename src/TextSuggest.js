@@ -62,7 +62,7 @@ class TextSuggest extends React.Component {
                     onNewRequest={this.handleUpdate}
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}
-                    openOnFocus={true}
+                    openOnFocus
                     searchText={value}
                     dataSource={this.props.form.titleMap || ['Loading...']}
                     filter={filter}

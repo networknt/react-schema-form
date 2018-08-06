@@ -26,10 +26,11 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.16.6",
+    "notevil": "^1.1.0",
     "objectpath": "^1.2.1",
     "react-autosuggest": "^9.3.4",
-    "notevil": "^1.1.0",
-    "tv4": "^1.2.7"
+    "tv4": "^1.2.7",
+    "webpack-config": "^7.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -56,9 +57,9 @@
     "webpack": "^2.7.0"
   },
   "peerDependencies": {
-    "material-ui": "^0.18.7",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "material-ui": "^0.18.7"
   },
   "scripts": {
     "lint": "eslint src",
