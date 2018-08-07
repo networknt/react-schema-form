@@ -18,12 +18,26 @@ const styles = theme => ({
   });
 
 class Array extends React.Component {
+    static ITEM_ID = '_SCHEMAFORM_ITEM_ID'
+    static _SEQUENCE = 1
+
+    static assignItemId (item) {
+        if (!item[Array.ITEM_ID]) {
+            // define hidden property with internal id
+            Object.defineProperty(item, Array.ITEM_ID, {
+                enumerable: false,
+                writable: true
+            })
+            item[Array.ITEM_ID] = Array._SEQUENCE++
+        }
+        return item
+    }
 
     constructor(props) {
         super(props);
         this.onAppend = this.onAppend.bind(this);
         this.onDelete = this.onDelete.bind(this);
-        // we have the model here for the entire form, get the model for this array only
+             // we have the model here for the entire form, get the model for this array only
         // and add to the state. if is empty, add an entry by calling onAppend directly.
         this.state = {
             model: utils.selectOrSet(this.props.form.key, this.props.model) || []
@@ -31,11 +45,16 @@ class Array extends React.Component {
         //console.log('constructor', this.props.form.key, this.props.model, this.state.model);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.model && nextProps.form && nextProps.form.key) {
-            this.setState({
-                model: utils.selectOrSet(nextProps.form.key, nextProps.model) || []
-            });
+    static getDerivedStateFromProps (props, state) {
+        let propsKey = props.form.key
+        if (props.form && propsKey === state.formKey && props.model && 
+            props.model[propsKey] === state.model) {
+                return null // nothing changed
+        }
+        let model = utils.selectOrSet(propsKey, props.model) || []
+         return {
+            formKey: propsKey,
+            model: model.map(Array.assignItemId)
         }
     }
 
@@ -83,24 +102,22 @@ class Array extends React.Component {
             }
         }
         var newModel = this.state.model;
+        Array.assignItemId(empty)
         newModel.push(empty);
         this.setState({
             model: newModel
-        }
-        );
+        });
         this.props.onChangeValidate(this.state.model);
         //console.log('After append this.state.model', newModel);
     }
 
     onDelete(index) {
-        console.log('onDelete is called', index);
+        // console.log('onDelete is called', index);
         var newModel = this.state.model;
         newModel.splice(index, 1);
-        this.setState(
-            {
-                model: newModel
-            }
-        );
+        this.setState({
+            model: newModel
+        });
         this.props.onChangeValidate(this.state.model);
     }
 
@@ -119,27 +136,21 @@ class Array extends React.Component {
         return copy;
     }
 
-    makeUniqueListItemKey (index) {
-        // not the best possible approach but allows to delete correct list items
-        // when user added several items to the Array
-        return index + Date.now()
-    }
-
     render() {
         //console.log('Array.render', this.props.form.items, this.props.model, this.state.model);
-        let {classes} = this.props;
+        let {classes, form} = this.props;
         var arrays = [];
         var model = this.state.model;
-        //console.log('fields', fields);
+        console.log('Array.render', model);
         for (var i = 0; i < model.length; i++) {
             let onItemDelete = this.onDelete.bind(this, i);
-            let forms = this.props.form.items.map(function (form, index) {
+            let forms = form.items.map(function (form, index) {
                 var copy = this.copyWithIndex(form, i);
                 return this.props.builder(copy, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-                <div key={this.makeUniqueListItemKey(i)}>
+                <div key={model[i][Array.ITEM_ID]}>
                     <IconButton onClick={onItemDelete}>
                         <DeleteIcon />
                     </IconButton>
