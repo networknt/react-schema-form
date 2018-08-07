@@ -2,8 +2,6 @@
  * Created by steve on 22/12/15.
  */
 import React from 'react';
-var utils = require('./utils');
-var classNames = require('classnames');
 import ComposedComponent from './ComposedComponent';
 import TextField from '@material-ui/core/TextField';
 
@@ -18,31 +16,25 @@ class DateField extends React.Component {
     }
 
     onDatePicked(e) {
-        console.log(Date);
-        let d = new Date(e.target.value);
-        console.log(d.toJSON());
-        this.props.onChangeValidate(d);
+        let date = new Date(e.target.value);
+        this.props.onChangeValidate(date);
     }
 
     render() {
-        var value = null;
-        if (this.props && this.props.value) {
-            value = this.props.value;
-        }
-
+        let { form, value } = this.props
+        // {shrink: true} fixes rendering of TextField without value
+        // see https://github.com/mui-org/material-ui/issues/8131#issuecomment-328373902
         return (
-            <div
-                style={{ width: '100%', display: 'block' }}
-                className={this.props.form.htmlClass}
-            >
-                <TextField
-                    id="date"
-                    label={this.props.form.title}
-                    type="date"
-                    onChange={this.onDatePicked}
-                    disabled={this.props.form.readonly}
-                />
-            </div>
+            <TextField
+                id="date"
+                label={form.title}
+                type="date"
+                defaultValue={value}
+                InputLabelProps={{ shrink: true }}
+                onChange={this.onDatePicked}
+                disabled={form.readonly}
+            />
+
         );
     }
 }
