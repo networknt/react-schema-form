@@ -2,6 +2,7 @@
  * Created by steve on 11/09/15.
  */
 import React from 'react';
+import FormControl from '@material-ui/core/FormControl';
 import utils from './utils';
 import Number from './Number';
 import Text from './Text';
@@ -90,12 +91,9 @@ class SchemaForm extends React.Component {
         );
 
         return (
-            <div
-                style={{ width: '100%' }}
-                className={'SchemaForm ' + this.props.className}
-            >
+            <FormControl component="div" className={this.props.className} fullWidth margin="normal">
                 {forms}
-            </div>
+            </FormControl>
         );
     }
 }
