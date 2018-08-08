@@ -12,10 +12,11 @@ import Date from './Date';
 import Checkbox from './Checkbox';
 import Help from './Help';
 import ComposedComponent from './ComposedComponent';
-import RaisedButton from 'material-ui/RaisedButton';
+import {Button, IconButton} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import _ from 'lodash';
 import SchemaForm from './SchemaForm';
-import IconButton from 'material-ui/IconButton';
 
 class Array extends React.Component {
 
@@ -135,7 +136,7 @@ class Array extends React.Component {
             //console.log('forms', i, forms);
             arrays.push(
               <li key={i} className="list-group-item">
-                  <IconButton iconClassName="material-icons" tooltip="Remove" onTouchTap={boundOnDelete}>clear</IconButton>
+                  <IconButton onClick={boundOnDelete}><DeleteIcon /></IconButton>
                   {forms}
               </li>
             );
@@ -148,7 +149,7 @@ class Array extends React.Component {
                         {arrays}
                     </ol>
                 </div>
-                <RaisedButton label={this.props.form.add || 'Add'} secondary onTouchTap={this.onAppend}/>
+                <Button variant='raised' color='secondary' onClick={this.onAppend.bind(this)}>Add</Button>
             </div>
         );
     }

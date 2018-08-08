@@ -6,35 +6,34 @@
 import React from 'react';
 import { utils } from 'react-schema-form';
 import { SchemaForm } from 'react-schema-form';
-require('react-select/less/select.less');
+// require('react-select/less/select.less');
 import Select from 'react-select';
 var $ = require('jquery');
 import AceEditor from 'react-ace';
-require('brace/ext/language_tools');
-require('brace/mode/json');
-require('brace/theme/github');
-require('rc-select/assets/index.css');
-import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
-import RaisedButton from 'material-ui/RaisedButton';
+// require('brace/ext/language_tools');
+// require('brace/mode/json');
+// require('brace/theme/github');
+// require('rc-select/assets/index.css');
+// import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
+import Button from '@material-ui/core/Button';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightRawTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 
-var ExamplePage = React.createClass({
+class ExamplePage extends React.Component{
 
-    childContextTypes: {
-        muiTheme: React.PropTypes.object
-    },
+    // childContextTypes: {
+    //     muiTheme: React.PropTypes.object
+    // }
 
     getChildContext() {
         return {
             muiTheme: this.state.muiTheme
         };
-    },
+    }
 
-    getInitialState: function() {
-        return {
+    state = {
             tests: [
                 { label: "Simple", value: 'data/simple.json' },
                 { label: "Triple Boolean", value: 'data/noanswer.json' },
@@ -58,10 +57,9 @@ var ExamplePage = React.createClass({
             formJson: '',
             selected: '',
             muiTheme: getMuiTheme(lightRawTheme)
-        };
-    },
+    };
 
-    onSelectChange: function(val) {
+    onSelectChange(val) {
         //console.log("Selected:" + val);
         if(!val) {
             this.setState({
@@ -91,55 +89,55 @@ var ExamplePage = React.createClass({
                 form: data.form
             });
         }.bind(this));
-    },
+    }
 
-    onModelChange: function(key, val, type) {
+    onModelChange(key, val, type) {
         console.log('ExamplePage.onModelChange:', key, val);
         var newModel = this.state.model;
         utils.selectOrSet(key, newModel, val, type);
         this.setState({ model: newModel });
-    },
+    }
 
-    onValidate: function() {
+    onValidate() {
         console.log('ExamplePage.onValidate is called');
         let result = utils.validateBySchema(this.state.schema, this.state.model);
         this.setState({ validationResult: result });
-    },
+    }
 
-    onFormChange: function(val) {
+    onFormChange(val) {
         try {
             let f = JSON.parse(val);
             this.setState({formJson: val, form: f});
         } catch (e) {}
-    },
+    }
 
-    onSchemaChange: function(val) {
+    onSchemaChange(val) {
         try {
             let s = JSON.parse(val);
             this.setState({schemaJson: val, schema: s});
         } catch (e) {}
-    },
+    }
 
-    render: function() {
+    render() {
         var mapper = {
-            "rc-select": RcSelect
+            // "rc-select": RcSelect
         };
 
         var schemaForm = '';
         var validate = '';
         if (this.state.form.length > 0) {
             schemaForm = (
-                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange} mapper={mapper} />
+                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange.bind(this)} mapper={mapper} />
             );
             validate = (
                 <div>
-                    <RaisedButton primary={true} label="Validate" onTouchTap={this.onValidate} />
+                    <Button variant="raised" color='primary' onClick={this.onValidate.bind(this)}>Validate</Button>
                     <pre>{JSON.stringify(this.state.validationResult,undefined,2,2)}</pre>
                 </div>
             );
         }
 
-        return (
+        return ( 
             <div className="col-md-12">
                 <h1>Schema Form Example</h1>
                 <div className="row">
@@ -157,18 +155,18 @@ var ExamplePage = React.createClass({
                                 name="selectTest"
                                 value={this.state.selected}
                                 options={this.state.tests}
-                                onChange={this.onSelectChange}>
+                                onChange={this.onSelectChange.bind(this)}>
                             </Select>
                         </div>
                         <h3>Form</h3>
-                        <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onFormChange} name="aceForm" value={this.state.formJson} editorProps={{$blockScrolling: true}}/>
+                            <AceEditor style={{'zIndex': '-1'}} mode="json" theme="github" height="300px" width="800px" onChange={this.onFormChange.bind(this)} name="aceForm" value={this.state.formJson} editorProps={{$blockScrolling: true}}/>
                         <h3>Schema</h3>
-                        <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onSchemaChange} name="aceSchema" value={this.state.schemaJson} editorProps={{$blockScrolling: true}}/>
+                            <AceEditor mode="json" theme="github" height="300px" width="800px" onChange={this.onSchemaChange.bind(this)} name="aceSchema" value={this.state.schemaJson} editorProps={{$blockScrolling: true}}/>
                     </div>
                 </div>
             </div>
         );
     }
-});
+};
 
 module.exports = ExamplePage;

@@ -22,18 +22,36 @@ module.exports = {
     }
   },
   module: {
-      loaders: [
+      rules: [
 
           // I highly recommend using the babel-loader as it gives you
           // ES6/7 syntax and JSX transpiling out of the box
           {
               test: /\.(js|jsx)$/,
-              loaders: ['babel-loader'],
+              use: [{
+                loader: 'babel-loader'
+              }],
               exclude: /node_modules/
           },
-          {test: /\.less$/, loader: "style-loader!css-loader!less-loader"},
-          {test: /\.css?$/, loader: 'style-loader!css-loader'},
-          {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+          {test: /\.less$/, use: [{
+            loader: 'style-loader'
+          }, {
+            loader: 'css-loader'
+          }, {
+            loader: 'less-loader'
+          }]},
+          {test: /\.css?$/, use: [{
+            loader: 'style-loader'
+          }, {
+            loader: 'css-loader'
+          }]},
+          {test: /\.(png|woff|woff2|eot|ttf|svg)$/, use: [{
+            loader: 'url-loader',
+
+            options: {
+              limit: 100000
+            }
+          }] }
       ]
   }
 };

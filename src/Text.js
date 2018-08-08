@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import TextField from 'material-ui/TextField';
+import {TextField} from '@material-ui/core';
 
 class Text extends React.Component {
 
@@ -19,16 +19,16 @@ class Text extends React.Component {
     render() {
         //console.log('Text props', this.props);
         return (
-            <div className={this.props.form.htmlClass}>
+            <div>
                 <TextField
                     type={this.props.form.type}
-                    floatingLabelText={this.props.form.title}
-                    hintText={this.props.form.placeholder}
-                    errorText={this.props.error || this.props.errorText}
+                    label={this.props.form.title}
+                    helperText={this.props.error || this.props.errorText}
+                    error={this.props.error || this.props.errorText}
                     onChange={this.props.onChangeValidate}
                     defaultValue={this.props.value}
                     disabled={this.props.form.readonly}
-                    style={this.props.form.style || {width: '100%'}} />
+                />
             </div>
         );
     }

@@ -31,7 +31,7 @@ export default ComposedComponent => class extends React.Component {
      * @param e The input element, or something.
      */
     onChangeValidate(e,v) {
-        // console.log('onChangeValidate e', e);
+        console.log('onChangeValidate e', this.props.form.schema.type);
         let value = null;
         switch(this.props.form.schema.type) {
           case 'integer':
@@ -55,9 +55,11 @@ export default ComposedComponent => class extends React.Component {
             }
             break
           case 'object':
-          case 'date':
           case 'array':
             value = e;
+            break
+          case 'date':
+            console.log("DATE IS LOOOH");
             break
           default:
             value = e.target.value;

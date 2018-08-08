@@ -3,11 +3,13 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import Checkbox from 'material-ui/Checkbox';
-import Button from 'material-ui/FlatButton';
-import Card from 'material-ui/Card';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/styles/typography';
+import {Card, 
+        Button, 
+        Checkbox,
+        FormControlLabel,
+        FormGroup } from '@material-ui/core';
+// import { withStyles } from 'material-ui/styles';
+// import Typography from 'material-ui/styles/typography';
 
 /**
  * There is no default number picker as part of Material-UI.
@@ -25,6 +27,8 @@ class TripleBoolean extends React.Component {
 
         const {model, form, value} = this.props;
         const {key} = form;
+
+        console.log(React.version);
 
         this.props.setDefault(key, model, form, value);
     }
@@ -49,16 +53,22 @@ class TripleBoolean extends React.Component {
 
         renderBlock = <div style={this.divStyle}>
             {this.props.form.title}<br/>
-             <Checkbox onCheck={(e) => {this.props.onChangeValidate(e,'yes')}}
-                checked={this.state.yesChecked}
-                label='Yes'
-             />
-             <Checkbox onCheck={(e) => {this.props.onChangeValidate(e,'no')}}
-                checked={this.state.noChecked}
-                label='No'
-             />
+            <FormGroup >
+                <FormControlLabel control={
+                        <Checkbox onClick={(e) => {this.props.onChangeValidate(e,'yes')}}
+                            checked={this.state.yesChecked}
+                        />}
+                        label='Yes'
+                />
+                <FormControlLabel control={
+                        <Checkbox onClick={(e) => {this.props.onChangeValidate(e,'no')}}
+                            checked={this.state.noChecked}
+                        />}
+                        label='No'
+                />
+            </FormGroup>
              {this.props.value === 'yes' || this.props.value === 'no' ? 
-                <Button style={this.butStyle}
+                <Button variant='raised' color='primary'
                     onClick={(e) => this.props.onChangeValidate(e,'unanswered')}>clear responce</Button> : ''}
         </div>;
 

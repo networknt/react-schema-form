@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import Checkbox from 'material-ui/Checkbox';
+import {Checkbox, FormControlLabel} from '@material-ui/core';
 
 const styles = {
     error: {
@@ -31,17 +31,13 @@ class Checkbox2 extends React.Component {
 
     render() {
         return (
-            <div className={this.props.form.className} style={styles.checkbox}>
-                <Checkbox
-                    name={this.props.form.key.slice(-1)[0]}
-                    value={this.props.form.key.slice(-1)[0]}
-                    checked={this.props.value}
-                    label={this.props.form.title}
-                    disabled={this.props.form.readonly}
-                    onCheck={(e, checked) => {this.props.onChangeValidate(e)}}
-                    />
-                <span style={styles.error}>{this.props.errorText}</span>
-             </div>
+                <FormControlLabel control={
+                        <Checkbox onChange={(e) => {this.props.onChangeValidate(e,'yes')}}
+                            checked={this.props.value}
+                            disabled={this.props.form.readonly}
+                        />}
+                        label={this.props.form.title}
+                />
         );
     }
 }

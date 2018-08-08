@@ -3,11 +3,10 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
+import {Select, InputLabel, MenuItem, FormControl} from '@material-ui/core';
 import _ from 'lodash';
 
-class Select extends React.Component {
+class Select2 extends React.Component {
 
     constructor(props) {
         super(props);
@@ -43,40 +42,37 @@ class Select extends React.Component {
         }
     }
 
-    onSelected(event, selectedIndex, menuItem) {
+    onSelected(event) {
 
         this.setState({
-            currentValue: menuItem
+            currentValue: event.target.value
         });
-        event.target.value = menuItem;
+
         this.props.onChangeValidate(event);
     }
 
     render() {
+
+        console.log('Select is tried to render', this.state.currentValue);
         const menuItems = this.props.form.titleMap.map((item, idx) => (
-            <MenuItem key={idx}
-                      primaryText={item.name}
-                      value={item.value} />
+            <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
         ));
 
         return (
-            <div className={this.props.form.htmlClass}>
-                <SelectField
-                    value={this.state.currentValue}
-                    floatingLabelText={this.props.form.title}
-                    disabled={this.props.form.readonly}
-                    onChange={this.onSelected}
-                    fullWidth >
+            <FormControl>
+                <InputLabel htmlFor="age-simple">{this.props.form.title}</InputLabel>
 
-                    {menuItems}
-                </SelectField>
-            </div>
+                    <Select
+                        disabled={this.props.form.readonly}
+                        value={'this.state.currentValue'}
+                        onChange={this.onSelected}
+                    >
+                        {menuItems}
+                    </Select>
+            </FormControl>
         );
     }
 }
 
-// Select.propTypes = {
-//
-// };
 
-export default ComposedComponent(Select);
+export default ComposedComponent(Select2);
