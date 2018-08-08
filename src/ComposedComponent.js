@@ -19,7 +19,7 @@ export default ComposedComponent => class extends React.Component {
     componentWillReceiveProps(nextProps) {
       let value = this.defaultValue(nextProps);
       let validationResult = utils.validate(nextProps.form, value);
-      this.setState({
+      if(value)this.setState({
         value: value,
         valid: !!(validationResult.valid || !value),
         error: !validationResult.valid && value ? validationResult.error.message : null
@@ -31,7 +31,7 @@ export default ComposedComponent => class extends React.Component {
      * @param e The input element, or something.
      */
     onChangeValidate(e,v) {
-        console.log('onChangeValidate e', this.props.form.schema.type);
+        if(e.target) console.log('onChangeValidate e', e.target.checked);
         let value = null;
         switch(this.props.form.schema.type) {
           case 'integer':
@@ -58,9 +58,6 @@ export default ComposedComponent => class extends React.Component {
           case 'array':
             value = e;
             break
-          case 'date':
-            console.log("DATE IS LOOOH");
-            break
           default:
             value = e.target.value;
         }
@@ -71,7 +68,6 @@ export default ComposedComponent => class extends React.Component {
             valid: validationResult.valid,
             error: validationResult.valid ? null : validationResult.error.message
         });
-        //console.log('conhangeValidate this.props.form.key, value', this.props.form.key, value);
         
         this.props.onChange(this.props.form.key, value);
     }

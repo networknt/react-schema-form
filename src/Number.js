@@ -58,9 +58,9 @@ class Number extends React.Component {
             <div className={this.props.form.htmlClass}>
                 <TextField
                     type={this.props.form.type}
-                    floatingLabelText={this.props.form.title}
+                    label={this.props.form.title}
                     hintText={this.props.form.placeholder}
-                    errorText={this.props.error || this.props.errorText}
+                    error={this.props.error || this.props.errorText}
                     onChange={this.preValidationCheck}
                     value={this.state.lastSuccessfulValue}
                     ref="numberField"

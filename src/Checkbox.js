@@ -20,6 +20,9 @@ const styles = {
 
 class Checkbox2 extends React.Component {
 
+    state = {
+    }
+
     constructor (props) {
         super(props);
         const {model, form} = this.props;
@@ -32,8 +35,8 @@ class Checkbox2 extends React.Component {
     render() {
         return (
                 <FormControlLabel control={
-                        <Checkbox onChange={(e) => {this.props.onChangeValidate(e,'yes')}}
-                            checked={this.props.value}
+                        <Checkbox onChange={(e) => {this.props.onChangeValidate(e, !this.props.value)}}
+                            checked={this.state.value}
                             disabled={this.props.form.readonly}
                         />}
                         label={this.props.form.title}
