@@ -21,9 +21,6 @@ const styles = {
 
 class Checkbox2 extends React.Component {
 
-    state = {
-    }
-
     constructor (props) {
         super(props);
         const {model, form} = this.props;

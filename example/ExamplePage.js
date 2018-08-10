@@ -33,6 +33,17 @@ class ExamplePage extends React.Component{
         };
     }
 
+    tempModel = {
+        "comments": [
+          {
+            "name": "1"
+          },
+          {
+            "name": "2"
+          }
+        ]
+    }
+
     state = {
             tests: [
                 { label: "Simple", value: 'data/simple.json' },
@@ -58,6 +69,12 @@ class ExamplePage extends React.Component{
             selected: '',
             muiTheme: getMuiTheme(lightRawTheme)
     };
+
+    setStateDefault() {
+        this.setState({
+            model: this.tempModel,
+        });
+    }
 
     onSelectChange(val) {
         //console.log("Selected:" + val);
@@ -126,12 +143,14 @@ class ExamplePage extends React.Component{
         var schemaForm = '';
         var validate = '';
         if (this.state.form.length > 0) {
+            console.log("SCHEMA FORM RENDERS")
             schemaForm = (
                 <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model} onModelChange={this.onModelChange.bind(this)} mapper={mapper} />
             );
             validate = (
                 <div>
                     <Button variant="raised" color='primary' onClick={this.onValidate.bind(this)}>Validate</Button>
+                    <Button variant="raised" color='primary' onClick={this.setStateDefault.bind(this)}>Throw temp model in</Button>
                     <pre>{JSON.stringify(this.state.validationResult,undefined,2,2)}</pre>
                 </div>
             );
