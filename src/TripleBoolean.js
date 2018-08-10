@@ -68,7 +68,7 @@ class TripleBoolean extends React.Component {
                 />
             </FormGroup>
              {this.props.value === 'yes' || this.props.value === 'no' ? 
-                <Button variant='raised' color='primary'
+                <Button variant='flat' color='primary'
                     onClick={(e) => this.props.onChangeValidate(e,'unanswered')}>clear responce</Button> : ''}
         </div>;
 

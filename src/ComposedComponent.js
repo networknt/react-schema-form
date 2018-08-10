@@ -19,7 +19,7 @@ export default ComposedComponent => class extends React.Component {
     componentWillReceiveProps(nextProps) {
       let value = this.defaultValue(nextProps);
       let validationResult = utils.validate(nextProps.form, value);
-      if(value)this.setState({
+      this.setState({
         value: value,
         valid: !!(validationResult.valid || !value),
         error: !validationResult.valid && value ? validationResult.error.message : null

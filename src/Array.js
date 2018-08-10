@@ -12,11 +12,10 @@ import Date from './Date';
 import Checkbox from './Checkbox';
 import Help from './Help';
 import ComposedComponent from './ComposedComponent';
-import {Button, IconButton} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import {Button, IconButton, Card} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Close';
 
 import _ from 'lodash';
-import SchemaForm from './SchemaForm';
 
 class Array extends React.Component {
 
@@ -94,14 +93,12 @@ class Array extends React.Component {
     }
 
     onDelete(index) {
-        //console.log('onDelete is called', index);
         var newModel = this.state.model;
         newModel.splice(index, 1);
-        this.setState(
-            {
-                model: newModel
-            }
-        );
+        this.setState({
+            model: newModel,
+        });
+
         this.props.onChangeValidate(this.state.model);
     }
 
@@ -135,10 +132,10 @@ class Array extends React.Component {
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-              <li key={i} className="list-group-item">
-                  <IconButton onClick={boundOnDelete}><DeleteIcon /></IconButton>
-                  {forms}
-              </li>
+                <Card key={i} style={{padding:'20px'}}>
+                    <IconButton onClick={boundOnDelete}><DeleteIcon /></IconButton>
+                    {forms}
+                </Card>
             );
         }
         return (

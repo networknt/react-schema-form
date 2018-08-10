@@ -4,6 +4,7 @@
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
 import {TextField} from '@material-ui/core';
+import {selectOrSet} from './utils';
 
 class Text extends React.Component {
 
@@ -17,16 +18,17 @@ class Text extends React.Component {
     }
 
     render() {
-        //console.log('Text props', this.props);
+        let value = selectOrSet(this.props.form.key,this.props.model) ? selectOrSet(this.props.form.key,this.props.model) : '';
         return (
             <div>
                 <TextField
                     type={this.props.form.type}
                     label={this.props.form.title}
-                    helperText={this.props.error || this.props.errorText}
-                    error={this.props.error || this.props.errorText}
+                    helperText={this.props.errorText}
+                    error={this.props.error}
                     onChange={this.props.onChangeValidate}
-                    defaultValue={this.props.value}
+                    value={value}
+                    
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}
                 />
