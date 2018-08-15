@@ -28,30 +28,28 @@ class TripleBoolean extends React.Component {
         const {model, form, value} = this.props;
         const {key} = form;
 
-        console.log(React.version);
-
         this.props.setDefault(key, model, form, value);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            yesChecked: nextProps.value === "yes",
-            noChecked: nextProps.value === "no",
+            yesChecked: nextProps.value === 'yes',
+            noChecked: nextProps.value === 'no',
         });
     }
 
     divStyle = {
-        padding: "20px",
+        padding: '20px',
     }
 
     butStyle = {
-        color: "#07f",
+        color: '#07f',
     }
 
     displaySwitch() {
         let renderBlock = null;
 
-        renderBlock = <div style={this.divStyle}>
+        renderBlock = (<div style={this.divStyle}>
             {this.props.form.title}<br/>
             <FormGroup >
                 <FormControlLabel control={
@@ -68,9 +66,9 @@ class TripleBoolean extends React.Component {
                 />
             </FormGroup>
              {this.props.value === 'yes' || this.props.value === 'no' ? 
-                <Button variant='flat' color='primary'
+                <Button id='temp' variant='flat' color='primary'
                     onClick={(e) => this.props.onChangeValidate(e,'unanswered')}>clear responce</Button> : ''}
-        </div>;
+        </div>);
 
         return renderBlock;
     }

@@ -53,21 +53,19 @@ class Select2 extends React.Component {
 
     render() {
 
-        console.log('Select is tried to render', this.state.currentValue);
         const menuItems = this.props.form.titleMap.map((item, idx) => (
-            <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
+            <MenuItem key={idx} value={item.name}>{item.name}</MenuItem>
         ));
 
         return (
-            <FormControl>
+            <FormControl style={{width: '100%'}}>
                 <InputLabel htmlFor="age-simple">{this.props.form.title}</InputLabel>
 
-                    <Select
+                    <Select 
                         disabled={this.props.form.readonly}
-                        value={'this.state.currentValue'}
+                        value={this.state.currentValue ? this.state.currentValue : ''}
                         onChange={this.onSelected}
-                    >
-                        {menuItems}
+                    > {menuItems}
                     </Select>
             </FormControl>
         );

@@ -17,7 +17,7 @@ class TextArea extends React.Component {
                     label={this.props.form.title}
                     helperText={this.props.form.placeholder}
                     onChange={this.props.onChangeValidate}
-                    error={this.props.error}
+                    error={!!this.props.error}
                     value={value}
                     
                     disabled={this.props.form.readonly}

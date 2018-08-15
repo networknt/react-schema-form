@@ -3,10 +3,6 @@ const Text = require('../Text').default;
 const Composed = require('../ComposedComponent').default;
 const Shalow = require('react-test-renderer/shallow');
 
-jest.dontMock('../ComposedComponent');
-jest.dontMock('../utils');
-jest.dontMock('lodash');
-
 test('Composed component test', () => {
 
     const renderer = new Shalow();
@@ -30,7 +26,7 @@ test('Composed component test', () => {
         form={cfg.form} 
         model={cfg.model}
         mapper={cfg.mapper}
-    >zaloopa</TestText>);
+    />);
 
     const result = renderer.getRenderOutput();
 

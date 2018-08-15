@@ -21,47 +21,47 @@ describe('Composed component test', () => {
         const cfg = {
             form: [
                 {
-                    "key": "comments",
-                    "add": "New",
-                    "style": {
-                        "add": "btn-success"
+                    'key': 'comments',
+                    'add': 'New',
+                    'style': {
+                        'add': 'btn-success'
                     },
-                    "items": [
-                        "comments[].name"
+                    'items': [
+                        'comments[].name'
                     ]
                 }
             ],
             schema: {
-                "type": "object",
-                "title": "Comment",
-                "required": ["comments"],
-                "properties": {
-                    "comments": {
-                        "type": "array",
-                        "maxItems": 2,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name":  {
-                                    "title": "Name",
-                                    "type": "string"
+                'type': 'object',
+                'title': 'Comment',
+                'required': ['comments'],
+                'properties': {
+                    'comments': {
+                        'type': 'array',
+                        'maxItems': 2,
+                        'items': {
+                            'type': 'object',
+                            'properties': {
+                                'name':  {
+                                    'title': 'Name',
+                                    'type': 'string'
                                 }
                             },
-                            "required": ["name"]
+                            'required': ['name']
                         }
                     }
                 }
             },
             model: {
-                "comments": [
+                'comments': [
                   {
-                    "name": "some value"
+                    'name': 'some value'
                   },
                   {
-                    "name": "some next value"
+                    'name': 'some next value'
                   },
                   {
-                    "name": "some other value"
+                    'name': 'some other value'
                   },
                 ]
             }

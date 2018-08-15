@@ -5,6 +5,7 @@ import React from 'react';
 var utils = require('./utils');
 import ComposedComponent from './ComposedComponent';
 import {IconButton, DatePicker, TextField} from '@material-ui/core';
+import {selectOrSet} from './utils';
 //import Clear from '@material-ui/core/SvgIcon';
 
 /**
@@ -15,30 +16,31 @@ class Date extends React.Component {
 
     constructor(props) {
         super(props);
+
+        const {model, form, value} = this.props;
+        const {key} = form;
+
+        this.props.setDefault(key, model, form, value)
+
         this.onDatePicked = this.onDatePicked.bind(this);
     }
 
 
     onDatePicked(e) {
-        this.props.onChangeValidate(e.target.value);
+        console.log('DATE SELECT', e.target.value, this.props.form.type);
+        this.props.onChangeValidate(e);
     }
 
     render() {
-        var value = null;
-        if (this.props && this.props.value) {
-            value = this.props.value;
-        }
+        let value = selectOrSet(this.props.form.key,this.props.model) ? selectOrSet(this.props.form.key,this.props.model) : '0';
 
         return (
-            <div style={{width: '100%', display: 'block'}}>
-                <TextField
-                    id="date"
-                    label="Birthday"
-                    type="date"
-                    defaultValue="2017-05-24"
+                <TextField style={{width: '100%', display: 'block'}}
+                    label={this.props.form.title}
+                    type={this.props.form.type}
+                    value={value}
                     onChange={this.onDatePicked}
                 />
-            </div>
         );
     }
 }
