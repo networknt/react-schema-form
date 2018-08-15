@@ -1,19 +1,13 @@
-jest.dontMock('../SchemaForm');
-jest.dontMock('../utils');
-jest.dontMock('lodash');
+import React from 'react';
+import SchemaForm from '../SchemaForm';
+import { shallow, mount, render, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
-var SchemaForm = require('../SchemaForm');
+configure({ adapter: new Adapter() });
 
-describe('SchemaForm', function() {
-
-  beforeEach(function() {
-
-  });
+describe('SchemaForm test', function() {
 
   it('shows SchemaForm', function() {
-    var shallowRenderer = TestUtils.createRenderer();
     var cfg = {
       form: {},
       schema: {
@@ -22,15 +16,12 @@ describe('SchemaForm', function() {
       model: {},
       mapper: {}
     };
-    shallowRenderer.render(
-      <SchemaForm
-        schema={cfg.schema}
-        mapper={cfg.mapper}
-      />
-    );
 
-    var result = shallowRenderer.getRenderOutput();
-    console.log('result = ', result.props);
-    expect(result.props.className).toEqual('SchemaForm');
+    var result = shallow(<SchemaForm
+      schema={cfg.schema}
+      mapper={cfg.mapper}
+    />);
+
+    expect(result.props().className).toEqual('SchemaForm');
   });
 });

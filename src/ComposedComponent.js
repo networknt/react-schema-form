@@ -31,7 +31,6 @@ export default ComposedComponent => class extends React.Component {
      * @param e The input element, or something.
      */
     onChangeValidate(e,v) {
-        if(e.target) console.log('onChangeValidate e', e.target.checked);
         let value = null;
         switch(this.props.form.schema.type) {
           case 'integer':
@@ -54,13 +53,15 @@ export default ComposedComponent => class extends React.Component {
                 value = v;
             }
             break
-          case 'object':
+          
           case 'array':
             value = e;
             break
+          case 'object':
           default:
             value = e.target.value;
         }
+        
         //console.log('onChangeValidate this.props.form, value', this.props.form, value);
         let validationResult = utils.validate(this.props.form, value);
         this.setState({
@@ -78,7 +79,7 @@ export default ComposedComponent => class extends React.Component {
         // console.log('Text.defaultValue key', this.props.form.key);
         // console.log('Text.defaultValue model', this.props.model);
         let value;
-        if(props.form.key)
+        if(props.form && props.form.key)
             value = utils.selectOrSet(props.form.key, props.model);
         //console.log('Text defaultValue value = ', value);
 

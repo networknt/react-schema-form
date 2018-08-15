@@ -34,7 +34,8 @@ class Checkbox2 extends React.Component {
         let value = selectOrSet(this.props.form.key, this.props.model);
         return (
                 <FormControlLabel control={
-                        <Checkbox onChange={(e) => {this.props.onChangeValidate(e, !this.props.value)}}
+                        <Checkbox 
+                            onChange={(e) => {this.props.onChangeValidate(e, !this.props.value)}}
                             checked={value}
                             disabled={this.props.form.readonly}
                         />}

@@ -132,7 +132,7 @@ class Array extends React.Component {
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-                <Card className='ArrayPart' key={i} style={{padding:'20px'}}>
+                <Card className='ArrayPart' key={i} style={{padding:'20px', margin:'5px'}}>
                     <IconButton onClick={boundOnDelete}><DeleteIcon /></IconButton>
                     {forms}
                 </Card>

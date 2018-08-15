@@ -25,7 +25,7 @@ class Text extends React.Component {
                     type={this.props.form.type}
                     label={this.props.form.title}
                     helperText={this.props.errorText}
-                    error={this.props.error}
+                    error={!!this.props.error}
                     onChange={this.props.onChangeValidate}
                     value={value}
                     
