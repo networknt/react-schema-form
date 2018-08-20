@@ -1,7 +1,6 @@
 /**
  * Created by steve on 12/09/15.
  */
-'use strict';
 
 import React from 'react';
 import { utils } from 'react-schema-form';
