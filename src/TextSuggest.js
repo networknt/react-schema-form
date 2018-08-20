@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import AutoComplete from 'material-ui/AutoComplete';
 
 const dataSourceConfig = {
   text: 'name',

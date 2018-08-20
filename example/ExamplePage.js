@@ -19,10 +19,6 @@ import AceEditor from 'react-ace';
 // import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 import Button from '@material-ui/core/Button';
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import lightRawTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-
-
 class ExamplePage extends React.Component{
 
     tempModel = {
@@ -58,8 +54,7 @@ class ExamplePage extends React.Component{
             model: {},
             schemaJson: '',
             formJson: '',
-            selected: '',
-            muiTheme: getMuiTheme(lightRawTheme)
+            selected: ''
     };
 
     setStateDefault() {
