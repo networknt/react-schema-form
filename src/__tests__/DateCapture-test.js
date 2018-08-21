@@ -1,5 +1,5 @@
 import React from 'react';
-import Composed from '../ComposedComponent';
+import SchemaForm from '../SchemaForm';
 import { shallow, mount, render, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -21,27 +21,27 @@ var cfg = {
             }
         }
     },
-    from: [
+    form: [
         {
             'key': 'date',
             'type': 'date'
         }
     ],
     model: {
-        'date': '2018-08-11'
+        'date': '1947-01-8'
     }
 };
 
 describe('Date capture main test', () => {
 
     it('Bowie"s birthday :', function() {
-        var result = render(<Composed 
+        var result = render(<SchemaForm 
             form={cfg.form}
             schema={cfg.schema}
             model={cfg.model}
             onModelChange={onModelChange}
         />);
 
-        console.log('OUTPUT: ', result.html());
+        expect(result.find('input')[0].attribs.value).toEqual('1947-01-8');
     });
 });
