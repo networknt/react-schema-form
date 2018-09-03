@@ -3,10 +3,19 @@
  */
 import React from 'react';
 import utils from './utils';
+import Number from './Number';
+import Text from './Text';
+import TextArea from './TextArea';
+import Select from './Select';
+import Radios from './Radios';
+import Date from './Date';
+import Checkbox from './Checkbox';
+import Help from './Help';
 import ComposedComponent from './ComposedComponent';
-import Button from 'material-ui/Button';
+import {Button, IconButton, Card} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Close';
+
 import _ from 'lodash';
-import IconButton from 'material-ui/IconButton';
 
 class Array extends React.Component {
 
@@ -84,14 +93,12 @@ class Array extends React.Component {
     }
 
     onDelete(index) {
-        //console.log('onDelete is called', index);
         var newModel = this.state.model;
         newModel.splice(index, 1);
-        this.setState(
-            {
-                model: newModel
-            }
-        );
+        this.setState({
+            model: newModel,
+        });
+
         this.props.onChangeValidate(this.state.model);
     }
 
@@ -121,14 +128,14 @@ class Array extends React.Component {
             let boundOnDelete = this.onDelete.bind(this, i);
             let forms = this.props.form.items.map(function(form, index){
                 var copy = this.copyWithIndex(form, i);
-                return this.props.builder(copy, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
+                return this.props.builder(copy, this.props.model, index, this.props.mapper, this.props.onChange, this.props.builder);
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-              <li key={i} className="list-group-item">
-                  <IconButton iconClassName="material-icons" tooltip="Remove" onTouchTap={boundOnDelete}>clear</IconButton>
-                  {forms}
-              </li>
+                <Card className='ArrayPart' key={i} style={{padding:'20px', margin:'5px'}}>
+                    <IconButton onClick={boundOnDelete}><DeleteIcon /></IconButton>
+                    {forms}
+                </Card>
             );
         }
         return (
@@ -139,7 +146,7 @@ class Array extends React.Component {
                         {arrays}
                     </ol>
                 </div>
-                <Button variant="raised" label={this.props.form.add || 'Add'} secondary onTouchTap={this.onAppend}/>
+                <Button variant='raised' color='secondary' onClick={this.onAppend.bind(this)}>Add</Button>
             </div>
         );
     }

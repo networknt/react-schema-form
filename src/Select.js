@@ -3,17 +3,25 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import { MenuItem } from 'material-ui/Menu';
-import MuiSelect from 'material-ui/Select';
+import {Select, InputLabel, MenuItem, FormControl} from '@material-ui/core';
+import _ from 'lodash';
 
-class Select extends React.Component {
+class Select2 extends React.Component {
 
     constructor(props) {
         super(props);
         this.onSelected = this.onSelected.bind(this);
-        var possibleValue = this.getModelKey(this.props.model, this.props.form.key);
+
+        const {model, form} = this.props;
+        const {key} = form;
+
+        const storedValue = model && this.getModelKey(model, key) || false;
+        const defaultValue = form.schema.default || false;
+        const value = !(_.isEmpty(storedValue)) && storedValue || defaultValue;
+
+        this.props.setDefault(key, model, form, value)
         this.state = {
-            currentValue: this.props.model !== undefined && possibleValue ? possibleValue : this.props.form.titleMap != null ? this.props.form.titleMap[0].value : ''
+            currentValue: value,
         };
     }
 
@@ -34,37 +42,35 @@ class Select extends React.Component {
         }
     }
 
-    onSelected(event, selectedIndex, menuItem) {
+    onSelected(event) {
 
         this.setState({
-            currentValue: menuItem
+            currentValue: event.target.value
         });
-        event.target.value = menuItem;
+
         this.props.onChangeValidate(event);
     }
 
     render() {
+
         const menuItems = this.props.form.titleMap.map((item, idx) => (
-          <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
+            <MenuItem key={idx} value={item.name}>{item.name}</MenuItem>
         ));
 
         return (
-            <div className={this.props.form.htmlClass}>
-                <MuiSelect
-                    value={this.state.currentValue}
-                    placeholder={this.props.form.title}
-                    disabled={this.props.form.readonly}
-                    onChange={this.onSelected}
-                    fullWidth >
-                    {menuItems}
-                </MuiSelect>
-            </div>
+            <FormControl style={{width: '100%'}}>
+                <InputLabel htmlFor="age-simple">{this.props.form.title}</InputLabel>
+
+                    <Select 
+                        disabled={this.props.form.readonly}
+                        value={this.state.currentValue ? this.state.currentValue : ''}
+                        onChange={this.onSelected}
+                    > {menuItems}
+                    </Select>
+            </FormControl>
         );
     }
 }
 
-// Select.propTypes = {
-//
-// };
 
-export default ComposedComponent(Select);
+export default ComposedComponent(Select2);

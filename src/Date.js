@@ -3,48 +3,46 @@
  */
 import React from 'react';
 var utils = require('./utils');
-var classNames = require('classnames');
 import ComposedComponent from './ComposedComponent';
-import TextField from 'material-ui/TextField';
+import {IconButton, DatePicker, TextField} from '@material-ui/core';
+import {selectOrSet} from './utils';
+//import Clear from '@material-ui/core/SvgIcon';
 
 /**
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
-class DateField extends React.Component {
+class Date extends React.Component {
+
     constructor(props) {
         super(props);
+
+        const {model, form, value} = this.props;
+        const {key} = form;
+
+        this.props.setDefault(key, model, form, value)
+
         this.onDatePicked = this.onDatePicked.bind(this);
     }
 
+
     onDatePicked(e) {
-        console.log(Date);
-        let d = new Date(e.target.value);
-        console.log(d.toJSON());
-        this.props.onChangeValidate(d);
+        console.log('DATE SELECT', e.target.value, this.props.form.type);
+        this.props.onChangeValidate(e);
     }
 
     render() {
-        var value = null;
-        if (this.props && this.props.value) {
-            value = this.props.value;
-        }
+        let value = selectOrSet(this.props.form.key,this.props.model) ? selectOrSet(this.props.form.key,this.props.model) : '0';
 
         return (
-            <div
-                style={{ width: '100%', display: 'block' }}
-                className={this.props.form.htmlClass}
-            >
-                <TextField
-                    id="date"
+                <TextField style={{width: '100%', display: 'block'}}
                     label={this.props.form.title}
-                    type="date"
+                    type={this.props.form.type}
+                    value={value}
                     onChange={this.onDatePicked}
-                    disabled={this.props.form.readonly}
                 />
-            </div>
         );
     }
 }
 
-export default ComposedComponent(DateField);
+export default ComposedComponent(Date);
