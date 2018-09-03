@@ -14,7 +14,8 @@ class TextArea extends React.Component {
             <TextField
                 type={form.type}
                 label={form.title}
-                helperText={error || form.placeholder}
+                placeholder={form.placeholder}
+                helperText={error || form.description}
                 onChange={onChangeValidate}
                 error={!!error}
                 defaultValue={value}

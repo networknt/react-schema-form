@@ -13,7 +13,8 @@ class Text extends React.Component {
             <TextField
                 type={form.type}
                 label={form.title}
-                helperText={error || form.placeholder}
+                placeholder={form.placeholder}
+                helperText={error || form.description }
                 error={!!error}
                 onChange={onChangeValidate}
                 defaultValue={value}
