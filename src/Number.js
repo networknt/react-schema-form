@@ -15,14 +15,15 @@ class Number extends React.Component {
         super(props);
         this.preValidationCheck = this.preValidationCheck.bind(this);
         this.state = {
-            lastSuccessfulValue : this.props.value
+            lastSuccessfulValue: this.props.value
         }
+        this.numberField = React.createRef();
     }
 
     componentWillReceiveProps(nextProps) {
-      this.setState({
-        lastSuccessfulValue: nextProps.value
-      });
+        this.setState({
+            lastSuccessfulValue: nextProps.value
+        });
     }
 
     isNumeric(n) {
@@ -40,24 +41,24 @@ class Number extends React.Component {
             });
             this.props.onChangeValidate(e);
         } else {
-                this.refs.numberField.value = this.state.lastSuccessfulValue;
+            this.numberField.current.value = this.state.lastSuccessfulValue;
         }
     }
 
     render() {
+        let { form, error} = this.props
         return (
-            <div className={this.props.form.htmlClass}>
-                <TextField
-                    type={this.props.form.type}
-                    floatingLabelText={this.props.form.title}
-                    hintText={this.props.form.placeholder}
-                    errorText={this.props.error}
-                    onChange={this.preValidationCheck}
-                    value={this.state.lastSuccessfulValue}
-                    ref="numberField"
-                    disabled={this.props.form.readonly}
-                    style={this.props.form.style || {width: '100%'}}/>
-            </div>
+            <TextField
+                type={form.type}
+                label={form.title}
+                placeholder={form.placeholder}
+                helperText={error || form.description}
+                error={!!error}
+                onChange={this.preValidationCheck}
+                value={this.state.lastSuccessfulValue}
+                ref={this.numberField}
+                disabled={form.readonly}
+            />
         );
     }
 }
