@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import TextField from 'material-ui/TextField';
+import {TextField} from '@material-ui/core';
 
 /**
  * There is no default number picker as part of Material-UI.
@@ -29,6 +29,10 @@ class Number extends React.Component {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
+    isEmpty(n) {
+        return (!n || 0 === n.length);
+    }
+
     /**
      * Prevent the field from accepting non-numeric characters.
      * @param e
@@ -39,8 +43,13 @@ class Number extends React.Component {
                 lastSuccessfulValue: e.target.value
             });
             this.props.onChangeValidate(e);
+        } else if (this.isEmpty(e.target.value)) {
+            this.setState({
+                lastSuccessfulValue: e.target.value
+            });
+            this.props.onChangeValidate(e);
         } else {
-                this.refs.numberField.value = this.state.lastSuccessfulValue;
+            // this.refs.numberField.value = this.state.lastSuccessfulValue;
         }
     }
 
@@ -49,12 +58,10 @@ class Number extends React.Component {
             <div className={this.props.form.htmlClass}>
                 <TextField
                     type={this.props.form.type}
-                    floatingLabelText={this.props.form.title}
-                    hintText={this.props.form.placeholder}
-                    errorText={this.props.error}
+                    label={this.props.form.title}
+                    error={this.props.error || this.props.errorText}
                     onChange={this.preValidationCheck}
                     value={this.state.lastSuccessfulValue}
-                    ref="numberField"
                     disabled={this.props.form.readonly}
                     style={this.props.form.style || {width: '100%'}}/>
             </div>
