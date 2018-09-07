@@ -143,6 +143,7 @@ class Array extends React.Component {
         var model = this.state.model;
         // console.log('Array.render', model);
         for (var i = 0; i < model.length; i++) {
+            let item = model[i]
             let onItemDelete = this.onDelete.bind(this, i);
             let forms = form.items.map(function (form, index) {
                 var copy = this.copyWithIndex(form, i);
@@ -150,7 +151,7 @@ class Array extends React.Component {
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-                <div key={model[i][Array.ITEM_ID]}>
+                <div key={item && item[Array.ITEM_ID] || i}>
                     <IconButton onClick={onItemDelete}>
                         <DeleteIcon />
                     </IconButton>
