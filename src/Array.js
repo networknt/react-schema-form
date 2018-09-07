@@ -22,7 +22,7 @@ class Array extends React.Component {
     static _SEQUENCE = 1
 
     static assignItemId (item) {
-        if (!item[Array.ITEM_ID]) {
+        if (item && !item[Array.ITEM_ID]) {
             // define hidden property with internal id
             Object.defineProperty(item, Array.ITEM_ID, {
                 enumerable: false,
