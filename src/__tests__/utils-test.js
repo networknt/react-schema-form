@@ -558,10 +558,10 @@ describe('utils', function () {
             'type': 'array'
         };
 
-        var model = {
+        // var model = {
 
-        };
-        var list = utils.selectOrSet(schema, [{key: 'sub', readonly: true}]);
+        // };
+        //var list = utils.selectOrSet(schema, [{key: 'sub', readonly: true}]);
         var merged = utils.merge(schema, [{key: 'sub', readonly: true}]);
         //sub
         expect(merged[0].readonly).toEqual(true);

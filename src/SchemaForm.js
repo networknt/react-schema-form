@@ -48,7 +48,7 @@ class SchemaForm extends React.Component {
         var type = form.type;
         let Field = this.mapper[type];
         if (!Field) {
-            console.log('Invalid field: "' + form.key[0] + '"!');
+            // console.log('Invalid field: "' + form.key[0] + '"!');
             return null;
         }
         if (form.condition && eval(form.condition) === false) {

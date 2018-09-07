@@ -141,7 +141,7 @@ class Array extends React.Component {
         let {classes, form} = this.props;
         var arrays = [];
         var model = this.state.model;
-        console.log('Array.render', model);
+        // console.log('Array.render', model);
         for (var i = 0; i < model.length; i++) {
             let onItemDelete = this.onDelete.bind(this, i);
             let forms = form.items.map(function (form, index) {
