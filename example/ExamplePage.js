@@ -123,7 +123,6 @@ class ExamplePage extends Component {
                         color="primary"
                         variant="raised"
                         onClick={this.onValidate}
-                        onTouchTap={this.onValidate}
                     >
                         Validate
                     </Button>
