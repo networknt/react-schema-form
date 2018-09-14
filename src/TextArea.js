@@ -23,6 +23,7 @@ class TextArea extends React.Component {
                 rows={form.rows }
                 rowsMax={form.rowsMax }
                 disabled={form.readonly}
+                fullWidth
             />
         );
     }
