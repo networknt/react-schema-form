@@ -5,6 +5,8 @@ import React from 'react';
 import ComposedComponent from './ComposedComponent';
 import MenuItem from '@material-ui/core/MenuItem';
 import MuiSelect from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 class Select extends React.Component {
 
@@ -20,7 +22,7 @@ class Select extends React.Component {
         }
     }
 
-    getInitialValue (model, form) {
+    getInitialValue(model, form) {
         return this.getModelValue(model, form.key) || (form.titleMap != null ? form.titleMap[0].value : '')
     }
 
@@ -41,26 +43,24 @@ class Select extends React.Component {
     }
 
     render() {
-        const menuItems = this.props.form.titleMap.map((item, idx) => (
+        const { form } = this.props
+        const menuItems = form.titleMap.map((item, idx) => (
             <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
         ));
         return (
-            <div className={this.props.form.htmlClass}>
+            <FormControl fullWidth>
+                <InputLabel>{form.title}</InputLabel>
                 <MuiSelect
                     value={this.state.currentValue}
-                    placeholder={this.props.form.title}
-                    disabled={this.props.form.readonly}
+                    placeholder={form.title}
+                    disabled={form.readonly}
                     onChange={this.onSelected}
-                    fullWidth >
+                >
                     {menuItems}
                 </MuiSelect>
-            </div>
+            </FormControl>
         );
     }
 }
-
-// Select.propTypes = {
-//
-// };
 
 export default ComposedComponent(Select);
