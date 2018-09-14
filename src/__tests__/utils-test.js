@@ -64,7 +64,6 @@ describe('utils', function () {
                     'description': 'Gimme yea name lad',
                     'type': 'string'
                 },
-                'ngModelOptions': {},
                 'key': [
                     'name'
                 ],
@@ -81,7 +80,6 @@ describe('utils', function () {
                         'NaN'
                     ]
                 },
-                'ngModelOptions': {},
                 'key': [
                     'gender'
                 ],
@@ -108,7 +106,6 @@ describe('utils', function () {
                     'type': 'boolean',
                     'default': false
                 },
-                'ngModelOptions': {},
                 'key': [
                     'overEighteen'
                 ],
@@ -144,7 +141,6 @@ describe('utils', function () {
                         }
                     }
                 },
-                'ngModelOptions': {},
                 'type': 'fieldset',
                 'items': [
                     {
@@ -154,7 +150,6 @@ describe('utils', function () {
                             'type': 'string',
                             'title': 'Eye color'
                         },
-                        'ngModelOptions': {},
                         'key': [
                             'attributes',
                             'eyecolor'
@@ -167,7 +162,6 @@ describe('utils', function () {
                             'type': 'string',
                             'title': 'Hair color'
                         },
-                        'ngModelOptions': {},
                         'key': [
                             'attributes',
                             'haircolor'
@@ -188,7 +182,6 @@ describe('utils', function () {
                                 }
                             }
                         },
-                        'ngModelOptions': {},
                         'type': 'fieldset',
                         'items': [
                             {
@@ -196,7 +189,6 @@ describe('utils', function () {
                                 'schema': {
                                     'type': 'string'
                                 },
-                                'ngModelOptions': {},
                                 'key': [
                                     'attributes',
                                     'shoulders',
@@ -209,7 +201,6 @@ describe('utils', function () {
                                 'schema': {
                                     'type': 'string'
                                 },
-                                'ngModelOptions': {},
                                 'key': [
                                     'attributes',
                                     'shoulders',
@@ -248,7 +239,6 @@ describe('utils', function () {
                     'description': 'Gimme yea name lad',
                     'type': 'string'
                 },
-                'ngModelOptions': { 'updateOn': 'blur'},
                 'foo': 'bar',
                 'key': [
                     'name'
@@ -257,7 +247,7 @@ describe('utils', function () {
             }
         ];
 
-        var f = utils.getDefaults(schema,{},{ formDefaults: { foo: 'bar', ngModelOptions: { updateOn: 'blur' }}});
+        var f = utils.getDefaults(schema,{},{ formDefaults: { foo: 'bar' } });
         expect(f.form).toEqual(form);
     });
 
@@ -462,7 +452,6 @@ describe('utils', function () {
                         'title': 'Name',
                         'type': 'string'
                     },
-                    'ngModelOptions': {},
                     'type': 'text'
                 },
                 {
@@ -479,7 +468,6 @@ describe('utils', function () {
                         'pattern': '^\\S+@\\S+$',
                         'description': 'Email will be used for evil.'
                     },
-                    'ngModelOptions': {},
                     'type': 'text'
                 },
                 {
@@ -496,7 +484,6 @@ describe('utils', function () {
                         'type': 'boolean',
                         'default': true
                     },
-                    'ngModelOptions': {}
                 },
                 {
                     'key': [
@@ -515,7 +502,6 @@ describe('utils', function () {
                         'maxLength': 20,
                         'validationMessage': 'Don\'t be greedy!'
                     },
-                    'ngModelOptions': {}
                 }
             ],
             'title': 'comments',
@@ -554,7 +540,6 @@ describe('utils', function () {
                     ]
                 }
             },
-            'ngModelOptions': {},
             'type': 'array'
         };
 
