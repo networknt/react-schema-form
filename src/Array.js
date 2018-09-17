@@ -12,9 +12,20 @@ import ComposedComponent from './ComposedComponent';
 
 
 const styles = theme => ({
-    addButton: {
-      marginTop: theme.spacing.unit
+    arrayItem: {
+        position: 'relative',
+        border: '1px dotted #aaa',
+        padding: theme.spacing.unit,
+        marginBottom: theme.spacing.unit
     },
+    deleteItemButton: {
+        position: 'absolute',
+        top: -theme.spacing.unit,
+        right: -theme.spacing.unit
+    },
+    addButton: {
+        marginTop: theme.spacing.unit
+    }
   });
 
 class Array extends React.Component {
@@ -151,9 +162,9 @@ class Array extends React.Component {
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-                <div key={item && item[Array.ITEM_ID] || i}>
-                    <IconButton onClick={onItemDelete}>
-                        <DeleteIcon />
+                <div className={classes.arrayItem} key={item && item[Array.ITEM_ID] || i}>
+                    <IconButton onClick={onItemDelete} className={classes.deleteItemButton}>
+                        <DeleteIcon fontSize='small' />
                     </IconButton>
                     {forms}
                 </div>

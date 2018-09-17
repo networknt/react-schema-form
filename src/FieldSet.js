@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
