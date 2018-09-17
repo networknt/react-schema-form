@@ -2,41 +2,42 @@ jest.dontMock('../ComposedComponent');
 jest.dontMock('../utils');
 jest.dontMock('lodash');
 
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+import React from 'react';
+import ShallowRenderer from 'react-test-renderer/shallow';
+
 import ComposedComponent from '../ComposedComponent';
 import Text from '../Text';
 
-describe('ComposedComponent', function() {
+describe('ComposedComponent', function () {
 
-    it('shows default value at text field', function() {
-        var shallowRenderer = TestUtils.createRenderer();
-        var cfg = {
-            form: {
-                key: ['name'],
-                schema: {
-                    default: 'steeve',
-                    title: 'name',
-                    type: 'String',
-                },
-                type: 'text',
-                title: 'name',
-            },
-            model: {name: 'steeve'},
-            mapper: {}
-          };
+  it('shows default value at text field', function () {
+    const renderer = new ShallowRenderer();
+    var cfg = {
+      form: {
+        key: ['name'],
+        schema: {
+          default: 'steeve',
+          title: 'name',
+          type: 'String',
+        },
+        type: 'text',
+        title: 'name',
+      },
+      model: {name: 'steeve'},
+      mapper: {}
+    };
 
-        var Composed = ComposedComponent(Text);
+    var Composed = ComposedComponent(Text);
 
-        shallowRenderer.render( 
-            <Composed 
-                form={cfg.form} 
-                model={cfg.model}
-                mapper={cfg.mapper}
-        />);
+    renderer.render(
+      <Composed
+        form={cfg.form}
+        model={cfg.model}
+        mapper={cfg.mapper}
+      />);
 
-        var result = shallowRenderer.getRenderOutput();
+    var result = renderer.getRenderOutput();
 
-        expect(result.props.value).toEqual('steeve');
-    });
+    expect(result.props.value).toEqual('steeve');
+  });
 });
