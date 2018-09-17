@@ -12,10 +12,10 @@ import Date from './Date';
 import Checkbox from './Checkbox';
 import Help from './Help';
 import ComposedComponent from './ComposedComponent';
-import RaisedButton from 'material-ui/RaisedButton';
+import {Button, IconButton, Card} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Close';
+
 import _ from 'lodash';
-import SchemaForm from './SchemaForm';
-import IconButton from 'material-ui/IconButton';
 
 class Array extends React.Component {
 
@@ -93,14 +93,12 @@ class Array extends React.Component {
     }
 
     onDelete(index) {
-        //console.log('onDelete is called', index);
         var newModel = this.state.model;
         newModel.splice(index, 1);
-        this.setState(
-            {
-                model: newModel
-            }
-        );
+        this.setState({
+            model: newModel,
+        });
+
         this.props.onChangeValidate(this.state.model);
     }
 
@@ -134,10 +132,10 @@ class Array extends React.Component {
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-              <li key={i} className="list-group-item">
-                  <IconButton iconClassName="material-icons" tooltip="Remove" onTouchTap={boundOnDelete}>clear</IconButton>
-                  {forms}
-              </li>
+                <Card className='ArrayPart' key={i} style={{padding:'20px', margin:'5px'}}>
+                    <IconButton onClick={boundOnDelete}><DeleteIcon /></IconButton>
+                    {forms}
+                </Card>
             );
         }
         return (
@@ -148,7 +146,7 @@ class Array extends React.Component {
                         {arrays}
                     </ol>
                 </div>
-                <RaisedButton label={this.props.form.add || 'Add'} secondary onTouchTap={this.onAppend}/>
+                <Button variant='raised' color='secondary' onClick={this.onAppend.bind(this)}>Add</Button>
             </div>
         );
     }

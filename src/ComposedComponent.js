@@ -30,8 +30,7 @@ export default ComposedComponent => class extends React.Component {
      * Called when <input> value changes.
      * @param e The input element, or something.
      */
-    onChangeValidate(e) {
-        // console.log('onChangeValidate e', e);
+    onChangeValidate(e,v) {
         let value = null;
         switch(this.props.form.schema.type) {
           case 'integer':
@@ -49,14 +48,20 @@ export default ComposedComponent => class extends React.Component {
           case 'boolean':
             value = e.target.checked;
             break;
-          case 'object':
-          case 'date':
+          case 'tBoolean':
+            if(e.target.value != 'yes' || e.target.value != 'no') {
+                value = v;
+            }
+            break
+          
           case 'array':
             value = e;
             break
+          case 'object':
           default:
             value = e.target.value;
         }
+        
         //console.log('onChangeValidate this.props.form, value', this.props.form, value);
         let validationResult = utils.validate(this.props.form, value);
         this.setState({
@@ -64,7 +69,6 @@ export default ComposedComponent => class extends React.Component {
             valid: validationResult.valid,
             error: validationResult.valid ? null : validationResult.error.message
         });
-        //console.log('conhangeValidate this.props.form.key, value', this.props.form.key, value);
         
         this.props.onChange(this.props.form.key, value);
     }
@@ -75,7 +79,7 @@ export default ComposedComponent => class extends React.Component {
         // console.log('Text.defaultValue key', this.props.form.key);
         // console.log('Text.defaultValue model', this.props.model);
         let value;
-        if(props.form.key)
+        if(props.form && props.form.key)
             value = utils.selectOrSet(props.form.key, props.model);
         //console.log('Text defaultValue value = ', value);
 
@@ -93,7 +97,6 @@ export default ComposedComponent => class extends React.Component {
         if(!value && props.form.titleMap && props.form.titleMap[0].value) {
             value = props.form.titleMap[0].value;
         }
-        //console.log('value', value);
         return value;
     }
 

@@ -566,10 +566,10 @@ describe('utils', function () {
         //sub
         // expect(merged[0].readonly).toEqual(true);
 
-        // array
+        // //array
         // expect(merged[0].items[0].readonly).toEqual(true);
 
-        // array items
+        // //array items
         // expect(merged[0].items[0].items[0].readonly).toEqual(true);
     });
 
