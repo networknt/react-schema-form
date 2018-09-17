@@ -163,9 +163,7 @@ class Array extends React.Component {
             <div>
                 <div>
                     <label>{this.props.form.title}</label>
-                    <div>
-                        {arrays}
-                    </div>
+                    <div>{arrays}</div>
                 </div>
                 <Button className={classes.addButton} variant="contained" color="primary" onClick={this.onAppend}>
                     {this.props.form.add || 'Add'}

@@ -24,7 +24,6 @@ class FieldSet extends React.Component {
 
         return (
             <FormControl component="fieldset" className={classes.root}>
-                <FormLabel component="legend">{form.title}</FormLabel>
                 <div>
                     {forms}
                 </div>
