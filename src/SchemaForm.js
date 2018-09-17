@@ -14,6 +14,7 @@ import Checkbox from './Checkbox';
 import Help from './Help';
 import Array from './Array';
 import FieldSet from './FieldSet';
+import TripleBoolean from './TripleBoolean';
 import _ from 'lodash';
 
 class SchemaForm extends React.Component {
@@ -30,6 +31,7 @@ class SchemaForm extends React.Component {
         'checkbox': Checkbox,
         'help': Help,
         'array': Array,
+        'tBoolean': TripleBoolean,
         'fieldset': FieldSet
     };
 
@@ -41,7 +43,7 @@ class SchemaForm extends React.Component {
 
     // Assign default values and save it to the model
     setDefault = (key, model, form, value) => {
-        const currentValue = utils.selectOrSet(key, model);
+         const currentValue = utils.selectOrSet(key, model);
 
         // If current value is not setted and exist a default, apply the default over the model
         if (_.isNil(currentValue) && !_.isNil(value))

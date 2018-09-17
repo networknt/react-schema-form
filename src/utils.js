@@ -77,6 +77,17 @@ var stdFormObj = function(name, schema, options) {
     return f;
 };
 
+var tBoolean = function(name, schema, options) {
+    if (stripNullType(schema.type) === 'tBoolean' && !schema['enum']) {
+        var f = stdFormObj(name, schema, options);
+        f.key  = options.path;
+        f.type = 'tBoolean';
+        options.lookup[ObjectPath.stringify(options.path)] = f;
+        
+        return f;
+    }
+};
+
 var text = function(name, schema, options) {
     if (stripNullType(schema.type) === 'string' && !schema['enum']) {
         var f = stdFormObj(name, schema, options);
@@ -232,7 +243,8 @@ var defaults = {
     integer: [integer],
     boolean: [checkbox],
     array:   [checkboxes, array],
-    date:    [date]
+    date:    [date],
+    tBoolean:[tBoolean]
 };
 
 function defaultFormDefinition(name, schema, options) {
@@ -395,7 +407,6 @@ function merge(schema, form, ignore, options, readonly) {
         if (typeof obj === 'string') {
             obj = {key: obj};
         }
-        //console.log('obj', obj);
         if (obj.key) {
             if (typeof obj.key === 'string') {
                 obj.key = ObjectPath.parse(obj.key);
