@@ -2,7 +2,6 @@
  * Created by steve on 11/09/15.
  */
 import React from 'react';
-import FormControl from '@material-ui/core/FormControl';
 import utils from './utils';
 import Number from './Number';
 import Text from './Text';
