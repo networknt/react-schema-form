@@ -9,6 +9,44 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.4.1 - 2018-08-06
+### Added
+
+### Changed
+- fix some issues with 0.4.0 release(Thanks @gtaschuk)
+
+## 0.4.0 - 2018-07-17
+### Added
+
+### Changed
+- fix number can not empty(Thanks @weilaihui)
+- fix Date field can't be cleared issue #77 (Thanks @taitt)
+- Merge pull request #79 from weilaihui/master
+- Merge pull request #80 from bakaoh/master
+- show the clear icon only when there was a value(Thanks @taitt)
+- Merge pull request #81 from bakaoh/master
+- Simplify canonicalTitleMap processing (Thanks @XaviTorello)
+- utils.canonicalTitleMap transpilation (Thanks @XaviTorello)
+- Add TextSuggest component (Thanks @XaviTorello)
+- Add TextSuggest to schemaForm using "textsuggest" as mapper (Thanks @XaviTorello)
+- Ready to work textsuggest component! (Thanks @XaviTorello)
+- Add dataSourceConfig to link passed datasource keys (Thanks @XaviTorello)
+- Activate openOnFocus (Thanks @XaviTorello)
+- Use the generated titleMap as dataSource (Thanks @XaviTorello)
+- Intercept changes and pass it to the form handler (Thanks @XaviTorello)
+- Clean debug mark (Thanks @XaviTorello)
+- Add react-autosuggest dependency for textsuggest fields (Thanks @XaviTorello)
+- Add textsuggest autoInit method (Thanks @XaviTorello)
+- Add default value if passed to textsuggest (Thanks @XaviTorello)
+- Add new TextSuggest field transpilation (Thanks @XaviTorello)
+- Add latest SchemaForm transpiled version (Thanks @XaviTorello)
+- Identify all SchemaForm fields by an unique key based on their form.key (Thanks @XaviTorello)
+- Merge pull request #2 from XaviTorello/fix_fields_identification
+- Update transpiled SchemaForm (Thanks @XaviTorello)
+- Merge pull request #3 from XaviTorello/fix_fields_identification
+- Add notevil dependency (Thanks @XaviTorello)
+- Create new util.safeEval method (Thanks @XaviTorello)
+
 ## 0.3.11 - 2017-11-03
 ### Added
 

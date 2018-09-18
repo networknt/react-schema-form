@@ -4,8 +4,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card'
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@material-ui/icons/Close';
 import _ from 'lodash';
 import utils from './utils';
 import ComposedComponent from './ComposedComponent';
@@ -14,7 +15,6 @@ import ComposedComponent from './ComposedComponent';
 const styles = theme => ({
     arrayItem: {
         position: 'relative',
-        border: '1px dotted #aaa',
         padding: theme.spacing.unit,
         marginBottom: theme.spacing.unit
     },
@@ -158,16 +158,16 @@ class Array extends React.Component {
             let onItemDelete = this.onDelete.bind(this, i);
             let forms = form.items.map(function (form, index) {
                 var copy = this.copyWithIndex(form, i);
-                return this.props.builder(copy, this.props.model, index, this.props.onChange, this.props.mapper, this.props.builder);
+                return this.props.builder(copy, this.props.model, index, this.props.mapper, this.props.onChange, this.props.builder);
             }.bind(this));
             //console.log('forms', i, forms);
             arrays.push(
-                <div className={classes.arrayItem} key={item && item[Array.ITEM_ID] || i}>
+                <Card className={classes.arrayItem} key={item && item[Array.ITEM_ID] || i}>
                     <IconButton onClick={onItemDelete} className={classes.deleteItemButton}>
                         <DeleteIcon fontSize='small' />
                     </IconButton>
                     {forms}
-                </div>
+                </Card>
             );
         }
         return (

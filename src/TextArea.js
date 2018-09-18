@@ -18,14 +18,14 @@ class TextArea extends React.Component {
                 helperText={error || form.description}
                 onChange={onChangeValidate}
                 error={!!error}
-                defaultValue={value}
+                value={value}
                 multiline
                 rows={form.rows }
                 rowsMax={form.rowsMax }
                 disabled={form.readonly}
                 fullWidth
             />
-        );
+        )
     }
 }
 

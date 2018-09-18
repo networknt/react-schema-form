@@ -1,16 +1,8 @@
-jest.dontMock('../SchemaForm');
-jest.dontMock('../utils');
-jest.dontMock('lodash');
-
 var React = require('react');
 var ShallowRenderer = require('react-test-renderer/shallow');
 var SchemaForm = require('../SchemaForm');
 
-describe('SchemaForm', function() {
-
-  beforeEach(function() {
-
-  });
+describe('SchemaForm test', function() {
 
   it('shows SchemaForm', function() {
     const shallowRenderer = new ShallowRenderer();
@@ -22,12 +14,6 @@ describe('SchemaForm', function() {
       model: {},
       mapper: {}
     };
-    shallowRenderer.render(
-      <SchemaForm
-        schema={cfg.schema}
-        mapper={cfg.mapper}
-      />
-    );
 
     var result = shallowRenderer.getRenderOutput();
     expect(result.type).toEqual('div');

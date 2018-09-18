@@ -14,6 +14,7 @@ class FormCheckbox extends React.Component {
     };
 
     render() {
+        // let value = selectOrSet(this.props.form.key, this.props.model);
         return (
             <FormGroup row={true}>
                 <FormControlLabel

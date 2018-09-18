@@ -6,9 +6,16 @@ import ComposedComponent from './ComposedComponent';
 import TextField from '@material-ui/core/TextField';
 
 class Text extends React.Component {
-    render() {
-        let { form, value, error, onChangeValidate } = this.props
 
+    constructor(props) {
+        super(props);
+        const {model, form, value} = this.props;
+        const {key} = form;
+        this.props.setDefault(key, model, form, value)
+    }
+
+    render() {
+        let { form, error, value, onChangeValidate } = this.props
         return (
             <TextField
                 type={form.type}
@@ -17,7 +24,7 @@ class Text extends React.Component {
                 helperText={error || form.description }
                 error={!!error}
                 onChange={onChangeValidate}
-                defaultValue={value}
+                value={value}
                 disabled={form.readonly}
                 fullWidth
             />

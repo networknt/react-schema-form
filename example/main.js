@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ExamplePage  from './ExamplePage';
+import React from 'react';import ReactDOM from 'react-dom';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-// For me this obfuscates the location of the error when searching from console. Not sure why it's necessary.
-var warn = console.warn;
+const ExamplePage  = require('./ExamplePage');
+const theme = createMuiTheme({
+    typography: {
+        fontSize: 22,
+      },
+});
 
-console.warn = function(warning) {
-    throw new Error(warning);
-    warn.apply(console, arguments);
-};
-
-ReactDOM.render(<ExamplePage />, document.getElementById("app"));
+ReactDOM.render(<MuiThemeProvider theme={theme}>
+                    <ExamplePage />
+                </MuiThemeProvider>, document.getElementById("app"));

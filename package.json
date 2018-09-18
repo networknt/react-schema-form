@@ -9,9 +9,9 @@
     "react-component",
     "form"
   ],
-  "author": "Steve Hu, Nicholas Azar",
+  "author": "Steve Hu, Nicholas Azar, Xavi Torelló",
   "license": "MIT",
-  "main": "./lib/index",
+  "main": "./src/index",
   "files": [
     "README.md",
     "CHANGELOG.md",
@@ -26,8 +26,15 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
+    "notevil": "^1.1.0",
     "objectpath": "^1.2.1",
-    "tv4": "^1.3.0"
+    "react": "^16.4.2",
+    "react-autosuggest": "^9.3.4",
+    "react-dom": "^16.4.2",
+    "react-test-renderer": "^16.4.2",
+    "supports-color": "^5.4.0",
+    "tv4": "^1.2.7",
+    "webpack-config": "^7.5.0"
   },
   "devDependencies": {
     "@material-ui/core": ">1.5.1",
