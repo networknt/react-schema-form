@@ -39,6 +39,7 @@ class SchemaForm extends React.Component {
         super(props);
 
         this.onChange = this.onChange.bind(this);
+        this.builder = this.builder.bind(this);
     }
 
     // Assign default values and save it to the model
@@ -58,7 +59,7 @@ class SchemaForm extends React.Component {
     builder(form, model, index, mapper, onChange, builder) {
         const Field = this.mapper[form.type];
         if(!Field) {
-            console.log('Invalid field: \"' + form.key[0] + '\"!');
+            // console.log('Invalid field: "' + form.key[0] + '"!');
             return null;
         }
 
@@ -97,7 +98,9 @@ class SchemaForm extends React.Component {
         }.bind(this));
 
         return (
-            <div style={{width: '100%'}} className={this.props.className ? 'SchemaForm '  + this.props.className : 'SchemaForm'}>{forms}</div>
+            <div className={this.props.className}>
+                {forms}
+            </div>
         );
     }
 }

@@ -70,10 +70,6 @@ var stdFormObj = function(name, schema, options) {
     if (schema.enumNames) { f.titleMap = canonicalTitleMap(schema.enumNames, schema['enum']); }
     f.schema = schema;
 
-    // Ng model options doesn't play nice with undefined, might be defined
-    // globally though
-    f.ngModelOptions = f.ngModelOptions || {};
-
     return f;
 };
 

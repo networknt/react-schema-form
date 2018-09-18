@@ -3,27 +3,29 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import {TextField} from '@material-ui/core';
-import {selectOrSet} from './utils';
+import TextField from '@material-ui/core/TextField';
 
 class TextArea extends React.Component {
 
     render() {
+        let { form, value, error, onChangeValidate } = this.props
         // FIXME: Obviously fix rowsMax eventually..
-        let value = selectOrSet(this.props.form.key,this.props.model) ? selectOrSet(this.props.form.key,this.props.model) : '';
         return (
-                <TextField
-                    type={this.props.form.type}
-                    label={this.props.form.title}
-                    helperText={this.props.form.placeholder}
-                    onChange={this.props.onChangeValidate}
-                    error={!!this.props.error}
-                    value={value}
-                    
-                    disabled={this.props.form.readonly}
-                    style={this.props.form.style || {width: '100%'}}
-                />
-        );
+            <TextField
+                type={form.type}
+                label={form.title}
+                placeholder={form.placeholder}
+                helperText={error || form.description}
+                onChange={onChangeValidate}
+                error={!!error}
+                value={value}
+                multiline
+                rows={form.rows }
+                rowsMax={form.rowsMax }
+                disabled={form.readonly}
+                fullWidth
+            />
+        )
     }
 }
 

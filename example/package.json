@@ -24,7 +24,7 @@
     "url": "https://github.com/networknt/react-schema-form.git"
   },
   "dependencies": {
-    "@material-ui/core": "^1.4.3",
+    "@material-ui/core": ">1.5.1",
     "babel-eslint": "^8.2.6",
     "css-loader": "^1.0.0",
     "install": "^0.12.1",

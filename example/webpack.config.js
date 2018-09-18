@@ -17,6 +17,7 @@ module.exports = {
     alias: {
       // Use uncompiled version
       // 'react-schema-form': '../src',
+      // Use compiled version
       'react-schema-form': '../dist/react-schema-form.min.js',
       react: path.resolve('./node_modules/react'),
       'react-dom': path.resolve('./node_modules/react-dom')

@@ -1,13 +1,11 @@
-import React from 'react';
-import SchemaForm from '../SchemaForm';
-import { shallow, mount, render, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
+var React = require('react');
+var ShallowRenderer = require('react-test-renderer/shallow');
+var SchemaForm = require('../SchemaForm');
 
 describe('SchemaForm test', function() {
 
   it('shows SchemaForm', function() {
+    const shallowRenderer = new ShallowRenderer();
     var cfg = {
       form: {},
       schema: {
@@ -17,11 +15,8 @@ describe('SchemaForm test', function() {
       mapper: {}
     };
 
-    var result = shallow(<SchemaForm
-      schema={cfg.schema}
-      mapper={cfg.mapper}
-    />);
-
-    expect(result.props().className).toEqual('SchemaForm');
+    var result = shallowRenderer.getRenderOutput();
+    expect(result.type).toEqual('div');
+    expect(result.props.children).toEqual([]);
   });
 });

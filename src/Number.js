@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import {TextField} from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 
 /**
  * There is no default number picker as part of Material-UI.
@@ -15,14 +15,15 @@ class Number extends React.Component {
         super(props);
         this.preValidationCheck = this.preValidationCheck.bind(this);
         this.state = {
-            lastSuccessfulValue : this.props.value
+            lastSuccessfulValue: this.props.value
         }
+        this.numberField = React.createRef();
     }
 
     componentWillReceiveProps(nextProps) {
-      this.setState({
-        lastSuccessfulValue: nextProps.value
-      });
+        this.setState({
+            lastSuccessfulValue: nextProps.value
+        });
     }
 
     isNumeric(n) {
@@ -49,22 +50,25 @@ class Number extends React.Component {
             });
             this.props.onChangeValidate(e);
         } else {
-            // this.refs.numberField.value = this.state.lastSuccessfulValue;
+            this.numberField.current.value = this.state.lastSuccessfulValue;
         }
     }
 
     render() {
+        let { form, error} = this.props
         return (
-            <div className={this.props.form.htmlClass}>
-                <TextField
-                    type={this.props.form.type}
-                    label={this.props.form.title}
-                    error={this.props.error || this.props.errorText}
-                    onChange={this.preValidationCheck}
-                    value={this.state.lastSuccessfulValue}
-                    disabled={this.props.form.readonly}
-                    style={this.props.form.style || {width: '100%'}}/>
-            </div>
+            <TextField
+                type={form.type}
+                label={form.title}
+                placeholder={form.placeholder}
+                helperText={error || form.description}
+                error={!!error}
+                onChange={this.preValidationCheck}
+                value={this.state.lastSuccessfulValue}
+                ref={this.numberField}
+                disabled={form.readonly}
+                fullWidth
+            />
         );
     }
 }

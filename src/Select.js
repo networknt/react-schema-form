@@ -3,74 +3,64 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import {Select, InputLabel, MenuItem, FormControl} from '@material-ui/core';
-import _ from 'lodash';
+import MenuItem from '@material-ui/core/MenuItem';
+import MuiSelect from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
-class Select2 extends React.Component {
+class Select extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.onSelected = this.onSelected.bind(this);
-
-        const {model, form} = this.props;
-        const {key} = form;
-
-        const storedValue = model && this.getModelKey(model, key) || false;
-        const defaultValue = form.schema.default || false;
-        const value = !(_.isEmpty(storedValue)) && storedValue || defaultValue;
-
-        this.props.setDefault(key, model, form, value)
-        this.state = {
-            currentValue: value,
-        };
+    state = {
+        currentValue: this.getInitialValue(this.props.model, this.props.form)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.model && nextProps.form.key) {
             this.setState({
-                currentValue: this.getModelKey(nextProps.model, nextProps.form.key)
-                || (nextProps.form.titleMap != null ? nextProps.form.titleMap[0].value : '')
+                currentValue: this.getInitialValue(nextProps.model, nextProps.form)
             });
         }
     }
 
-    getModelKey(model, key) {
+    getInitialValue(model, form) {
+        return this.getModelValue(model, form.key) || (form.titleMap != null ? form.titleMap[0].value : '')
+    }
+
+    getModelValue(model, key) {
         if (Array.isArray(key)) {
-            return key.reduce((cur, nxt) => (cur[nxt] || {}), model);
+            return key.reduce((cur, nxt) => cur && cur[nxt], model);
         } else {
             return model[key];
         }
     }
 
-    onSelected(event) {
-
+    onSelected = (event) => {
+        let currentValue = event.target.value
         this.setState({
-            currentValue: event.target.value
+            currentValue
         });
-
         this.props.onChangeValidate(event);
     }
 
     render() {
-
-        const menuItems = this.props.form.titleMap.map((item, idx) => (
-            <MenuItem key={idx} value={item.name}>{item.name}</MenuItem>
+        const { form } = this.props
+        const menuItems = form.titleMap.map((item, idx) => (
+            <MenuItem key={idx} value={item.value}>{item.name}</MenuItem>
         ));
-
         return (
-            <FormControl style={{width: '100%'}}>
-                <InputLabel htmlFor="age-simple">{this.props.form.title}</InputLabel>
-
-                    <Select 
-                        disabled={this.props.form.readonly}
-                        value={this.state.currentValue ? this.state.currentValue : ''}
-                        onChange={this.onSelected}
-                    > {menuItems}
-                    </Select>
+            <FormControl fullWidth>
+                <InputLabel>{form.title}</InputLabel>
+                <MuiSelect
+                    value={this.state.currentValue}
+                    placeholder={form.title}
+                    disabled={form.readonly}
+                    onChange={this.onSelected}
+                >
+                    {menuItems}
+                </MuiSelect>
             </FormControl>
         );
     }
 }
 
-
-export default ComposedComponent(Select2);
+export default ComposedComponent(Select);

@@ -2,7 +2,7 @@
 import React from 'react';
 var utils = require('./utils');
 
-export default ComposedComponent => class extends React.Component {
+export default (ComposedComponent, defaultProps = {}) => class extends React.Component {
 
     constructor(props) {
         super(props);
@@ -101,6 +101,6 @@ export default ComposedComponent => class extends React.Component {
     }
 
     render() {
-        return <ComposedComponent {...this.props} {...this.state} onChangeValidate={this.onChangeValidate}/>;
+        return <ComposedComponent {...defaultProps} {...this.props} {...this.state} onChangeValidate={this.onChangeValidate}/>;
     }
 };
