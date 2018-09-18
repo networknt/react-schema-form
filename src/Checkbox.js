@@ -15,7 +15,7 @@ class FormCheckbox extends React.Component {
 
     render() {
         return (
-            <FormGroup>
+            <FormGroup row={true}>
                 <FormControlLabel
                     className={this.props.form.className}
                     label={this.props.form.title}
