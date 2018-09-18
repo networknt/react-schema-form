@@ -1,6 +1,3 @@
-/**
- * Created by steve on 15/09/15.
- */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
 import TextField from 'material-ui/TextField';
@@ -9,7 +6,6 @@ class Text extends React.Component {
 
     constructor(props) {
         super(props);
-
         const {model, form, value} = this.props;
         const {key} = form;
 
@@ -17,7 +13,6 @@ class Text extends React.Component {
     }
 
     render() {
-        //console.log('Text props', this.props);
         return (
             <div className={this.props.form.htmlClass}>
                 <TextField

@@ -1,33 +1,29 @@
-import React from 'react';
-import utils from './utils';
-import classNames from 'classnames';
-import ComposedComponent from './ComposedComponent';
-
-import RadioButton from 'material-ui/RadioButton';
-import RadioButtonGroup from 'material-ui/RadioButton/RadioButtonGroup';
+import React from 'react'
+import ComposedComponent from './ComposedComponent'
+import RadioButton from 'material-ui/RadioButton'
+import RadioButtonGroup from 'material-ui/RadioButton/RadioButtonGroup'
 
 class Radios extends React.Component {
 
-    render() {
-        let items = this.props.form.titleMap.map(function(item, index) {
-            return (
-                <RadioButton label={item.name}
-                             value={item.value}
-                             key={index}
-                             disabled={this.props.form.readonly}
-                    />
-            )
-        }.bind(this));
+  render() {
+    let items = this.props.form.titleMap.map(({name, value}, i) =>
+      <RadioButton label={name}
+                   value={value}
+                   key={`react-schema-form-radio-${this.props.form.title}-${i}`}
+                   disabled={this.props.form.readonly}/>
+    )
 
-        return (
-            <span className={this.props.form.htmlClass}>
-              <label className="control-lable">{this.props.form.title}</label>
-              <RadioButtonGroup defaultSelected={this.props.value} name={this.props.form.title} onChange={this.props.onChangeValidate}>
+    return (
+      <span className={this.props.form.htmlClass}>
+              <label>{this.props.form.title}</label>
+              <RadioButtonGroup defaultSelected={this.props.value}
+                                name={this.props.form.title}
+                                onChange={this.props.onChangeValidate}>
                   {items}
               </RadioButtonGroup>
             </span>
-        );
-    }
+    )
+  }
 }
 
-export default ComposedComponent(Radios);
+export default ComposedComponent(Radios)
