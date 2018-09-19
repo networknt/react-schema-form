@@ -11,7 +11,7 @@
   ],
   "author": "Steve Hu, Nicholas Azar, Xavi Torelló",
   "license": "MIT",
-  "main": "./src/index",
+  "main": "./lib/index",
   "files": [
     "README.md",
     "CHANGELOG.md",
