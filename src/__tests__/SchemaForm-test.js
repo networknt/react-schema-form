@@ -14,7 +14,10 @@ describe('SchemaForm test', function() {
       model: {},
       mapper: {}
     };
-
+    shallowRenderer.render(<SchemaForm
+      schema={cfg.schema}
+      mapper={cfg.mapper}
+    />);
     var result = shallowRenderer.getRenderOutput();
     expect(result.type).toEqual('div');
     expect(result.props.children).toEqual([]);

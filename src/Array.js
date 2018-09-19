@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card'
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Close';
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import utils from './utils';
 import ComposedComponent from './ComposedComponent';
 
@@ -141,7 +141,7 @@ class Array extends React.Component {
     }
 
     copyWithIndex(form, index) {
-        var copy = _.cloneDeep(form);
+        var copy = cloneDeep(form);
         copy.arrayIndex = index;
         utils.traverseForm(copy, this.setIndex(index));
         return copy;

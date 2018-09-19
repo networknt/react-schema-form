@@ -15,7 +15,8 @@ import Help from './Help';
 import Array from './Array';
 import FieldSet from './FieldSet';
 import TripleBoolean from './TripleBoolean';
-import _ from 'lodash';
+import merge from 'lodash/merge';
+import isNil from 'lodash/isNil'
 
 class SchemaForm extends React.Component {
 
@@ -47,7 +48,7 @@ class SchemaForm extends React.Component {
          const currentValue = utils.selectOrSet(key, model);
 
         // If current value is not setted and exist a default, apply the default over the model
-        if (_.isNil(currentValue) && !_.isNil(value))
+        if (isNil(currentValue) && !isNil(value))
             this.props.onModelChange(key, value, form.type, form);
     }
 
@@ -91,7 +92,7 @@ class SchemaForm extends React.Component {
         //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         let mapper = this.mapper;
         if(this.props.mapper) {
-            mapper = _.merge(this.mapper, this.props.mapper);
+            mapper = merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(function(form, index) {
             return this.builder(form, this.props.model, index, mapper, this.onChange, this.builder);

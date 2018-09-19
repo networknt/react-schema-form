@@ -1,7 +1,8 @@
 const React = require('react');
 const SchemaForm = require('../SchemaForm');
-import { shallow, mount, render, configure } from 'enzyme';
+import { render, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import utils from '../utils';
 
 configure({ adapter: new Adapter() });
 
@@ -10,7 +11,6 @@ jest.dontMock('../utils');
 jest.dontMock('lodash');
 
 function onModelChange(key, val, type) {
-    console.log('ExamplePage.onModelChange:', key, val);
     var newModel = this.state.model;
     utils.selectOrSet(key, newModel, val, type);
     this.setState({ model: newModel });

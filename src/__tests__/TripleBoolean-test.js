@@ -1,10 +1,8 @@
 import React from 'react';
 import SchemaForm from '../SchemaForm';
 import utils from '../utils';
-import { shallow, mount, render, configure } from 'enzyme';
+import { render, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
-import {Button} from '@material-ui/core'
 
 configure({ adapter: new Adapter() });
 
@@ -44,7 +42,7 @@ describe('SchemaForm test', function() {
       expect(result.find('Button').length).toEqual(0);
       
       cfg.model['issues'] = 'no';
-      var result = render(<SchemaForm
+      result = render(<SchemaForm
         form={cfg.form}
         model={cfg.model}
         schema={cfg.schema}
@@ -54,7 +52,7 @@ describe('SchemaForm test', function() {
       expect(result.find('Button').length).toEqual(1);
 
       cfg.model['issues'] = 'unanswered';
-      var result = render(<SchemaForm
+      result = render(<SchemaForm
         form={cfg.form}
         model={cfg.model}
         schema={cfg.schema}
