@@ -30,7 +30,10 @@
     "objectpath": "^1.2.1",
     "react-autosuggest": "^9.3.4",
     "tv4": "^1.2.7",
-    "webpack-config": "^7.5.0"
+    "webpack-config": "^7.5.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "material-ui": "0.20.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -48,18 +51,12 @@
     "jest-cli": "^16.0.2",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "material-ui": "^0.18.7",
     "react-addons-test-utils": "^15.3.2",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-tap-event-plugin": "^2.0.0",
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "webpack": "^2.7.0"
-  },
-  "peerDependencies": {
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "material-ui": "^0.18.7"
   },
   "scripts": {
     "lint": "eslint src",
