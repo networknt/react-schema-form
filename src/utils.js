@@ -1,4 +1,7 @@
-import _ from 'lodash';
+import isObject from 'lodash/isObject';
+import cloneDeep from 'lodash/cloneDeep'
+import extend from 'lodash/extend'
+import isUndefined from 'lodash/isUndefined'
 import ObjectPath from 'objectpath';
 import tv4 from 'tv4';
 import notevil from 'notevil';
@@ -6,7 +9,7 @@ import notevil from 'notevil';
 //Evaluates an expression in a safe way
 function safeEval(condition, scope) {
     try {
-        const scope_safe = _.cloneDeep(scope);
+        const scope_safe = cloneDeep(scope);
         return notevil(condition, scope_safe);
     } catch (error) {
         return undefined
@@ -49,7 +52,7 @@ var canonicalTitleMap = function(titleMap, originalEnum) {
 //Creates a form object with all common properties
 var stdFormObj = function(name, schema, options) {
     options = options || {};
-    var f = options.global && options.global.formDefaults ? _.cloneDeep(options.global.formDefaults) : {};
+    var f = options.global && options.global.formDefaults ? cloneDeep(options.global.formDefaults) : {};
     if (options.global && options.global.supressPropertyTitles === true) {
         f.title = schema.title;
     } else {
@@ -257,8 +260,8 @@ function defaultFormDefinition(name, schema, options) {
             if (def) {
 
                 // Do we have form defaults in the schema under the x-schema-form-attribute?
-                if (def.schema['x-schema-form'] && _.isObject(def.schema['x-schema-form'])) {
-                    def = _.extend(def, def.schema['x-schema-form']);
+                if (def.schema['x-schema-form'] && isObject(def.schema['x-schema-form'])) {
+                    def = extend(def, def.schema['x-schema-form']);
                 }
                 return def;
             }
@@ -420,7 +423,7 @@ function merge(schema, form, ignore, options, readonly) {
             var str = ObjectPath.stringify(obj.key);
             var stdForm = lookup[str];
             stdForm.items.forEach(function(item) {
-                var o = _.cloneDeep(obj.itemForm);
+                var o = cloneDeep(obj.itemForm);
                 o.key = item.key;
                 obj.items.push(o);
             });
@@ -465,7 +468,7 @@ function merge(schema, form, ignore, options, readonly) {
 
         // Special case: checkbox
         // Since have to ternary state we need a default
-        if (obj.type === 'checkbox' && _.isUndefined(obj.schema['default'])) {
+        if (obj.type === 'checkbox' && isUndefined(obj.schema['default'])) {
             obj.schema['default'] = false;
         }
 
