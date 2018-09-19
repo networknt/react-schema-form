@@ -1,12 +1,12 @@
-var webpack = require('webpack');
-
 module.exports = {
   entry: ['react-hot-loader/patch', './src/index'],
   output: {
-    filename: './dist/react-schema-form.min.js',
+    filename: 'react-schema-form.min.js',
+    path: __dirname + '/dist',
     library: 'ReactSchemaForm',
     libraryTarget: 'umd'
   },
+  devtool: 'source-map',
   externals: {
     'react': {
       root: 'React',
