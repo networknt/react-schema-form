@@ -14,7 +14,9 @@ import Checkbox from './Checkbox';
 import Help from './Help';
 import Array from './Array';
 import FieldSet from './FieldSet';
-import _ from 'lodash';
+import TripleBoolean from './TripleBoolean';
+import merge from 'lodash/merge';
+import isNil from 'lodash/isNil'
 
 class SchemaForm extends React.Component {
 
@@ -30,6 +32,7 @@ class SchemaForm extends React.Component {
         'checkbox': Checkbox,
         'help': Help,
         'array': Array,
+        'tBoolean': TripleBoolean,
         'fieldset': FieldSet
     };
 
@@ -37,14 +40,15 @@ class SchemaForm extends React.Component {
         super(props);
 
         this.onChange = this.onChange.bind(this);
+        this.builder = this.builder.bind(this);
     }
 
     // Assign default values and save it to the model
     setDefault = (key, model, form, value) => {
-        const currentValue = utils.selectOrSet(key, model);
+         const currentValue = utils.selectOrSet(key, model);
 
         // If current value is not setted and exist a default, apply the default over the model
-        if (_.isNil(currentValue) && !_.isNil(value))
+        if (isNil(currentValue) && !isNil(value))
             this.props.onModelChange(key, value, form.type, form);
     }
 
@@ -56,7 +60,7 @@ class SchemaForm extends React.Component {
     builder(form, model, index, mapper, onChange, builder) {
         const Field = this.mapper[form.type];
         if(!Field) {
-            console.log('Invalid field: \"' + form.key[0] + '\"!');
+            // console.log('Invalid field: "' + form.key[0] + '"!');
             return null;
         }
 
@@ -88,14 +92,16 @@ class SchemaForm extends React.Component {
         //console.log('SchemaForm merged = ', JSON.stringify(merged, undefined, 2));
         let mapper = this.mapper;
         if(this.props.mapper) {
-            mapper = _.merge(this.mapper, this.props.mapper);
+            mapper = merge(this.mapper, this.props.mapper);
         }
         let forms = merged.map(function(form, index) {
             return this.builder(form, this.props.model, index, mapper, this.onChange, this.builder);
         }.bind(this));
 
         return (
-            <div style={{width: '100%'}} className={this.props.className ? 'SchemaForm '  + this.props.className : 'SchemaForm'}>{forms}</div>
+            <div className={this.props.className}>
+                {forms}
+            </div>
         );
     }
 }

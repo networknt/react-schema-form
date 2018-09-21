@@ -1,0 +1,16 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Issues",
+        "properties": {
+            "issues": {
+                "title": "Did you have any issues?",
+                "type": "tBoolean",
+                "default": "unanswered"
+            }
+        }
+    },
+    "form": [
+        "issues"
+    ]
+}

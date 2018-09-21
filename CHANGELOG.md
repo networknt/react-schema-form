@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.5.0 - 2018-09-20
+### Added
+
+### Changed
+- upgrade to react 16.5.1 and material-ui/core 1.5.1(Thanks @dogada and @SadMonster)
+
+
 ## 0.4.1 - 2018-08-06
 ### Added
 

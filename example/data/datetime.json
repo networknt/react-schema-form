@@ -6,21 +6,19 @@
             "name": {
                 "type": "string",
                 "minLength": 3
-              },
+            },
             "date": {
-                "title": "Birthday",
+                "title": "Date",
                 "type": "object"
             }
         },
-        "required": [
-            "name",
-            "date"
-          ]
+        "required": ["name", "date"]
     },
     "form": [
+        "name",
         {
             "key": "date",
-            "type": "date"
+            "type": "datetime"
         }
     ]
 }

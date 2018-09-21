@@ -3,33 +3,31 @@
  */
 import React from 'react';
 import ComposedComponent from './ComposedComponent';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 
 class Text extends React.Component {
 
     constructor(props) {
         super(props);
-
         const {model, form, value} = this.props;
         const {key} = form;
-
         this.props.setDefault(key, model, form, value)
     }
 
     render() {
-        //console.log('Text props', this.props);
+        let { form, error, value, onChangeValidate } = this.props
         return (
-            <div className={this.props.form.htmlClass}>
-                <TextField
-                    type={this.props.form.type}
-                    floatingLabelText={this.props.form.title}
-                    hintText={this.props.form.placeholder}
-                    errorText={this.props.error || this.props.errorText}
-                    onChange={this.props.onChangeValidate}
-                    defaultValue={this.props.value}
-                    disabled={this.props.form.readonly}
-                    style={this.props.form.style || {width: '100%'}} />
-            </div>
+            <TextField
+                type={form.type}
+                label={form.title}
+                placeholder={form.placeholder}
+                helperText={error || form.description }
+                error={!!error}
+                onChange={onChangeValidate}
+                value={value}
+                disabled={form.readonly}
+                fullWidth
+            />
         );
     }
 }

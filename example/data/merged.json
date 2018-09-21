@@ -14,7 +14,6 @@
             "pattern": "^[^/]*$",
             "minLength": 2
         },
-        "ngModelOptions": {},
         "type": "text"
     },
     {
@@ -49,7 +48,6 @@
                 }
             }
         },
-        "ngModelOptions": {},
         "type": "fieldset",
         "items": [
             {
@@ -59,7 +57,6 @@
                     "type": "string",
                     "title": "Hair color"
                 },
-                "ngModelOptions": {},
                 "key": [
                     "attributes",
                     "haircolor"
@@ -82,7 +79,6 @@
                         }
                     }
                 },
-                "ngModelOptions": {},
                 "type": "fieldset",
                 "items": [
                     {
@@ -91,7 +87,6 @@
                             "type": "string",
                             "title": "Left"
                         },
-                        "ngModelOptions": {},
                         "key": [
                             "attributes",
                             "shoulders",
@@ -105,7 +100,6 @@
                             "type": "string",
                             "title": "Right"
                         },
-                        "ngModelOptions": {},
                         "key": [
                             "attributes",
                             "shoulders",

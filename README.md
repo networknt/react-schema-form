@@ -13,6 +13,7 @@
 While you are trying the demo forms, you can update the schema and form in the json editor to see the instant re-rendered form. This is a way to build form interactively.
 
 # Examples
+
 If you don't have babel-cli installed globally, please do it first.
 
 ```
@@ -22,7 +23,10 @@ sudo npm install -g babel-cli
 Clone the project and run
 
 ```
+cd react-schema-form
 npm install
+cd example
+yarn
 npm start
 ```
 
@@ -105,4 +109,4 @@ See our [CONTRIBUTING.md](https://github.com/networknt/react-schema-form/CONTRIB
 
 # License
 
-MIT Licensed. Copyright (c) Network New Technologies Inc. 2016.
+MIT Licensed. Copyright (c) Network New Technologies Inc. 2018.

@@ -1,33 +1,53 @@
 import React from 'react';
-import utils from './utils';
-import classNames from 'classnames';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import { withStyles } from '@material-ui/core/styles';
 import ComposedComponent from './ComposedComponent';
 
-import RadioButton from 'material-ui/RadioButton';
-import RadioButtonGroup from 'material-ui/RadioButton/RadioButtonGroup';
+const styles = theme => ({
+    formControl: {
+      marginTop: theme.spacing.unit
+    },
+    group: {
+      margin: `${theme.spacing.unit}px 0`,
+    },
+  });
+  
 
 class Radios extends React.Component {
 
-    render() {
-        let items = this.props.form.titleMap.map(function(item, index) {
+    renderItems(form) {
+        return form.titleMap.map(function(item, index) {
             return (
-                <RadioButton label={item.name}
-                             value={item.value}
-                             key={index}
-                             disabled={this.props.form.readonly}
-                    />
+                <FormControlLabel
+                    key={index}
+                    control={<Radio />}
+                    label={item.name}
+                    value={item.value}
+                    disabled={form.readonly}                    
+                />
             )
-        }.bind(this));
+        });
+    }
 
+    render() {
+        let {classes} = this.props
         return (
-            <span className={this.props.form.htmlClass}>
-              <label className="control-lable">{this.props.form.title}</label>
-              <RadioButtonGroup defaultSelected={this.props.value} name={this.props.form.title} onChange={this.props.onChangeValidate}>
-                  {items}
-              </RadioButtonGroup>
-            </span>
+            <FormControl component="fieldset" className={classes.formControl}>
+                <FormLabel component="legend">{this.props.form.title}</FormLabel>
+                <RadioGroup 
+                    value={this.props.value} 
+                    name={this.props.form.title} 
+                    onChange={this.props.onChangeValidate}
+                    className={classes.group}>
+                  {this.renderItems(this.props.form)}
+                </RadioGroup>
+            </FormControl>
         );
     }
 }
 
-export default ComposedComponent(Radios);
+export default ComposedComponent(withStyles(styles)(Radios));

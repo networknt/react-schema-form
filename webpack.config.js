@@ -1,12 +1,12 @@
-var webpack = require('webpack');
-
 module.exports = {
   entry: ['react-hot-loader/patch', './src/index'],
   output: {
-    filename: './dist/react-schema-form.min.js',
+    filename: 'react-schema-form.min.js',
+    path: __dirname + '/dist',
     library: 'ReactSchemaForm',
     libraryTarget: 'umd'
   },
+  devtool: 'source-map',
   externals: {
     'react': {
       root: 'React',
@@ -22,9 +22,15 @@ module.exports = {
     }
   },
   module: {
-    loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
-      {test: /\.css?$/, exclude: /node_modules/, loader: 'style-loader!css-loader'},
+    rules: [
+      {test: /\.js$/, exclude: /node_modules/, use: [{
+        loader: 'babel-loader'
+      }]},
+      {test: /\.css?$/, exclude: /node_modules/, use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader'
+      }]},
     ]
   }
 };
