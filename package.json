@@ -9,7 +9,7 @@
     "react-component",
     "form"
   ],
-  "author": "Steve Hu, Nicholas Azar, Xavi Torelló",
+  "author": "Steve Hu, Nicholas Azar, Xavi Torelló, Greg Taschuk, Gene Sumchenko, Dmytro V. Dogadailo",
   "license": "MIT",
   "main": "./lib/index",
   "files": [
