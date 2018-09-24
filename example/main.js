@@ -10,4 +10,4 @@ const theme = createMuiTheme({
 
 ReactDOM.render(<MuiThemeProvider theme={theme}>
                     <ExamplePage />
-                </MuiThemeProvider>, document.getElementById("app"));
+                </MuiThemeProvider>, document.getElementById('app'));
