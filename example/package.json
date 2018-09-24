@@ -12,6 +12,9 @@
   "author": "Steve Hu, Nicholas Azar",
   "license": "MIT",
   "main": "./lib/index",
+  "engines": {
+      "yarn": "^1.9.4"
+  },
   "files": [
     "README.md",
     "CHANGELOG.md",
@@ -26,17 +29,13 @@
   "dependencies": {
     "@material-ui/core": ">1.5.1",
     "babel-eslint": "^8.2.6",
-    "css-loader": "^1.0.0",
     "install": "^0.12.1",
-    "jquery": "^3.3.1",
     "lodash": "^4.17.10",
-    "npm": "^6.3.0",
     "react": "^16.4.2",
     "react-ace": "^6.1.4",
     "react-dom": "^16.4.2",
     "react-schema-form": "file:../",
     "react-select": "^2.0.0",
-    "style-loader": "^0.21.0",
     "supports-color": "^5.4.0",
     "webpack-cli": "^3.1.0"
   },
