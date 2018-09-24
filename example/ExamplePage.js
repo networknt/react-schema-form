@@ -2,6 +2,7 @@ import React from 'react'
 import {SchemaForm, utils} from 'react-schema-form'
 import AceEditor from 'react-ace'
 import {Button, FormControl, InputLabel, MenuItem, Select} from '@material-ui/core'
+import {ErrorBoundary} from './ErrorBoundary'
 // RcSelect is still in migrating process so it's excluded for now
 // import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 
@@ -111,8 +112,10 @@ class ExamplePage extends React.Component {
         let validate = ''
         if (this.state.form.length > 0) {
             schemaForm = (
-                <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model}
-                            onModelChange={this.onModelChange} mapper={mapper}/>
+                <ErrorBoundary>
+                    <SchemaForm schema={this.state.schema} form={this.state.form} model={this.state.model}
+                                onModelChange={this.onModelChange} mapper={mapper}/>
+                </ErrorBoundary>
             )
             validate = (
                 <div>
@@ -137,7 +140,7 @@ class ExamplePage extends React.Component {
                     </div>
                     <div className='col-sm-8'>
                         <h3>Select Example</h3>
-                        <FormControl classes={{root: 'form-group'}} style={{ minWidth: 150 }}>
+                        <FormControl classes={{root: 'form-group'}} style={{minWidth: 150}}>
                             <InputLabel htmlFor="select-test">select-test</InputLabel>
                             <Select
                                 autoWidth

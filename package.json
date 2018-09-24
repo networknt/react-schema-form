@@ -58,7 +58,6 @@
     "react-hot-loader": "^4.3.8",
     "react-test-renderer": "^16.5.1",
     "rimraf": "^2.6.2",
-    "style-loader": "^0.21.0",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.0"
   },
