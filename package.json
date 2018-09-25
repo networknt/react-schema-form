@@ -27,20 +27,18 @@
     "url": "https://github.com/networknt/react-schema-form.git"
   },
   "dependencies": {
-    "@material-ui/core": ">1.5.1",
-    "@material-ui/icons": ">2.0.1",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "notevil": "^1.1.0",
     "objectpath": "^1.2.1",
-    "react": "^16.5.1",
     "react-autosuggest": "^9.3.4",
-    "react-dom": "^16.5.1",
     "supports-color": "^5.4.0",
     "tv4": "^1.2.7",
     "webpack-config": "^7.5.0"
   },
   "devDependencies": {
+    "@material-ui/core": ">1.5.1",
+    "@material-ui/icons": ">2.0.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
@@ -55,11 +53,19 @@
     "eslint": "^5.6.0",
     "eslint-plugin-react": "^7.11.1",
     "jest-cli": "^23.6.0",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
     "react-hot-loader": "^4.3.8",
     "react-test-renderer": "^16.5.1",
     "rimraf": "^2.6.2",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.0"
+  },
+  "peerDependencies": {
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "@material-ui/core": ">1.5.1",
+    "@material-ui/icons": ">2.0.1"
   },
   "scripts": {
     "lint": "eslint src",
