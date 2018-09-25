@@ -8,6 +8,7 @@ import Text from './Text';
 import TextArea from './TextArea';
 import TextSuggest from './TextSuggest';
 import Select from './Select';
+import MultiSelect from './MultiSelect'
 import Radios from './Radios';
 import Date from './Date';
 import Checkbox from './Checkbox';
@@ -33,7 +34,8 @@ class SchemaForm extends React.Component {
         'help': Help,
         'array': Array,
         'tBoolean': TripleBoolean,
-        'fieldset': FieldSet
+        'fieldset': FieldSet,
+        'multiselect': MultiSelect
     };
 
     constructor(props) {
