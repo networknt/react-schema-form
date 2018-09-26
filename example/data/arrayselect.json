@@ -18,7 +18,9 @@
                     "enum": [
                         "A", "N", "C", "R", "U", "CR", "CU", "RU", "CRU"
                     ]
-                }
+                },
+                "minItems": 2,
+                "maxItems": 3
             }
         }
     },
