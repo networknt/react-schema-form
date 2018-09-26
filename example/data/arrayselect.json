@@ -13,27 +13,31 @@
             "accessLevel": {
                 "title": "Access Level",
                 "type": "array",
-                "items": [
-                    {"value": "A", "label": "Authorized to anyone"},
-                    {"value": "N", "label": "Not Accessible"},
-                    {"value": "C", "label": "Client Based"},
-                    {"value": "R", "label": "Role Based"},
-                    {"value": "U", "label": "User Based"},
-                    {"value": "CR", "label": "Client and Role Based"},
-                    {"value": "CU", "label": "Client and User Based"},
-                    {"value": "RU", "label": "Role and User Based"},
-                    {"value": "CRU", "label": "Client, Role and User Based"}
-                ]
+                "items": {
+                    "type": "string",
+                    "enum": [
+                        "A", "N", "C", "R", "U", "CR", "CU", "RU", "CRU"
+                    ]
+                }
             }
         }
     },
-
     "form": [
         "name",
         {
             "key": "accessLevel",
-            "type": "rc-select",
-            "multiple": true
+            "type": "multiselect",
+            "titleMap": [
+                {"value": "A", "name": "Authorized to anyone"},
+                {"value": "N", "name": "Not Accessible"},
+                {"value": "C", "name": "Client Based"},
+                {"value": "R", "name": "Role Based"},
+                {"value": "U", "name": "User Based"},
+                {"value": "CR", "name": "Client and Role Based"},
+                {"value": "CU", "name": "Client and User Based"},
+                {"value": "RU", "name": "Role and User Based"},
+                {"value": "CRU", "name": "Client, Role and User Based"}
+            ]            
         }
     ]
 }
