@@ -607,6 +607,13 @@ function getValueFromModel (model, key) {
     return result
 }
 
+function getTitleByValue (titleMap, value) {
+    for (let i = titleMap.length; --i >= 0; ) {
+        let item = titleMap[i];
+        if (item.value === value) return item.name
+    }
+}
+
 module.exports = {
     traverseForm:traverseForm,
     traverseSchema: traverseSchema,
@@ -633,5 +640,6 @@ module.exports = {
     validateBySchema: validateBySchema,
     safeEval: safeEval,
     selectOrSet: selectOrSet,
-    getValueFromModel: getValueFromModel
+    getValueFromModel: getValueFromModel,
+    getTitleByValue: getTitleByValue
 };
