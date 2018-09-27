@@ -594,7 +594,24 @@ function validate(form, value) {
         tv4Result.error.message = form.validationMessage;
     }
     return tv4Result;
+}
 
+function getValueFromModel (model, key) {
+    let result
+    if (Array.isArray(key)) {
+        key.reduce((cur, nxt) => cur && cur[nxt], model)
+        result = key.reduce((cur, nxt) => cur && cur[nxt], model)
+    } else {
+        result = model[key]
+    }
+    return result
+}
+
+function getTitleByValue (titleMap, value) {
+    for (let i = titleMap.length; --i >= 0; ) {
+        let item = titleMap[i];
+        if (item.value === value) return item.name
+    }
 }
 
 module.exports = {
@@ -622,5 +639,7 @@ module.exports = {
     validate: validate,
     validateBySchema: validateBySchema,
     safeEval: safeEval,
-    selectOrSet: selectOrSet
+    selectOrSet: selectOrSet,
+    getValueFromModel: getValueFromModel,
+    getTitleByValue: getTitleByValue
 };
