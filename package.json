@@ -68,10 +68,10 @@
     "@material-ui/icons": ">2.0.1"
   },
   "scripts": {
-    "lint": "eslint src",
     "preversion": "webpack -p && git add dist",
     "prepublishOnly": "rimraf lib && NODE_ENV=production babel src -d lib",
-    "test": "npm run lint && jest"
+    "lint": "eslint src",
+    "test": "jest"
   },
   "jest": {
     "verbose": true,
