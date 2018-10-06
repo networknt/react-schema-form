@@ -2,7 +2,7 @@
 import React from 'react';
 var utils = require('./utils');
 
-export default (ComposedComponent, defaultProps = {}) => class extends React.Component {
+export default (ComposedComponent, defaultProps = {}) => class Composed extends React.Component {
 
     constructor(props) {
         super(props);
