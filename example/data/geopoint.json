@@ -1,0 +1,41 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Geo point",
+        "required": [
+            "type",
+            "coordinates"
+        ],
+        "properties": {
+            "type": {
+                "type": "string",
+                "enum": [
+                    "Point"
+                ],
+                "default": [
+                    "Point"
+                ]
+            },
+            "coordinates": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                    "type": "number"
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "key": "type"
+        },
+        {
+            "key": "coordinates",
+            "add": "New",
+            "style": {
+                "add": "btn-success"
+            }
+        }
+    ]
+}
