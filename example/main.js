@@ -4,6 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const ExamplePage  = require('./ExamplePage');
 const theme = createMuiTheme({
     typography: {
+        useNextVariants: true,
         fontSize: 22,
       },
 });
