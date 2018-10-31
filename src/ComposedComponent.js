@@ -2,12 +2,33 @@
 import React from 'react';
 var utils = require('./utils');
 
-export default (ComposedComponent, defaultProps = {}) => class extends React.Component {
+const defaultValue = (props) => {
+    // check if there is a value in the model, if there is, display it. Otherwise, check if
+    // there is a default value, display it.
+    // console.log('Text.defaultValue key', this.props.form.key);
+    // console.log('Text.defaultValue model', this.props.model);
+    let value;
+    if (props.form && props.form.key)
+        value = utils.selectOrSet(props.form.key, props.model);
+    //console.log('Text defaultValue value = ', value);
+
+    // check if there is a default value
+    if (!value && props.form['default']) {
+        value = props.form['default'];
+    }
+
+    if (!value && props.form.schema && props.form.schema['default']) {
+        value = props.form.schema['default'];
+    }
+    return value;
+};
+
+export default (ComposedComponent, defaultProps = {}) => class Composed extends React.Component {
 
     constructor(props) {
         super(props);
         this.onChangeValidate = this.onChangeValidate.bind(this);
-        let value = this.defaultValue(this.props);
+        let value = defaultValue(this.props);
         let validationResult = utils.validate(this.props.form, value);
         this.state = {
             value: value,
@@ -16,14 +37,14 @@ export default (ComposedComponent, defaultProps = {}) => class extends React.Com
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        let value = this.defaultValue(nextProps);
+    static getDerivedStateFromProps(nextProps) {
+        let value = defaultValue(nextProps);
         let validationResult = utils.validate(nextProps.form, value);
-        this.setState({
-            value: value,
+        return {
+            value,
             valid: !!(validationResult.valid || !value),
             error: !validationResult.valid && value ? validationResult.error.message : null
-        });
+        };
     }
 
     /**
@@ -71,27 +92,6 @@ export default (ComposedComponent, defaultProps = {}) => class extends React.Com
         });
 
         this.props.onChange(this.props.form.key, value);
-    }
-
-    defaultValue(props) {
-        // check if there is a value in the model, if there is, display it. Otherwise, check if
-        // there is a default value, display it.
-        // console.log('Text.defaultValue key', this.props.form.key);
-        // console.log('Text.defaultValue model', this.props.model);
-        let value;
-        if (props.form && props.form.key)
-            value = utils.selectOrSet(props.form.key, props.model);
-        //console.log('Text defaultValue value = ', value);
-
-        // check if there is a default value
-        if (!value && props.form['default']) {
-            value = props.form['default'];
-        }
-
-        if (!value && props.form.schema && props.form.schema['default']) {
-            value = props.form.schema['default'];
-        }
-        return value;
     }
 
     render() {

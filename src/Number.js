@@ -16,14 +16,14 @@ class Number extends React.Component {
         this.preValidationCheck = this.preValidationCheck.bind(this);
         this.state = {
             lastSuccessfulValue: this.props.value
-        }
+        };
         this.numberField = React.createRef();
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            lastSuccessfulValue: nextProps.value
-        });
+    static getDerivedStateFromProps(nextProps) {
+        return {
+            lastSuccessfulValue: nextProps.value,
+        };
     }
 
     isNumeric(n) {
