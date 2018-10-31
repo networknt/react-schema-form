@@ -31,11 +31,11 @@ class TripleBoolean extends React.Component {
         this.props.setDefault(key, model, form, value);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
+    static getDerivedStateFromProps(nextProps) {
+        return {
             yesChecked: nextProps.value === 'yes',
             noChecked: nextProps.value === 'no',
-        });
+        };
     }
 
     divStyle = {
@@ -66,7 +66,7 @@ class TripleBoolean extends React.Component {
                 />
             </FormGroup>
              {this.props.value === 'yes' || this.props.value === 'no' ? 
-                <Button id='temp' variant='flat' color='primary'
+                <Button id='temp' variant='text' color='primary'
                     onClick={(e) => this.props.onChangeValidate(e,'unanswered')}>clear responce</Button> : ''}
         </div>);
 
