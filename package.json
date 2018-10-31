@@ -79,9 +79,6 @@
     "testURL": "http://localhost/",
     "roots": [
       "src"
-    ],
-    "standard": {
-      "parser": "babel-eslint"
-    }
+    ]
   }
 }
