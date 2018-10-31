@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.0 - 2018-10-31
+### Added
+
+### Changed
+- It is a massive release with latest react and material-ui support. Thanks @JFrankfurt, @dogada, @gtaschuk and @naeemba 
+
 ## 0.5.0 - 2018-09-20
 ### Added
 
