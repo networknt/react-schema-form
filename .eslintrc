@@ -13,5 +13,10 @@
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
     "react/prop-types": false
+  },
+  "settings": {
+    "react": {
+       "version":"16.6"
+    }
   }
 }
