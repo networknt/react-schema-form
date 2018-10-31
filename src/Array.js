@@ -26,14 +26,14 @@ const styles = theme => ({
     addButton: {
         marginTop: theme.spacing.unit
     }
-  });
+});
 
 class Array extends React.Component {
     static ITEM_ID = '_SCHEMAFORM_ITEM_ID'
     static _SEQUENCE = 1
 
-    static assignItemId (item) {
-        if (item && !item[Array.ITEM_ID]) {
+    static assignItemId(item) {
+        if (item && typeof item === 'object' && !item[Array.ITEM_ID]) {
             // define hidden property with internal id
             Object.defineProperty(item, Array.ITEM_ID, {
                 enumerable: false,
@@ -48,7 +48,7 @@ class Array extends React.Component {
         super(props);
         this.onAppend = this.onAppend.bind(this);
         this.onDelete = this.onDelete.bind(this);
-             // we have the model here for the entire form, get the model for this array only
+        // we have the model here for the entire form, get the model for this array only
         // and add to the state. if is empty, add an entry by calling onAppend directly.
         this.state = {
             model: utils.selectOrSet(this.props.form.key, this.props.model) || []
@@ -56,14 +56,14 @@ class Array extends React.Component {
         //console.log('constructor', this.props.form.key, this.props.model, this.state.model);
     }
 
-    static getDerivedStateFromProps (props, state) {
+    static getDerivedStateFromProps(props, state) {
         let propsKey = props.form.key
-        if (props.form && propsKey === state.formKey && props.model && 
+        if (props.form && propsKey === state.formKey && props.model &&
             props.model[propsKey] === state.model) {
-                return null // nothing changed
+            return null // nothing changed
         }
         let model = utils.selectOrSet(propsKey, props.model) || []
-         return {
+        return {
             formKey: propsKey,
             model: model.map(Array.assignItemId)
         }
@@ -149,7 +149,7 @@ class Array extends React.Component {
 
     render() {
         //console.log('Array.render', this.props.form.items, this.props.model, this.state.model);
-        let {classes, form} = this.props;
+        let { classes, form } = this.props;
         var arrays = [];
         var model = this.state.model;
         // console.log('Array.render', model);

@@ -194,13 +194,6 @@
     recompose "0.28.0 - 0.30.0"
     warning "^4.0.1"
 
-"@material-ui/icons@>2.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-3.0.1.tgz#671fb3d04dcaf9351dbbd2bf82ae2ae72e3d93cd"
-  dependencies:
-    "@babel/runtime" "7.0.0"
-    recompose "^0.29.0"
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -5841,15 +5834,6 @@ react-dom@^16.4.2:
     prop-types "^15.6.2"
     schedule "^0.4.0"
 
-react-dom@^16.5.1:
-  version "16.5.2"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.2.tgz#b69ee47aa20bab5327b2b9d7c1fe2a30f2cfa9d7"
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    schedule "^0.5.0"
-
 react-event-listener@^0.6.2:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.6.3.tgz#8eab88129a76e095ed8aa684c29679eded1e843d"
@@ -5881,15 +5865,11 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
 "react-schema-form@file:..":
   version "0.5.0"
   dependencies:
-    "@material-ui/core" ">1.5.1"
-    "@material-ui/icons" ">2.0.1"
     classnames "^2.2.6"
     lodash "^4.17.11"
     notevil "^1.1.0"
     objectpath "^1.2.1"
-    react "^16.5.1"
     react-autosuggest "^9.3.4"
-    react-dom "^16.5.1"
     supports-color "^5.4.0"
     tv4 "^1.2.7"
     webpack-config "^7.5.0"
@@ -5929,15 +5909,6 @@ react@^16.4.2:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     schedule "^0.4.0"
-
-react@^16.5.1:
-  version "16.5.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    schedule "^0.5.0"
 
 read-chunk@^2.1.0:
   version "2.1.0"
@@ -6020,17 +5991,6 @@ rechoir@^0.6.2:
 "recompose@0.28.0 - 0.30.0":
   version "0.30.0"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.30.0.tgz#82773641b3927e8c7d24a0d87d65aeeba18aabd0"
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    change-emitter "^0.1.2"
-    fbjs "^0.8.1"
-    hoist-non-react-statics "^2.3.1"
-    react-lifecycles-compat "^3.0.2"
-    symbol-observable "^1.0.4"
-
-recompose@^0.29.0:
-  version "0.29.0"
-  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.29.0.tgz#f1a4e20d5f24d6ef1440f83924e821de0b1bccef"
   dependencies:
     "@babel/runtime" "^7.0.0"
     change-emitter "^0.1.2"
@@ -6315,12 +6275,6 @@ sax@^1.2.4:
 schedule@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.4.0.tgz#fa20cfd0bfbf91c47d02272fd7096780d3170bbb"
-  dependencies:
-    object-assign "^4.1.1"
-
-schedule@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.5.0.tgz#c128fffa0b402488b08b55ae74bb9df55cc29cc8"
   dependencies:
     object-assign "^4.1.1"
 

@@ -13,7 +13,7 @@
   "license": "MIT",
   "main": "./lib/index",
   "engines": {
-      "yarn": "^1.9.4"
+    "yarn": "^1.9.4"
   },
   "files": [
     "README.md",

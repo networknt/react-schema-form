@@ -3,4 +3,4 @@ node_modules
 *.log
 .idea
 /example/data/Tokens
-dist/**
+/dist/**
