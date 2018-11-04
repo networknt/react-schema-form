@@ -13,12 +13,12 @@ const defaultValue = (props) => {
     //console.log('Text defaultValue value = ', value);
 
     // check if there is a default value
-    if (!value && props.form['default']) {
-        value = props.form['default'];
-    }
-
-    if (!value && props.form.schema && props.form.schema['default']) {
-        value = props.form.schema['default'];
+    if (value === null || value === undefined) {
+        if (props.form['default']) {
+            value = props.form['default'];
+        } else if (props.form.schema && props.form.schema['default']) {
+            value = props.form.schema['default'];
+        }
     }
     return value;
 };
