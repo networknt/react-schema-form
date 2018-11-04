@@ -89,7 +89,7 @@ class SchemaForm extends Component<Props> {
 
         const key = (form.key && form.key.join(".")) || index;
 
-        const error = key in errors ? errors[key] : null;
+        const error = errors && key in errors ? errors[key] : null;
 
         return (
             <Field
