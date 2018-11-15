@@ -86,6 +86,16 @@ export default (ComposedComponent, defaultProps = {}) =>
                     value = e;
                     break;
                 case "object":
+                    if (form.type === "date") {
+                        if (e.target.value.length > 0) {
+                            value = new Date(e.target.value);
+                        } else {
+                            value = "";
+                        }
+                        break;
+                    }
+                    ({ value } = e.target);
+                    break;
                 default:
                     ({ value } = e.target);
             }
