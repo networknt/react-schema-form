@@ -60,17 +60,19 @@ export default (ComposedComponent, defaultProps = {}) =>
             let value = null;
             switch (form.schema.type) {
                 case "integer":
-                case "number":
-                    if (e.target.value.indexOf(".") === -1) {
+                    value = parseInt(e.target.value, 10);
+                    break;
+                case "number": {
+                    const values = e.target.value.split(".");
+                    if (values.length < 2) {
                         value = parseInt(e.target.value, 10);
-                    } else {
-                        value = parseFloat(e.target.value);
-                    }
-
-                    if (Number.isNaN(value)) {
-                        value = undefined;
+                    } else if (values.length > 1) {
+                        if (values[1].length > 0)
+                            value = parseFloat(e.target.value);
+                        else value = `${parseInt(values[0], 10)}.`;
                     }
                     break;
+                }
                 case "boolean":
                     value = e.target.checked;
                     break;
