@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.1 - 2018-11-19
+### Added
+
+### Changed
+- Fixes Validation Errors not Showing. Thanks @thefringeninja
+
+
 ## 0.6.0 - 2018-10-31
 ### Added
 
