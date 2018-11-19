@@ -42,8 +42,8 @@ export default (ComposedComponent, defaultProps = {}) => class Composed extends 
         let validationResult = utils.validate(nextProps.form, value);
         return {
             value,
-            valid: !!(validationResult.valid || !value),
-            error: !validationResult.valid && value ? validationResult.error.message : null
+            valid: validationResult.valid,
+            error: !validationResult.valid ? validationResult.error.message : null
         };
     }
 
