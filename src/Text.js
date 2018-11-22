@@ -33,7 +33,7 @@ class Text extends React.Component<Props> {
                 helperText={error || form.description}
                 error={!!error}
                 onChange={onChangeValidate}
-                value={value}
+                value={value || ""}
                 disabled={form.readonly}
                 fullWidth
             />
