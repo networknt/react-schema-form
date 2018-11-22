@@ -228,21 +228,25 @@ const fieldset = (name, schema, options) => {
         options.lookup[ObjectPath.stringify(options.path)] = f;
 
         // recurse down into properties
-        schema.properties.forEach(k => {
-            if (Object.prototype.hasOwnProperty.call(schema.properties, k)) {
+        Object.keys(schema.properties).forEach(key => {
+            if (Object.prototype.hasOwnProperty.call(schema.properties, key)) {
                 const path = options.path.slice();
-                path.push(k);
+                path.push(key);
                 if (options.ignore[ObjectPath.stringify(path)] !== true) {
                     const required =
-                        schema.required && schema.required.indexOf(k) !== -1;
+                        schema.required && schema.required.indexOf(key) !== -1;
 
-                    const def = defaultFormDefinition(k, schema.properties[k], {
-                        path,
-                        required: required || false,
-                        lookup: options.lookup,
-                        ignore: options.ignore,
-                        global: options.global
-                    });
+                    const def = defaultFormDefinition(
+                        key,
+                        schema.properties[key],
+                        {
+                            path,
+                            required: required || false,
+                            lookup: options.lookup,
+                            ignore: options.ignore,
+                            global: options.global
+                        }
+                    );
                     if (def) {
                         f.items.push(def);
                     }
@@ -312,18 +316,22 @@ const getDefaults = (schema, ignore, globalOptions) => {
     ignore = ignore || {};
     globalOptions = globalOptions || {};
     if (stripNullType(schema.type) === "object") {
-        schema.properties.forEach(k => {
-            if (Object.prototype.hasOwnProperty.call(schema.properties, k)) {
-                if (ignore[k] !== true) {
+        Object.keys(schema.properties).forEach(key => {
+            if (Object.prototype.hasOwnProperty.call(schema.properties, key)) {
+                if (ignore[key] !== true) {
                     const required =
-                        schema.required && schema.required.indexOf(k) !== -1;
-                    const def = defaultFormDefinition(k, schema.properties[k], {
-                        path: [k], // Path to this property in bracket notation.
-                        lookup, // Extra map to register with. Optimization for merger.
-                        ignore, // The ignore list of paths (sans root level name)
-                        required, // Is it required? (v4 json schema style)
-                        global: globalOptions // Global options, including form defaults
-                    });
+                        schema.required && schema.required.indexOf(key) !== -1;
+                    const def = defaultFormDefinition(
+                        key,
+                        schema.properties[key],
+                        {
+                            path: [key], // Path to this property in bracket notation.
+                            lookup, // Extra map to register with. Optimization for merger.
+                            ignore, // The ignore list of paths (sans root level name)
+                            required, // Is it required? (v4 json schema style)
+                            global: globalOptions // Global options, including form defaults
+                        }
+                    );
                     if (def) {
                         form.push(def);
                     }
@@ -377,15 +385,24 @@ const traverseSchema = (schema, fn, path, ignoreArrays) => {
 
     const traverse = (innerSchema, innerFunc, innerPath) => {
         innerFunc(innerSchema, innerPath);
-        innerSchema.properties.forEach(k => {
-            if (
-                Object.prototype.hasOwnProperty.call(innerSchema.properties, k)
-            ) {
-                const currentPath = innerPath.slice();
-                currentPath.push(k);
-                traverse(innerSchema.properties[k], innerFunc, currentPath);
-            }
-        });
+        if (innerSchema.properties) {
+            Object.keys(innerSchema.properties).forEach(key => {
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        innerSchema.properties,
+                        key
+                    )
+                ) {
+                    const currentPath = innerPath.slice();
+                    currentPath.push(key);
+                    traverse(
+                        innerSchema.properties[key],
+                        innerFunc,
+                        currentPath
+                    );
+                }
+            });
+        }
         // Only support type "array" which have a schema as "items".
         if (!ignoreArrays && innerSchema.items) {
             const arrPath = innerPath.slice();
@@ -462,15 +479,15 @@ const merge = (schema, form, ignore, options, readonly) => {
                 const strid = ObjectPath.stringify(obj.key);
                 if (lookup[strid]) {
                     const schemaDefaults = lookup[strid];
-                    schemaDefaults.forEach(k => {
+                    Object.keys(schemaDefaults).forEach(key => {
                         if (
                             Object.prototype.hasOwnProperty.call(
                                 schemaDefaults,
-                                k
+                                key
                             )
                         ) {
-                            if (obj[k] === undefined) {
-                                obj[k] = schemaDefaults[k];
+                            if (obj[key] === undefined) {
+                                obj[key] = schemaDefaults[key];
                             }
                         }
                     });
