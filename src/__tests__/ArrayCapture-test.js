@@ -1,80 +1,81 @@
-const React = require('react');
-const SchemaForm = require('../SchemaForm');
-import { render, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import utils from '../utils';
+import { render, configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import utils from "../utils";
+
+const React = require("react");
+const SchemaForm = require("../SchemaForm");
 
 configure({ adapter: new Adapter() });
 
-jest.dontMock('../ComposedComponent');
-jest.dontMock('../utils');
-jest.dontMock('lodash');
+jest.dontMock("../ComposedComponent");
+jest.dontMock("../utils");
+jest.dontMock("lodash");
 
 function onModelChange(key, val, type) {
-    var newModel = this.state.model;
+    const { model } = this.state;
+    const newModel = model;
     utils.selectOrSet(key, newModel, val, type);
     this.setState({ model: newModel });
 }
 
-describe('Composed component test', () => {
-    it('Output from model with 3 comps must have length 3: ', function() {
+describe("Composed component test", () => {
+    it("Output from model with 3 comps must have length 3: ", () => {
         const cfg = {
             form: [
                 {
-                    'key': 'comments',
-                    'add': 'New',
-                    'style': {
-                        'add': 'btn-success'
+                    key: "comments",
+                    add: "New",
+                    style: {
+                        add: "btn-success"
                     },
-                    'items': [
-                        'comments[].name'
-                    ]
+                    items: ["comments[].name"]
                 }
             ],
             schema: {
-                'type': 'object',
-                'title': 'Comment',
-                'required': ['comments'],
-                'properties': {
-                    'comments': {
-                        'type': 'array',
-                        'maxItems': 2,
-                        'items': {
-                            'type': 'object',
-                            'properties': {
-                                'name':  {
-                                    'title': 'Name',
-                                    'type': 'string'
+                type: "object",
+                title: "Comment",
+                required: ["comments"],
+                properties: {
+                    comments: {
+                        type: "array",
+                        maxItems: 2,
+                        items: {
+                            type: "object",
+                            properties: {
+                                name: {
+                                    title: "Name",
+                                    type: "string"
                                 }
                             },
-                            'required': ['name']
+                            required: ["name"]
                         }
                     }
                 }
             },
             model: {
-                'comments': [
-                  {
-                    'name': 'some value'
-                  },
-                  {
-                    'name': 'some next value'
-                  },
-                  {
-                    'name': 'some other value'
-                  },
+                comments: [
+                    {
+                        name: "some value"
+                    },
+                    {
+                        name: "some next value"
+                    },
+                    {
+                        name: "some other value"
+                    }
                 ]
             }
         };
-        
-        let display = render(<SchemaForm 
-            form={cfg.form}
-            schema={cfg.schema}
-            model={cfg.model}
-            onModelChange={onModelChange}
-        />);
-    
-        expect(display.find('input').length).toEqual(3);
+
+        const display = render(
+            <SchemaForm
+                form={cfg.form}
+                schema={cfg.schema}
+                model={cfg.model}
+                onModelChange={onModelChange}
+            />
+        );
+
+        expect(display.find("input").length).toEqual(3);
     });
 });
-  
