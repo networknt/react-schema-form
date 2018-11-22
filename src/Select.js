@@ -5,7 +5,7 @@ import MuiSelect from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import ComposedComponent from "./ComposedComponent";
-import { getValueFromModel } from "./utils";
+import utils from "./utils";
 
 type Props = {
     model: any,
@@ -22,14 +22,17 @@ class Select extends Component<Props, State> {
         super(props);
         const { model, form } = this.props;
         this.state = {
-            currentValue: getValueFromModel(model, form.key) || ""
+            currentValue: utils.getValueFromModel(model, form.key) || ""
         };
     }
 
     static getDerivedStateFromProps(props) {
         if (props.model && props.form.key) {
             return {
-                currentValue: getValueFromModel(props.model, props.form.key)
+                currentValue: utils.getValueFromModel(
+                    props.model,
+                    props.form.key
+                )
             };
         }
         return null;

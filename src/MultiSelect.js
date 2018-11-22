@@ -7,7 +7,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Chip from "@material-ui/core/Chip";
 import ComposedComponent from "./ComposedComponent";
-import { getValueFromModel, getTitleByValue } from "./utils";
+import utils from "./utils";
 
 const styles = theme => ({
     root: {
@@ -56,7 +56,7 @@ class MultiSelect extends Component<Props, State> {
         super(props);
         const { model, form } = this.props;
         this.state = {
-            currentValue: getValueFromModel(model, form.key) || []
+            currentValue: utils.getValueFromModel(model, form.key) || []
         };
     }
 
@@ -64,7 +64,7 @@ class MultiSelect extends Component<Props, State> {
         if (props.model && props.form.key) {
             return {
                 currentValue:
-                    getValueFromModel(props.model, props.form.key) || []
+                    utils.getValueFromModel(props.model, props.form.key) || []
             };
         }
         return null;
@@ -80,7 +80,7 @@ class MultiSelect extends Component<Props, State> {
     render() {
         const { form, classes } = this.props;
         const { currentValue } = this.state;
-        const getTitle = getTitleByValue.bind(this, form.titleMap);
+        const getTitle = utils.getTitleByValue.bind(this, form.titleMap);
         const menuItems = form.titleMap.map(item => (
             <MenuItem
                 key={item.value}
