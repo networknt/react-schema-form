@@ -35,4 +35,32 @@ describe("ComposedComponent", () => {
 
         expect(result.props.value).toEqual("steeve");
     });
+
+    it("shows an error when there is an error", () => {
+        const renderer = new ShallowRenderer();
+        const cfg = {
+            form: {
+                key: ["name"],
+                required: true,
+                schema: {
+                    title: "name",
+                    type: "String"
+                },
+                type: "text",
+                title: "name"
+            },
+            model: { name: "" },
+            mapper: {}
+        };
+
+        const Composed = ComposedComponent(Text);
+
+        renderer.render(
+            <Composed form={cfg.form} model={cfg.model} mapper={cfg.mapper} />
+        );
+
+        const result = renderer.getRenderOutput();
+
+        expect(result.props.error).toEqual("Missing required property: name");
+    });
 });
