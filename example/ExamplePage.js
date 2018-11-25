@@ -76,7 +76,7 @@ class ExamplePage extends React.Component {
                     formJson: JSON.stringify(form, undefined, 2),
                     selected: value,
                     schema,
-                    model,
+                    model: model || {},
                     form
                 });
             });
@@ -138,6 +138,7 @@ class ExamplePage extends React.Component {
                         form={form}
                         onModelChange={this.onModelChange}
                         mapper={mapper}
+                        model={model}
                     />
                 </ErrorBoundary>
             );
