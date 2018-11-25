@@ -1,0 +1,21 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Types",
+        "properties": {
+            "date": {
+                "title": "Birthday",
+                "type": "object"
+            }
+        }
+    },
+    "form": [
+        {
+            "key": "date",
+            "type": "date"
+        }
+    ],
+    "model": {
+        "date": "1947-01-8"
+    }
+}

@@ -33,7 +33,9 @@ class ExamplePage extends React.Component {
             {label: 'Readonly', value: 'data/readonly.json'},
             {label: 'Array', value: 'data/array.json'},
             {label: 'Object', value: 'data/object.json'},
-            {label: 'ArraySelect', value: 'data/arrayselect.json'}
+            {label: 'ArraySelect', value: 'data/arrayselect.json'},
+            {label: 'Test - Date Capture', value: 'data/tests/datecapture.json'},
+
         ],
         validationResult: {},
         schema: {},
@@ -60,13 +62,13 @@ class ExamplePage extends React.Component {
 
         fetch(value)
             .then(x => x.json())
-            .then(({form, schema}) => {
+            .then(({form, schema, model}) => {
                 this.setState({
                     schemaJson: JSON.stringify(schema, undefined, 2),
                     formJson: JSON.stringify(form, undefined, 2),
                     selected: value,
                     schema,
-                    model: {},
+                    model,
                     form,
                 })
             })
