@@ -82,7 +82,7 @@
     "preversion": "webpack -p",
     "prepublishOnly": "rimraf lib && NODE_ENV=production babel src -d lib",
     "lint": "eslint src",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "jest": {
     "verbose": true,
