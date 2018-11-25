@@ -545,14 +545,11 @@ const merge = (schema, form, ignore, options, readonly) => {
     );
 };
 
-const selectOrSet = (projection, obj, valueToSet, type) => {
+function selectOrSet(projection, obj, valueToSet, type) {
     const numRe = /^\d+$/;
 
     if (!obj) {
         obj = this;
-    }
-    if (!obj) {
-        return obj;
     }
     // Support [] array syntax
     const parts =
@@ -611,7 +608,7 @@ const selectOrSet = (projection, obj, valueToSet, type) => {
         }
     }
     return value;
-};
+}
 
 const validateBySchema = (schema, value) => tv4.validateResult(value, schema);
 
