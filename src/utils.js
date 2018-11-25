@@ -228,31 +228,36 @@ const fieldset = (name, schema, options) => {
         options.lookup[ObjectPath.stringify(options.path)] = f;
 
         // recurse down into properties
-        Object.keys(schema.properties).forEach(key => {
-            if (Object.prototype.hasOwnProperty.call(schema.properties, key)) {
-                const path = options.path.slice();
-                path.push(key);
-                if (options.ignore[ObjectPath.stringify(path)] !== true) {
-                    const required =
-                        schema.required && schema.required.indexOf(key) !== -1;
+        if (schema.properties) {
+            Object.keys(schema.properties).forEach(key => {
+                if (
+                    Object.prototype.hasOwnProperty.call(schema.properties, key)
+                ) {
+                    const path = options.path.slice();
+                    path.push(key);
+                    if (options.ignore[ObjectPath.stringify(path)] !== true) {
+                        const required =
+                            schema.required &&
+                            schema.required.indexOf(key) !== -1;
 
-                    const def = defaultFormDefinition(
-                        key,
-                        schema.properties[key],
-                        {
-                            path,
-                            required: required || false,
-                            lookup: options.lookup,
-                            ignore: options.ignore,
-                            global: options.global
+                        const def = defaultFormDefinition(
+                            key,
+                            schema.properties[key],
+                            {
+                                path,
+                                required: required || false,
+                                lookup: options.lookup,
+                                ignore: options.ignore,
+                                global: options.global
+                            }
+                        );
+                        if (def) {
+                            f.items.push(def);
                         }
-                    );
-                    if (def) {
-                        f.items.push(def);
                     }
                 }
-            }
-        });
+            });
+        }
         return f;
     }
     return undefined;
@@ -540,6 +545,9 @@ const selectOrSet = (projection, obj, valueToSet, type) => {
 
     if (!obj) {
         obj = this;
+    }
+    if (!obj) {
+        return obj;
     }
     // Support [] array syntax
     const parts =
