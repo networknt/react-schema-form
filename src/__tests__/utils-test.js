@@ -1,5 +1,5 @@
-const _ = require("lodash");
-const utils = require("../utils");
+import _ from "lodash";
+import utils from "../utils";
 /**
  * Created by steve on 11/09/15.
  */
@@ -178,7 +178,6 @@ describe("utils", () => {
             }
         ];
         const f = utils.getDefaults(schema);
-        // console.log('f = ', f);
         expect(f.form).toEqual(form);
     });
 
