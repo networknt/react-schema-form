@@ -321,28 +321,33 @@ const getDefaults = (schema, ignore, globalOptions) => {
     ignore = ignore || {};
     globalOptions = globalOptions || {};
     if (stripNullType(schema.type) === "object") {
-        Object.keys(schema.properties).forEach(key => {
-            if (Object.prototype.hasOwnProperty.call(schema.properties, key)) {
-                if (ignore[key] !== true) {
-                    const required =
-                        schema.required && schema.required.indexOf(key) !== -1;
-                    const def = defaultFormDefinition(
-                        key,
-                        schema.properties[key],
-                        {
-                            path: [key], // Path to this property in bracket notation.
-                            lookup, // Extra map to register with. Optimization for merger.
-                            ignore, // The ignore list of paths (sans root level name)
-                            required, // Is it required? (v4 json schema style)
-                            global: globalOptions // Global options, including form defaults
+        if (schema.properties) {
+            Object.keys(schema.properties).forEach(key => {
+                if (
+                    Object.prototype.hasOwnProperty.call(schema.properties, key)
+                ) {
+                    if (ignore[key] !== true) {
+                        const required =
+                            schema.required &&
+                            schema.required.indexOf(key) !== -1;
+                        const def = defaultFormDefinition(
+                            key,
+                            schema.properties[key],
+                            {
+                                path: [key], // Path to this property in bracket notation.
+                                lookup, // Extra map to register with. Optimization for merger.
+                                ignore, // The ignore list of paths (sans root level name)
+                                required, // Is it required? (v4 json schema style)
+                                global: globalOptions // Global options, including form defaults
+                            }
+                        );
+                        if (def) {
+                            form.push(def);
                         }
-                    );
-                    if (def) {
-                        form.push(def);
                     }
                 }
-            }
-        });
+            });
+        }
     } else {
         throw new Error(
             'Not implemented. Only type "object" allowed at root level of schema.'
