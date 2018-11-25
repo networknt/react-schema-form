@@ -1,6 +1,5 @@
 import React from "react";
 import ShallowRenderer from "react-test-renderer/shallow";
-
 import ComposedComponent from "../ComposedComponent";
 import Text from "../Text";
 

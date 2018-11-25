@@ -1,9 +1,8 @@
+import React from "react";
 import { render, configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import utils from "../utils";
-
-const React = require("react");
-const SchemaForm = require("../SchemaForm");
+import SchemaForm from "../SchemaForm";
 
 configure({ adapter: new Adapter() });
 

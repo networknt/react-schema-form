@@ -1,6 +1,6 @@
-const React = require("react");
-const ShallowRenderer = require("react-test-renderer/shallow");
-const SchemaForm = require("../SchemaForm");
+import React from "react";
+import ShallowRenderer from "react-test-renderer/shallow";
+import SchemaForm from "../SchemaForm";
 
 describe("SchemaForm test", () => {
     it("shows SchemaForm", () => {

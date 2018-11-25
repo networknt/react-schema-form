@@ -1,7 +1,7 @@
-const React = require("react");
-const Shalow = require("react-test-renderer/shallow");
-const Text = require("../Text").default;
-const Composed = require("../ComposedComponent").default;
+import React from "react";
+import Shalow from "react-test-renderer/shallow";
+import Text from "../Text";
+import Composed from "../ComposedComponent";
 
 test("Composed component test", () => {
     const renderer = new Shalow();
