@@ -145,14 +145,14 @@ class ExamplePage extends React.Component {
             validate = (
                 <div>
                     <Button
-                        variant="raised"
+                        variant="contained"
                         color="primary"
                         onClick={this.onValidate}
                     >
                         Validate
                     </Button>
                     <Button
-                        variant="raised"
+                        variant="contained"
                         color="primary"
                         onClick={this.setStateDefault}
                     >
