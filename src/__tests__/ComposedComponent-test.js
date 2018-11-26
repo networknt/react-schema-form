@@ -1,74 +1,66 @@
-jest.dontMock('../ComposedComponent');
-jest.dontMock('../utils');
-jest.dontMock('lodash');
+import React from "react";
+import ShallowRenderer from "react-test-renderer/shallow";
+import ComposedComponent from "../ComposedComponent";
+import Text from "../Text";
 
-import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
+jest.dontMock("../ComposedComponent");
+jest.dontMock("../utils");
+jest.dontMock("lodash");
 
-import ComposedComponent from '../ComposedComponent';
-import Text from '../Text';
-
-describe('ComposedComponent', function () {
-
-  it('shows default value at text field', function () {
-    const renderer = new ShallowRenderer();
-    var cfg = {
-      form: {
-        key: ['name'],
-        schema: {
-          default: 'steeve',
-          title: 'name',
-          type: 'String',
-        },
-        type: 'text',
-        title: 'name',
-      },
-      model: {name: 'steeve'},
-      mapper: {}
-    };
-
-    var Composed = ComposedComponent(Text);
-
-    renderer.render(
-      <Composed
-        form={cfg.form}
-        model={cfg.model}
-        mapper={cfg.mapper}
-      />);
-
-    var result = renderer.getRenderOutput();
-
-    expect(result.props.value).toEqual('steeve');
-  });
-
-  it('shows an error when there is an error', function () {
-    const renderer = new ShallowRenderer();
-    var cfg = {
-        form: {
-            key: ['name'],
-            required: true,
-            schema: {
-                title: 'name',
-                type: 'String',
+describe("ComposedComponent", () => {
+    it("shows default value at text field", () => {
+        const renderer = new ShallowRenderer();
+        const cfg = {
+            form: {
+                key: ["name"],
+                schema: {
+                    default: "steeve",
+                    title: "name",
+                    type: "String"
+                },
+                type: "text",
+                title: "name"
             },
-            type: 'text',
-            title: 'name',
-        },
-        model: {name: ''},
-        mapper: {}
-    };
+            model: { name: "steeve" },
+            mapper: {}
+        };
 
-    var Composed = ComposedComponent(Text);
+        const Composed = ComposedComponent(Text);
 
-    renderer.render(
-      <Composed
-        form={cfg.form}
-        model={cfg.model}
-        mapper={cfg.mapper}
-      />);
+        renderer.render(
+            <Composed form={cfg.form} model={cfg.model} mapper={cfg.mapper} />
+        );
 
-    var result = renderer.getRenderOutput();
+        const result = renderer.getRenderOutput();
 
-    expect(result.props.error).toEqual('Missing required property: name');
-  });
+        expect(result.props.value).toEqual("steeve");
+    });
+
+    it("shows an error when there is an error", () => {
+        const renderer = new ShallowRenderer();
+        const cfg = {
+            form: {
+                key: ["name"],
+                required: true,
+                schema: {
+                    title: "name",
+                    type: "String"
+                },
+                type: "text",
+                title: "name"
+            },
+            model: { name: "" },
+            mapper: {}
+        };
+
+        const Composed = ComposedComponent(Text);
+
+        renderer.render(
+            <Composed form={cfg.form} model={cfg.model} mapper={cfg.mapper} />
+        );
+
+        const result = renderer.getRenderOutput();
+
+        expect(result.props.error).toEqual("Missing required property: name");
+    });
 });

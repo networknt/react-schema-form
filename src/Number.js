@@ -1,76 +1,42 @@
+// @flow
 /**
  * Created by steve on 15/09/15.
  */
-import React from 'react';
-import ComposedComponent from './ComposedComponent';
-import TextField from '@material-ui/core/TextField';
+import React from "react";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import ComposedComponent from "./ComposedComponent";
+
+type Props = {
+    value: any,
+    onChangeValidate: any,
+    form: any,
+    error: any
+};
 
 /**
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
-class Number extends React.Component {
+const NumberComponent = ({ form, error, onChangeValidate, value }: Props) => (
+    <FormControl fullWidth error={!!error}>
+        <InputLabel htmlFor={`input-${form.key[0]}`} required={form.required}>
+            {form.title}
+        </InputLabel>
+        <Input
+            id={`input-${form.key[0]}`}
+            type="string"
+            placeholder={form.placeholder}
+            onChange={onChangeValidate}
+            value={value || value === 0 ? value : ""}
+            disabled={form.readonly}
+        />
+        {Boolean(error || form.description) && (
+            <FormHelperText>{error || form.description}</FormHelperText>
+        )}
+    </FormControl>
+);
 
-    constructor(props) {
-        super(props);
-        this.preValidationCheck = this.preValidationCheck.bind(this);
-        this.state = {
-            lastSuccessfulValue: this.props.value
-        };
-        this.numberField = React.createRef();
-    }
-
-    static getDerivedStateFromProps(nextProps) {
-        return {
-            lastSuccessfulValue: nextProps.value,
-        };
-    }
-
-    isNumeric(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-    }
-
-    isEmpty(n) {
-        return (!n || 0 === n.length);
-    }
-
-    /**
-     * Prevent the field from accepting non-numeric characters.
-     * @param e
-     */
-    preValidationCheck(e) {
-        if (this.isNumeric(e.target.value)) {
-            this.setState({
-                lastSuccessfulValue: e.target.value
-            });
-            this.props.onChangeValidate(e);
-        } else if (this.isEmpty(e.target.value)) {
-            this.setState({
-                lastSuccessfulValue: e.target.value
-            });
-            this.props.onChangeValidate(e);
-        } else {
-            this.numberField.current.value = this.state.lastSuccessfulValue;
-        }
-    }
-
-    render() {
-        let { form, error} = this.props
-        return (
-            <TextField
-                type={form.type}
-                label={form.title}
-                placeholder={form.placeholder}
-                helperText={error || form.description}
-                error={!!error}
-                onChange={this.preValidationCheck}
-                value={this.state.lastSuccessfulValue}
-                ref={this.numberField}
-                disabled={form.readonly}
-                fullWidth
-            />
-        );
-    }
-}
-
-export default ComposedComponent(Number);
+export default ComposedComponent(NumberComponent);

@@ -1,32 +1,39 @@
+// @flow
 /**
  * Created by steve on 20/09/15.
  */
-import React from 'react';
-import ComposedComponent from './ComposedComponent';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React, { Component } from "react";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import ComposedComponent from "./ComposedComponent";
 
-class FormCheckbox extends React.Component {
+type Props = {
+    onChangeValidate: any,
+    form: any,
+    value: any
+};
 
+class FormCheckbox extends Component<Props> {
     handleChange = e => {
-        this.props.onChangeValidate(e);
+        const { onChangeValidate } = this.props;
+        onChangeValidate(e);
     };
 
     render() {
-        // let value = selectOrSet(this.props.form.key, this.props.model);
+        const { form, value } = this.props;
         return (
-            <FormGroup row={true}>
+            <FormGroup row>
                 <FormControlLabel
-                    className={this.props.form.className}
-                    label={this.props.form.title}
+                    className={form.className}
+                    label={form.title}
                     control={
                         <Checkbox
-                            name={this.props.form.key.slice(-1)[0]}
-                            value={this.props.form.key.slice(-1)[0]}
-                            checked={this.props.value || false}
-                            disabled={this.props.form.readonly}
-                            onChange={this.handleChange}
+                            name={form.key.slice(-1)[0]}
+                            value={form.key.slice(-1)[0]}
+                            checked={value || false}
+                            disabled={form.readonly}
+                            onChange={e => this.handleChange(e)}
                         />
                     }
                 />
