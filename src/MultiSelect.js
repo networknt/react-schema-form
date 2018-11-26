@@ -1,24 +1,25 @@
-import React, { Component } from 'react'
-import ComposedComponent from './ComposedComponent'
-import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem'
-import MuiSelect from '@material-ui/core/Select'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
-import Chip from '@material-ui/core/Chip';
-import { getValueFromModel, getTitleByValue } from './utils'
+// @flow
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
+import MuiSelect from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Chip from "@material-ui/core/Chip";
+import ComposedComponent from "./ComposedComponent";
+import utils from "./utils";
 
 const styles = theme => ({
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
+        display: "flex",
+        flexWrap: "wrap"
     },
     chips: {
-        display: 'flex',
-        flexWrap: 'wrap',
+        display: "flex",
+        flexWrap: "wrap"
     },
     chip: {
-        margin: theme.spacing.unit / 4,
+        margin: theme.spacing.unit / 4
     },
     menuItem: {
         fontWeight: theme.typography.fontWeightRegular
@@ -26,7 +27,7 @@ const styles = theme => ({
     selectedMenuItem: {
         fontWeight: theme.typography.fontWeightMedium
     }
-})
+});
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -39,47 +40,66 @@ const MenuProps = {
     }
 };
 
-class MultiSelect extends Component {
+type Props = {
+    model: any,
+    form: any,
+    onChangeValidate: any,
+    classes: any
+};
+
+type State = {
+    currentValue: any
+};
+
+class MultiSelect extends Component<Props, State> {
     constructor(props) {
-        super(props)
+        super(props);
+        const { model, form } = this.props;
         this.state = {
-            currentValue: getValueFromModel(this.props.model, this.props.form.key) || []
-        }
+            currentValue: utils.getValueFromModel(model, form.key) || []
+        };
     }
 
-    static getDerivedStateFromProps(props) {
+    static getDerivedStateFromProps(props: Props) {
         if (props.model && props.form.key) {
             return {
-                currentValue: getValueFromModel(props.model, props.form.key) || []
-            }
+                currentValue:
+                    utils.getValueFromModel(props.model, props.form.key) || []
+            };
         }
+        return null;
     }
 
-    onSelected = (event) => {
-        let currentValue = event.target.value
-        this.setState({ currentValue })
-        this.props.onChangeValidate(currentValue)
-    }
+    onSelected = event => {
+        const { onChangeValidate } = this.props;
+        const currentValue = event.target.value;
+        this.setState({ currentValue });
+        onChangeValidate(currentValue);
+    };
 
     render() {
-        const { form, classes } = this.props
-        const { currentValue } = this.state
-        const getTitle = getTitleByValue.bind(this, form.titleMap)
+        const { form, classes } = this.props;
+        const { currentValue } = this.state;
+        const getTitle = utils.getTitleByValue.bind(this, form.titleMap);
         const menuItems = form.titleMap.map(item => (
             <MenuItem
                 key={item.value}
                 value={item.value}
-                className={currentValue.indexOf(name) === -1 ? classes.menuItem : classes.selectedMenuItem}
+                className={
+                    currentValue.indexOf(item.value) === -1
+                        ? classes.menuItem
+                        : classes.selectedMenuItem
+                }
             >
                 {item.name}
             </MenuItem>
-        ))
+        ));
         return (
             <FormControl fullWidth>
                 <InputLabel>{form.title}</InputLabel>
                 <MuiSelect
                     multiple
-                    value={this.state.currentValue || ''}
+                    value={currentValue || ""}
                     placeholder={form.title}
                     disabled={form.readonly}
                     onChange={this.onSelected}
@@ -87,15 +107,19 @@ class MultiSelect extends Component {
                     renderValue={selected => (
                         <div className={classes.chips}>
                             {selected.map(value => (
-                                <Chip key={value} label={getTitle(value)} className={classes.chip} />
+                                <Chip
+                                    key={value}
+                                    label={getTitle(value)}
+                                    className={classes.chip}
+                                />
                             ))}
                         </div>
-                    )}                    
+                    )}
                 >
                     {menuItems}
                 </MuiSelect>
             </FormControl>
-        )
+        );
     }
 }
 

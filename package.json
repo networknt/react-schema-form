@@ -38,6 +38,7 @@
     "webpack-config": "^7.5.0"
   },
   "devDependencies": {
+    "@babel/preset-flow": "^7.0.0",
     "@material-ui/core": "3.3.2",
     "@material-ui/icons": "3.0.1",
     "babel-cli": "6.26.0",
@@ -52,8 +53,17 @@
     "enzyme": "3.7.0",
     "enzyme-adapter-react-16": "1.6.0",
     "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-flowtype": "^3.1.4",
+    "eslint-plugin-flowtype-errors": "^3.6.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.85.0",
     "jest-cli": "^23.6.0",
+    "prettier": "^1.14.3",
     "react": "16.6.0",
     "react-dom": "16.6.0",
     "react-hot-loader": "4.3.11",
@@ -72,7 +82,7 @@
     "preversion": "webpack -p",
     "prepublishOnly": "rimraf lib && NODE_ENV=production babel src -d lib",
     "lint": "eslint src",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "jest": {
     "verbose": true,

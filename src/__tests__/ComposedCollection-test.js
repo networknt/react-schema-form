@@ -1,35 +1,31 @@
-const React = require('react');
-const Text = require('../Text').default;
-const Composed = require('../ComposedComponent').default;
-const Shalow = require('react-test-renderer/shallow');
+import React from "react";
+import Shalow from "react-test-renderer/shallow";
+import Text from "../Text";
+import Composed from "../ComposedComponent";
 
-test('Composed component test', () => {
-
+test("Composed component test", () => {
     const renderer = new Shalow();
     const cfg = {
         form: {
-            key: ['name'],
+            key: ["name"],
             schema: {
-                default: 'steeve',
-                title: 'name',
-                type: 'String',
+                default: "steeve",
+                title: "name",
+                type: "String"
             },
-            type: 'text',
-            title: 'name',
+            type: "text",
+            title: "name"
         },
-        model: {name: 'steeve'},
+        model: { name: "steeve" },
         mapper: {}
     };
 
     const TestText = Composed(Text);
-    renderer.render(<TestText
-        form={cfg.form} 
-        model={cfg.model}
-        mapper={cfg.mapper}
-    />);
+    renderer.render(
+        <TestText form={cfg.form} model={cfg.model} mapper={cfg.mapper} />
+    );
 
     const result = renderer.getRenderOutput();
 
-    expect(result.props.value).toEqual('steeve');
+    expect(result.props.value).toEqual("steeve");
 });
-  
