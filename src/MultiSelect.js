@@ -8,6 +8,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Chip from "@material-ui/core/Chip";
 import ComposedComponent from "./ComposedComponent";
 import utils from "./utils";
+import type { Localization } from "./types";
 
 const styles = theme => ({
     root: {
@@ -44,7 +45,8 @@ type Props = {
     model: any,
     form: any,
     onChangeValidate: any,
-    classes: any
+    classes: any,
+    localization: Localization
 };
 
 type State = {
@@ -78,7 +80,11 @@ class MultiSelect extends Component<Props, State> {
     };
 
     render() {
-        const { form, classes } = this.props;
+        const {
+            form,
+            classes,
+            localization: { getLocalizedString }
+        } = this.props;
         const { currentValue } = this.state;
         const getTitle = utils.getTitleByValue.bind(this, form.titleMap);
         const menuItems = form.titleMap.map(item => (
@@ -91,16 +97,16 @@ class MultiSelect extends Component<Props, State> {
                         : classes.selectedMenuItem
                 }
             >
-                {item.name}
+                {getLocalizedString(item.name)}
             </MenuItem>
         ));
         return (
             <FormControl fullWidth>
-                <InputLabel>{form.title}</InputLabel>
+                <InputLabel>{getLocalizedString(form.title)}</InputLabel>
                 <MuiSelect
                     multiple
                     value={currentValue || ""}
-                    placeholder={form.title}
+                    placeholder={getLocalizedString(form.title)}
                     disabled={form.readonly}
                     onChange={this.onSelected}
                     MenuProps={MenuProps}
@@ -109,7 +115,7 @@ class MultiSelect extends Component<Props, State> {
                             {selected.map(value => (
                                 <Chip
                                     key={value}
-                                    label={getTitle(value)}
+                                    label={getLocalizedString(getTitle(value))}
                                     className={classes.chip}
                                 />
                             ))}

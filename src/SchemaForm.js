@@ -13,12 +13,13 @@ import TextSuggest from "./TextSuggest";
 import Select from "./Select";
 import MultiSelect from "./MultiSelect";
 import Radios from "./Radios";
-import Date from "./Date";
+import DateComponent from "./Date";
 import Checkbox from "./Checkbox";
 import Help from "./Help";
 import Array from "./Array";
 import FieldSet from "./FieldSet";
 import TripleBoolean from "./TripleBoolean";
+import type { Localization } from "./types";
 
 type Props = {
     onModelChange: any,
@@ -29,10 +30,28 @@ type Props = {
     option: any,
     model: any,
     className: any,
-    mapper: any
+    mapper: any,
+    localization?: Localization
+};
+
+const formatDate = (date: string | Date) => {
+    let value =
+        (date && typeof date === "object" && date.toISOString().slice(0, 10)) ||
+        date;
+    if (!value) value = "";
+    if (value.length > 0) value = new Date(value).toISOString().slice(0, 10);
+    return value;
 };
 
 class SchemaForm extends Component<Props> {
+    static defaultProps = {
+        localization: {
+            getLocalizedString: value => value,
+            getLocalizedNumber: value => value,
+            getLocalizedDate: formatDate
+        }
+    };
+
     mapper = {
         number: Number,
         text: Text,
@@ -41,7 +60,7 @@ class SchemaForm extends Component<Props> {
         textsuggest: TextSuggest,
         select: Select,
         radios: Radios,
-        date: Date,
+        date: DateComponent,
         checkbox: Checkbox,
         help: Help,
         array: Array,
@@ -73,7 +92,7 @@ class SchemaForm extends Component<Props> {
     };
 
     builder(form, model, index, mapper, onChange, builder) {
-        const { errors } = this.props;
+        const { errors, localization } = this.props;
         const Field = this.mapper[form.type];
         if (!Field) {
             return null;
@@ -101,6 +120,7 @@ class SchemaForm extends Component<Props> {
                 mapper={mapper}
                 builder={builder}
                 errorText={error}
+                localization={localization}
             />
         );
     }
