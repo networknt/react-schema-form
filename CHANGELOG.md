@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.2 - 2018-11-26
+### Added
+
+### Changed
+- Updating project dependencies to latest version #135. Thanks @naeemba
+- Flow #134. Thanks @naeemba
+
 ## 0.6.1 - 2018-11-19
 ### Added
 
