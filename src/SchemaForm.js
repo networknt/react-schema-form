@@ -45,11 +45,7 @@ const formatDate = (date: string | Date) => {
 
 class SchemaForm extends Component<Props> {
     static defaultProps = {
-        localization: {
-            getLocalizedString: value => value,
-            getLocalizedNumber: value => value,
-            getLocalizedDate: formatDate
-        }
+        localization: undefined
     };
 
     mapper = {
@@ -91,8 +87,26 @@ class SchemaForm extends Component<Props> {
             onModelChange(key, value, form.type, form);
     };
 
+    getLocalization = () => {
+        const { localization } = this.props;
+        return {
+            getLocalizedString:
+                localization && localization.getLocalizedString
+                    ? localization.getLocalizedString
+                    : value => value,
+            getLocalizedNumber:
+                localization && localization.getLocalizedNumber
+                    ? localization.getLocalizedNumber
+                    : value => value,
+            getLocalizedDate:
+                localization && localization.getLocalizedDate
+                    ? localization.getLocalizedDate
+                    : formatDate
+        };
+    };
+
     builder(form, model, index, mapper, onChange, builder) {
-        const { errors, localization } = this.props;
+        const { errors } = this.props;
         const Field = this.mapper[form.type];
         if (!Field) {
             return null;
@@ -120,7 +134,7 @@ class SchemaForm extends Component<Props> {
                 mapper={mapper}
                 builder={builder}
                 errorText={error}
-                localization={localization}
+                localization={this.getLocalization()}
             />
         );
     }
