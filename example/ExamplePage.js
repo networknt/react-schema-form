@@ -39,6 +39,7 @@ class ExamplePage extends React.Component {
             { label: "Readonly", value: "data/readonly.json" },
             { label: "Array", value: "data/array.json" },
             { label: "Object", value: "data/object.json" },
+            { label: "Select with label", value: "data/selectlabel.json"},
             { label: "ArraySelect", value: "data/arrayselect.json" },
             {
                 label: "Test - Date Capture",
