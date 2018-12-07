@@ -677,7 +677,7 @@ const getValueFromModel = (model, key) => {
 };
 
 const getTitleByValue = (titleMap, value) => {
-    for (let i = titleMap.length; i >= 0; i -= 1) {
+    for (let i = 0; i < titleMap.length; i += 1) {
         const item = titleMap[i];
         if (item.value === value) return item.name;
     }
