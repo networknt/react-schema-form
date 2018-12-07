@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.3 - 2018-12-07
+### Added
+
+### Changed
+- arrayselect seems not working in the example #121
+
 ## 0.6.2 - 2018-11-26
 ### Added
 
