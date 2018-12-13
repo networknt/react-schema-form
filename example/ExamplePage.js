@@ -33,6 +33,7 @@ class ExamplePage extends React.Component {
             { label: "Basic JSON Schema Type", value: "data/types.json" },
             { label: "Basic Radios", value: "data/radio.json" },
             { label: "Condition", value: "data/condition.json" },
+            { label: "Help", value: "data/help.json"},
             { label: "Kitchen Sink", value: "data/kitchenSink.json" },
             { label: "Login", value: "data/login.json" },
             { label: "Date", value: "data/date.json" },
