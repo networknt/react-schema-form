@@ -32,10 +32,10 @@ const cfg = {
                     type: "object",
                     properties: {
                         switch: {
-                            "type": "boolean"
+                            type: "boolean"
                         },
                         conditional: {
-                            "type": "string"
+                            type: "string"
                         }
                     }
                 }
@@ -109,7 +109,7 @@ describe("Composed component test", () => {
             }
         ];
 
-        let model = {
+        const model = {
             name: "some",
             array: [
                 {
