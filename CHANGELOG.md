@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.5 - 2018-12-18
+### Added
+
+### Changed
+- Conditionals in array objects #142. Thanks @struankl
+
 ## 0.6.4 - 2018-12-13
 ### Added
 
