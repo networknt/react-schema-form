@@ -31,7 +31,8 @@ type Props = {
     model: any,
     className: any,
     mapper: any,
-    localization?: Localization
+    localization?: Localization,
+    showErrors?: boolean
 };
 
 const formatDate = (date: string | Date) => {
@@ -45,7 +46,8 @@ const formatDate = (date: string | Date) => {
 
 class SchemaForm extends Component<Props> {
     static defaultProps = {
-        localization: undefined
+        localization: undefined,
+        showErrors: false
     };
 
     mapper = {
@@ -106,7 +108,7 @@ class SchemaForm extends Component<Props> {
     };
 
     builder(form, model, index, mapper, onChange, builder) {
-        const { errors } = this.props;
+        const { errors, showErrors } = this.props;
         const Field = this.mapper[form.type];
         if (!Field) {
             return null;
@@ -135,6 +137,7 @@ class SchemaForm extends Component<Props> {
                 builder={builder}
                 errorText={error}
                 localization={this.getLocalization()}
+                showErrors={showErrors}
             />
         );
     }
