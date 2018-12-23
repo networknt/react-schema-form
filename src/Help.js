@@ -9,8 +9,18 @@ type Props = {
     form: any
 };
 
-const Help = ({ form: { description } }: Props) => (
-    <Typography variant="body2">{description}</Typography>
+const Help = ({
+    form: { description, variant, align, color, noWrap, paragraph }
+}: Props) => (
+    <Typography
+        variant={variant}
+        align={align}
+        color={color}
+        noWrap={noWrap}
+        paragraph={paragraph}
+    >
+        {description}
+    </Typography>
 );
 
 export default Help;

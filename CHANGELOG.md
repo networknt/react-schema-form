@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.5 - 2018-12-18
+### Added
+
+### Changed
+- Conditionals in array objects #142. Thanks @struankl
+
+## 0.6.4 - 2018-12-13
+### Added
+
+### Changed
+- fix the help to inject text on form and add an example #141
+
+## 0.6.3 - 2018-12-07
+### Added
+
+### Changed
+- arrayselect seems not working in the example #121
+
 ## 0.6.2 - 2018-11-26
 ### Added
 

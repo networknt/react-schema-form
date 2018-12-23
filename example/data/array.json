@@ -40,7 +40,10 @@
   "form": [
     {
       "type": "help",
-      "helpvalue": "<h4>Array Example</h4><p>Try adding a couple of forms, reorder by drag'n'drop.</p>"
+      "description": "Array Example. Try adding a couple of forms, reorder by drag'n'drop.",
+      "variant": "h4",
+      "align": "left",
+      "color": "secondary"
     },
     {
       "key": "comments",
