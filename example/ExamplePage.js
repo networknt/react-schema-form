@@ -9,11 +9,19 @@ import {
     MenuItem,
     Select
 } from "@material-ui/core";
+import Localizer from "./data/tests/localizer";
 import ErrorBoundary from "./ErrorBoundary";
 // RcSelect is still in migrating process so it's excluded for now
 // import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
+const examples = {
+    localizer: Localizer
+};
 
-class ExamplePage extends React.Component {
+type State = {
+    showErrors: boolean
+};
+
+class ExamplePage extends React.Component<void, State> {
     tempModel = {
         comments: [
             {
@@ -33,7 +41,7 @@ class ExamplePage extends React.Component {
             { label: "Basic JSON Schema Type", value: "data/types.json" },
             { label: "Basic Radios", value: "data/radio.json" },
             { label: "Condition", value: "data/condition.json" },
-            { label: "Help", value: "data/help.json"},
+            { label: "Help", value: "data/help.json" },
             { label: "Kitchen Sink", value: "data/kitchenSink.json" },
             { label: "Login", value: "data/login.json" },
             { label: "Date", value: "data/date.json" },
@@ -46,6 +54,10 @@ class ExamplePage extends React.Component {
             {
                 label: "Test - Date Capture",
                 value: "data/tests/datecapture.json"
+            },
+            {
+                label: "Test - Localizer",
+                value: "localizer"
             }
         ],
         validationResult: {},
@@ -54,7 +66,9 @@ class ExamplePage extends React.Component {
         model: {},
         schemaJson: "",
         formJson: "",
-        selected: ""
+        selected: "",
+        localization: undefined,
+        showErrors: false
     };
 
     setStateDefault = () => this.setState({ model: this.tempModel });
@@ -67,22 +81,38 @@ class ExamplePage extends React.Component {
                 selected: "",
                 schema: {},
                 model: {},
-                form: []
+                form: [],
+                showErrors: false
             });
         }
 
-        fetch(value)
-            .then(x => x.json())
-            .then(({ form, schema, model }) => {
-                this.setState({
-                    schemaJson: JSON.stringify(schema, undefined, 2),
-                    formJson: JSON.stringify(form, undefined, 2),
-                    selected: value,
-                    schema,
-                    model: model || {},
-                    form
-                });
+        if (!value.endsWith("json")) {
+            const elem = examples[value];
+            this.setState({
+                schemaJson: JSON.stringify(elem.schema, undefined, 2),
+                formJson: JSON.stringify(elem.form, undefined, 2),
+                selected: value,
+                schema: elem.schema,
+                model: elem.model || {},
+                form: elem.form,
+                localization: elem.localization,
+                showErrors: false
             });
+        } else {
+            fetch(value)
+                .then(x => x.json())
+                .then(({ form, schema, model }) => {
+                    this.setState({
+                        schemaJson: JSON.stringify(schema, undefined, 2),
+                        formJson: JSON.stringify(form, undefined, 2),
+                        selected: value,
+                        schema,
+                        model: model || {},
+                        form,
+                        showErrors: false
+                    });
+                });
+        }
     };
 
     onModelChange = (key, val, type) => {
@@ -95,7 +125,7 @@ class ExamplePage extends React.Component {
     onValidate = () => {
         const { schema, model } = this.state;
         const result = utils.validateBySchema(schema, model);
-        this.setState({ validationResult: result });
+        this.setState({ validationResult: result, showErrors: true });
     };
 
     onFormChange = val => {
@@ -125,7 +155,9 @@ class ExamplePage extends React.Component {
             selected,
             tests,
             formJson,
-            schemaJson
+            schemaJson,
+            localization,
+            showErrors
         } = this.state;
         const mapper = {
             // 'rc-select': RcSelect
@@ -142,6 +174,8 @@ class ExamplePage extends React.Component {
                         onModelChange={this.onModelChange}
                         mapper={mapper}
                         model={model}
+                        localization={localization}
+                        showErrors={showErrors}
                     />
                 </ErrorBoundary>
             );

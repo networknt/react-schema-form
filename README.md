@@ -102,6 +102,34 @@ import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 
 ```
 
+# Error Handler
+
+The error handler is disabled by default but you can enable it by using showErrors prop on `SchemaForm`.
+
+```js
+...
+onValidate = () => {
+    if (form is valid) {
+        ...
+    } else {
+        this.setState({ showErrors: true });
+    }
+}
+
+...
+    <>
+        <SchemaForm
+            schema={schemaObject}
+            form={formObject}
+            model={modelObject}
+            onModelChange={this.onModelChange}
+            mapper={mapperObject}
+            showErrors={this.state.showErrors}
+        />
+        <Button onClick={this.validate}>Submit</Button>
+    </>
+```
+
 
 # Contributing
 

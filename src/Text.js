@@ -5,6 +5,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import ComposedComponent from "./ComposedComponent";
+import type { Localization } from "./types";
 
 type Props = {
     form: any,
@@ -12,7 +13,8 @@ type Props = {
     value: any,
     setDefault: any,
     error: any,
-    onChangeValidate: any
+    onChangeValidate: any,
+    localization: Localization
 };
 
 class Text extends React.Component<Props> {
@@ -24,13 +26,19 @@ class Text extends React.Component<Props> {
     }
 
     render() {
-        const { form, error, value, onChangeValidate } = this.props;
+        const {
+            form,
+            error,
+            value,
+            onChangeValidate,
+            localization: { getLocalizedString }
+        } = this.props;
         return (
             <TextField
                 type={form.type}
-                label={form.title}
-                placeholder={form.placeholder}
-                helperText={error || form.description}
+                label={getLocalizedString(form.title)}
+                placeholder={getLocalizedString(form.placeholder)}
+                helperText={getLocalizedString(error || form.description)}
                 error={!!error}
                 onChange={onChangeValidate}
                 value={value || ""}

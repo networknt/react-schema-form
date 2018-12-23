@@ -6,11 +6,13 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import ComposedComponent from "./ComposedComponent";
 import utils from "./utils";
+import type { Localization } from "./types";
 
 type Props = {
     model: any,
     form: any,
-    onChangeValidate: any
+    onChangeValidate: any,
+    localization: Localization
 };
 
 type State = {
@@ -46,20 +48,23 @@ class Select extends Component<Props, State> {
     };
 
     render() {
-        const { form } = this.props;
+        const {
+            form,
+            localization: { getLocalizedString }
+        } = this.props;
         const { currentValue } = this.state;
         const menuItems = form.titleMap.map((item, idx) => (
             // eslint-disable-next-line react/no-array-index-key
             <MenuItem key={idx} value={item.value}>
-                {item.name}
+                {getLocalizedString(item.name)}
             </MenuItem>
         ));
         return (
             <FormControl fullWidth>
-                <InputLabel>{form.title}</InputLabel>
+                <InputLabel>{getLocalizedString(form.title)}</InputLabel>
                 <MuiSelect
                     value={currentValue || ""}
-                    placeholder={form.title}
+                    placeholder={getLocalizedString(form.title)}
                     disabled={form.readonly}
                     onChange={this.onSelected}
                 >
