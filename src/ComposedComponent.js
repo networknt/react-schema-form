@@ -24,11 +24,11 @@ export default (ComposedComponent, defaultProps = {}) =>
     class Composed extends React.Component {
         constructor(props) {
             super(props);
-            const { errorText, form, showError } = this.props;
+            const { errorText, form, showErrors } = this.props;
             this.onChangeValidate = this.onChangeValidate.bind(this);
             const value = defaultValue(this.props);
             const validationResult = utils.validate(form, value);
-            if (!showError) {
+            if (!showErrors) {
                 this.state = {
                     value,
                     valid: true,
@@ -48,9 +48,9 @@ export default (ComposedComponent, defaultProps = {}) =>
 
         static getDerivedStateFromProps(nextProps) {
             const value = defaultValue(nextProps);
-            const { showError } = nextProps;
+            const { showErrors } = nextProps;
             const validationResult = utils.validate(nextProps.form, value);
-            if (!showError) {
+            if (!showErrors) {
                 return {
                     value,
                     valid: true,

@@ -56,7 +56,12 @@ describe("ComposedComponent", () => {
         const Composed = ComposedComponent(Text);
 
         renderer.render(
-            <Composed form={cfg.form} model={cfg.model} mapper={cfg.mapper} />
+            <Composed
+                form={cfg.form}
+                model={cfg.model}
+                mapper={cfg.mapper}
+                showErrors
+            />
         );
 
         const result = renderer.getRenderOutput();

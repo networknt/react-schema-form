@@ -18,7 +18,7 @@ const examples = {
 };
 
 type State = {
-    showError: boolean
+    showErrors: boolean
 };
 
 class ExamplePage extends React.Component<void, State> {
@@ -68,7 +68,7 @@ class ExamplePage extends React.Component<void, State> {
         formJson: "",
         selected: "",
         localization: undefined,
-        showError: false
+        showErrors: false
     };
 
     setStateDefault = () => this.setState({ model: this.tempModel });
@@ -82,7 +82,7 @@ class ExamplePage extends React.Component<void, State> {
                 schema: {},
                 model: {},
                 form: [],
-                showError: false
+                showErrors: false
             });
         }
 
@@ -96,7 +96,7 @@ class ExamplePage extends React.Component<void, State> {
                 model: elem.model || {},
                 form: elem.form,
                 localization: elem.localization,
-                showError: false
+                showErrors: false
             });
         } else {
             fetch(value)
@@ -109,7 +109,7 @@ class ExamplePage extends React.Component<void, State> {
                         schema,
                         model: model || {},
                         form,
-                        showError: false
+                        showErrors: false
                     });
                 });
         }
@@ -125,7 +125,7 @@ class ExamplePage extends React.Component<void, State> {
     onValidate = () => {
         const { schema, model } = this.state;
         const result = utils.validateBySchema(schema, model);
-        this.setState({ validationResult: result, showError: true });
+        this.setState({ validationResult: result, showErrors: true });
     };
 
     onFormChange = val => {
@@ -157,7 +157,7 @@ class ExamplePage extends React.Component<void, State> {
             formJson,
             schemaJson,
             localization,
-            showError
+            showErrors
         } = this.state;
         const mapper = {
             // 'rc-select': RcSelect
@@ -175,7 +175,7 @@ class ExamplePage extends React.Component<void, State> {
                         mapper={mapper}
                         model={model}
                         localization={localization}
-                        showError={showError}
+                        showErrors={showErrors}
                     />
                 </ErrorBoundary>
             );
