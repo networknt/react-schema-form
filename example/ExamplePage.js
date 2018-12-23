@@ -17,7 +17,11 @@ const examples = {
     localizer: Localizer
 };
 
-class ExamplePage extends React.Component {
+type State = {
+    showError: boolean
+};
+
+class ExamplePage extends React.Component<void, State> {
     tempModel = {
         comments: [
             {
@@ -63,7 +67,8 @@ class ExamplePage extends React.Component {
         schemaJson: "",
         formJson: "",
         selected: "",
-        localization: undefined
+        localization: undefined,
+        showError: false
     };
 
     setStateDefault = () => this.setState({ model: this.tempModel });
@@ -76,7 +81,8 @@ class ExamplePage extends React.Component {
                 selected: "",
                 schema: {},
                 model: {},
-                form: []
+                form: [],
+                showError: false
             });
         }
 
@@ -89,7 +95,8 @@ class ExamplePage extends React.Component {
                 schema: elem.schema,
                 model: elem.model || {},
                 form: elem.form,
-                localization: elem.localization
+                localization: elem.localization,
+                showError: false
             });
         } else {
             fetch(value)
@@ -101,7 +108,8 @@ class ExamplePage extends React.Component {
                         selected: value,
                         schema,
                         model: model || {},
-                        form
+                        form,
+                        showError: false
                     });
                 });
         }
@@ -117,7 +125,7 @@ class ExamplePage extends React.Component {
     onValidate = () => {
         const { schema, model } = this.state;
         const result = utils.validateBySchema(schema, model);
-        this.setState({ validationResult: result });
+        this.setState({ validationResult: result, showError: true });
     };
 
     onFormChange = val => {
@@ -148,7 +156,8 @@ class ExamplePage extends React.Component {
             tests,
             formJson,
             schemaJson,
-            localization
+            localization,
+            showError
         } = this.state;
         const mapper = {
             // 'rc-select': RcSelect
@@ -166,6 +175,7 @@ class ExamplePage extends React.Component {
                         mapper={mapper}
                         model={model}
                         localization={localization}
+                        showError={showError}
                     />
                 </ErrorBoundary>
             );
