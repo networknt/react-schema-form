@@ -11,13 +11,20 @@ import {
     FormGroup
 } from "@material-ui/core";
 import ComposedComponent from "./ComposedComponent";
+import type { Localization } from "./types";
 
 type Props = {
     model: any,
-    form: any,
+    form: {
+        title: string,
+        yesLabel: string,
+        noLabel: string,
+        clearButtonLabel: string
+    },
     value: any,
     setDefault: any,
-    onChangeValidate: any
+    onChangeValidate: any,
+    localization: Localization
 };
 
 type State = {
@@ -56,11 +63,16 @@ class TripleBoolean extends Component<Props, State> {
     }
 
     displaySwitch() {
-        const { form, onChangeValidate, value } = this.props;
+        const {
+            form: { title, yesLabel, noLabel, clearButtonLabel },
+            onChangeValidate,
+            value,
+            localization: { getLocalizedString }
+        } = this.props;
         const { yesChecked, noChecked } = this.state;
         return (
             <div style={this.divStyle}>
-                {form.title}
+                {getLocalizedString(title)}
                 <br />
                 <FormGroup>
                     <FormControlLabel
@@ -72,7 +84,7 @@ class TripleBoolean extends Component<Props, State> {
                                 checked={yesChecked}
                             />
                         }
-                        label="Yes"
+                        label={yesLabel ? getLocalizedString(yesLabel) : "Yes"}
                     />
                     <FormControlLabel
                         control={
@@ -83,7 +95,7 @@ class TripleBoolean extends Component<Props, State> {
                                 checked={noChecked}
                             />
                         }
-                        label="No"
+                        label={noLabel ? getLocalizedString(noLabel) : "No"}
                     />
                 </FormGroup>
                 {value === "yes" || value === "no" ? (
@@ -93,7 +105,9 @@ class TripleBoolean extends Component<Props, State> {
                         color="primary"
                         onClick={e => onChangeValidate(e, "unanswered")}
                     >
-                        clear responce
+                        {clearButtonLabel
+                            ? getLocalizedString(clearButtonLabel)
+                            : "clear response"}
                     </Button>
                 ) : (
                     ""

@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import cloneDeep from "lodash/cloneDeep";
 import utils from "./utils";
 import ComposedComponent from "./ComposedComponent";
+import type { Localization } from "./types";
 
 const styles = theme => ({
     arrayItem: {
@@ -36,7 +37,8 @@ type Props = {
     mapper: any,
     options: any,
     onChangeValidate: any,
-    onChange: any
+    onChange: any,
+    localization: Localization
 };
 
 type State = {
@@ -171,7 +173,15 @@ class Array extends Component<Props, State> {
     };
 
     render() {
-        const { classes, form, builder, model, mapper, onChange } = this.props;
+        const {
+            classes,
+            form,
+            builder,
+            model,
+            mapper,
+            onChange,
+            localization: { getLocalizedString }
+        } = this.props;
         const { model: stateModel } = this.state;
         const arrays = [];
         for (let i = 0; i < stateModel.length; i += 1) {
@@ -198,7 +208,9 @@ class Array extends Component<Props, State> {
         return (
             <div>
                 <div>
-                    <Typography variant="h6">{form.title}</Typography>
+                    <Typography variant="h6">
+                        {getLocalizedString(form.title)}
+                    </Typography>
                     <div>{arrays}</div>
                 </div>
                 <Button

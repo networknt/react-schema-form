@@ -7,6 +7,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
 import { withStyles } from "@material-ui/core/styles";
 import ComposedComponent from "./ComposedComponent";
+import type { Localization } from "./types";
 
 const styles = theme => ({
     formControl: {
@@ -21,27 +22,40 @@ type Props = {
     classes: any,
     form: any,
     value: any,
-    onChangeValidate: any
+    onChangeValidate: any,
+    localization: Localization
 };
 
 class Radios extends Component<Props> {
-    renderItems = form =>
-        form.titleMap.map((item, index) => (
+    renderItems = form => {
+        const {
+            localization: { getLocalizedString }
+        } = this.props;
+        return form.titleMap.map((item, index) => (
             <FormControlLabel
                 // eslint-disable-next-line react/no-array-index-key
                 key={index}
                 control={<Radio />}
-                label={item.name}
+                label={getLocalizedString(item.name)}
                 value={item.value}
                 disabled={form.readonly}
             />
         ));
+    };
 
     render() {
-        const { classes, form, value, onChangeValidate } = this.props;
+        const {
+            classes,
+            form,
+            value,
+            onChangeValidate,
+            localization: { getLocalizedString }
+        } = this.props;
         return (
             <FormControl component="fieldset" className={classes.formControl}>
-                <FormLabel component="legend">{form.title}</FormLabel>
+                <FormLabel component="legend">
+                    {getLocalizedString(form.title)}
+                </FormLabel>
                 <RadioGroup
                     value={value}
                     name={form.title}

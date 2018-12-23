@@ -5,20 +5,28 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import ComposedComponent from "./ComposedComponent";
+import type { Localization } from "./types";
 
 type Props = {
     form: any,
     value: any,
     error: any,
-    onChangeValidate: any
+    onChangeValidate: any,
+    localization: Localization
 };
 
-const TextArea = ({ form, value, error, onChangeValidate }: Props) => (
+const TextArea = ({
+    form,
+    value,
+    error,
+    onChangeValidate,
+    localization: { getLocalizedString }
+}: Props) => (
     <TextField
         type={form.type}
-        label={form.title}
-        placeholder={form.placeholder}
-        helperText={error || form.description}
+        label={getLocalizedString(form.title)}
+        placeholder={getLocalizedString(form.placeholder)}
+        helperText={getLocalizedString(error || form.description)}
         onChange={onChangeValidate}
         error={!!error}
         value={value}
