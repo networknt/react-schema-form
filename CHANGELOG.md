@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.6 - 2018-12-23
+### Added
+- Add support for localization #144. Thanks @naeemba
+
+### Changed
+- Validation behaviour on load #136 Thanks @naeemba
+
+
 ## 0.6.5 - 2018-12-18
 ### Added
 
