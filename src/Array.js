@@ -8,8 +8,8 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Close";
-import Typography from "@material-ui/core/Typography";
 import cloneDeep from "lodash/cloneDeep";
+import FormLabel from "@material-ui/core/FormLabel";
 import utils from "./utils";
 import ComposedComponent from "./ComposedComponent";
 import type { Localization } from "./types";
@@ -208,9 +208,9 @@ class Array extends Component<Props, State> {
         return (
             <div>
                 <div>
-                    <Typography variant="h6">
-                        {getLocalizedString(form.title)}
-                    </Typography>
+                    <FormLabel variant="h6" required={form.required}>
+                        {form.title && getLocalizedString(form.title)}
+                    </FormLabel>
                     <div>{arrays}</div>
                 </div>
                 <Button
