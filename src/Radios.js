@@ -36,7 +36,7 @@ class Radios extends Component<Props> {
                 // eslint-disable-next-line react/no-array-index-key
                 key={index}
                 control={<Radio />}
-                label={getLocalizedString(item.name)}
+                label={item.name && getLocalizedString(item.name)}
                 value={item.value}
                 disabled={form.readonly}
             />
@@ -53,8 +53,8 @@ class Radios extends Component<Props> {
         } = this.props;
         return (
             <FormControl component="fieldset" className={classes.formControl}>
-                <FormLabel component="legend">
-                    {getLocalizedString(form.title)}
+                <FormLabel component="legend" required={form.required}>
+                    {form.title && getLocalizedString(form.title)}
                 </FormLabel>
                 <RadioGroup
                     value={value}
