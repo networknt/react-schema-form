@@ -31,6 +31,11 @@
               "type": "string",
               "maxLength": 20,
               "validationMessage": "Don't be greedy!"
+            },
+            "type": {
+                "title": "Type",
+                "type": "string",
+                "enum": ["home", "work", "mobile", "fax", "etc"]
             }
           },
           "required": ["name","comment"]
@@ -64,6 +69,17 @@
         {
           "key": "comments[].comment",
           "type": "textarea"
+        },
+        {
+            "key": "comments[].type",
+            "type": "select",
+            "titleMap": [
+                { "name": "Home", "value": "home" },
+                { "name": "Work", "value": "work" },
+                { "name": "Mobile", "value": "mobile" },
+                { "name": "Fax", "value": "fax" },
+                { "name": "Etc", "value": "etc" }
+            ]
         }
       ]
     }
