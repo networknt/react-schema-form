@@ -10,6 +10,7 @@ import {
     FormControlLabel,
     FormGroup
 } from "@material-ui/core";
+import FormLabel from "@material-ui/core/FormLabel";
 import ComposedComponent from "./ComposedComponent";
 import type { Localization } from "./types";
 
@@ -64,7 +65,7 @@ class TripleBoolean extends Component<Props, State> {
 
     displaySwitch() {
         const {
-            form: { title, yesLabel, noLabel, clearButtonLabel },
+            form: { title, yesLabel, noLabel, clearButtonLabel, required },
             onChangeValidate,
             value,
             localization: { getLocalizedString }
@@ -72,7 +73,9 @@ class TripleBoolean extends Component<Props, State> {
         const { yesChecked, noChecked } = this.state;
         return (
             <div style={this.divStyle}>
-                {getLocalizedString(title)}
+                <FormLabel required={required}>
+                    {title && getLocalizedString(title)}
+                </FormLabel>
                 <br />
                 <FormGroup>
                     <FormControlLabel

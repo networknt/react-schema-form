@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.7 - 2018-12-25
+### Added
+- Render custom labels for required fields #146. Thanks @naeemba
+
+### Changed
+
 ## 0.6.6 - 2018-12-23
 ### Added
 - Add support for localization #144. Thanks @naeemba

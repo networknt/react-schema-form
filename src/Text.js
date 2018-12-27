@@ -14,10 +14,15 @@ type Props = {
     setDefault: any,
     error: any,
     onChangeValidate: any,
-    localization: Localization
+    localization: Localization,
+    otherProps?: any
 };
 
 class Text extends React.Component<Props> {
+    static defaultProps = {
+        otherProps: undefined
+    };
+
     constructor(props) {
         super(props);
         const { model, form, value, setDefault } = this.props;
@@ -31,19 +36,27 @@ class Text extends React.Component<Props> {
             error,
             value,
             onChangeValidate,
-            localization: { getLocalizedString }
+            localization: { getLocalizedString },
+            otherProps
         } = this.props;
         return (
             <TextField
                 type={form.type}
-                label={getLocalizedString(form.title)}
-                placeholder={getLocalizedString(form.placeholder)}
-                helperText={getLocalizedString(error || form.description)}
+                label={form.title && getLocalizedString(form.title)}
+                placeholder={
+                    form.placeholder && getLocalizedString(form.placeholder)
+                }
+                helperText={
+                    (error || form.description) &&
+                    getLocalizedString(error || form.description)
+                }
                 error={!!error}
                 onChange={onChangeValidate}
                 value={value || ""}
                 disabled={form.readonly}
                 fullWidth
+                required={form.required}
+                {...otherProps}
             />
         );
     }

@@ -6,6 +6,7 @@
     "properties": {
       "comments": {
         "type": "array",
+        "title": "Comments",
         "maxItems": 2,
         "items": {
           "type": "object",
