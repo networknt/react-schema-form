@@ -43,8 +43,6 @@ describe("Date capture main test", () => {
                 onModelChange={onModelChange}
             />
         );
-        expect(result.find("input")[0].attribs.value).toEqual(
-            new Date("1947-01-8").toISOString().slice(0, 10)
-        );
+        expect(result.find("input")[0].attribs.value).toEqual("1947-01-8");
     });
 });
