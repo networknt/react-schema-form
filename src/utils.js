@@ -178,6 +178,13 @@ const select = (name, schema, options) => {
     return undefined;
 };
 
+const removeEmpty = obj =>
+    Object.entries(obj).forEach(([key, val]) => {
+        if (val && typeof val === "object") removeEmpty(val);
+        // eslint-disable-next-line no-param-reassign
+        else if (!val || val === null || val === "") delete obj[key];
+    });
+
 const checkboxes = (name, schema, options) => {
     if (
         stripNullType(schema.type) === "array" &&
@@ -545,6 +552,43 @@ const merge = (schema, form, ignore, options, readonly) => {
     );
 };
 
+const getNestedValue = (parts, value) => {
+    if (!parts || parts.length < 1 || !value) return value;
+    return getNestedValue(parts.slice(1), value[parts[0]]);
+};
+
+const getValue = (projection, obj) => {
+    // Support [] array syntax
+    const parts =
+        typeof projection === "string"
+            ? ObjectPath.parse(projection)
+            : projection;
+    return getNestedValue(parts, obj);
+};
+
+const setNestedValue = (parts, value, valueToSet) => {
+    const newValue = Object.assign({}, value);
+    if (parts.length > 0) {
+        newValue[parts[0]] = setNestedValue(
+            parts.slice(1),
+            newValue[parts[0]],
+            valueToSet
+        );
+    } else if (!parts || parts.length < 1) {
+        return valueToSet;
+    }
+    return newValue;
+};
+
+const setValue = (projection, obj, valueToSet) => {
+    // Support [] array syntax
+    const parts =
+        typeof projection === "string"
+            ? ObjectPath.parse(projection)
+            : projection;
+    return setNestedValue(parts, obj, valueToSet);
+};
+
 function selectOrSet(projection, obj, valueToSet, type) {
     const numRe = /^\d+$/;
 
@@ -711,5 +755,8 @@ export default {
     safeEval,
     selectOrSet,
     getValueFromModel,
-    getTitleByValue
+    getTitleByValue,
+    removeEmpty,
+    getValue,
+    setValue
 };
