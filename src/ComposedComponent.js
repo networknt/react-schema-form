@@ -20,36 +20,23 @@ const defaultValue = props => {
     return value;
 };
 
+const getDisplayName = WrappedComponent =>
+    WrappedComponent.displayName || WrappedComponent.name || "Component";
+
 export default (ComposedComponent, defaultProps = {}) =>
     class Composed extends React.Component {
+        displayName = `ComposedComponent(${getDisplayName(ComposedComponent)})`;
+
         constructor(props) {
             super(props);
-            const { errorText, form, showErrors } = this.props;
             this.onChangeValidate = this.onChangeValidate.bind(this);
-            const value = defaultValue(this.props);
-            const validationResult = utils.validate(form, value);
-            if (!showErrors) {
-                this.state = {
-                    value,
-                    valid: true,
-                    error: ""
-                };
-            } else {
-                this.state = {
-                    value,
-                    valid: !!(validationResult.valid || !value),
-                    error:
-                        (!validationResult.valid &&
-                            (value ? validationResult.error.message : null)) ||
-                        errorText
-                };
-            }
+            this.state = this.constructor.getDerivedStateFromProps(this.props);
         }
 
         static getDerivedStateFromProps(nextProps) {
+            const { errorText, form, showErrors } = nextProps;
             const value = defaultValue(nextProps);
-            const { showErrors } = nextProps;
-            const validationResult = utils.validate(nextProps.form, value);
+            const validationResult = utils.validate(form, value);
             if (!showErrors) {
                 return {
                     value,
@@ -60,9 +47,10 @@ export default (ComposedComponent, defaultProps = {}) =>
             return {
                 value,
                 valid: validationResult.valid,
-                error: !validationResult.valid
-                    ? validationResult.error.message
-                    : null
+                error:
+                    (!validationResult.valid
+                        ? validationResult.error.message
+                        : null) || errorText
             };
         }
 
