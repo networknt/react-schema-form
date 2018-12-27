@@ -73,7 +73,8 @@ export default (ComposedComponent, defaultProps = {}) =>
         onChangeValidate(e, v) {
             const { form, onChange } = this.props;
             let value = null;
-            switch (form.schema.type) {
+            const type = form.schema ? form.schema.type : form.type;
+            switch (type) {
                 case "integer":
                     value = parseInt(e.target.value, 10);
                     break;
