@@ -498,27 +498,27 @@ describe("utils", () => {
         expect(merged[0].items[0].items[0].readonly).toEqual(true);
     });
 
-    it("setValue and getValue test", () => {
-        let result = {};
-        result = utils.setValue(["test", "tt"], result, "HI");
+    it("selectOrSet test", () => {
+        const result = {};
+        utils.selectOrSet(["test", "tt"], result, "HI");
         expect(result.test.tt).toBe("HI");
-        expect(utils.getValue("test.tt", result)).toBe("HI");
-        expect(utils.getValue(["test", "tt"], result)).toBe("HI");
+        expect(utils.selectOrSet("test.tt", result)).toBe("HI");
+        expect(utils.selectOrSet(["test", "tt"], result)).toBe("HI");
 
-        result = utils.setValue("my.test.fn", result, "Value");
+        utils.selectOrSet("my.test.fn", result, "Value");
         expect(result.my.test.fn).toBe("Value");
-        expect(utils.getValue("my.test.fn", result)).toBe("Value");
-        expect(utils.getValue(["my", "test", "fn"], result)).toBe("Value");
+        expect(utils.selectOrSet("my.test.fn", result)).toBe("Value");
+        expect(utils.selectOrSet(["my", "test", "fn"], result)).toBe("Value");
 
-        result = utils.setValue("number.is", result, 1326);
+        utils.selectOrSet("number.is", result, 1326);
         expect(result.number.is).toBe(1326);
-        expect(utils.getValue("number.is", result)).toBe(1326);
-        expect(utils.getValue(["number", "is"], result)).toBe(1326);
+        expect(utils.selectOrSet("number.is", result)).toBe(1326);
+        expect(utils.selectOrSet(["number", "is"], result)).toBe(1326);
 
-        result = utils.setValue("number.is", result, 1272);
+        utils.selectOrSet("number.is", result, 1272);
         expect(result.number.is).toBe(1272);
-        expect(utils.getValue("number.is", result)).toBe(1272);
-        expect(utils.getValue(["number", "is"], result)).toBe(1272);
+        expect(utils.selectOrSet("number.is", result)).toBe(1272);
+        expect(utils.selectOrSet(["number", "is"], result)).toBe(1272);
     });
 
     it("removeEmpty test", () => {
