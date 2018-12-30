@@ -20,36 +20,29 @@ const defaultValue = props => {
     return value;
 };
 
+const getDisplayName = WrappedComponent =>
+    WrappedComponent.displayName || WrappedComponent.name || "Component";
+
 export default (ComposedComponent, defaultProps = {}) =>
     class Composed extends React.Component {
+        displayName = `ComposedComponent(${getDisplayName(ComposedComponent)})`;
+
         constructor(props) {
             super(props);
-            const { errorText, form, showErrors } = this.props;
             this.onChangeValidate = this.onChangeValidate.bind(this);
-            const value = defaultValue(this.props);
-            const validationResult = utils.validate(form, value);
-            if (!showErrors) {
-                this.state = {
-                    value,
-                    valid: true,
-                    error: ""
-                };
-            } else {
-                this.state = {
-                    value,
-                    valid: !!(validationResult.valid || !value),
-                    error:
-                        (!validationResult.valid &&
-                            (value ? validationResult.error.message : null)) ||
-                        errorText
-                };
-            }
+            this.state = this.constructor.getDerivedStateFromProps(this.props);
         }
 
         static getDerivedStateFromProps(nextProps) {
+            const { errorText, form, showErrors, localization } = nextProps;
+            const getLocalizedString =
+                localization && localization.getLocalizedString;
             const value = defaultValue(nextProps);
-            const { showErrors } = nextProps;
-            const validationResult = utils.validate(nextProps.form, value);
+            const validationResult = utils.validate(
+                form,
+                value,
+                getLocalizedString
+            );
             if (!showErrors) {
                 return {
                     value,
@@ -60,9 +53,10 @@ export default (ComposedComponent, defaultProps = {}) =>
             return {
                 value,
                 valid: validationResult.valid,
-                error: !validationResult.valid
-                    ? validationResult.error.message
-                    : null
+                error:
+                    (!validationResult.valid
+                        ? validationResult.error.message
+                        : null) || errorText
             };
         }
 
@@ -71,21 +65,15 @@ export default (ComposedComponent, defaultProps = {}) =>
          * @param e The input element, or something.
          */
         onChangeValidate(e, v) {
-            const { form, onChange } = this.props;
+            const { form, onChange, localization } = this.props;
+            const getLocalizedString =
+                localization && localization.getLocalizedString;
             let value = null;
-            switch (form.schema.type) {
+            const type = form.schema ? form.schema.type : form.type;
+            switch (type) {
                 case "integer":
-                    value = parseInt(e.target.value, 10);
-                    break;
                 case "number": {
-                    const values = e.target.value.split(".");
-                    if (values.length < 2) {
-                        value = parseInt(e.target.value, 10);
-                    } else if (values.length > 1) {
-                        if (values[1].length > 0)
-                            value = parseFloat(e.target.value);
-                        else value = `${parseInt(values[0], 10)}.`;
-                    }
+                    value = e;
                     break;
                 }
                 case "boolean":
@@ -115,7 +103,11 @@ export default (ComposedComponent, defaultProps = {}) =>
                     ({ value } = e.target);
             }
 
-            const validationResult = utils.validate(form, value);
+            const validationResult = utils.validate(
+                form,
+                value,
+                getLocalizedString
+            );
             this.setState({
                 value,
                 valid: validationResult.valid,

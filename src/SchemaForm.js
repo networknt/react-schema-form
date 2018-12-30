@@ -69,14 +69,7 @@ class SchemaForm extends Component<Props> {
 
     constructor(props) {
         super(props);
-
-        this.onChange = this.onChange.bind(this);
         this.builder = this.builder.bind(this);
-    }
-
-    onChange(key, val) {
-        const { onModelChange } = this.props;
-        onModelChange(key, val);
     }
 
     // Assign default values and save it to the model
@@ -150,6 +143,7 @@ class SchemaForm extends Component<Props> {
             option,
             model,
             className,
+            onModelChange,
             mapper
         } = this.props;
         const merged = utils.merge(schema, form, ignore, option);
@@ -164,7 +158,7 @@ class SchemaForm extends Component<Props> {
                 model,
                 index,
                 mergedMapper,
-                this.onChange,
+                onModelChange,
                 this.builder
             )
         );
