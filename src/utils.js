@@ -619,7 +619,7 @@ function selectOrSet(projection, obj, valueToSet, type) {
 
 const validateBySchema = (schema, value) => tv4.validateResult(value, schema);
 
-const validate = (form, value) => {
+const validate = (form, value, getLocalizedString) => {
     if (!form) {
         return { valid: true };
     }
@@ -667,7 +667,9 @@ const validate = (form, value) => {
         form.validationMessage != null &&
         typeof value !== "undefined"
     ) {
-        tv4Result.error.message = form.validationMessage;
+        tv4Result.error.message = getLocalizedString
+            ? getLocalizedString(form.validationMessage)
+            : form.validationMessage;
     }
     return tv4Result;
 };

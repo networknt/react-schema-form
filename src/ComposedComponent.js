@@ -34,9 +34,15 @@ export default (ComposedComponent, defaultProps = {}) =>
         }
 
         static getDerivedStateFromProps(nextProps) {
-            const { errorText, form, showErrors } = nextProps;
+            const { errorText, form, showErrors, localization } = nextProps;
+            const getLocalizedString =
+                localization && localization.getLocalizedString;
             const value = defaultValue(nextProps);
-            const validationResult = utils.validate(form, value);
+            const validationResult = utils.validate(
+                form,
+                value,
+                getLocalizedString
+            );
             if (!showErrors) {
                 return {
                     value,
@@ -59,7 +65,9 @@ export default (ComposedComponent, defaultProps = {}) =>
          * @param e The input element, or something.
          */
         onChangeValidate(e, v) {
-            const { form, onChange } = this.props;
+            const { form, onChange, localization } = this.props;
+            const getLocalizedString =
+                localization && localization.getLocalizedString;
             let value = null;
             const type = form.schema ? form.schema.type : form.type;
             switch (type) {
@@ -104,7 +112,11 @@ export default (ComposedComponent, defaultProps = {}) =>
                     ({ value } = e.target);
             }
 
-            const validationResult = utils.validate(form, value);
+            const validationResult = utils.validate(
+                form,
+                value,
+                getLocalizedString
+            );
             this.setState({
                 value,
                 valid: validationResult.valid,
