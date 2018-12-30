@@ -72,17 +72,8 @@ export default (ComposedComponent, defaultProps = {}) =>
             const type = form.schema ? form.schema.type : form.type;
             switch (type) {
                 case "integer":
-                    value = parseInt(e.target.value, 10);
-                    break;
                 case "number": {
-                    const values = e.target.value.split(".");
-                    if (values.length < 2) {
-                        value = parseInt(e.target.value, 10);
-                    } else if (values.length > 1) {
-                        if (values[1].length > 0)
-                            value = parseFloat(e.target.value);
-                        else value = `${parseInt(values[0], 10)}.`;
-                    }
+                    value = e;
                     break;
                 }
                 case "boolean":
