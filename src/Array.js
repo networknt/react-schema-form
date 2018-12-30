@@ -18,14 +18,21 @@ const styles = theme => ({
     arrayItem: {
         position: "relative",
         padding: theme.spacing.unit,
-        marginBottom: theme.spacing.unit,
+        marginTop: theme.spacing.unit,
         display: "flex"
     },
     deleteItemButton: {
         margin: [[-theme.spacing.unit, -theme.spacing.unit, "auto", "auto"]]
     },
     addButton: {
-        marginTop: theme.spacing.unit
+        marginLeft: theme.spacing.unit
+    },
+    elementsContainer: {
+        display: "flex",
+        flexWrap: "wrap"
+    },
+    title: {
+        margin: "auto 0"
     }
 });
 
@@ -172,6 +179,24 @@ class Array extends Component<Props, State> {
         onChangeValidate(model);
     };
 
+    getAddButton = () => {
+        const { form, classes } = this.props;
+
+        const AddButton =
+            form.AddButton ||
+            (props => (
+                <Button
+                    className={classes.addButton}
+                    variant="contained"
+                    color="primary"
+                    {...props}
+                />
+            ));
+        return (
+            <AddButton onClick={this.onAppend}>{form.add || "Add"}</AddButton>
+        );
+    };
+
     render() {
         const {
             classes,
@@ -182,8 +207,10 @@ class Array extends Component<Props, State> {
             onChange,
             localization: { getLocalizedString }
         } = this.props;
+
         const { model: stateModel } = this.state;
         const arrays = [];
+
         for (let i = 0; i < stateModel.length; i += 1) {
             const item = stateModel[i];
             const forms = form.items.map((eachForm, index) => {
@@ -195,7 +222,7 @@ class Array extends Component<Props, State> {
                     className={classes.arrayItem}
                     key={(item && item[Array.ITEM_ID]) || i}
                 >
-                    <div>{forms}</div>
+                    <div className={classes.elementsContainer}>{forms}</div>
                     <IconButton
                         onClick={this.onDelete(i)}
                         className={classes.deleteItemButton}
@@ -206,21 +233,17 @@ class Array extends Component<Props, State> {
             );
         }
         return (
-            <div>
-                <div>
-                    <FormLabel variant="h6" required={form.required}>
+            <div className={classes.root}>
+                <div style={{ display: "flex" }}>
+                    <FormLabel
+                        required={form.required}
+                        className={classes.title}
+                    >
                         {form.title && getLocalizedString(form.title)}
                     </FormLabel>
-                    <div>{arrays}</div>
+                    {this.getAddButton()}
                 </div>
-                <Button
-                    className={classes.addButton}
-                    variant="contained"
-                    color="primary"
-                    onClick={this.onAppend}
-                >
-                    {form.add || "Add"}
-                </Button>
+                <div>{arrays}</div>
             </div>
         );
     }
