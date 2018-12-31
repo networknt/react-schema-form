@@ -10,7 +10,6 @@ import type { Localization } from "./types";
 
 type Props = {
     model: any,
-    key: any,
     form: any,
     onChangeValidate: any,
     localization: Localization
@@ -29,13 +28,11 @@ class Select extends Component<Props, State> {
         };
     }
 
-    static getDerivedStateFromProps(props) {
-        if (props.model && props.form.key) {
+    static getDerivedStateFromProps(props: Props) {
+        const { form, model } = props;
+        if (model && form.key) {
             return {
-                currentValue: utils.getValueFromModel(
-                    props.model,
-                    props.form.key
-                )
+                currentValue: utils.getValueFromModel(model, form.key)
             };
         }
         return null;

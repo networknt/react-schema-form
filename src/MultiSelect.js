@@ -44,7 +44,6 @@ const MenuProps = {
 type Props = {
     model: any,
     form: any,
-    key: any,
     onChangeValidate: any,
     classes: any,
     localization: Localization
@@ -64,10 +63,10 @@ class MultiSelect extends Component<Props, State> {
     }
 
     static getDerivedStateFromProps(props: Props) {
-        if (props.model && props.form.key) {
+        const { model, form } = props;
+        if (model && form.key) {
             return {
-                currentValue:
-                    utils.getValueFromModel(props.model, props.form.key) || []
+                currentValue: utils.getValueFromModel(model, form.key) || []
             };
         }
         return null;
