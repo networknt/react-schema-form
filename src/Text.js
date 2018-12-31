@@ -56,6 +56,7 @@ class Text extends React.Component<Props> {
                 disabled={form.readonly}
                 fullWidth
                 required={form.required}
+                style={form.style}
                 {...otherProps}
             />
         );
