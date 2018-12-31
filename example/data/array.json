@@ -36,6 +36,19 @@
                 "title": "Type",
                 "type": "string",
                 "enum": ["home", "work", "mobile", "fax", "etc"]
+            },
+            "nested": {
+                "title": "Nested",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "first": {
+                            "title": "First",
+                            "type": "string"
+                        }
+                    }
+                }
             }
           },
           "required": ["name","comment"]
@@ -79,6 +92,12 @@
                 { "name": "Mobile", "value": "mobile" },
                 { "name": "Fax", "value": "fax" },
                 { "name": "Etc", "value": "etc" }
+            ]
+        },
+        {
+            "key": "comments[].nested",
+            "items": [
+                "comments[].nested[].first"
             ]
         }
       ]

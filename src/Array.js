@@ -56,8 +56,6 @@ type State = {
 class Array extends Component<Props, State> {
     static ITEM_ID = "_SCHEMAFORM_ITEM_ID";
 
-    static SEQUENCE = 1;
-
     static assignItemId(item) {
         if (item && typeof item === "object" && !item[Array.ITEM_ID]) {
             const newItem = Object.assign({}, item);
@@ -87,6 +85,8 @@ class Array extends Component<Props, State> {
         utils.traverseForm(copy, Array.setIndex(index));
         return copy;
     };
+
+    SEQUENCE = 1;
 
     constructor(props) {
         super(props);
