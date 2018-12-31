@@ -44,7 +44,6 @@ const MenuProps = {
 type Props = {
     model: any,
     form: any,
-    key: any,
     onChangeValidate: any,
     classes: any,
     localization: Localization
