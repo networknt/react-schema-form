@@ -20,11 +20,19 @@ const defaultValue = props => {
     return value;
 };
 
+type Props = {
+    errorText: any,
+    form: any,
+    showErrors: boolean,
+    localization: any,
+    onChange: any
+};
+
 const getDisplayName = WrappedComponent =>
     WrappedComponent.displayName || WrappedComponent.name || "Component";
 
 export default (ComposedComponent, defaultProps = {}) =>
-    class Composed extends React.Component {
+    class Composed extends React.Component<Props> {
         displayName = `ComposedComponent(${getDisplayName(ComposedComponent)})`;
 
         constructor(props) {
@@ -33,16 +41,11 @@ export default (ComposedComponent, defaultProps = {}) =>
             this.state = this.constructor.getDerivedStateFromProps(this.props);
         }
 
-        static getDerivedStateFromProps(nextProps) {
+        static getDerivedStateFromProps(nextProps: Props) {
             const { errorText, form, showErrors, localization } = nextProps;
             const getLocalizedString =
                 localization && localization.getLocalizedString;
             const value = defaultValue(nextProps);
-            const validationResult = utils.validate(
-                form,
-                value,
-                getLocalizedString
-            );
             if (!showErrors) {
                 return {
                     value,
@@ -50,13 +53,23 @@ export default (ComposedComponent, defaultProps = {}) =>
                     error: ""
                 };
             }
+
+            const validationResult = utils.validate(
+                form,
+                value,
+                getLocalizedString
+            );
+
+            const error = !validationResult.valid
+                ? validationResult.error
+                : undefined;
+
             return {
                 value,
                 valid: validationResult.valid,
                 error:
-                    (!validationResult.valid
-                        ? validationResult.error.message
-                        : null) || errorText
+                    (!validationResult.valid ? error.message : null) ||
+                    errorText
             };
         }
 

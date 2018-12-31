@@ -97,8 +97,9 @@ class Array extends Component<Props, State> {
         };
     }
 
-    static getDerivedStateFromProps(props, state) {
-        const propsKey = props.form.key;
+    static getDerivedStateFromProps(props: Props, state) {
+        const { form } = props;
+        const propsKey = form.key;
         if (
             props.form &&
             propsKey === state.formKey &&
