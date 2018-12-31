@@ -38,6 +38,7 @@ const styles = theme => ({
 
 type Props = {
     form: any,
+    key: any,
     model: any,
     classes: any,
     builder: any,

@@ -34,6 +34,7 @@ export default (ComposedComponent, defaultProps = {}) =>
         }
 
         static getDerivedStateFromProps(nextProps) {
+            // eslint-disable-next-line
             const { errorText, form, showErrors, localization } = nextProps;
             const getLocalizedString =
                 localization && localization.getLocalizedString;
@@ -55,7 +56,7 @@ export default (ComposedComponent, defaultProps = {}) =>
                 valid: validationResult.valid,
                 error:
                     (!validationResult.valid
-                        ? validationResult.error.message
+                        ? validationResult.error.message // eslint-disable-line
                         : null) || errorText
             };
         }
@@ -65,7 +66,7 @@ export default (ComposedComponent, defaultProps = {}) =>
          * @param e The input element, or something.
          */
         onChangeValidate(e, v) {
-            const { form, onChange, localization } = this.props;
+            const { form, onChange, localization } = this.props; // eslint-disable-line
             const getLocalizedString =
                 localization && localization.getLocalizedString;
             let value = null;

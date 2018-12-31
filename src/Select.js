@@ -10,6 +10,7 @@ import type { Localization } from "./types";
 
 type Props = {
     model: any,
+    key: any,
     form: any,
     onChangeValidate: any,
     localization: Localization
