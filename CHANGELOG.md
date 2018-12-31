@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.8 - 2018-12-31
+### Added
+
+### Changed
+- Improvements on array component #149. Thanks @naeemba
+- Array: fix bug causing nested arrays TextFields loose focus on type #150. Thanks @naeemba
+- fix eslint errors #152. Thanks @naeemba
+
 ## 0.6.7 - 2018-12-25
 ### Added
 - Render custom labels for required fields #146. Thanks @naeemba
