@@ -78,7 +78,7 @@ export default (ComposedComponent, defaultProps = {}) =>
          * @param e The input element, or something.
          */
         onChangeValidate(e, v) {
-            const { form, onChange, localization } = this.props;
+            const { form, onChange, localization } = this.props; // eslint-disable-line
             const getLocalizedString =
                 localization && localization.getLocalizedString;
             let value = null;
