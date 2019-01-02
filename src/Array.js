@@ -8,8 +8,8 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Close";
-import Typography from "@material-ui/core/Typography";
 import cloneDeep from "lodash/cloneDeep";
+import FormLabel from "@material-ui/core/FormLabel";
 import utils from "./utils";
 import ComposedComponent from "./ComposedComponent";
 import type { Localization } from "./types";
@@ -18,19 +18,27 @@ const styles = theme => ({
     arrayItem: {
         position: "relative",
         padding: theme.spacing.unit,
-        marginBottom: theme.spacing.unit,
+        marginTop: theme.spacing.unit,
         display: "flex"
     },
     deleteItemButton: {
         margin: [[-theme.spacing.unit, -theme.spacing.unit, "auto", "auto"]]
     },
     addButton: {
-        marginTop: theme.spacing.unit
+        marginLeft: theme.spacing.unit
+    },
+    elementsContainer: {
+        display: "flex",
+        flexWrap: "wrap"
+    },
+    title: {
+        margin: "auto 0"
     }
 });
 
 type Props = {
     form: any,
+    key: any,
     model: any,
     classes: any,
     builder: any,
@@ -47,8 +55,6 @@ type State = {
 
 class Array extends Component<Props, State> {
     static ITEM_ID = "_SCHEMAFORM_ITEM_ID";
-
-    static SEQUENCE = 1;
 
     static assignItemId(item) {
         if (item && typeof item === "object" && !item[Array.ITEM_ID]) {
@@ -80,6 +86,8 @@ class Array extends Component<Props, State> {
         return copy;
     };
 
+    SEQUENCE = 1;
+
     constructor(props) {
         super(props);
         const { form, model } = this.props;
@@ -90,8 +98,9 @@ class Array extends Component<Props, State> {
         };
     }
 
-    static getDerivedStateFromProps(props, state) {
-        const propsKey = props.form.key;
+    static getDerivedStateFromProps(props: Props, state) {
+        const { form } = props;
+        const propsKey = form.key;
         if (
             props.form &&
             propsKey === state.formKey &&
@@ -172,6 +181,24 @@ class Array extends Component<Props, State> {
         onChangeValidate(model);
     };
 
+    getAddButton = () => {
+        const { form, classes } = this.props;
+
+        const AddButton =
+            form.AddButton ||
+            (props => (
+                <Button
+                    className={classes.addButton}
+                    variant="contained"
+                    color="primary"
+                    {...props}
+                />
+            ));
+        return (
+            <AddButton onClick={this.onAppend}>{form.add || "Add"}</AddButton>
+        );
+    };
+
     render() {
         const {
             classes,
@@ -182,8 +209,10 @@ class Array extends Component<Props, State> {
             onChange,
             localization: { getLocalizedString }
         } = this.props;
+
         const { model: stateModel } = this.state;
         const arrays = [];
+
         for (let i = 0; i < stateModel.length; i += 1) {
             const item = stateModel[i];
             const forms = form.items.map((eachForm, index) => {
@@ -195,7 +224,7 @@ class Array extends Component<Props, State> {
                     className={classes.arrayItem}
                     key={(item && item[Array.ITEM_ID]) || i}
                 >
-                    <div>{forms}</div>
+                    <div className={classes.elementsContainer}>{forms}</div>
                     <IconButton
                         onClick={this.onDelete(i)}
                         className={classes.deleteItemButton}
@@ -206,21 +235,17 @@ class Array extends Component<Props, State> {
             );
         }
         return (
-            <div>
-                <div>
-                    <Typography variant="h6">
-                        {getLocalizedString(form.title)}
-                    </Typography>
-                    <div>{arrays}</div>
+            <div className={classes.root}>
+                <div style={{ display: "flex" }}>
+                    <FormLabel
+                        required={form.required}
+                        className={classes.title}
+                    >
+                        {form.title && getLocalizedString(form.title)}
+                    </FormLabel>
+                    {this.getAddButton()}
                 </div>
-                <Button
-                    className={classes.addButton}
-                    variant="contained"
-                    color="primary"
-                    onClick={this.onAppend}
-                >
-                    {form.add || "Add"}
-                </Button>
+                <div>{arrays}</div>
             </div>
         );
     }

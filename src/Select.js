@@ -28,13 +28,11 @@ class Select extends Component<Props, State> {
         };
     }
 
-    static getDerivedStateFromProps(props) {
-        if (props.model && props.form.key) {
+    static getDerivedStateFromProps(props: Props) {
+        const { form, model } = props;
+        if (model && form.key) {
             return {
-                currentValue: utils.getValueFromModel(
-                    props.model,
-                    props.form.key
-                )
+                currentValue: utils.getValueFromModel(model, form.key)
             };
         }
         return null;
@@ -56,15 +54,19 @@ class Select extends Component<Props, State> {
         const menuItems = form.titleMap.map((item, idx) => (
             // eslint-disable-next-line react/no-array-index-key
             <MenuItem key={idx} value={item.value}>
-                {getLocalizedString(item.name)}
+                {item.name && getLocalizedString(item.name)}
             </MenuItem>
         ));
         return (
             <FormControl fullWidth>
-                <InputLabel>{getLocalizedString(form.title)}</InputLabel>
+                <InputLabel required={form.required}>
+                    {form.title && getLocalizedString(form.title)}
+                </InputLabel>
                 <MuiSelect
                     value={currentValue || ""}
-                    placeholder={getLocalizedString(form.title)}
+                    placeholder={
+                        form.placeholder && getLocalizedString(form.placeholder)
+                    }
                     disabled={form.readonly}
                     onChange={this.onSelected}
                 >

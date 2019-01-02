@@ -6,6 +6,7 @@
     "properties": {
       "comments": {
         "type": "array",
+        "title": "Comments",
         "maxItems": 2,
         "items": {
           "type": "object",
@@ -30,6 +31,24 @@
               "type": "string",
               "maxLength": 20,
               "validationMessage": "Don't be greedy!"
+            },
+            "type": {
+                "title": "Type",
+                "type": "string",
+                "enum": ["home", "work", "mobile", "fax", "etc"]
+            },
+            "nested": {
+                "title": "Nested",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "first": {
+                            "title": "First",
+                            "type": "string"
+                        }
+                    }
+                }
             }
           },
           "required": ["name","comment"]
@@ -63,6 +82,23 @@
         {
           "key": "comments[].comment",
           "type": "textarea"
+        },
+        {
+            "key": "comments[].type",
+            "type": "select",
+            "titleMap": [
+                { "name": "Home", "value": "home" },
+                { "name": "Work", "value": "work" },
+                { "name": "Mobile", "value": "mobile" },
+                { "name": "Fax", "value": "fax" },
+                { "name": "Etc", "value": "etc" }
+            ]
+        },
+        {
+            "key": "comments[].nested",
+            "items": [
+                "comments[].nested[].first"
+            ]
         }
       ]
     }
