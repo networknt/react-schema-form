@@ -10,11 +10,13 @@ import {
     Select
 } from "@material-ui/core";
 import Localizer from "./data/tests/localizer";
+import SelectLabel from "./data/selectlabel";
 import ErrorBoundary from "./ErrorBoundary";
 // RcSelect is still in migrating process so it's excluded for now
 // import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 const examples = {
-    localizer: Localizer
+    localizer: Localizer,
+    selectLabel: SelectLabel
 };
 
 type State = {
@@ -48,7 +50,7 @@ class ExamplePage extends React.Component<void, State> {
             { label: "Readonly", value: "data/readonly.json" },
             { label: "Array", value: "data/array.json" },
             { label: "Object", value: "data/object.json" },
-            { label: "Select with label", value: "data/selectlabel.json" },
+            { label: "Select", value: "selectLabel" },
             { label: "ArraySelect", value: "data/arrayselect.json" },
             { label: "Conditional Array", value: "data/conditionalarray.json" },
             {
