@@ -178,6 +178,13 @@ const select = (name, schema, options) => {
     return undefined;
 };
 
+const removeEmpty = obj =>
+    Object.entries(obj).forEach(([key, val]) => {
+        if (val && typeof val === "object") removeEmpty(val);
+        // eslint-disable-next-line no-param-reassign
+        else if (!val || val === null || val === "") delete obj[key];
+    });
+
 const checkboxes = (name, schema, options) => {
     if (
         stripNullType(schema.type) === "array" &&
@@ -612,7 +619,7 @@ function selectOrSet(projection, obj, valueToSet, type) {
 
 const validateBySchema = (schema, value) => tv4.validateResult(value, schema);
 
-const validate = (form, value) => {
+const validate = (form, value, getLocalizedString) => {
     if (!form) {
         return { valid: true };
     }
@@ -660,7 +667,9 @@ const validate = (form, value) => {
         form.validationMessage != null &&
         typeof value !== "undefined"
     ) {
-        tv4Result.error.message = form.validationMessage;
+        tv4Result.error.message = getLocalizedString
+            ? getLocalizedString(form.validationMessage)
+            : form.validationMessage;
     }
     return tv4Result;
 };
@@ -711,5 +720,6 @@ export default {
     safeEval,
     selectOrSet,
     getValueFromModel,
-    getTitleByValue
+    getTitleByValue,
+    removeEmpty
 };

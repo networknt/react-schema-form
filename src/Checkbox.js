@@ -25,7 +25,7 @@ const FormCheckbox = ({
     <FormGroup row>
         <FormControlLabel
             className={form.className}
-            label={getLocalizedString(form.title)}
+            label={form.title && getLocalizedString(form.title)}
             control={
                 <Checkbox
                     name={form.key.slice(-1)[0]}
