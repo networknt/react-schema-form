@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.9 - 2019-01-02
+### Added
+
+### Changed
+- Support objects in selects #153. Thanks @naeemba
+- Remove peer dependancy on a fixed version of material-ui #154. Thanks @psamim
+
+
 ## 0.6.8 - 2018-12-31
 ### Added
 
