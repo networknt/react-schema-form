@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.10 - 2019-01-15
+### Added
+
+### Changed
+- Fix error message and description on Select #156. Thanks @naeemba
+
 ## 0.6.9 - 2019-01-02
 ### Added
 

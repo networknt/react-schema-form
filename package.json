@@ -1,6 +1,6 @@
 {
   "name": "react-schema-form",
-  "version": "0.6.9",
+  "version": "0.6.10",
   "description": "React json schema form",
   "keywords": [
     "json schema",
@@ -70,7 +70,7 @@
     "react-test-renderer": "16.7.0",
     "rimraf": "^2.6.2",
     "webpack": "4.28.2",
-    "webpack-cli": "3.1.2"
+    "webpack-cli": "3.1.11"
   },
   "peerDependencies": {
     "react": "*",
