@@ -37,7 +37,7 @@
     "react-schema-form": "file:../",
     "react-select": "^2.0.0",
     "supports-color": "^5.4.0",
-    "webpack-cli": "3.1.2"
+    "webpack-cli": "3.1.11"
   },
   "devDependencies": {
     "@webpack-cli/migrate": "0.1.2",
