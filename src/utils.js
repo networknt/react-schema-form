@@ -169,7 +169,7 @@ const select = (name, schema, options) => {
         const f = stdFormObj(name, schema, options);
         f.key = options.path;
         f.type = "select";
-        if (!f.titleMap) {
+        if (!f.titleMap && !schema.isObject) {
             f.titleMap = enumToTitleMap(schema.enum);
         }
         options.lookup[ObjectPath.stringify(options.path)] = f;

@@ -12,7 +12,8 @@ type Props = {
     model: any,
     form: any,
     onChangeValidate: any,
-    localization: Localization
+    localization: Localization,
+    onChange: any
 };
 
 type State = {
@@ -39,10 +40,38 @@ class Select extends Component<Props, State> {
     }
 
     onSelected = event => {
-        const { onChangeValidate } = this.props;
+        const {
+            onChangeValidate,
+            onChange,
+            form: {
+                key,
+                schema: { isObject, enum: values, findFn }
+            }
+        } = this.props;
         const currentValue = event.target.value;
         this.setState({ currentValue });
-        onChangeValidate(event);
+        if (isObject) {
+            const item = values.find(each =>
+                findFn ? findFn(each, currentValue) : each === currentValue
+            );
+            onChange(key, item);
+        } else {
+            onChangeValidate(event);
+        }
+    };
+
+    getLabel = each => {
+        const {
+            form: {
+                schema: { displayFn, noLocalization }
+            },
+            localization: { getLocalizedString }
+        } = this.props;
+        if (displayFn) {
+            return displayFn(each);
+        }
+        if (noLocalization) return each.name;
+        return getLocalizedString(each.name);
     };
 
     render() {
@@ -51,12 +80,22 @@ class Select extends Component<Props, State> {
             localization: { getLocalizedString }
         } = this.props;
         const { currentValue } = this.state;
-        const menuItems = form.titleMap.map((item, idx) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <MenuItem key={idx} value={item.value}>
-                {item.name && getLocalizedString(item.name)}
-            </MenuItem>
-        ));
+        let menuItems = [];
+        if (form.schema.isObject) {
+            menuItems = form.schema.enum.map((item, idx) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <MenuItem key={idx} value={item}>
+                    {this.getLabel(item)}
+                </MenuItem>
+            ));
+        } else {
+            menuItems = form.titleMap.map((item, idx) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <MenuItem key={idx} value={item.value}>
+                    {this.getLabel(item)}
+                </MenuItem>
+            ));
+        }
         return (
             <FormControl fullWidth>
                 <InputLabel required={form.required}>
