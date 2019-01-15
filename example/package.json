@@ -28,7 +28,9 @@
   },
   "dependencies": {
     "@material-ui/core": "3.3.2",
+    "@material-ui/icons": "3.0.2",
     "babel-eslint": "10.0.1",
+    "eslint": "5.11.1",
     "install": "^0.12.1",
     "lodash": "^4.17.10",
     "react": "16.6.0",
@@ -37,7 +39,7 @@
     "react-schema-form": "file:../",
     "react-select": "^2.0.0",
     "supports-color": "^5.4.0",
-    "webpack-cli": "3.1.11"
+    "webpack-cli": "3.1.2"
   },
   "devDependencies": {
     "@webpack-cli/migrate": "0.1.2",
