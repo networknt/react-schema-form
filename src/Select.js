@@ -101,7 +101,7 @@ class Select extends Component<Props, State> {
         }
 
         return (
-            <FormControl fullWidth error={!!error}>
+            <FormControl fullWidth error={!!error} {...form.otherProps}>
                 <InputLabel required={form.required}>
                     {form.title && getLocalizedString(form.title)}
                 </InputLabel>

@@ -101,7 +101,7 @@ class MultiSelect extends Component<Props, State> {
             </MenuItem>
         ));
         return (
-            <FormControl fullWidth>
+            <FormControl fullWidth {...form.otherProps}>
                 <InputLabel required={form.required}>
                     {form.title && getLocalizedString(form.title)}
                 </InputLabel>
