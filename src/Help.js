@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Help = ({
-    form: { description, variant, align, color, noWrap, paragraph }
+    form: { description, variant, align, color, noWrap, paragraph, otherProps }
 }: Props) => (
     <Typography
         variant={variant}
@@ -18,6 +18,7 @@ const Help = ({
         color={color}
         noWrap={noWrap}
         paragraph={paragraph}
+        {...otherProps}
     >
         {description}
     </Typography>

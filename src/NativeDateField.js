@@ -28,6 +28,7 @@ const NativeDateField = (props: Props) => {
             form={Object.assign({}, form, { type })}
             value={getLocalizedDate(value)}
             otherProps={{ InputLabelProps: { shrink: true } }}
+            {...form.otherProps}
         />
     );
 };

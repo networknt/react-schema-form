@@ -58,6 +58,7 @@ class Text extends React.Component<Props> {
                 required={form.required}
                 style={form.style}
                 {...otherProps}
+                {...form.otherProps}
             />
         );
     }

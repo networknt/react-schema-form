@@ -45,6 +45,7 @@ const FieldSet = ({
             component="fieldset"
             className={classes.root}
             style={form.style}
+            {...form.otherProps}
         >
             <FormLabel component="legend" required={form.required}>
                 {form.title && getLocalizedString(form.title)}

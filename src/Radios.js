@@ -52,7 +52,11 @@ class Radios extends Component<Props> {
             localization: { getLocalizedString }
         } = this.props;
         return (
-            <FormControl component="fieldset" className={classes.formControl}>
+            <FormControl
+                component="fieldset"
+                className={classes.formControl}
+                {...form.otherProps}
+            >
                 <FormLabel component="legend" required={form.required}>
                     {form.title && getLocalizedString(form.title)}
                 </FormLabel>
