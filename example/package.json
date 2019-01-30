@@ -28,7 +28,9 @@
   },
   "dependencies": {
     "@material-ui/core": "3.3.2",
+    "@material-ui/icons": "3.0.2",
     "babel-eslint": "10.0.1",
+    "eslint": "5.11.1",
     "install": "^0.12.1",
     "lodash": "^4.17.10",
     "react": "16.6.0",
@@ -47,7 +49,7 @@
     "babel-preset-env": "1.7.0",
     "@babel/runtime": "7.1.2",
     "webpack": "4.23.1",
-    "webpack-dev-server": "3.1.10"
+    "webpack-dev-server": "3.1.11"
   },
   "scripts": {
     "start": "webpack-dev-server -d --config webpack.config.js"

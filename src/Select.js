@@ -4,6 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MuiSelect from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import ComposedComponent from "./ComposedComponent";
 import utils from "./utils";
 import type { Localization } from "./types";
@@ -13,7 +14,8 @@ type Props = {
     form: any,
     onChangeValidate: any,
     localization: Localization,
-    onChange: any
+    onChange: any,
+    error: any
 };
 
 type State = {
@@ -77,6 +79,7 @@ class Select extends Component<Props, State> {
     render() {
         const {
             form,
+            error,
             localization: { getLocalizedString }
         } = this.props;
         const { currentValue } = this.state;
@@ -96,8 +99,9 @@ class Select extends Component<Props, State> {
                 </MenuItem>
             ));
         }
+
         return (
-            <FormControl fullWidth>
+            <FormControl fullWidth error={!!error}>
                 <InputLabel required={form.required}>
                     {form.title && getLocalizedString(form.title)}
                 </InputLabel>
@@ -111,6 +115,10 @@ class Select extends Component<Props, State> {
                 >
                     {menuItems}
                 </MuiSelect>
+                <FormHelperText>
+                    {(error || form.description) &&
+                        getLocalizedString(error || form.description)}
+                </FormHelperText>
             </FormControl>
         );
     }
