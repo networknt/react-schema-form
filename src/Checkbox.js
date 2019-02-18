@@ -35,6 +35,7 @@ const FormCheckbox = ({
                     onChange={onChangeValidate}
                 />
             }
+            {...form.otherProps}
         />
     </FormGroup>
 );

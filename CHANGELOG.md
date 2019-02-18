@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.11 - 2019-01-30
+### Added
+
+### Changed
+- I18 add other props to elements #159. Thanks @naeemba
+
 ## 0.6.10 - 2019-01-15
 ### Added
 
