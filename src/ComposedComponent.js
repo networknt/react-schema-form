@@ -56,7 +56,7 @@ export default (ComposedComponent, defaultProps = {}) =>
 
             const validationResult = utils.validate(
                 form,
-                value,
+                value || undefined,
                 getLocalizedString
             );
 
