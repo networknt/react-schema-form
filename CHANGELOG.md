@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.12 - 2019-03-26
+### Added
+
+### Changed
+- I 160 incorrect errors for not required null fields. Thanks @naeemba
+
 ## 0.6.11 - 2019-01-30
 ### Added
 
