@@ -52,6 +52,7 @@ class ExamplePage extends React.Component<void, State> {
             { label: "Object", value: "data/object.json" },
             { label: "Select", value: "selectLabel" },
             { label: "ArraySelect", value: "data/arrayselect.json" },
+            { label: "htmlClass", value: "data/htmlclass.json" },
             { label: "Conditional Array", value: "data/conditionalarray.json" },
             {
                 label: "Test - Date Capture",
