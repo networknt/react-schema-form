@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.13 - 2019-06-03
+### Added
+
+### Changed
+- Fix 163 Allow htmlClass on fieldset elements. Thanks @fauxsoup
+
 ## 0.6.12 - 2019-03-26
 ### Added
 
