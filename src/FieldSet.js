@@ -6,8 +6,8 @@ import React from "react";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { withStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
 import type { Localization } from "./types";
-import classNames from 'classnames';
 
 const styles = theme => ({
     root: {
