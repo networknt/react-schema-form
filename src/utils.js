@@ -270,6 +270,37 @@ const fieldset = (name, schema, options) => {
     return undefined;
 };
 
+const tuple = (name, schema, options) => {
+    if (stripNullType(schema.type) === "array") {
+        const f = stdFormObj(name, schema, options);
+        f.type = "tuple";
+        f.key = options.path;
+        options.lookup[ObjectPath.stringify(options.path)] = f;
+
+        if (Array.isArray(schema.items)) {
+            const required = schema.required && 
+                             schema.required.indexOf(
+                                 options.path[options.path.length-1]
+                             );
+
+            f.items = schema.items.reduce((items, item, index) => {
+                const arrPath = options.path.slice();
+                arrPath.push(index)
+
+                const def = defaultFormDefinition(name, item, { path: arrPath, required: required || false, lookup: options.lookup, ignore: options.ignore, global: options.global });
+                if (def) {
+                    items.push(def)
+                }
+
+                return items;
+            }, []);
+
+            return f;
+        }
+    }
+    return undefined;
+}
+
 const array = (name, schema, options) => {
     if (stripNullType(schema.type) === "array") {
         const f = stdFormObj(name, schema, options);
@@ -317,7 +348,7 @@ const defaults = {
     number: [number],
     integer: [integer],
     boolean: [checkbox],
-    array: [checkboxes, array],
+    array: [checkboxes, tuple, array],
     date: [date],
     tBoolean: [tBoolean]
 };

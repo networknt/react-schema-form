@@ -64,6 +64,7 @@ class SchemaForm extends Component<Props> {
         array: Array,
         tBoolean: TripleBoolean,
         fieldset: FieldSet,
+        tuple: FieldSet,
         multiselect: MultiSelect
     };
 
