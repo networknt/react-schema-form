@@ -1,0 +1,17 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Tuples",
+        "properties": {
+            "foo": {
+                "type": "array",
+                "additionalItems": false,
+                "items": [
+                    {"type": "number"},
+                    {"type": "string"}
+                ]
+            }
+        }
+    },
+    "form": ["*"]
+}
