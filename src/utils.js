@@ -278,14 +278,13 @@ const tuple = (name, schema, options) => {
         options.lookup[ObjectPath.stringify(options.path)] = f;
 
         if (Array.isArray(schema.items)) {
-            const required = schema.required && 
-                             schema.required.indexOf(
-                                 options.path[options.path.length-1]
-                             );
+            const required =
+                schema.required &&
+                schema.required.indexOf(options.path[options.path.length - 1]);
 
             f.items = schema.items.reduce((items, item, index) => {
                 const arrPath = options.path.slice();
-                arrPath.push(index)
+                arrPath.push(index);
 
                 const def = defaultFormDefinition(name, item, {
                     path: arrPath,
@@ -295,7 +294,7 @@ const tuple = (name, schema, options) => {
                     global: options.global
                 });
                 if (def) {
-                    items.push(def)
+                    items.push(def);
                 }
 
                 return items;
@@ -305,7 +304,7 @@ const tuple = (name, schema, options) => {
         }
     }
     return undefined;
-}
+};
 
 const array = (name, schema, options) => {
     if (stripNullType(schema.type) === "array") {

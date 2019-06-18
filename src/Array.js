@@ -58,10 +58,14 @@ class ArrayComponent extends Component<Props, State> {
 
     static assignItemId(item) {
         let newItem = null;
-        if (item && typeof item === 'object' && Array.isArray(item)) {
+        if (item && typeof item === "object" && Array.isArray(item)) {
             newItem = [...item];
-        } else if (item && typeof item === "object" && !item[ArrayComponent.ITEM_ID]) {
-            newItem = {...item};
+        } else if (
+            item &&
+            typeof item === "object" &&
+            !item[ArrayComponent.ITEM_ID]
+        ) {
+            newItem = { ...item };
         }
 
         if (newItem) {
