@@ -36,42 +36,38 @@ class ExamplePage extends React.Component<void, State> {
     };
 
     state = {
-        tests: [
-            { label: "Simple", value: "data/simple.json" },
-            { label: "Triple Boolean", value: "data/noanswer.json" },
-            { label: "Simple Array", value: "data/simplearray.json" },
-            { label: "Basic JSON Schema Type", value: "data/types.json" },
-            { label: "Basic Radios", value: "data/radio.json" },
-            { label: "Condition", value: "data/condition.json" },
-            { label: "Help", value: "data/help.json" },
-            { label: "Kitchen Sink", value: "data/kitchenSink.json" },
-            { label: "Login", value: "data/login.json" },
-            { label: "Date", value: "data/date.json" },
-            { label: "Readonly", value: "data/readonly.json" },
-            { label: "Array", value: "data/array.json" },
-            { label: "Object", value: "data/object.json" },
-            { label: "Select", value: "selectLabel" },
-            { label: "ArraySelect", value: "data/arrayselect.json" },
-            { label: "htmlClass", value: "data/htmlclass.json" },
-            { label: "Conditional Array", value: "data/conditionalarray.json" },
-            {
-                label: "Test - Date Capture",
-                value: "data/tests/datecapture.json"
-            },
-            {
-                label: "Test - Localizer",
-                value: "localizer"
-            }
-        ],
-        validationResult: {},
-        schema: {},
-        form: [],
-        model: {},
-        schemaJson: "",
-        formJson: "",
-        selected: "",
-        localization: undefined,
-        showErrors: false
+      tests : [
+        {label : "Simple", value: "data/simple.json"},
+        {label : "Triple Boolean", value: "data/noanswer.json"},
+        {label : "Simple Array", value: "data/simplearray.json"},
+        {label : "Basic JSON Schema Type", value: "data/types.json"},
+        {label : "Basic Radios", value: "data/radio.json"},
+        {label : "Condition", value: "data/condition.json"},
+        {label : "Help", value: "data/help.json"},
+        {label : "Kitchen Sink", value: "data/kitchenSink.json"},
+        {label : "Login", value: "data/login.json"},
+        {label : "Date", value: "data/date.json"},
+        {label : "Readonly", value: "data/readonly.json"},
+        {label : "Array", value: "data/array.json"},
+        {label : "Object", value: "data/object.json"},
+        {label : "Select", value: "selectLabel"},
+        {label : "ArraySelect", value: "data/arrayselect.json"},
+        {label : "htmlClass", value: "data/htmlclass.json"},
+        {label : "Tuples", value: "data/tuple.json"},
+        {label : "Advanced Tuples", value: "data/tuple-advanced.json"},
+        {label : "Conditional Array", value: "data/conditionalarray.json"},
+        {label : "Test - Date Capture", value: "data/tests/datecapture.json"},
+        {label : "Test - Localizer", value: "localizer"}
+      ],
+      validationResult: {},
+      schema: {},
+      form: [],
+      model: {},
+      schemaJson: "",
+      formJson: "",
+      selected: "",
+      localization: undefined,
+      showErrors: false
     };
 
     setStateDefault = () => this.setState({ model: this.tempModel });

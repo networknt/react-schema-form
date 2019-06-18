@@ -1,0 +1,48 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Tuples",
+        "properties": {
+            "foo": {
+                "type": "array",
+                "additionalItems": false,
+                "title": "User Tuple",
+                "items": [
+                    {
+                        "type": "number",
+                        "title": "ID"
+                    },
+                    {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    {
+                        "type": "array",
+                        "title": "Addresses",
+                        "items": {
+                            "type": "array",
+                            "title": "Address",
+                            "items": [
+                                {
+                                    "type": "number",
+                                    "title": "Street Number"
+                                },
+                                {
+                                    "type": "string",
+                                    "title": "Street Name"
+                                },
+                                {
+                                    "type": "string",
+                                    "title": "Postal Code"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "form": [
+        "*"
+    ]
+}
