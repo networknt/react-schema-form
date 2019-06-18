@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.14 - 2019-06-18
+### Added
+
+### Changed
+- Fix 167 Array tuple example/support. Thanks @fauxsoup
+
+
 ## 0.6.13 - 2019-06-03
 ### Added
 
