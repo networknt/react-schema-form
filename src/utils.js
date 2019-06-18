@@ -287,7 +287,13 @@ const tuple = (name, schema, options) => {
                 const arrPath = options.path.slice();
                 arrPath.push(index)
 
-                const def = defaultFormDefinition(name, item, { path: arrPath, required: required || false, lookup: options.lookup, ignore: options.ignore, global: options.global });
+                const def = defaultFormDefinition(name, item, {
+                    path: arrPath,
+                    required: required || false,
+                    lookup: options.lookup,
+                    ignore: options.ignore,
+                    global: options.global
+                });
                 if (def) {
                     items.push(def)
                 }
