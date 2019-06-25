@@ -11,10 +11,10 @@ import type { Localization } from "./types";
 
 const styles = theme => ({
     formControl: {
-        marginTop: theme.spacing.unit
+        marginTop: theme.spacing(1)
     },
     group: {
-        margin: `${theme.spacing.unit}px 0`
+        margin: theme.spacing(1, 0)
     }
 });
 
