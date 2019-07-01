@@ -53,21 +53,32 @@ type State = {
     model: any
 };
 
-class Array extends Component<Props, State> {
-    static ITEM_ID = "_SCHEMAFORM_ITEM_ID";
+class ArrayComponent extends Component<Props, State> {
+    static ITEM_ID = Symbol("_SCHEMAFORM_ITEM_ID");
 
     static assignItemId(item) {
-        if (item && typeof item === "object" && !item[Array.ITEM_ID]) {
-            const newItem = Object.assign({}, item);
+        let newItem = null;
+        if (item && typeof item === "object" && Array.isArray(item)) {
+            newItem = [...item];
+        } else if (
+            item &&
+            typeof item === "object" &&
+            !item[ArrayComponent.ITEM_ID]
+        ) {
+            newItem = { ...item };
+        }
+
+        if (newItem) {
             // define hidden property with internal id
-            Object.defineProperty(newItem, Array.ITEM_ID, {
+            Object.defineProperty(newItem, ArrayComponent.ITEM_ID, {
                 enumerable: false,
                 writable: true
             });
-            Array.SEQUENCE += 1;
-            newItem[Array.ITEM_ID] = Array.SEQUENCE;
+            ArrayComponent.SEQUENCE += 1;
+            newItem[ArrayComponent.ITEM_ID] = ArrayComponent.SEQUENCE;
             return newItem;
         }
+
         return item;
     }
 
@@ -82,7 +93,7 @@ class Array extends Component<Props, State> {
     static copyWithIndex = (form, index) => {
         const copy = cloneDeep(form);
         copy.arrayIndex = index;
-        utils.traverseForm(copy, Array.setIndex(index));
+        utils.traverseForm(copy, ArrayComponent.setIndex(index));
         return copy;
     };
 
@@ -112,7 +123,7 @@ class Array extends Component<Props, State> {
         const model = utils.selectOrSet(propsKey, props.model) || [];
         return {
             formKey: propsKey,
-            model: model.map(Array.assignItemId)
+            model: model.map(ArrayComponent.assignItemId)
         };
     }
 
@@ -162,7 +173,7 @@ class Array extends Component<Props, State> {
             }
         }
         const newModel = model;
-        Array.assignItemId(empty);
+        ArrayComponent.assignItemId(empty);
         newModel.push(empty);
         this.setState({
             model: newModel
@@ -216,13 +227,13 @@ class Array extends Component<Props, State> {
         for (let i = 0; i < stateModel.length; i += 1) {
             const item = stateModel[i];
             const forms = form.items.map((eachForm, index) => {
-                const copy = Array.copyWithIndex(eachForm, i);
+                const copy = ArrayComponent.copyWithIndex(eachForm, i);
                 return builder(copy, model, index, mapper, onChange, builder);
             });
             arrays.push(
                 <Card
                     className={classes.arrayItem}
-                    key={(item && item[Array.ITEM_ID]) || i}
+                    key={(item && item[ArrayComponent.ITEM_ID]) || i}
                 >
                     <div className={classes.elementsContainer}>{forms}</div>
                     <IconButton
@@ -251,4 +262,4 @@ class Array extends Component<Props, State> {
     }
 }
 
-export default ComposedComponent(withStyles(styles)(Array));
+export default ComposedComponent(withStyles(styles)(ArrayComponent));

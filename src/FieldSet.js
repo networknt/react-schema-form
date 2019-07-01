@@ -6,6 +6,7 @@ import React from "react";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { withStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
 import type { Localization } from "./types";
 
 const styles = theme => ({
@@ -39,11 +40,12 @@ const FieldSet = ({
     const forms = form.items.map((f, index) =>
         builder(f, model, index, mapper, onChange, builder)
     );
+    const className = classNames(classes.root, form.htmlClass);
 
     return (
         <FormControl
             component="fieldset"
-            className={classes.root}
+            className={className}
             style={form.style}
             {...form.otherProps}
         >
