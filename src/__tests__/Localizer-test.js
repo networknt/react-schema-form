@@ -109,7 +109,7 @@ describe("Localizer test", () => {
             if (index === 5) expect(each.text()).toBe("Date Field");
             if (index === 6) expect(each.text()).toBe("T Boolean Field");
             if (index === 7)
-                expect(each.find("Typography > span").text()).toBe(
+                expect(each.find("ForwardRef(Typography) > span").text()).toBe(
                     "Array Field"
                 );
         });
@@ -130,7 +130,7 @@ describe("Localizer test", () => {
             if (index === 5) expect(each.text()).toBe("date.field");
             if (index === 6) expect(each.text()).toBe("tBoolean.field");
             if (index === 7)
-                expect(each.find("Typography > span").text()).toBe(
+                expect(each.find("ForwardRef(Typography) > span").text()).toBe(
                     "array.field"
                 );
         });
