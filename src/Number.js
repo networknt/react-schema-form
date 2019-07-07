@@ -16,7 +16,9 @@ type Props = {
         placeholder: string,
         readonly: boolean,
         description: string,
-        useLocalizer: boolean
+        schema: any,
+        useLocalizer: boolean,
+        type?: string
     },
     error: any,
     localization: Localization

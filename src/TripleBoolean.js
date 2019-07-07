@@ -20,7 +20,9 @@ type Props = {
         title: string,
         yesLabel: string,
         noLabel: string,
-        clearButtonLabel: string
+        clearButtonLabel: string,
+        key: any,
+        required?: boolean
     },
     value: any,
     setDefault: any,
