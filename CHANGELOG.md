@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.6.16 - 2019-07-07
+### Added
+
+### Changed
+- Fix 169 Update to material-ui v4. Thanks @naeemba
+
 ## 0.6.15 - 2019-06-18
 ### Added
 
