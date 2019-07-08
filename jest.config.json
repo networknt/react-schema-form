@@ -1,4 +1,14 @@
 {
+    "clearMocks": true,
+    "coverageDirectory": "coverage",
+    "moduleFileExtensions": ["js", "jsx", "json"],
+    "testPathIgnorePatterns": ["/node_modules/", "/.undodir/"],
     "verbose": true,
-    "transform": {}
+    "transform": {
+        "^.+\\.js$": "babel-jest"
+    },
+    "moduleNameMapper": {
+        "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "transformIgnorePatterns": ["node_modules/(?!(vuejs-datepicker/dist)/)"]
 }

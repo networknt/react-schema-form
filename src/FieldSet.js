@@ -11,10 +11,10 @@ import type { Localization } from "./types";
 
 const styles = theme => ({
     root: {
-        marginTop: theme.spacing.unit
+        marginTop: theme.spacing(1)
     },
     fields: {
-        marginLeft: theme.spacing.unit
+        marginLeft: theme.spacing(1)
     }
 });
 

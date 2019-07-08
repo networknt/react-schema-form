@@ -28,7 +28,14 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 use: [
                     {
-                        loader: "babel-loader"
+                        loader: "babel-loader",
+                        query: {
+                            presets: [
+                                "@babel/preset-react",
+                                "@babel/preset-flow"
+                            ],
+                            plugins: ["@babel/plugin-proposal-class-properties"]
+                        }
                     }
                 ],
                 exclude: /node_modules/

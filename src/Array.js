@@ -17,15 +17,15 @@ import type { Localization } from "./types";
 const styles = theme => ({
     arrayItem: {
         position: "relative",
-        padding: theme.spacing.unit,
-        marginTop: theme.spacing.unit,
+        padding: theme.spacing(),
+        marginTop: theme.spacing(),
         display: "flex"
     },
     deleteItemButton: {
-        margin: [[-theme.spacing.unit, -theme.spacing.unit, "auto", "auto"]]
+        margin: [[theme.spacing(-1), theme.spacing(-1), "auto", "auto"]]
     },
     addButton: {
-        marginLeft: theme.spacing.unit
+        marginLeft: theme.spacing()
     },
     elementsContainer: {
         display: "flex",
