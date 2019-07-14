@@ -34,7 +34,7 @@
     "babel-preset-react": "^6.24.1",
     "eslint": "5.11.1",
     "install": "^0.12.1",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.13",
     "react": "16.8.6",
     "react-ace": "6.2.0",
     "react-dom": "16.8.6",
