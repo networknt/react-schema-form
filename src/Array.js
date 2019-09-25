@@ -1,7 +1,4 @@
 // @flow
-/**
- * Created by steve on 11/09/15.
- */
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -228,7 +225,9 @@ class ArrayComponent extends Component<Props, State> {
             const item = stateModel[i];
             const forms = form.items.map((eachForm, index) => {
                 const copy = ArrayComponent.copyWithIndex(eachForm, i);
-                return builder(copy, model, index, mapper, onChange, builder);
+                return builder(copy, model, index, mapper, onChange, builder, {
+                    arrayIndex: i
+                });
             });
             arrays.push(
                 <Card
