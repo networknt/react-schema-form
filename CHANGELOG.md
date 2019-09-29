@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.7.1 - 2019-09-29
+### Added
+
+### Changed
+- Fix 175 Fix conditional array. Thanks @ psamim
+- Fix 176 fix the security issue reported by npm with npm audit fix
+
 ## 0.7.0 - 2019-07-07
 ### Added
 
