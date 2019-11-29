@@ -1,0 +1,30 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Comment",
+        "properties": {
+            "name":  {
+                "title": "Name",
+                "type": "string",
+                "default": "Steve"
+            }
+        },
+        "required": ["name"]
+    },
+    "form": [
+        {
+            "type": "help",
+            "description": "You can inject any text on your form.",
+            "variant": "h4",
+            "align": "left",
+            "color": "secondary"
+        },
+        {
+            "type": "help",
+            "description": "variant h2, align center",
+            "variant": "h2",
+            "align": "center"
+        },
+        "name"
+    ]
+}

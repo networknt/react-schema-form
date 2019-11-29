@@ -1,0 +1,47 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Conditional Elements in Arrays",
+        "properties": {
+            "notes": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "basicInfo": {
+                            "type": "string",
+                            "title": "Basic Information"
+                        },
+                        "additionalInfoRequired": {
+                            "type": "boolean",
+                            "title": "Addition Information Required"
+                        },
+                        "additionalInfo": {
+                            "type": "string",
+                            "title": "Additional Information"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "key": "notes",
+            "type": "array",
+            "items": [
+                "notes[].basicInfo",
+                "notes[].additionalInfoRequired",
+                {
+                    "key": "notes[].additionalInfo",
+                    "condition": "model.notes[form.key[1]].additionalInfoRequired",
+                    "type": "textarea"
+                },
+                {
+                    "type": "help",
+                    "description": "key will be: ['notes', x, 'additionalInfo'], where x is the index of the array, so use 'form.key[1]' to get index"
+                }
+            ]
+        }
+    ]
+}

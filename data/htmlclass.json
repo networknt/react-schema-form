@@ -1,0 +1,20 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "htmlClass demonstration",
+        "properties": {
+            "foo": {"type": "string"},
+            "bar": {"type": "number"}
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "htmlClass": "red",
+            "items": [
+                "foo",
+                {"key": "bar", "htmlClass": "red"}
+            ]
+        }
+    ]
+}

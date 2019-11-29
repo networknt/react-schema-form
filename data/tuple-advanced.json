@@ -1,0 +1,71 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Advanced Tuples",
+        "properties": {
+            "nested": {
+                "type": "array",
+                "title": "Outer Tuple",
+                "items": [
+                    {
+                        "type": "array",
+                        "title": "Name",
+                        "items": [
+                            {"type": "string", "title": "First Name"},
+                            {"type": "string", "title": "Last Name"}
+                        ]
+                    },
+                    {
+                        "type": "array",
+                        "title": "Address",
+                        "items": [
+                            {"type": "string", "title": "Street Address"},
+                            {"type": "string", "title": "City/State"}
+                        ]
+                    }
+                ]
+            },
+            "array": {
+                "type": "array",
+                "title": "Array of Tuples",
+                "items": {
+                    "type": "array",
+                    "items": [
+                        {"type": "string", "title": "First Name"},
+                        {"type": "string", "title": "Last Name"}
+                    ]
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "title": "Nested",
+            "items": [
+                {
+                    "type": "fieldset",
+                    "items": [
+                        "nested[0][1]",
+                        "nested[0][0]"
+                    ]
+                },
+                {
+                    "type": "fieldset",
+                    "items": [
+                        "nested[1][0]",
+                        "nested[1][1]"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Array",
+            "key": "array",
+            "items": [
+                "array[][0]",
+                "array[][1]"
+            ]
+        }
+    ]
+}
