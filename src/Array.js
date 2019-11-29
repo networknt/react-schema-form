@@ -51,8 +51,6 @@ type State = {
 };
 
 class ArrayComponent extends Component<Props, State> {
-    static ITEM_ID = Symbol("_SCHEMAFORM_ITEM_ID");
-
     static assignItemId(item) {
         let newItem = null;
         if (item && typeof item === "object" && Array.isArray(item)) {
@@ -206,6 +204,8 @@ class ArrayComponent extends Component<Props, State> {
             <AddButton onClick={this.onAppend}>{form.add || "Add"}</AddButton>
         );
     };
+
+    static ITEM_ID = Symbol("_SCHEMAFORM_ITEM_ID");
 
     render() {
         const {

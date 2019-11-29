@@ -59,7 +59,7 @@ const NumberComponent = (props: Props) => {
     return (
         <Text
             {...props}
-            form={Object.assign({}, form, { type: "string" })}
+            form={{ ...form, type: "string" }}
             value={inputValue}
             otherProps={{ onChange }}
         />

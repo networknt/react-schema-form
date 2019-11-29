@@ -40,11 +40,6 @@ type State = {
  * Instead, use a TextField and validate.
  */
 class TripleBoolean extends Component<Props, State> {
-    state = {
-        yesChecked: false,
-        noChecked: false
-    };
-
     static getDerivedStateFromProps(nextProps) {
         return {
             yesChecked: nextProps.value === "yes",
@@ -58,6 +53,10 @@ class TripleBoolean extends Component<Props, State> {
 
     constructor(props) {
         super(props);
+        this.state = {
+            yesChecked: false,
+            noChecked: false
+        };
 
         const { model, form, value, setDefault } = this.props;
         const { key } = form;

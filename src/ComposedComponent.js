@@ -33,10 +33,11 @@ const getDisplayName = WrappedComponent =>
 
 export default (ComposedComponent, defaultProps = {}) =>
     class Composed extends React.Component<Props> {
-        displayName = `ComposedComponent(${getDisplayName(ComposedComponent)})`;
-
         constructor(props) {
             super(props);
+            this.displayName = `ComposedComponent(${getDisplayName(
+                ComposedComponent
+            )})`;
             this.onChangeValidate = this.onChangeValidate.bind(this);
             this.state = this.constructor.getDerivedStateFromProps(this.props);
         }

@@ -19,10 +19,6 @@ type Props = {
 };
 
 class Text extends React.Component<Props> {
-    static defaultProps = {
-        otherProps: undefined
-    };
-
     constructor(props) {
         super(props);
         const { model, form, value, setDefault } = this.props;
@@ -63,5 +59,9 @@ class Text extends React.Component<Props> {
         );
     }
 }
+
+Text.defaultProps = {
+    otherProps: undefined
+};
 
 export default ComposedComponent(Text);

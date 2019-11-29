@@ -45,11 +45,6 @@ const formatDate = (date: string | Date) => {
 };
 
 class SchemaForm extends Component<Props> {
-    static defaultProps = {
-        localization: undefined,
-        showErrors: false
-    };
-
     mapper = {
         number: Number,
         text: Text,
@@ -168,5 +163,10 @@ class SchemaForm extends Component<Props> {
         return <div className={className}>{forms}</div>;
     }
 }
+
+SchemaForm.defaultProps = {
+    localization: undefined,
+    showErrors: false
+};
 
 export default SchemaForm;
