@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.8.0 - 2019-11-29
+### Added
+
+### Changed
+- Fix 179 upgrade dependencies to the latest and node 12 is needed 
+
 ## 0.7.1 - 2019-09-29
 ### Added
 
