@@ -7,7 +7,9 @@
     "schema form",
     "react",
     "react-component",
-    "form"
+    "form",
+    "react-schema-form",
+    "react schema form"
   ],
   "author": "Steve Hu, Nicholas Azar, Xavi Torelló, Greg Taschuk, Gene Sumchenko, Dmytro V. Dogadailo, Naeem Baghi",
   "license": "MIT",
@@ -87,7 +89,7 @@
   },
   "scripts": {
     "preversion": "webpack -p",
-    "prepublishOnly": "rimraf lib && NODE_ENV=production babel src -d lib",
+    "prepublish": "rimraf lib && NODE_ENV=production babel src -d lib",
     "lint": "eslint src",
     "test": "jest --runInBand"
   },
