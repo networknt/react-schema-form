@@ -18,11 +18,12 @@
   "rules": {
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
+    "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }]
   },
   "settings": {
     "react": {
-       "version":"16.6"
+       "version":"16.12"
     }
   },
   "plugins": [

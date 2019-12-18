@@ -16,7 +16,9 @@ type Props = {
         placeholder: string,
         readonly: boolean,
         description: string,
-        useLocalizer: boolean
+        schema: any,
+        useLocalizer: boolean,
+        type?: string
     },
     error: any,
     localization: Localization
@@ -57,7 +59,7 @@ const NumberComponent = (props: Props) => {
     return (
         <Text
             {...props}
-            form={Object.assign({}, form, { type: "string" })}
+            form={{ ...form, type: "string" }}
             value={inputValue}
             otherProps={{ onChange }}
         />

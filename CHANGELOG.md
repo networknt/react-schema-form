@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.8.0 - 2019-11-29
+### Added
+
+### Changed
+- Fix 179 upgrade dependencies to the latest and node 12 is needed 
+
+## 0.7.1 - 2019-09-29
+### Added
+
+### Changed
+- Fix 175 Fix conditional array. Thanks @ psamim
+- Fix 176 fix the security issue reported by npm with npm audit fix
+
+## 0.7.0 - 2019-07-07
+### Added
+
+### Changed
+- Fix 169 Update to material-ui v4. Thanks @naeemba
+
 ## 0.6.15 - 2019-06-18
 ### Added
 

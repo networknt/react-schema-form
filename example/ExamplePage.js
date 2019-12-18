@@ -1,7 +1,10 @@
 // @flow
 import React from "react";
 import { SchemaForm, utils } from "react-schema-form";
+import "ace-builds";
 import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/src-noconflict/theme-github";
 import {
     Button,
     FormControl,
@@ -12,6 +15,9 @@ import {
 import Localizer from "./data/tests/localizer";
 import SelectLabel from "./data/selectlabel";
 import ErrorBoundary from "./ErrorBoundary";
+import jsonWorkerUrl from "file-loader!ace-builds/src-noconflict/worker-json";
+ace.config.setModuleUrl("ace/mode/json_worker", jsonWorkerUrl);
+
 // RcSelect is still in migrating process so it's excluded for now
 // import RcSelect from 'react-schema-form-rc-select/lib/RcSelect';
 const examples = {

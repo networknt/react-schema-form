@@ -1,7 +1,4 @@
 // @flow
-/**
- * Created by steve on 11/09/15.
- */
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -17,15 +14,15 @@ import type { Localization } from "./types";
 const styles = theme => ({
     arrayItem: {
         position: "relative",
-        padding: theme.spacing.unit,
-        marginTop: theme.spacing.unit,
+        padding: theme.spacing(),
+        marginTop: theme.spacing(),
         display: "flex"
     },
     deleteItemButton: {
-        margin: [[-theme.spacing.unit, -theme.spacing.unit, "auto", "auto"]]
+        margin: [[theme.spacing(-1), theme.spacing(-1), "auto", "auto"]]
     },
     addButton: {
-        marginLeft: theme.spacing.unit
+        marginLeft: theme.spacing()
     },
     elementsContainer: {
         display: "flex",
@@ -54,8 +51,6 @@ type State = {
 };
 
 class ArrayComponent extends Component<Props, State> {
-    static ITEM_ID = Symbol("_SCHEMAFORM_ITEM_ID");
-
     static assignItemId(item) {
         let newItem = null;
         if (item && typeof item === "object" && Array.isArray(item)) {
@@ -210,6 +205,8 @@ class ArrayComponent extends Component<Props, State> {
         );
     };
 
+    static ITEM_ID = Symbol("_SCHEMAFORM_ITEM_ID");
+
     render() {
         const {
             classes,
@@ -228,7 +225,9 @@ class ArrayComponent extends Component<Props, State> {
             const item = stateModel[i];
             const forms = form.items.map((eachForm, index) => {
                 const copy = ArrayComponent.copyWithIndex(eachForm, i);
-                return builder(copy, model, index, mapper, onChange, builder);
+                return builder(copy, model, index, mapper, onChange, builder, {
+                    arrayIndex: i
+                });
             });
             arrays.push(
                 <Card

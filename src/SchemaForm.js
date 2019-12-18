@@ -45,11 +45,6 @@ const formatDate = (date: string | Date) => {
 };
 
 class SchemaForm extends Component<Props> {
-    static defaultProps = {
-        localization: undefined,
-        showErrors: false
-    };
-
     mapper = {
         number: Number,
         text: Text,
@@ -101,7 +96,7 @@ class SchemaForm extends Component<Props> {
         };
     };
 
-    builder(form, model, index, mapper, onChange, builder) {
+    builder(form, model, index, mapper, onChange, builder, evalContext) {
         const { errors, showErrors } = this.props;
         const Field = this.mapper[form.type];
         if (!Field) {
@@ -111,7 +106,8 @@ class SchemaForm extends Component<Props> {
         // Apply conditionals to review if this field must be rendered
         if (
             form.condition &&
-            utils.safeEval(form.condition, { model, form }) === false
+            utils.safeEval(form.condition, { model, form, ...evalContext }) ===
+                false
         ) {
             return null;
         }
@@ -167,5 +163,10 @@ class SchemaForm extends Component<Props> {
         return <div className={className}>{forms}</div>;
     }
 }
+
+SchemaForm.defaultProps = {
+    localization: undefined,
+    showErrors: false
+};
 
 export default SchemaForm;
