@@ -27,7 +27,7 @@ class Select extends Component<Props, State> {
         super(props);
         const { model, form } = this.props;
         const defaultValue =
-            form && form.selectProps && form.sepectProps.multiple ? [] : "";
+            form && form.selectProps && form.selectProps.multiple ? [] : "";
         this.state = {
             currentValue:
                 utils.getValueFromModel(model, form.key) || defaultValue
