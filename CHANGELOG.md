@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.8.1 - 2019-12-20
+### Added
+
+### Changed
+- fixes #182 move the webpack-config from dependencies to devDependencies
+- fixes #183 rebuilt the example code with webpack
+- fixes #184 add README.md to the example folder
+- Fixes #185 add support for multi selects. Thanks @naeemba
+- fixes #186 resolve a small lint issue
+
 ## 0.8.0 - 2019-11-29
 ### Added
 
