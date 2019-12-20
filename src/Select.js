@@ -26,8 +26,11 @@ class Select extends Component<Props, State> {
     constructor(props) {
         super(props);
         const { model, form } = this.props;
+        const defaultValue =
+            form && form.selectProps && form.selectProps.multiple ? [] : "";
         this.state = {
-            currentValue: utils.getValueFromModel(model, form.key) || ""
+            currentValue:
+                utils.getValueFromModel(model, form.key) || defaultValue
         };
     }
 
@@ -102,7 +105,7 @@ class Select extends Component<Props, State> {
 
         return (
             <FormControl fullWidth error={!!error} {...form.otherProps}>
-                <InputLabel required={form.required}>
+                <InputLabel required={form.required} {...form.labelProps}>
                     {form.title && getLocalizedString(form.title)}
                 </InputLabel>
                 <MuiSelect
@@ -112,10 +115,11 @@ class Select extends Component<Props, State> {
                     }
                     disabled={form.readonly}
                     onChange={this.onSelected}
+                    {...form.selectProps}
                 >
                     {menuItems}
                 </MuiSelect>
-                <FormHelperText>
+                <FormHelperText {...form.helperTextProps}>
                     {(error || form.description) &&
                         getLocalizedString(error || form.description)}
                 </FormHelperText>
