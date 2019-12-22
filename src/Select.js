@@ -103,13 +103,16 @@ class Select extends Component<Props, State> {
             ));
         }
 
+        const defaultValue =
+            form && form.selectProps && form.selectProps.multiple ? [] : "";
+
         return (
             <FormControl fullWidth error={!!error} {...form.otherProps}>
                 <InputLabel required={form.required} {...form.labelProps}>
                     {form.title && getLocalizedString(form.title)}
                 </InputLabel>
                 <MuiSelect
-                    value={currentValue || ""}
+                    value={currentValue || defaultValue}
                     placeholder={
                         form.placeholder && getLocalizedString(form.placeholder)
                     }
