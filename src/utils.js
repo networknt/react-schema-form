@@ -182,7 +182,7 @@ const removeEmpty = obj =>
     Object.entries(obj).forEach(([key, val]) => {
         if (val && typeof val === "object") removeEmpty(val);
         // eslint-disable-next-line no-param-reassign
-        else if (!val || val === null || val === "") delete obj[key];
+        else if (val === undefined || val === null || val === "") delete obj[key];
     });
 
 const checkboxes = (name, schema, options) => {
