@@ -92,8 +92,6 @@ class ArrayComponent extends Component<Props, State> {
         return copy;
     };
 
-    static ITEM_ID = Symbol("_SCHEMAFORM_ITEM_ID");
-
     SEQUENCE = 1;
 
     constructor(props) {
@@ -206,6 +204,8 @@ class ArrayComponent extends Component<Props, State> {
             <AddButton onClick={this.onAppend}>{form.add || "Add"}</AddButton>
         );
     };
+
+    static ITEM_ID = Symbol("_SCHEMAFORM_ITEM_ID");
 
     render() {
         const {
