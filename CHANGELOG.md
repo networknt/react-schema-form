@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.8.2 - 2019-12-24
+### Added
+
+### Changed
+- fixes #188 fix bug in removing empty value. Thanks @sahba-changizi
+- fixes #187 I25 add support for multi selects. Thanks @naeemba
+
 ## 0.8.1 - 2019-12-20
 ### Added
 
