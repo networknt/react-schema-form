@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.8.3 - 2019-12-30
+### Added
+
+### Changed
+- fixes #189 Check if obj is not null. Thanks @psamim
+
+
 ## 0.8.2 - 2019-12-24
 ### Added
 
