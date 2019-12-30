@@ -511,7 +511,7 @@ const merge = (schema, form, ignore, options, readonly) => {
             if (typeof obj === "string") {
                 obj = { key: obj };
             }
-            if (obj.key) {
+            if (obj && obj.key) {
                 if (typeof obj.key === "string") {
                     obj.key = ObjectPath.parse(obj.key);
                 }
