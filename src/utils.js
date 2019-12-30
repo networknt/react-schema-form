@@ -517,7 +517,7 @@ const merge = (schema, form, ignore, options, readonly) => {
                 }
             }
 
-            if (obj.itemForm) {
+            if (obj && obj.itemForm) {
                 obj.items = [];
                 const str = ObjectPath.stringify(obj.key);
                 const foundForm = lookup[str];
@@ -529,7 +529,7 @@ const merge = (schema, form, ignore, options, readonly) => {
             }
 
             // extend with std form from schema.
-            if (obj.key) {
+            if (obj && obj.key) {
                 const strid = ObjectPath.stringify(obj.key);
                 if (lookup[strid]) {
                     const schemaDefaults = lookup[strid];
@@ -555,7 +555,7 @@ const merge = (schema, form, ignore, options, readonly) => {
             }
 
             // if it's a type with items, merge 'em!
-            if (obj.items && obj.items.length > 0) {
+            if (obj && obj.items && obj.items.length > 0) {
                 obj.items = merge(
                     schema,
                     obj.items,
@@ -566,7 +566,7 @@ const merge = (schema, form, ignore, options, readonly) => {
             }
 
             // if its has tabs, merge them also!
-            if (obj.tabs) {
+            if (obj && obj.tabs) {
                 obj.tabs.forEach(tab => {
                     tab.items = merge(
                         schema,
@@ -580,7 +580,11 @@ const merge = (schema, form, ignore, options, readonly) => {
 
             // Special case: checkbox
             // Since have to ternary state we need a default
-            if (obj.type === "checkbox" && isUndefined(obj.schema.default)) {
+            if (
+                obj &&
+                obj.type === "checkbox" &&
+                isUndefined(obj.schema.default)
+            ) {
                 obj.schema.default = false;
             }
 
