@@ -156,7 +156,12 @@ describe("Composed component test", () => {
 
     it("Condition with additonal context:", () => {
         const display = render(
-            <SchemaForm form={cfg.form} schema={cfg.schema} model={cfg.model} evalContext={{roles: ['canSeeSecrets']}}/>
+            <SchemaForm
+                form={cfg.form}
+                schema={cfg.schema}
+                model={cfg.model}
+                evalContext={{ roles: ["canSeeSecrets"] }}
+            />
         );
 
         // Output must have three inputs

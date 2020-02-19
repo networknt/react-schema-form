@@ -33,7 +33,7 @@ type Props = {
     mapper: any,
     localization?: Localization,
     showErrors?: boolean,
-    evalContext: any,
+    evalContext: any
 };
 
 const formatDate = (date: string | Date) => {
@@ -118,18 +118,18 @@ class SchemaForm extends Component<Props> {
 
         return (
             <Field
-        model={model}
-        form={form}
-        key={key}
-        onChange={onChange}
-        setDefault={this.setDefault}
-        mapper={mapper}
-        builder={builder}
-        errorText={error}
-        localization={this.getLocalization()}
-        showErrors={showErrors}
-        />
-    );
+                model={model}
+                form={form}
+                key={key}
+                onChange={onChange}
+                setDefault={this.setDefault}
+                mapper={mapper}
+                builder={builder}
+                errorText={error}
+                localization={this.getLocalization()}
+                showErrors={showErrors}
+            />
+        );
     }
 
     render() {
