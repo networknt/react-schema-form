@@ -12,6 +12,11 @@ const cfg = {
             key: "date",
             type: "date",
             condition: 'model.name !== "" && model.name !== undefined'
+        },
+        {
+            key: "secretDate",
+            type: "date",
+            condition: "roles && roles.includes('canSeeSecrets')"
         }
     ],
     schema: {
@@ -23,6 +28,10 @@ const cfg = {
                 minLength: 3
             },
             date: {
+                title: "Date",
+                type: "object"
+            },
+            secretDate: {
                 title: "Date",
                 type: "object"
             },
@@ -143,5 +152,22 @@ describe("Composed component test", () => {
         );
         // Should not show 'conditional' field in either elements of the array
         expect(display.find("input").length).toEqual(3);
+    });
+
+    it("Condition with additonal context:", () => {
+        const display = render(
+            <SchemaForm
+                form={cfg.form}
+                schema={cfg.schema}
+                model={cfg.model}
+                evalContext={{ roles: ["canSeeSecrets"] }}
+            />
+        );
+
+        // Output must have three inputs
+        expect(display.find("input").length).toEqual(3);
+        // And second & third inputs type have to be of type 'date'
+        expect(display.find("input")[1].attribs.type).toEqual("date");
+        expect(display.find("input")[2].attribs.type).toEqual("date");
     });
 });

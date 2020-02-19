@@ -32,7 +32,8 @@ type Props = {
     className: any,
     mapper: any,
     localization?: Localization,
-    showErrors?: boolean
+    showErrors?: boolean,
+    evalContext: any
 };
 
 const formatDate = (date: string | Date) => {
@@ -96,8 +97,8 @@ class SchemaForm extends Component<Props> {
         };
     };
 
-    builder(form, model, index, mapper, onChange, builder, evalContext) {
-        const { errors, showErrors } = this.props;
+    builder(form, model, index, mapper, onChange, builder) {
+        const { errors, showErrors, evalContext } = this.props;
         const Field = this.mapper[form.type];
         if (!Field) {
             return null;
@@ -106,8 +107,7 @@ class SchemaForm extends Component<Props> {
         // Apply conditionals to review if this field must be rendered
         if (
             form.condition &&
-            utils.safeEval(form.condition, { model, form, ...evalContext }) ===
-                false
+            !utils.safeEval(form.condition, { model, form, ...evalContext })
         ) {
             return null;
         }
