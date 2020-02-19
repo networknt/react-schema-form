@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.8.4 - 2019-02-19
+### Added
+
+### Changed
+- fixes #191 Allow additional contexts to be passed to be used in evaluation of condition property. Thanks @struankl
+
 ## 0.8.3 - 2019-12-30
 ### Added
 
