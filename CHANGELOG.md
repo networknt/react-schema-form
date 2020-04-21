@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.8.5 - 2019-04-21
+### Added
+
+### Changed
+- fixes #194 fix the logic for default value for Select component
+
 ## 0.8.4 - 2019-02-19
 ### Added
 
