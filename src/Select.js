@@ -26,22 +26,18 @@ class Select extends Component<Props, State> {
     constructor(props) {
         super(props);
         const { model, form } = this.props;
-        const defaultValue =
+
+        let defaultValue =
             form && form.selectProps && form.selectProps.multiple ? [] : "";
+        if (props.form.default) {
+            defaultValue = props.form.default;
+        } else if (props.form.schema && props.form.schema.default) {
+            defaultValue = props.form.schema.default;
+        }
         this.state = {
             currentValue:
                 utils.getValueFromModel(model, form.key) || defaultValue
         };
-    }
-
-    static getDerivedStateFromProps(props: Props) {
-        const { form, model } = props;
-        if (model && form.key) {
-            return {
-                currentValue: utils.getValueFromModel(model, form.key)
-            };
-        }
-        return null;
     }
 
     onSelected = event => {
@@ -103,16 +99,13 @@ class Select extends Component<Props, State> {
             ));
         }
 
-        const defaultValue =
-            form && form.selectProps && form.selectProps.multiple ? [] : "";
-
         return (
             <FormControl fullWidth error={!!error} {...form.otherProps}>
                 <InputLabel required={form.required} {...form.labelProps}>
                     {form.title && getLocalizedString(form.title)}
                 </InputLabel>
                 <MuiSelect
-                    value={currentValue || defaultValue}
+                    value={currentValue}
                     placeholder={
                         form.placeholder && getLocalizedString(form.placeholder)
                     }
