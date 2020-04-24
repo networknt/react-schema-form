@@ -15,6 +15,7 @@ type Props = {
     onChangeValidate: any,
     localization: Localization,
     onChange: any,
+    setDefault: any,
     error: any
 };
 
@@ -25,7 +26,12 @@ type State = {
 class Select extends Component<Props, State> {
     constructor(props) {
         super(props);
-        const { model, form } = this.props;
+        const {
+            model,
+            form,
+            setDefault,
+            form: { key }
+        } = this.props;
 
         let defaultValue =
             form && form.selectProps && form.selectProps.multiple ? [] : "";
@@ -34,10 +40,12 @@ class Select extends Component<Props, State> {
         } else if (props.form.schema && props.form.schema.default) {
             defaultValue = props.form.schema.default;
         }
+        const currentValue =
+            utils.getValueFromModel(model, form.key) || defaultValue;
         this.state = {
-            currentValue:
-                utils.getValueFromModel(model, form.key) || defaultValue
+            currentValue
         };
+        setDefault(key, model, form, currentValue);
     }
 
     onSelected = event => {
