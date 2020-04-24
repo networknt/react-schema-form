@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.8.6 - 2019-04-24
+### Added
+
+### Changed
+- fixes #195 add setDefault to populate default value from the Select constructor
+
 ## 0.8.5 - 2019-04-21
 ### Added
 
