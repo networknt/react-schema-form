@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.8.7 - 2019-05-05
+### Added
+
+### Changed
+- fixes #196 add timestamp component to default to the current Date()
+
 ## 0.8.6 - 2019-04-24
 ### Added
 

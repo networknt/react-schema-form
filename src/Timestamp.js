@@ -1,7 +1,10 @@
+// @flow
+/**
+ * Created by steve on 15/09/15.
+ */
 import React from "react";
+import TextField from "@material-ui/core/TextField";
 import ComposedComponent from "./ComposedComponent";
-import TextField from '@material-ui/core/TextField';
-
 
 type Props = {
     form: any,
@@ -10,8 +13,7 @@ type Props = {
     setDefault: any,
     error: any,
     onChangeValidate: any,
-    localization: Localization,
-    otherProps?: any
+    localization: Localization
 };
 
 class Timestamp extends React.Component<Props> {
@@ -19,10 +21,9 @@ class Timestamp extends React.Component<Props> {
         super(props);
         const { model, form, value, setDefault } = this.props;
         const { key } = form;
-		const d = new Date();
-		const currentTimestamp = d.toISOString().substring(0, 16);
+        const d = new Date();
+        const currentTimestamp = d.toISOString().substring(0, 16);
         setDefault(key, model, form, value || currentTimestamp);
-
     }
 
     render() {
@@ -31,8 +32,7 @@ class Timestamp extends React.Component<Props> {
             error,
             value,
             onChangeValidate,
-            localization: { getLocalizedString },
-            otherProps
+            localization: { getLocalizedString }
         } = this.props;
         return (
             <TextField
@@ -52,15 +52,10 @@ class Timestamp extends React.Component<Props> {
                 fullWidth
                 required={form.required}
                 style={form.style}
-                {...otherProps}
                 {...form.otherProps}
             />
         );
     }
 }
-
-Text.defaultProps = {
-    otherProps: undefined
-};
 
 export default ComposedComponent(Timestamp);
