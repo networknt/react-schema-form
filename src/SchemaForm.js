@@ -14,6 +14,7 @@ import Select from "./Select";
 import MultiSelect from "./MultiSelect";
 import Radios from "./Radios";
 import DateComponent from "./Date";
+import Timestamp from "./Timestamp";
 import Checkbox from "./Checkbox";
 import Help from "./Help";
 import Array from "./Array";
@@ -55,6 +56,7 @@ class SchemaForm extends Component<Props> {
         select: Select,
         radios: Radios,
         date: DateComponent,
+        timestamp: Timestamp,
         checkbox: Checkbox,
         help: Help,
         array: Array,

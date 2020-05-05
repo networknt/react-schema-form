@@ -53,6 +53,7 @@ class ExamplePage extends React.Component<void, State> {
         {label : "Kitchen Sink", value: "data/kitchenSink.json"},
         {label : "Login", value: "data/login.json"},
         {label : "Date", value: "data/date.json"},
+        {label : "Timestamp", value: "data/timestamp.json"},
         {label : "Readonly", value: "data/readonly.json"},
         {label : "Array", value: "data/array.json"},
         {label : "Object", value: "data/object.json"},

@@ -1,0 +1,24 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Types",
+        "properties": {
+            "name": {
+                "type": "string",
+                "minLength": 3
+            },
+            "timestamp": {
+                "title": "Timestamp",
+                "type": "object"
+            }
+        },
+        "required": ["name", "timestamp"]
+    },
+    "form": [
+        "name",
+        {
+            "key": "timestamp",
+            "type": "timestamp"
+        }
+    ]
+}
