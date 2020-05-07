@@ -1,0 +1,117 @@
+{
+  "schema": {
+    "title": "Update Status",
+    "type": "object",
+    "properties": {
+      "co": {
+        "title": "Component",
+        "type": "string",
+        "default": "StatusComponent",
+        "readonly": true
+      },
+      "ss": {
+        "type": "array",
+        "title": "Subject",
+        "minItems": 1,
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "properties": {
+            "t": {
+              "title": "Timestamp",
+              "type": "string"
+            },
+            "s": {
+              "title": "Subject",
+              "type": "string"
+            },
+            "d": {
+              "title": "Description",
+              "type": "string"
+            },
+            "is": {
+              "type": "array",
+              "title": "Optional Image Urls",
+              "maxItems": 50,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "u": {
+                    "title": "Image Url",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "u"
+                ]
+              }
+            },
+            "vs": {
+              "type": "array",
+              "title": "Optional Video Urls",
+              "maxItems": 5,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "u": {
+                    "title": "Video Url",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "u"
+                ]
+              }
+            }
+          },
+          "required": [
+            "t",
+            "s",
+            "d"
+          ]
+        }
+      }
+    }
+  },
+  "form": [
+    "co",
+    {
+      "key": "ss",
+      "add": "New",
+      "style": {
+        "add": "btn-success"
+      },
+      "items": [
+        {
+          "key": "ss[].t",
+          "type": "timestamp"
+        },
+        "ss[].s",
+        {
+          "key": "ss[].d",
+          "type": "textarea"
+        },
+        {
+          "key": "ss[].is",
+          "add": "New URL",
+          "style": {
+            "add": "btn-success"
+          },
+          "items": [
+            "ss[].is[].u"
+          ]
+        },
+        {
+          "key": "ss[].vs",
+          "add": "New URL",
+          "style": {
+            "add": "btn-success"
+          },
+          "items": [
+            "ss[].vs[].u"
+          ]
+        }
+      ]
+    }
+  ]
+}
