@@ -1,0 +1,174 @@
+{
+    "schema": {
+        "type": "object",
+        "required": [
+            "co"
+        ],
+        "properties": {
+            "co": {
+              "title": "Component",
+              "type": "string",
+              "default": "restaurant",
+              "readonly": true
+            },
+            "home": {
+                "type": "object",
+                "title": "Home",
+                "required": [
+                    "render"
+                ],
+                "properties": {
+                    "render": {
+                        "type": "boolean",
+                        "title": "Render?"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Restaurant Name"
+                    },
+                    "title": {
+                        "type": "string",
+                        "title": "Title or Type"
+                    },
+                    "backgroud": {
+                        "type": "string",
+                        "title": "Backgroud Picture Url"
+                    }
+                }
+            },
+            "about": {
+                "type": "object",
+                "title": "About",
+                "required": [
+                    "render"
+                ],
+                "properties": {
+                    "render": {
+                        "type": "boolean",
+                        "title": "Render?"
+                    },
+                    "banner": {
+                        "type": "string",
+                        "title": "Banner Picture Url"
+                    },
+                    "stories": {
+                        "type": "array",
+                        "title": "stories",
+                        "minItems": 1,
+                        "maxItems": 10,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "subject": {
+                                    "type": "string",
+                                    "title": "Subject"
+                                },
+                                "content": {
+                                    "type": "string",
+                                    "title": "Content"
+                                },
+                                "image": {
+                                    "type": "string",
+                                    "title": "Image Url"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "catalog": {
+                "type": "object",
+                "title": "Online Order",
+                "required": [
+                    "render"
+                ],
+                "properties": {
+                    "render": {
+                        "type": "boolean",
+                        "title": "Render?"
+                    },
+                    "banner": {
+                        "type": "string",
+                        "title": "Banner Picture Url"
+                    },
+                    "products": {
+                        "type": "array",
+                        "title": "Products",
+                        "minItems": 1,
+                        "maxItems": 1000,
+                        "items": {
+                            "type": "object",
+                            "title": "product",
+                            "properties": {
+                                "sku": {
+                                    "type": "string",
+                                    "title": "SKU"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "title": "Name"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "title": "Price"
+                                },
+                                "image": {
+                                    "type": "string",
+                                    "title": "Image Url"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "reservation": {
+                "type": "object",
+                "title": "Reservation",
+                "required": [
+                    "render"
+                ],
+                "properties": {
+                    "render": {
+                        "type": "boolean",
+                        "title": "Render?"
+                    },
+                    "background": {
+                        "type": "string",
+                        "title": "Backgroud Image Url"
+                    }
+                }
+            },
+            "contact": {
+                "type": "object",
+                "title": "Contact",
+                "required": [
+                    "render"
+                ],
+                "properties": {
+                    "render": {
+                        "type": "boolean",
+                        "title": "Render?"
+                    },
+                    "lines": {
+                        "type": "array",
+                        "title": "Lines",
+                        "minItems": 1,
+                        "maxItems": 20,
+                        "itmes": {
+                            "type": "string",
+                            "title": "Line"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "form": [
+        "co",
+        "home",
+        "about",
+        "catalog",
+        "reservation",
+        "contact"
+    ]
+}

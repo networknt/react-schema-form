@@ -53,6 +53,7 @@ class ExamplePage extends React.Component<void, State> {
         {label : "Kitchen Sink", value: "data/kitchenSink.json"},
         {label : "Login", value: "data/login.json"},
         {label : "Date", value: "data/date.json"},
+        {label : "Number", value: "data/number.json"},
         {label : "Timestamp", value: "data/timestamp.json"},
         {label : "Subjects", value: "data/subjects.json"},
         {label : "Readonly", value: "data/readonly.json"},
@@ -65,7 +66,9 @@ class ExamplePage extends React.Component<void, State> {
         {label : "Advanced Tuples", value: "data/tuple-advanced.json"},
         {label : "Conditional Array", value: "data/conditionalarray.json"},
         {label : "Test - Date Capture", value: "data/tests/datecapture.json"},
-        {label : "Test - Localizer", value: "localizer"}
+        {label : "Test - Localizer", value: "localizer"},
+        {label : "MapRoot Restaurant", value: "data/maproot/restaurant.json"}
+
       ],
       validationResult: {},
       schema: {},

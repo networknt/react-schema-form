@@ -1,0 +1,24 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Number",
+        "properties": {
+            "integer": {
+                "type": "integer",
+                "title": "Integer"
+              },
+            "number": {
+                "title": "Number",
+                "type": "number"
+            }
+        },
+        "required": [
+            "integer",
+            "number"
+          ]
+    },
+    "form": [
+        "integer",
+        "number"
+    ]
+}
