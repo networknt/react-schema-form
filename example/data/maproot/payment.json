@@ -12,6 +12,8 @@
               "type": "string",
               "title": "Payment Method",
               "enum": [
+                "OnPickup",
+                "OnDelivery",
                 "Braintree",
                 "Taiji",
                 "TaijiToken",
@@ -42,6 +44,10 @@
             "tokenName": {
               "type": "string",
               "title": "Token Name"
+            },
+            "acceptMethods": {
+              "type": "string",
+              "title": "Accept Methods"
             }
           }
         }
@@ -73,7 +79,11 @@
         },
         {
           "key": "payments[].address",
-          "condition": "model.payments[form.key[1]].method !== 'Braintree'"
+          "condition": "model.payments[form.key[1]].method === 'Taiji' || model.payments[form.key[1]].method === 'TaijiToken' || model.payments[form.key[1]].method === 'Bitcoin' || model.payments[form.key[1]].method === 'Ethereum'"
+        },
+        {
+          "key": "payments[].acceptMethods",
+          "condition": "model.payments[form.key[1]].method === 'OnPickup' || model.payments[form.key[1]].method === 'OnDelivery'"
         }
       ]
     }
