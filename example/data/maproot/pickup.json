@@ -1,0 +1,53 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "Pick Up Form",
+    "properties": {
+      "pickupTime": {
+        "title": "Pick up Time",
+        "type": "string",
+        "enum": [
+          "0",
+          "5",
+          "10"
+        ]
+      },
+      "instruction": {
+        "title": "Additional Instruction",
+        "type": "string"
+      }
+    },
+    "required": [
+      "pickupTime"
+    ]
+  },
+  "form": [
+    {
+      "type": "help",
+      "description": "22 Front Street, Toronto, ON",
+      "align": "left"
+    },
+    {
+      "key": "pickupTime",
+      "type": "select",
+      "titleMap": [
+        {
+          "value": "0",
+          "name": "Now"
+        },
+        {
+          "value": "5",
+          "name": "5 minutes"
+        },
+        {
+          "value": "10",
+          "name": "10 minutes"
+        }
+      ]
+    },
+    {
+      "key": "instruction",
+      "type": "textarea"
+    }
+  ]
+}

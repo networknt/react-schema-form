@@ -67,8 +67,9 @@ class ExamplePage extends React.Component<void, State> {
         {label : "Conditional Array", value: "data/conditionalarray.json"},
         {label : "Test - Date Capture", value: "data/tests/datecapture.json"},
         {label : "Test - Localizer", value: "localizer"},
-        {label : "MapRoot Restaurant", value: "data/maproot/restaurant.json"}
-
+        {label : "MapRoot Restaurant", value: "data/maproot/restaurant.json"},
+        {label : "MapRoot Payment", value: "data/maproot/payment.json"},
+        {label : "MapRoot Pickup", value: "data/maproot/pickup.json"}
       ],
       validationResult: {},
       schema: {},
