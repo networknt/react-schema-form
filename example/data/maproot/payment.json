@@ -3,6 +3,10 @@
     "type": "object",
     "title": "Payment Methods Setup",
     "properties": {
+      "email": {
+        "type": "string",
+        "title": "Merchant Email"
+      },
       "payments": {
         "type": "array",
         "items": {
@@ -52,9 +56,13 @@
           }
         }
       }
-    }
+    },
+    "required": [
+      "email"
+    ]
   },
   "form": [
+    "email",
     {
       "key": "payments",
       "type": "array",
