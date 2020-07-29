@@ -9,25 +9,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-## 0.8.7 - 2019-05-05
+## 0.8.8 - 2020-07-28
+### Added
+
+### Changed
+- fixes #204 update Checkbox to functional component with default value handling
+
+## 0.8.7 - 2020-05-05
 ### Added
 
 ### Changed
 - fixes #196 add timestamp component to default to the current Date()
 
-## 0.8.6 - 2019-04-24
+## 0.8.6 - 2020-04-24
 ### Added
 
 ### Changed
 - fixes #195 add setDefault to populate default value from the Select constructor
 
-## 0.8.5 - 2019-04-21
+## 0.8.5 - 2020-04-21
 ### Added
 
 ### Changed
 - fixes #194 fix the logic for default value for Select component
 
-## 0.8.4 - 2019-02-19
+## 0.8.4 - 2020-02-19
 ### Added
 
 ### Changed
