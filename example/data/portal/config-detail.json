@@ -81,6 +81,30 @@
           "type": "boolean",
           "default": false
         },
+        "dbInfo": {
+          "type": "object",
+          "title": "Database Info",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Database Name",
+              "default": "mysql"
+            },
+            "driverClassName": {
+              "type": "string",
+              "title": "Driver Class Name",
+              "default": "jdbc:mysql://mysqldb:3306/oauth2?useSSL=false"
+            },
+            "username": {
+              "type": "string",
+              "title": "Username"
+            },
+            "password": {
+              "type": "string",
+              "title": "Password"
+            }
+          }
+        },
         "supportH2ForTest": {
           "title": "Support H2 Test",
           "type": "boolean",
@@ -138,6 +162,10 @@
     "enableRegistry",
     "eclipseIDE",
     "supportDb",
+    {
+      "key": "dbInfo",
+      "condition": "model.supportDb"
+    },
     "supportH2ForTest",
     "supportClient",
     "dockerOrganization"
