@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.9.0 - 2020-09-08
+### Added
+
+### Changed
+- fixes #211 update build environment with create-react-library
+- fixes #207 add dbInfo to the light-codegen config form conditionally
+
+
 ## 0.8.8 - 2020-07-28
 ### Added
 
