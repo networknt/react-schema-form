@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import ExamplePage from "./ExamplePage";
 
@@ -10,9 +9,12 @@ const theme = createMuiTheme({
     }
 });
 
-ReactDOM.render(
+const App = () => {
+  return (
     <MuiThemeProvider theme={theme}>
         <ExamplePage />
-    </MuiThemeProvider>,
-    document.getElementById("app")
-);
+    </MuiThemeProvider>
+  )
+}
+
+export default App

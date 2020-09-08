@@ -1,36 +1,33 @@
 {
-  "extends": [
-      "airbnb",
-      "plugin:react/recommended",
-      "plugin:flowtype/recommended",
-      "plugin:prettier/recommended",
-      "prettier/flowtype",
-      "prettier/react",
-      "prettier/standard"
-  ],
   "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "standard-react",
+    "plugin:prettier/recommended",
+    "prettier/standard",
+    "prettier/react"
+  ],
   "env": {
-    "browser": true,
-    "node": true,
-    "jest": true,
-    "es6": true
+    "node": true
   },
-  "rules": {
-    "react/jsx-uses-react": 1,
-    "react/jsx-uses-vars": 1,
-    "react/jsx-props-no-spreading": "off",
-    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }]
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "legacyDecorators": true,
+      "jsx": true
+    }
   },
   "settings": {
     "react": {
-       "version":"16.12"
+      "version": "16"
     }
   },
-  "plugins": [
-    "flowtype",
-    "flowtype-errors",
-    "react",
-    "import",
-    "prettier"
-  ]
+  "rules": {
+    "space-before-function-paren": 0,
+    "react/prop-types": 0,
+    "react/jsx-handler-names": 0,
+    "react/jsx-fragments": 0,
+    "react/no-unused-prop-types": 0,
+    "import/export": 0
+  }
 }
