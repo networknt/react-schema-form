@@ -77,7 +77,7 @@ export default (ComposedComponent, defaultProps = {}) =>
             const { form, onChange, localization } = this.props; // eslint-disable-line
       const getLocalizedString = localization && localization.getLocalizedString
       let value = null
-      const type = form.schema ? form.schema.type : form.type
+      const type = form.type ? form.type : form.schema.type
       switch (type) {
         case 'integer':
         case 'number': {
@@ -87,12 +87,18 @@ export default (ComposedComponent, defaultProps = {}) =>
         case 'boolean':
           value = e.target.checked
           break
+        case 'markdown':
+          if(v && v.length > 0) {
+            value = v
+          } else {
+            value = ''
+          }
+          break
         case 'tBoolean':
           if (e.target.value !== 'yes' || e.target.value !== 'no') {
             value = v
           }
           break
-
         case 'array':
           value = e
           break

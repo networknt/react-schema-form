@@ -106,7 +106,6 @@ class Select extends Component<Props, State> {
         </MenuItem>
       ))
     }
-
     return (
       <FormControl fullWidth error={!!error} {...form.otherProps}>
         <InputLabel required={form.required} {...form.labelProps}>

@@ -63,6 +63,7 @@ class ExamplePage extends React.Component<void, State> {
         {label : "Tuples", value: "data/tuple.json"},
         {label : "Advanced Tuples", value: "data/tuple-advanced.json"},
         {label : "Conditional Array", value: "data/conditionalarray.json"},
+        {label : "Markdown", value: "data/markdown.json"},
         {label : "Test - Date Capture", value: "data/tests/datecapture.json"},
         {label : "Test - Localizer", value: "localizer"},
         {label : "Portal Config", value: "data/portal/config-detail.json"},
@@ -109,7 +110,6 @@ class ExamplePage extends React.Component<void, State> {
                 showErrors: false
             });
         } else {
-            console.log(value);
             fetch(value)
                 .then(x => x.json())
                 .then(({ form, schema, model }) => {

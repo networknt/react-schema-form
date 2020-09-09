@@ -9,6 +9,7 @@ import utils from './utils'
 import Number from './Number'
 import Text from './Text'
 import TextArea from './TextArea'
+import Markdown from './Markdown'
 import TextSuggest from './TextSuggest'
 import Select from './Select'
 import MultiSelect from './MultiSelect'
@@ -52,6 +53,7 @@ class SchemaForm extends Component<Props> {
     text: Text,
     password: Text,
     textarea: TextArea,
+    markdown: Markdown,
     textsuggest: TextSuggest,
     select: Select,
     radios: Radios,

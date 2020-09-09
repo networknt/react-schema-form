@@ -1,0 +1,28 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "Comment",
+    "properties": {
+      "name":  {
+        "title": "Name",
+        "type": "string",
+        "default": "Steve"
+      },
+      "comment": {
+        "title": "Comment",
+        "type": "string",
+        "description": "Please write your comment here."
+      }
+    },
+    "required": ["name","comment"]
+  },
+  "form": [
+    "name",
+    {
+      "key": "comment",
+      "type": "markdown",
+      "title": "Comment",
+      "placeholder": "Make a comment"
+    }
+  ]
+}
