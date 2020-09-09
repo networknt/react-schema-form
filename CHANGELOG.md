@@ -9,13 +9,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.9.1 - 2020-09-09
+### Added
+
+### Changed
+- fixes #214 Add markdown field to support light-portal forms
+- fixes #213 add dev dependencies to fix unit test cases
+- fixes #212 Run the lint with the new configuration and remove lib folder
+
 ## 0.9.0 - 2020-09-08
 ### Added
 
 ### Changed
 - fixes #211 update build environment with create-react-library
 - fixes #207 add dbInfo to the light-codegen config form conditionally
-
 
 ## 0.8.8 - 2020-07-28
 ### Added
