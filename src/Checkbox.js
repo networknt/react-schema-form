@@ -1,9 +1,7 @@
-// @flow
 /**
  * Created by steve on 20/09/15.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -38,16 +36,6 @@ function FormCheckbox(props) {
       />
     </FormGroup>
   )
-}
-
-FormCheckbox.propTypes = {
-  model: PropTypes.objectOf(PropTypes.object).isRequired,
-  form: PropTypes.objectOf(PropTypes.object).isRequired,
-  setDefault: PropTypes.func.isRequired,
-  value: PropTypes.bool.isRequired,
-  localization: PropTypes.objectOf(PropTypes.object).isRequired,
-  getLocalizedString: PropTypes.func.isRequired,
-  onChangeValidate: PropTypes.func.isRequired
 }
 
 export default ComposedComponent(FormCheckbox)

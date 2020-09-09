@@ -78,6 +78,7 @@ export default (ComposedComponent, defaultProps = {}) =>
       const getLocalizedString = localization && localization.getLocalizedString
       let value = null
       const type = form.type ? form.type : form.schema.type
+      console.log(type);
       switch (type) {
         case 'integer':
         case 'number': {
@@ -85,6 +86,9 @@ export default (ComposedComponent, defaultProps = {}) =>
           break
         }
         case 'boolean':
+          value = e.target.checked
+          break
+        case 'checkbox':
           value = e.target.checked
           break
         case 'markdown':
