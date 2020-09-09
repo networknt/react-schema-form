@@ -18,7 +18,7 @@
   "module": "dist/index.modern.js",
   "source": "src/index.js",
   "engines": {
-    "node": ">=10"
+    "node": ">=10.14"
   },
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
