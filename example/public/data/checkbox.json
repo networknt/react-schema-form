@@ -1,0 +1,16 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "Types",
+    "properties": {
+      "correct":  {
+        "type": "boolean",
+        "title": "correct?"
+      }
+    },
+    "required": ["correct"]
+  },
+  "form": [
+    "*"
+  ]
+}

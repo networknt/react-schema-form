@@ -1,0 +1,99 @@
+{
+  "formId": "createSchemaForm",
+  "actions": [
+    {
+      "host": "lightapi.net",
+      "service": "market",
+      "action": "createSchemaForm",
+      "version": "0.1.0",
+      "title": "Create Schema Form",
+      "success": "/app/success",
+      "failure": "/app/failure"
+    }
+  ],
+  "schema": {
+    "title": "Relation",
+    "type": "object",
+    "properties": {
+      "formId": {
+        "title": "Form Id",
+        "type": "string"
+      },
+      "formName": {
+        "title": "Form Name",
+        "type": "string"
+      },
+      "formDesc": {
+        "title": "Form Description",
+        "type": "string"
+      },
+      "imageUrl": {
+        "title": "Image URL",
+        "type": "string"
+      },
+      "categories": {
+        "type": "array",
+        "title": "Categories",
+        "minItems": 1,
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "title": "Category"
+            },
+            "subcategory": {
+              "type": "string",
+              "title": "Sub Category"
+            }
+          },
+          "required": [
+            "category"
+          ]
+        }
+      }
+    },
+    "required": [
+      "formId",
+      "formName",
+      "formDesc",
+      "imageUrl",
+      "categories"
+    ]
+  },
+  "form": [
+    "formId",
+    "formName",
+    {
+      "key": "formDesc",
+      "type": "markdown"
+    },
+    "imageUrl",
+    {
+      "key": "categories",
+      "add": "Add Categories",
+      "style": {
+        "add": "btn-success"
+      },
+      "items": [
+        {
+          "key": "categories[].category",
+          "type": "rc-select",
+          "filterOption": true,
+          "action": {
+            "url": "https://dev.lightapi.net/r/data?name=schema-category"
+          }
+        },
+        {
+          "key": "categories[].subcategory",
+          "type": "rc-select",
+          "filterOption": true,
+          "action": {
+            "url": "https://dev.lightapi.net/r/data?name=schema-subcategory&rela=schema-cat-sub&from=$(categories[].category)"
+          }
+        }
+      ]
+    }
+  ]
+}

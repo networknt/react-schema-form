@@ -1,0 +1,209 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "Category",
+    "required": [
+      "name",
+      "categories"
+    ],
+    "properties": {
+      "name": {
+        "type": "string",
+        "title": "Category Name"
+      },
+      "categories": {
+        "type": "array",
+        "title": "Categories",
+        "maxItems": 100,
+        "minItems":1,
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string"
+            },
+            "code": {
+              "title": "Code",
+              "type": "string"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string",
+              "enum": [
+                "volcabulary",
+                "term"
+              ],
+              "default": "volcabulary"
+            },
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "children": {
+              "title": "Children",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "title": "Label",
+                    "type": "string"
+                  },
+                  "code": {
+                    "title": "Code",
+                    "type": "string"
+                  },
+                  "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "enum": [
+                      "volcabulary",
+                      "term"
+                    ],
+                    "default": "term"
+                  },
+                  "description": {
+                    "title": "Description",
+                    "type": "string"
+                  },
+                  "children": {
+                    "title": "Children",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "title": "Label",
+                          "type": "string"
+                        },
+                        "code": {
+                          "title": "Code",
+                          "type": "string"
+                        },
+                        "type": {
+                          "title": "Type",
+                          "type": "string",
+                          "enum": [
+                            "volcabulary",
+                            "term"
+                          ],
+                          "default": "term"
+                        },
+                        "description": {
+                          "title": "Description",
+                          "type": "string"
+                        },
+                        "children": {
+                          "title": "Children",
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "label": {
+                                "title": "Label",
+                                "type": "string"
+                              },
+                              "code": {
+                                "title": "Code",
+                                "type": "string"
+                              },
+                              "type": {
+                                "title": "Type",
+                                "type": "string",
+                                "enum": [
+                                  "volcabulary",
+                                  "term"
+                                ],
+                                "default": "term"
+                              },
+                              "description": {
+                                "title": "Description",
+                                "type": "string"
+                              }
+                                
+                            },
+                            "required": [
+                              "label",
+                              "code",
+                              "type"
+                            ]
+                          }
+                        }                          
+                      },
+                      "required": [
+                        "label",
+                        "code",
+                        "type"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "label",
+                  "code",
+                  "type"
+                ]
+              }
+            }
+          },
+          "required": [
+            "label",
+            "code",
+            "type"
+          ]
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "type": "help",
+      "description": "Construct categories. Try adding a couple of forms, reorder by drag'n'drop.",
+      "variant": "h4",
+      "align": "left",
+      "color": "secondary"
+    },
+    "name",
+    {
+      "key": "categories",
+      "add": "New",
+      "style": {
+        "add": "btn-success"
+      },
+      "items": [
+        "categories[].label",
+        "categories[].code",
+        "categories[].type",
+        "categories[].description",
+        {
+          "key": "categories[].children",
+          "items": [
+            "categories[].children[].label",
+            "categories[].children[].code",
+            "categories[].children[].type",
+            "categories[].children[].description",
+            {
+              "key": "categories[].children[].children",
+              "items": [
+                "categories[].children[].children[].label",
+                "categories[].children[].children[].code",
+                "categories[].children[].children[].type",
+                "categories[].children[].children[].description",
+                {
+                  "key": "categories[].children[].children[].children",
+                  "items": [
+                    "categories[].children[].children[].children[].label",
+                    "categories[].children[].children[].children[].code",
+                    "categories[].children[].children[].children[].type",
+                    "categories[].children[].children[].children[].description"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

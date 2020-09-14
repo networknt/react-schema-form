@@ -45,6 +45,7 @@ class ExamplePage extends React.Component<void, State> {
         {label : "Triple Boolean", value: "data/noanswer.json"},
         {label : "Simple Array", value: "data/simplearray.json"},
         {label : "Basic JSON Schema Type", value: "data/types.json"},
+        {label : "Checkbox", value: "data/checkbox.json"},
         {label : "Basic Radios", value: "data/radio.json"},
         {label : "Condition", value: "data/condition.json"},
         {label : "Help", value: "data/help.json"},
@@ -67,6 +68,9 @@ class ExamplePage extends React.Component<void, State> {
         {label : "Test - Date Capture", value: "data/tests/datecapture.json"},
         {label : "Test - Localizer", value: "localizer"},
         {label : "Portal Config", value: "data/portal/config-detail.json"},
+        {label : "Portal Quiz", value: "data/portal/quiz.json"},
+        {label : "Schema Form", value: "data/portal/schema-form.json"},
+        {label : "Portal Category", value: "data/portal/category.json"},
         {label : "MapRoot Restaurant", value: "data/maproot/restaurant.json"},
         {label : "MapRoot Payment", value: "data/maproot/payment.json"},
         {label : "MapRoot Pickup", value: "data/maproot/pickup.json"}
