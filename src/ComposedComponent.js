@@ -78,7 +78,7 @@ export default (ComposedComponent, defaultProps = {}) =>
       const getLocalizedString = localization && localization.getLocalizedString
       let value = null
       const type = form.type ? form.type : form.schema.type
-      console.log(type)
+      // console.log(type)
       switch (type) {
         case 'integer':
         case 'number': {

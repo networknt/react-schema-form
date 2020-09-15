@@ -1,6 +1,6 @@
 {
   "name": "react-schema-form",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "React json schema form",
   "keywords": [
     "json schema",
@@ -74,6 +74,7 @@
     "objectpath": "1.2.2",
     "prop-types": "^15.7.2",
     "react-autosuggest": "^9.4.3",
+    "react-checkbox-tree": "^1.6.0",
     "react-mde": "^11.0.0",
     "showdown": "^1.9.1",
     "supports-color": "^7.1.0",
