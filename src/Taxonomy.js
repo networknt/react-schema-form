@@ -6,9 +6,6 @@ import ComposedComponent from './ComposedComponent'
 
 const useStyles = makeStyles({
   root: {
-    '& .outputField': {
-      visibility: 'hidden'
-    },
     '& .term': {
       margin: '5px 0'
     },
@@ -278,7 +275,7 @@ function Taxonomy(props) {
   }
 
   return (
-    <div className={classes.root}>
+    <React.Fragment>
       <FormLabel required={form.required}>{title}</FormLabel>
       <ul className={classes.tags}>
         {parseAssignedTaxonomy(terms) || (
@@ -287,7 +284,7 @@ function Taxonomy(props) {
       </ul>
       <div className='term-chooser'>{parseTerms(terms)}</div>
       {error ? <FormHelperText error>{error}</FormHelperText> : null}
-    </div>
+    </React.Fragment>
   )
 }
 
