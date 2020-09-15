@@ -78,7 +78,7 @@ export default (ComposedComponent, defaultProps = {}) =>
       const getLocalizedString = localization && localization.getLocalizedString
       let value = null
       const type = form.type ? form.type : form.schema.type
-      console.log(type);
+      console.log(type)
       switch (type) {
         case 'integer':
         case 'number': {
@@ -92,10 +92,17 @@ export default (ComposedComponent, defaultProps = {}) =>
           value = e.target.checked
           break
         case 'markdown':
-          if(v && v.length > 0) {
+          if (v && v.length > 0) {
             value = v
           } else {
             value = ''
+          }
+          break
+        case 'taxonomy':
+          if (v && v.length) {
+            value = v
+          } else {
+            value = []
           }
           break
         case 'tBoolean':

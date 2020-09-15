@@ -21,6 +21,7 @@ import Help from './Help'
 import Array from './Array'
 import FieldSet from './FieldSet'
 import TripleBoolean from './TripleBoolean'
+import Taxonomy from './Taxonomy'
 import type { Localization } from './types'
 
 type Props = {
@@ -56,6 +57,7 @@ class SchemaForm extends Component<Props> {
     markdown: Markdown,
     textsuggest: TextSuggest,
     select: Select,
+    taxonomy: Taxonomy,
     radios: Radios,
     date: DateComponent,
     timestamp: Timestamp,

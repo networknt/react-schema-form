@@ -39,9 +39,7 @@ const Markdown = (props) => {
           Promise.resolve(converter.makeHtml(markdown))
         }
       />
-      { error ? <FormHelperText error={true}>
-        {error}
-      </FormHelperText> : null }
+      {error ? <FormHelperText error>{error}</FormHelperText> : null}
     </React.Fragment>
   )
 }

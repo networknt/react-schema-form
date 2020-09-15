@@ -65,6 +65,7 @@ class ExamplePage extends React.Component<void, State> {
         {label : "Advanced Tuples", value: "data/tuple-advanced.json"},
         {label : "Conditional Array", value: "data/conditionalarray.json"},
         {label : "Markdown", value: "data/markdown.json"},
+        {label : "Taxonomy", value: "data/taxonomy.json"},
         {label : "Test - Date Capture", value: "data/tests/datecapture.json"},
         {label : "Test - Localizer", value: "localizer"},
         {label : "Portal Config", value: "data/portal/config-detail.json"},
