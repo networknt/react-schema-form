@@ -1,5 +1,4 @@
-// @flow
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import MenuItem from '@material-ui/core/MenuItem'
 import MuiSelect from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -7,61 +6,42 @@ import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import ComposedComponent from './ComposedComponent'
 import utils from './utils'
-import type { Localization } from './types'
 
-type Props = {
-  model: any,
-  form: any,
-  onChangeValidate: any,
-  localization: Localization,
-  onChange: any,
-  setDefault: any,
-  error: any
-}
-
-type State = {
-  currentValue: any
-}
-
-class Select extends Component<Props, State> {
-  constructor(props) {
-    super(props)
-    const {
-      model,
-      form,
-      setDefault,
-      form: { key }
-    } = this.props
-
-    let defaultValue =
-      form && form.selectProps && form.selectProps.multiple ? [] : ''
-    if (props.form.default) {
-      defaultValue = props.form.default
-    } else if (props.form.schema && props.form.schema.default) {
-      defaultValue = props.form.schema.default
+function Select(props) {
+  const {
+    model,
+    form,
+    error,
+    setDefault,
+    onChange,
+    onChangeValidate,
+    localization: { getLocalizedString },
+    form: {
+      key,
+      schema: { isObject, enum: values, findFn, displayFn, noLocalization }
     }
-    const currentValue =
-      utils.getValueFromModel(model, form.key) || defaultValue
-    this.state = {
-      currentValue
-    }
-    setDefault(key, model, form, currentValue)
+  } = props
+
+  let defaultValue =
+    form && form.selectProps && form.selectProps.multiple ? [] : ''
+  if (props.form.default) {
+    defaultValue = props.form.default
+  } else if (props.form.schema && props.form.schema.default) {
+    defaultValue = props.form.schema.default
   }
+  const [currentValue, setCurrentValue] = useState(
+    utils.getValueFromModel(model, form.key) || defaultValue
+  )
 
-  onSelected = (event) => {
-    const {
-      onChangeValidate,
-      onChange,
-      form: {
-        key,
-        schema: { isObject, enum: values, findFn }
-      }
-    } = this.props
-    const currentValue = event.target.value
-    this.setState({ currentValue })
+  useEffect(() => {
+    setDefault(key, model, form, currentValue)
+  }, [])
+
+  const onSelected = (event) => {
+    const selectedValue = event.target.value
     if (isObject) {
       const item = values.find((each) =>
-        findFn ? findFn(each, currentValue) : each === currentValue
+        findFn ? findFn(each, selectedValue) : each === selectedValue
       )
       onChange(key, item)
     } else {
@@ -69,13 +49,7 @@ class Select extends Component<Props, State> {
     }
   }
 
-  getLabel = (each) => {
-    const {
-      form: {
-        schema: { displayFn, noLocalization }
-      },
-      localization: { getLocalizedString }
-    } = this.props
+  const getLabel = (each) => {
     if (displayFn) {
       return displayFn(each)
     }
@@ -83,50 +57,43 @@ class Select extends Component<Props, State> {
     return getLocalizedString(each.name)
   }
 
-  render() {
-    const {
-      form,
-      error,
-      localization: { getLocalizedString }
-    } = this.props
-    const { currentValue } = this.state
-    let menuItems = []
-    if (form.schema.isObject) {
-      menuItems = form.schema.enum.map((item, idx) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <MenuItem key={idx} value={item}>
-          {this.getLabel(item)}
-        </MenuItem>
-      ))
-    } else {
-      menuItems = form.titleMap.map((item, idx) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <MenuItem key={idx} value={item.value}>
-          {this.getLabel(item)}
-        </MenuItem>
-      ))
-    }
-    return (
-      <FormControl fullWidth error={!!error} {...form.otherProps}>
-        <InputLabel required={form.required} {...form.labelProps}>
-          {form.title && getLocalizedString(form.title)}
-        </InputLabel>
-        <MuiSelect
-          value={currentValue}
-          placeholder={form.placeholder && getLocalizedString(form.placeholder)}
-          disabled={form.readonly}
-          onChange={this.onSelected}
-          {...form.selectProps}
-        >
-          {menuItems}
-        </MuiSelect>
-        <FormHelperText {...form.helperTextProps}>
-          {(error || form.description) &&
-            getLocalizedString(error || form.description)}
-        </FormHelperText>
-      </FormControl>
-    )
+  let menuItems = []
+  if (form.schema.isObject) {
+    menuItems = form.schema.enum.map((item, idx) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <MenuItem key={idx} value={item}>
+        {getLabel(item)}
+      </MenuItem>
+    ))
+  } else {
+    menuItems = form.titleMap.map((item, idx) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <MenuItem key={idx} value={item.value}>
+        {getLabel(item)}
+      </MenuItem>
+    ))
   }
+
+  return (
+    <FormControl fullWidth error={!!error} {...form.otherProps}>
+      <InputLabel required={form.required} {...form.labelProps}>
+        {form.title && getLocalizedString(form.title)}
+      </InputLabel>
+      <MuiSelect
+        value={currentValue}
+        placeholder={form.placeholder && getLocalizedString(form.placeholder)}
+        disabled={form.readonly}
+        onChange={onSelected}
+        {...form.selectProps}
+      >
+        {menuItems}
+      </MuiSelect>
+      <FormHelperText {...form.helperTextProps}>
+        {(error || form.description) &&
+          getLocalizedString(error || form.description)}
+      </FormHelperText>
+    </FormControl>
+  )
 }
 
 export default ComposedComponent(Select)
