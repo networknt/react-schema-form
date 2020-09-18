@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.9.6 - 2020-09-17
+### Added
+
+### Changed
+- fixes #220 resolve a react warning after upgrade to 16.13.x
+- fixes #219 switch taxnomy to react-checkbox-tree implementation
+- fixes #218 change the taxonomy wrapper to remove the root style
+- fixes #217 add taxonomy and example for light-portal category management
+- fixes #216 add several examples for testing and light-portal
+- fixes #215 resolve the value update for checkbox
+
 ## 0.9.2 - 2020-09-09
 ### Added
 
