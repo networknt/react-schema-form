@@ -39,6 +39,7 @@ function Select(props) {
 
   const onSelected = (event) => {
     const selectedValue = event.target.value
+    setCurrentValue(selectedValue)
     if (isObject) {
       const item = values.find((each) =>
         findFn ? findFn(each, selectedValue) : each === selectedValue
@@ -58,7 +59,7 @@ function Select(props) {
   }
 
   let menuItems = []
-  if (form.schema.isObject) {
+  if (isObject) {
     menuItems = form.schema.enum.map((item, idx) => (
       // eslint-disable-next-line react/no-array-index-key
       <MenuItem key={idx} value={item}>
