@@ -22,7 +22,7 @@ function Taxonomy(props) {
   const [expanded, setExpended] = useState([])
   const [terms, setTerms] = useState([]) // the entire category
   useEffect(() => {
-    onChangeValidate(null, taxonomies)
+    onChangeValidate(taxonomies)
   }, [taxonomies])
 
   const fetchCateogry = (url) => {

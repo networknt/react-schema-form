@@ -24,7 +24,7 @@ const Markdown = (props) => {
   const [selectedTab, setSelectedTab] = useState('write')
   const [text, setText] = useState(value)
   useEffect(() => {
-    onChangeValidate(null, text)
+    onChangeValidate({target: {value: text}})
   }, [text])
   return (
     <React.Fragment>

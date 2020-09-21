@@ -9,7 +9,7 @@
             },
             "timestamp": {
                 "title": "Timestamp",
-                "type": "object"
+                "type": "string"
             }
         },
         "required": ["name", "timestamp"]

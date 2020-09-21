@@ -77,7 +77,9 @@ export default (ComposedComponent, defaultProps = {}) =>
             const { form, onChange, localization } = this.props; // eslint-disable-line
       const getLocalizedString = localization && localization.getLocalizedString
       let value = null
-      const type = form.type ? form.type : form.schema.type
+      // use the schema type so that we can have a limited number of types to handle. This
+      // gives us the flexibility to create add-ons without touching the code of main project.
+      const type = form.schema ? form.schema.type : form.type
       // console.log(type)
       switch (type) {
         case 'integer':
@@ -87,28 +89,6 @@ export default (ComposedComponent, defaultProps = {}) =>
         }
         case 'boolean':
           value = e.target.checked
-          break
-        case 'checkbox':
-          value = e.target.checked
-          break
-        case 'markdown':
-          if (v && v.length > 0) {
-            value = v
-          } else {
-            value = ''
-          }
-          break
-        case 'taxonomy':
-          if (v && v.length) {
-            value = v
-          } else {
-            value = []
-          }
-          break
-        case 'tBoolean':
-          if (e.target.value !== 'yes' || e.target.value !== 'no') {
-            value = v
-          }
           break
         case 'array':
           value = e
@@ -125,6 +105,7 @@ export default (ComposedComponent, defaultProps = {}) =>
           ;({ value } = e.target)
           break
         default:
+          // string goes here.
           ;({ value } = e.target)
       }
 
