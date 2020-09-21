@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.9.9 - 2020-09-21
+### Added
+
+### Changed
+- fixes #222 rollback ComposedComponent type to schema type
+- fixes #221 update Select filed to set the currentValue
+
+
 ## 0.9.6 - 2020-09-17
 ### Added
 
