@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 0.9.10 - 2020-10-31
+### Added
+
+### Changed
+- fixes #223 add X-CSRF-TOKEN to the header to integrate with light-portal
+
 ## 0.9.9 - 2020-09-21
 ### Added
 
