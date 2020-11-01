@@ -12,6 +12,7 @@ import AddBoxIcon from '@material-ui/icons/AddBox'
 import FolderIcon from '@material-ui/icons/Folder'
 import FolderOpenIcon from '@material-ui/icons/FolderOpen'
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile'
+import Cookies from 'universal-cookie'
 import ComposedComponent from './ComposedComponent'
 
 function Taxonomy(props) {
@@ -26,7 +27,11 @@ function Taxonomy(props) {
   }, [taxonomies])
 
   const fetchCateogry = (url) => {
-    fetch(url)
+    const cookies = new Cookies()
+    const headers = { 'Content-Type': 'application/json' }
+    if (cookies.get('csrf'))
+      Object.assign(headers, { 'X-CSRF-TOKEN': cookies.get('csrf') })
+    fetch(url, { headers, credentials: 'include' })
       .then((res) => {
         if (res.ok) {
           return res.json()
