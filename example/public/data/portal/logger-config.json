@@ -1,0 +1,42 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "Logger Config",
+    "required": ["loggers"],
+    "properties": {
+      "loggers": {
+        "type": "array",
+        "title": "Loggers",
+        "maxItems": 20,
+        "items": {
+          "type": "object",
+          "properties": {
+            "name":  {
+              "title": "Name",
+              "type": "string"
+            },
+            "level": {
+                "title": "Level",
+                "type": "string",
+                "enum": ["ERROR", "WARN", "INFO", "DEBUG", "TRACE"]
+            }
+          },
+          "required": ["name","level"]
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "loggers",
+  	  "add": "New",
+  	  "style": {
+  		  "add": "btn-success"
+	    },
+      "items": [
+        "loggers[].name",
+        "loggers[].level"
+      ]
+    }
+  ]
+}

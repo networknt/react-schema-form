@@ -71,6 +71,7 @@ class ExamplePage extends React.Component<void, State> {
         {label : "Portal Config", value: "data/portal/config-detail.json"},
         {label : "Portal Quiz", value: "data/portal/quiz.json"},
         {label : "Schema Form", value: "data/portal/schema-form.json"},
+        {label : "Logger Config", value: "data/portal/logger-config.json"},
         {label : "Portal Category", value: "data/portal/category.json"},
         {label : "MapRoot Restaurant", value: "data/maproot/restaurant.json"},
         {label : "MapRoot Payment", value: "data/maproot/payment.json"},
