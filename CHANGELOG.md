@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.2 - 2021-12-26
+### Added
+
+### Changed
+- fixes #237 upgrade to the latest dependency and fix the es-lint
+
 ## 1.0.1 - 2021-12-26
 ### Added
 
