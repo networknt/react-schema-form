@@ -17,7 +17,6 @@
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
-  "type": "module",
   "engines": {
     "node": ">=14"
   },
@@ -51,7 +50,7 @@
     "@mui/material": "^5.1.0",
     "@mui/styles": "^5.1.0",
     "@mui/x-data-grid": "^5.0.1",
-    "babel-eslint": "^10.0.3",
+    "@babel/eslint-parser": "^7.16.5",
     "cross-env": "^7.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
