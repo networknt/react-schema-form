@@ -1,12 +1,12 @@
 // @flow
 import React, { Component } from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Close'
+import withStyles from '@mui/styles/withStyles';
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/Close'
 import cloneDeep from 'lodash/cloneDeep'
-import FormLabel from '@material-ui/core/FormLabel'
+import FormLabel from '@mui/material/FormLabel'
 import utils from './utils'
 import ComposedComponent from './ComposedComponent'
 import type { Localization } from './types'
@@ -233,7 +233,7 @@ class ArrayComponent extends Component<Props, State> {
           <IconButton
             onClick={this.onDelete(i)}
             className={classes.deleteItemButton}
-          >
+            size="large">
             <DeleteIcon fontSize='small' />
           </IconButton>
         </Card>

@@ -3,7 +3,7 @@
  * Created by steve on 15/09/15.
  */
 import React from 'react'
-import TextField from '@material-ui/core/TextField'
+import TextField from '@mui/material/TextField'
 import ComposedComponent from './ComposedComponent'
 import type { Localization } from './types'
 

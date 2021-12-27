@@ -2,8 +2,8 @@
  * Created by steve on 15/09/15.
  */
 import React, { useState, useEffect } from 'react'
-import FormLabel from '@material-ui/core/FormLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
+import FormLabel from '@mui/material/FormLabel'
+import FormHelperText from '@mui/material/FormHelperText'
 import ReactMde from 'react-mde'
 import * as Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'

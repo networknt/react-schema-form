@@ -1,20 +1,22 @@
 import React from 'react'
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider, StyledEngineProvider, createTheme, adaptV4Theme } from "@mui/material/styles";
 import ExamplePage from "./ExamplePage";
 
-const theme = createMuiTheme({
+const theme = createTheme(adaptV4Theme({
     typography: {
         useNextVariants: true,
         fontSize: 22
     }
-});
+}));
 
 const App = () => {
   return (
-    <MuiThemeProvider theme={theme}>
-        <ExamplePage />
-    </MuiThemeProvider>
-  )
+      <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+              <ExamplePage />
+          </ThemeProvider>
+      </StyledEngineProvider>
+  );
 }
 
 export default App

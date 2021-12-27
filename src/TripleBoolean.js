@@ -9,8 +9,8 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup
-} from '@material-ui/core'
-import FormLabel from '@material-ui/core/FormLabel'
+} from '@mui/material'
+import FormLabel from '@mui/material/FormLabel'
 import ComposedComponent from './ComposedComponent'
 import type { Localization } from './types'
 

@@ -1,11 +1,11 @@
 // @flow
 import React, { Component } from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import MenuItem from '@material-ui/core/MenuItem'
-import MuiSelect from '@material-ui/core/Select'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
-import Chip from '@material-ui/core/Chip'
+import withStyles from '@mui/styles/withStyles';
+import MenuItem from '@mui/material/MenuItem'
+import MuiSelect from '@mui/material/Select'
+import InputLabel from '@mui/material/InputLabel'
+import FormControl from '@mui/material/FormControl'
+import Chip from '@mui/material/Chip'
 import ComposedComponent from './ComposedComponent'
 import utils from './utils'
 import type { Localization } from './types'

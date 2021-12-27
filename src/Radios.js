@@ -1,11 +1,11 @@
 // @flow
 import React, { Component } from 'react'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormLabel from '@material-ui/core/FormLabel'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import Radio from '@material-ui/core/Radio'
-import { withStyles } from '@material-ui/core/styles'
+import FormControl from '@mui/material/FormControl'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormLabel from '@mui/material/FormLabel'
+import RadioGroup from '@mui/material/RadioGroup'
+import Radio from '@mui/material/Radio'
+import withStyles from '@mui/styles/withStyles';
 import ComposedComponent from './ComposedComponent'
 import type { Localization } from './types'
 

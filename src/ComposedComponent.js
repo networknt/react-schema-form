@@ -32,7 +32,7 @@ const getDisplayName = (WrappedComponent) =>
   WrappedComponent.displayName || WrappedComponent.name || 'Component'
 
 export default (ComposedComponent, defaultProps = {}) =>
-  class Composed extends React.Component<Props> {
+  (class Composed extends React.Component<Props> {
     constructor(props) {
       super(props)
       this.displayName = `ComposedComponent(${getDisplayName(
@@ -129,4 +129,4 @@ export default (ComposedComponent, defaultProps = {}) =>
         />
       )
     }
-  }
+  })

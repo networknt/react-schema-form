@@ -3,9 +3,9 @@
  * Created by steve on 11/09/15.
  */
 import React from 'react'
-import FormControl from '@material-ui/core/FormControl'
-import FormLabel from '@material-ui/core/FormLabel'
-import { withStyles } from '@material-ui/core/styles'
+import FormControl from '@mui/material/FormControl'
+import FormLabel from '@mui/material/FormLabel'
+import withStyles from '@mui/styles/withStyles';
 import classNames from 'classnames'
 import type { Localization } from './types'
 

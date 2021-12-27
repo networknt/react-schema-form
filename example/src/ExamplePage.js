@@ -11,7 +11,7 @@ import {
     InputLabel,
     MenuItem,
     Select
-} from "@material-ui/core";
+} from "@mui/material";
 import Localizer from "./localizer";
 import SelectLabel from "./selectlabel";
 import ErrorBoundary from "./ErrorBoundary";

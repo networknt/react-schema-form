@@ -1,6 +1,6 @@
 {
   "name": "react-schema-form",
-  "version": "0.9.10",
+  "version": "1.0.1",
   "description": "React json schema form",
   "keywords": [
     "json schema",
@@ -17,8 +17,9 @@
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
+  "type": "module",
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
@@ -33,51 +34,59 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "@material-ui/core": ">=4.11.0",
-    "@material-ui/icons": ">=4.9.1",
-    "react": ">=16.13.1",
-    "react-dom": ">=16.13.1",
-    "react-is": ">=16.13.1"
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.1.0",
+    "@mui/material": "^5.1.0",
+    "@mui/styles": "^5.1.0",
+    "@mui/x-data-grid": "^5.0.1",
+    "react": ">=^17.0.2",
+    "react-dom": ">=^17.0.2",
+    "react-is": ">=17.0.2"
   },
   "devDependencies": {
-    "@material-ui/core": ">=4.11.0",
-    "@material-ui/icons": ">=4.9.1",
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.1.0",
+    "@mui/material": "^5.1.0",
+    "@mui/styles": "^5.1.0",
+    "@mui/x-data-grid": "^5.0.1",
     "babel-eslint": "^10.0.3",
-    "cross-env": "^7.0.2",
+    "cross-env": "^7.0.3",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.4",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-config-standard-react": "^9.2.0",
-    "eslint-plugin-import": "^2.18.2",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-config-standard-react": "^11.0.1",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-standard": "^4.0.1",
-    "gh-pages": "^2.2.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "gh-pages": "^3.2.3",
     "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1"
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.0"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "classnames": "^2.2.6",
+    "classnames": "^2.3.1",
     "lodash": "^4.17.15",
     "notevil": "^1.3.2",
-    "objectpath": "1.2.2",
-    "prop-types": "^15.7.2",
-    "react-autosuggest": "^9.4.3",
-    "react-checkbox-tree": "^1.6.0",
-    "react-mde": "^11.0.0",
+    "objectpath": "2.0.0",
+    "prop-types": "^15.8.0",
+    "react-autosuggest": "^10.1.0",
+    "react-checkbox-tree": "^1.7.2",
+    "react-mde": "^11.5.0",
     "showdown": "^1.9.1",
-    "supports-color": "^7.1.0",
+    "supports-color": "^9.2.1",
     "tv4": "^1.3.0",
     "universal-cookie": "^4.0.4"
   }
