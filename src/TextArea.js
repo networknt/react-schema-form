@@ -23,7 +23,7 @@ const TextArea = (props: Props) => {
       otherProps={{
         multiline: true,
         rows: form.rows,
-        rowsMax: form.rowsMax
+        maxRows: form.maxRows
       }}
     />
   )
