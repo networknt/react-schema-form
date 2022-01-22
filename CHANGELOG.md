@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.3 - 2022-01-22
+### Added
+
+### Changed
+- fixes #241 update textarea rowsMax to maxRows as the new version of mui 5 changed attribute name
+
 ## 1.0.2 - 2021-12-26
 ### Added
 
