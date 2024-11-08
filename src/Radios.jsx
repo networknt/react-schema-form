@@ -7,7 +7,6 @@ import RadioGroup from '@mui/material/RadioGroup'
 import Radio from '@mui/material/Radio'
 import withStyles from '@mui/styles/withStyles';
 import ComposedComponent from './ComposedComponent'
-import type { Localization } from './types'
 
 const styles = (theme) => ({
   formControl: {
@@ -18,15 +17,8 @@ const styles = (theme) => ({
   }
 })
 
-type Props = {
-  classes: any,
-  form: any,
-  value: any,
-  onChangeValidate: any,
-  localization: Localization
-}
 
-class Radios extends Component<Props> {
+class Radios extends Component {
   renderItems = (form) => {
     const {
       localization: { getLocalizedString }

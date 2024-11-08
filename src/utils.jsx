@@ -5,17 +5,6 @@ import extend from 'lodash/extend'
 import isUndefined from 'lodash/isUndefined'
 import ObjectPath from 'objectpath'
 import tv4 from 'tv4'
-import notevil from 'notevil'
-
-// Evaluates an expression in a safe way
-const safeEval = (condition, scope) => {
-  try {
-    const scopeSafe = cloneDeep(scope)
-    return notevil(condition, scopeSafe)
-  } catch (error) {
-    return undefined
-  }
-}
 
 const stripNullType = (type) => {
   if (Array.isArray(type) && type.length === 2) {
@@ -709,7 +698,6 @@ export default {
   merge,
   validate,
   validateBySchema,
-  safeEval,
   selectOrSet,
   getValueFromModel,
   getTitleByValue,

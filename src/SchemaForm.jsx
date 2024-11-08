@@ -1,7 +1,3 @@
-// @flow
-/**
- * Created by steve on 11/09/15.
- */
 import React, { Component } from 'react'
 import merge from 'lodash/merge'
 import isNil from 'lodash/isNil'
@@ -22,24 +18,8 @@ import Array from './Array'
 import FieldSet from './FieldSet'
 import TripleBoolean from './TripleBoolean'
 import Taxonomy from './Taxonomy'
-import type { Localization } from './types'
 
-type Props = {
-  onModelChange: any,
-  errors: any,
-  schema: any,
-  form: any,
-  ignore: any,
-  option: any,
-  model: any,
-  className: any,
-  mapper: any,
-  localization?: Localization,
-  showErrors?: boolean,
-  evalContext: any
-}
-
-const formatDate = (date: string | Date) => {
+const formatDate = (date) => {
   let value =
     (date && typeof date === 'object' && date.toISOString().slice(0, 10)) ||
     date
@@ -48,7 +28,7 @@ const formatDate = (date: string | Date) => {
   return value
 }
 
-class SchemaForm extends Component<Props> {
+class SchemaForm extends Component {
   mapper = {
     number: Number,
     text: Text,
@@ -111,10 +91,7 @@ class SchemaForm extends Component<Props> {
     }
 
     // Apply conditionals to review if this field must be rendered
-    if (
-      form.condition &&
-      !utils.safeEval(form.condition, { model, form, ...evalContext })
-    ) {
+    if (form.condition) {
       return null
     }
 

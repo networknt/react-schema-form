@@ -1,15 +1,6 @@
 import React, { Component } from "react";
-import type { ChildrenArray } from "react";
 
-type Props = {
-    children: ChildrenArray<*>
-};
-
-type State = {
-    hasError: boolean
-};
-
-class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends Component {
     state = { hasError: false };
 
     componentDidCatch(error, info) {

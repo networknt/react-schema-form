@@ -1,17 +1,10 @@
-// @flow
-/**
- * Created by steve on 20/09/15.
- */
 import React from 'react'
 import Typography from '@mui/material/Typography'
 
-type Props = {
-  form: any
-}
 
 const Help = ({
   form: { description, variant, align, color, noWrap, paragraph, otherProps }
-}: Props) => (
+}) => (
   <Typography
     variant={variant}
     align={align}

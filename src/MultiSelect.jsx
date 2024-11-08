@@ -8,7 +8,6 @@ import FormControl from '@mui/material/FormControl'
 import Chip from '@mui/material/Chip'
 import ComposedComponent from './ComposedComponent'
 import utils from './utils'
-import type { Localization } from './types'
 
 const styles = (theme) => ({
   root: {
@@ -41,19 +40,8 @@ const MenuProps = {
   }
 }
 
-type Props = {
-  model: any,
-  form: any,
-  onChangeValidate: any,
-  classes: any,
-  localization: Localization
-}
 
-type State = {
-  currentValue: any
-}
-
-class MultiSelect extends Component<Props, State> {
+class MultiSelect extends Component {
   constructor(props) {
     super(props)
     const { model, form } = this.props
@@ -62,7 +50,7 @@ class MultiSelect extends Component<Props, State> {
     }
   }
 
-  static getDerivedStateFromProps(props: Props) {
+  static getDerivedStateFromProps(props) {
     const { model, form } = props
     if (model && form.key) {
       return {

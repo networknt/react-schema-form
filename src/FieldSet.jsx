@@ -7,7 +7,6 @@ import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
 import withStyles from '@mui/styles/withStyles';
 import classNames from 'classnames'
-import type { Localization } from './types'
 
 const styles = (theme) => ({
   root: {
@@ -18,15 +17,6 @@ const styles = (theme) => ({
   }
 })
 
-type Props = {
-  form: any,
-  mapper: any,
-  builder: any,
-  model: any,
-  onChange: any,
-  classes: any,
-  localization: Localization
-}
 
 const FieldSet = ({
   form,
@@ -36,7 +26,7 @@ const FieldSet = ({
   onChange,
   classes,
   localization: { getLocalizedString }
-}: Props) => {
+}) => {
   const forms = form.items.map((f, index) =>
     builder(f, model, index, mapper, onChange, builder)
   )

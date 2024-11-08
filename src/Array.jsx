@@ -9,7 +9,6 @@ import cloneDeep from 'lodash/cloneDeep'
 import FormLabel from '@mui/material/FormLabel'
 import utils from './utils'
 import ComposedComponent from './ComposedComponent'
-import type { Localization } from './types'
 
 const styles = (theme) => ({
   arrayItem: {
@@ -33,24 +32,8 @@ const styles = (theme) => ({
   }
 })
 
-type Props = {
-  form: any,
-  key: any,
-  model: any,
-  classes: any,
-  builder: any,
-  mapper: any,
-  options: any,
-  onChangeValidate: any,
-  onChange: any,
-  localization: Localization
-}
 
-type State = {
-  model: any
-}
-
-class ArrayComponent extends Component<Props, State> {
+class ArrayComponent extends Component {
   static assignItemId(item) {
     let newItem = null
     if (item && typeof item === 'object' && Array.isArray(item)) {
@@ -104,7 +87,7 @@ class ArrayComponent extends Component<Props, State> {
     }
   }
 
-  static getDerivedStateFromProps(props: Props, state) {
+  static getDerivedStateFromProps(props, state) {
     const { form } = props
     const propsKey = form.key
     if (

@@ -4,18 +4,10 @@
 import React, { useState, useEffect } from 'react'
 import FormLabel from '@mui/material/FormLabel'
 import FormHelperText from '@mui/material/FormHelperText'
-import ReactMde from 'react-mde'
-import * as Showdown from 'showdown'
-import 'react-mde/lib/styles/css/react-mde-all.css'
+import MarkdownEditor from '@uiw/react-markdown-editor';
 
 import ComposedComponent from './ComposedComponent'
 
-const converter = new Showdown.Converter({
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true
-})
 
 const Markdown = (props) => {
   const { model, form, value, error, setDefault, onChangeValidate } = props
@@ -29,16 +21,7 @@ const Markdown = (props) => {
   return (
     <React.Fragment>
       <FormLabel required={form.required}>{title}</FormLabel>
-      <ReactMde
-        value={value}
-        onChange={setText}
-        readOnly={form.readonly}
-        selectedTab={selectedTab}
-        onTabChange={setSelectedTab}
-        generateMarkdownPreview={(markdown) =>
-          Promise.resolve(converter.makeHtml(markdown))
-        }
-      />
+      form.readonly ? <MarkdownEditor.Markdown source={markdownVal} /> : <MarkdownEditor value={value} onChange={(value) => setText(value)} />
       {error ? <FormHelperText error>{error}</FormHelperText> : null}
     </React.Fragment>
   )

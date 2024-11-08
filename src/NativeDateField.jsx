@@ -1,21 +1,7 @@
-// @flow
-/*
-Native date field. 
-Contains common logic for final components Date and DateTime.
-*/
 import React from 'react'
-import type { Localization } from './types'
 import Text from './Text'
 
-type Props = {
-  onChangeValidate: any,
-  form: any,
-  value: any,
-  type: any,
-  localization: Localization
-}
-
-const NativeDateField = (props: Props) => {
+const NativeDateField = (props) => {
   const {
     value,
     localization: { getLocalizedDate },

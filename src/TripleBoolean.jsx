@@ -1,7 +1,3 @@
-// @flow
-/**
- * Created by steve on 15/09/15.
- */
 import React, { Component } from 'react'
 import {
   Card,
@@ -12,34 +8,13 @@ import {
 } from '@mui/material'
 import FormLabel from '@mui/material/FormLabel'
 import ComposedComponent from './ComposedComponent'
-import type { Localization } from './types'
 
-type Props = {
-  model: any,
-  form: {
-    title: string,
-    yesLabel: string,
-    noLabel: string,
-    clearButtonLabel: string,
-    key: any,
-    required?: boolean
-  },
-  value: any,
-  setDefault: any,
-  onChangeValidate: any,
-  localization: Localization
-}
-
-type State = {
-  yesChecked: boolean,
-  noChecked: boolean
-}
 
 /**
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
-class TripleBoolean extends Component<Props, State> {
+class TripleBoolean extends Component {
   static getDerivedStateFromProps(nextProps) {
     return {
       yesChecked: nextProps.value === 'yes',

@@ -4,31 +4,14 @@
  */
 import React from 'react'
 import ComposedComponent from './ComposedComponent'
-import type { Localization } from './types'
 import Text from './Text'
 
-type Props = {
-  value: any,
-  onChangeValidate: any,
-  form: {
-    key: string,
-    required: boolean,
-    placeholder: string,
-    readonly: boolean,
-    description: string,
-    schema: any,
-    useLocalizer: boolean,
-    type?: string
-  },
-  error: any,
-  localization: Localization
-}
 
 /**
  * There is no default number picker as part of Material-UI.
  * Instead, use a TextField and validate.
  */
-const NumberComponent = (props: Props) => {
+const NumberComponent = (props) => {
   const {
     form,
     value,

@@ -4,18 +4,10 @@
  */
 import React from 'react'
 import ComposedComponent from './ComposedComponent'
-import type { Localization } from './types'
 import Text from './Text'
 
-type Props = {
-  form: any,
-  value: any,
-  error: any,
-  onChangeValidate: any,
-  localization: Localization
-}
 
-const TextArea = (props: Props) => {
+const TextArea = (props) => {
   const { form } = props
   return (
     <Text

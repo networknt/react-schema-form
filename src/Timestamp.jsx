@@ -5,19 +5,9 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 import ComposedComponent from './ComposedComponent'
-import type { Localization } from './types'
 
-type Props = {
-  form: any,
-  model: any,
-  value: any,
-  setDefault: any,
-  error: any,
-  onChangeValidate: any,
-  localization: Localization
-}
 
-class Timestamp extends React.Component<Props> {
+class Timestamp extends React.Component {
   constructor(props) {
     super(props)
     const { model, form, value, setDefault } = this.props

@@ -20,19 +20,12 @@ const defaultValue = (props) => {
   return value
 }
 
-type Props = {
-  errorText: any,
-  form: any,
-  showErrors: boolean,
-  localization: any,
-  onChange: any
-}
 
 const getDisplayName = (WrappedComponent) =>
   WrappedComponent.displayName || WrappedComponent.name || 'Component'
 
 export default (ComposedComponent, defaultProps = {}) =>
-  (class Composed extends React.Component<Props> {
+  (class Composed extends React.Component {
     constructor(props) {
       super(props)
       this.displayName = `ComposedComponent(${getDisplayName(
@@ -42,7 +35,7 @@ export default (ComposedComponent, defaultProps = {}) =>
       this.state = this.constructor.getDerivedStateFromProps(this.props)
     }
 
-    static getDerivedStateFromProps(nextProps: Props) {
+    static getDerivedStateFromProps(nextProps) {
       const { errorText, form, showErrors, localization } = nextProps
       const getLocalizedString = localization && localization.getLocalizedString
       const value = defaultValue(nextProps)
