@@ -1,6 +1,6 @@
 {
   "name": "react-schema-form",
-  "private": true,
+  "private": false,
   "version": "1.0.5",
   "description": "React JSON Schema Form",
   "keywords": [
