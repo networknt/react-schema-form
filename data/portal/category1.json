@@ -1,0 +1,215 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "category",
+    "required": [
+      "category"
+    ],
+    "properties": {
+      "category": {
+        "type": "array",
+        "title": "Category",
+        "maxItems": 100,
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string",
+              "description": "The description of the term."
+            },
+            "code": {
+              "title": "Code",
+              "type": "string",
+              "description": "Unique code for the term."
+            },
+            "type": {
+              "title": "Type",
+              "type": "string",
+              "description": "The type of the term.",
+              "enum": [
+                "volcabulary",
+                "term"
+              ],
+              "default": "volcabulary"
+            },
+            "description": {
+              "title": "Description",
+              "type": "string",
+              "description": "Optional term description."
+            },
+            "children": {
+              "title": "Children",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "title": "Label",
+                    "type": "string",
+                    "description": "The description of the term."
+                  },
+                  "code": {
+                    "title": "Code",
+                    "type": "string",
+                    "description": "Unique code for the term."
+                  },
+                  "type": {
+                    "title": "Type",
+                    "type": "string",
+                    "description": "The type of the term.",
+                    "enum": [
+                      "volcabulary",
+                      "term"
+                    ],
+                    "default": "volcabulary"
+                  },
+                  "description": {
+                    "title": "Description",
+                    "type": "string",
+                    "description": "Optional term description."
+                  },
+                  "children": {
+                    "title": "Children",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "title": "Label",
+                          "type": "string",
+                          "description": "The description of the term."
+                        },
+                        "code": {
+                          "title": "Code",
+                          "type": "string",
+                          "description": "Unique code for the term."
+                        },
+                        "type": {
+                          "title": "Type",
+                          "type": "string",
+                          "description": "The type of the term.",
+                          "enum": [
+                            "volcabulary",
+                            "term"
+                          ],
+                          "default": "volcabulary"
+                        },
+                        "description": {
+                          "title": "Description",
+                          "type": "string",
+                          "description": "Optional term description."
+                        },
+                        "children": {
+                          "title": "Children",
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "label": {
+                                "title": "Label",
+                                "type": "string",
+                                "description": "The description of the term."
+                              },
+                              "code": {
+                                "title": "Code",
+                                "type": "string",
+                                "description": "Unique code for the term."
+                              },
+                              "type": {
+                                "title": "Type",
+                                "type": "string",
+                                "description": "The type of the term.",
+                                "enum": [
+                                  "volcabulary",
+                                  "term"
+                                ],
+                                "default": "volcabulary"
+                              },
+                              "description": {
+                                "title": "Description",
+                                "type": "string",
+                                "description": "Optional term description."
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "label",
+            "code",
+            "type"
+          ]
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "type": "help",
+      "description": "Category JSON. Try adding a couple of forms, reorder by drag'n'drop.",
+      "variant": "h5",
+      "align": "left",
+      "color": "secondary"
+    },
+    {
+      "key": "category",
+      "add": "New",
+      "style": {
+        "add": "btn-success"
+      },
+      "items": [
+        "label",
+        "code",
+        "type",
+        "description",
+        {
+          "key": "children",
+          "add": "New",
+          "style": {
+            "add": "btn-success"
+          },
+          "items": [
+            "children[].label",
+            "children[].code",
+            "children[].type",
+            "children[].description",
+            {
+              "key": "children[].children",
+              "add": "New",
+              "style": {
+                "add": "btn-success"
+              },
+              "items": [
+                "children[].children[].label",
+                "children[].children[].code",
+                "children[].children[].type",
+                "children[].children[].description",
+                {
+                  "key": "children[].children[].children",
+                  "add": "New",
+                  "style": {
+                    "add": "btn-success"
+                  },
+                  "items": [
+                    "children[].children[].children[].label",
+                    "children[].children[].children[].code",
+                    "children[].children[].children[].type",
+                    "children[].children[].children[].description"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

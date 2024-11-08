@@ -1,0 +1,42 @@
+{
+    "schema": {
+      "type": "object",
+      "title": "Comment",
+      "properties": {
+        "name":  {
+          "title": "Name",
+          "type": "string"
+        },
+        "environment": {
+          "type": "string",
+          "title": "Environment",
+          "default": "LOCAL",
+          "enum": [
+            "LOCAL",
+            "SIT1",
+            "SIT2",
+            "SIT3",
+            "UAT1",
+            "UAT2"
+          ]
+        },
+        "taxonomy": {
+          "type": "array",
+          "title": "Taxonomy"
+        }
+      },
+      "required": ["name", "environment", "taxonomy"]
+    },
+    "form": [
+      "name",
+      "environment",
+      {
+        "key": "taxonomy",
+        "type": "taxonomy",
+        "action": {
+          "url" : "https://localhost/portal/query?cmd=%7B%22host%22%3A%22lightapi.net%22%2C%22service%22%3A%22market%22%2C%22action%22%3A%22getCategoryByName%22%2C%22version%22%3A%220.1.0%22%2C%22data%22%3A%7B%22host%22%3A%22lightapi.net%22%2C%22name%22%3A%22schemaForm%22%7D%7D"
+        }
+      }
+    ]
+  }
+  

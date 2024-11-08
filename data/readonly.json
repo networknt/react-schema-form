@@ -59,7 +59,7 @@
             },
             "date": {
                 "title": "Date",
-                "type": "date"
+                "type": "string"
             }
         }
     },

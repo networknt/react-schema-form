@@ -1,0 +1,99 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "Payment Methods Setup",
+    "properties": {
+      "email": {
+        "type": "string",
+        "title": "Merchant Email"
+      },
+      "payments": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "title": "Payment Method",
+              "enum": [
+                "OnPickup",
+                "OnDelivery",
+                "Braintree",
+                "Taiji",
+                "TaijiToken",
+                "Bitcoin",
+                "Ethereum"
+              ]
+            },
+            "sandbox": {
+              "type": "boolean",
+              "title": "Test Sandbox?"
+            },
+            "merchantId": {
+              "type": "string",
+              "title": "Merchant Id"
+            },
+            "privateKey": {
+              "type": "string",
+              "title": "Private Key"
+            },
+            "publicKey": {
+              "type": "string",
+              "title": "Public Key"
+            },
+            "address": {
+              "type": "string",
+              "title": "Crypto Address"
+            },
+            "tokenName": {
+              "type": "string",
+              "title": "Token Name"
+            },
+            "acceptMethods": {
+              "type": "string",
+              "title": "Accept Methods"
+            }
+          }
+        }
+      }
+    },
+    "required": [
+      "email"
+    ]
+  },
+  "form": [
+    "email",
+    {
+      "key": "payments",
+      "type": "array",
+      "items": [
+        "payments[].method",
+        "payments[].sandbox",
+        {
+          "key": "payments[].merchantId",
+          "condition": "model.payments[form.key[1]].method === 'Braintree'"
+        },
+        {
+          "key": "payments[].privateKey",
+          "condition": "model.payments[form.key[1]].method === 'Braintree'"
+        },
+        {
+          "key": "payments[].publicKey",
+          "condition": "model.payments[form.key[1]].method === 'Braintree'"
+        },
+        {
+          "key": "payments[].tokenName",
+          "condition": "model.payments[form.key[1]].method === 'TaijiToken'"
+        },
+        {
+          "key": "payments[].address",
+          "condition": "model.payments[form.key[1]].method === 'Taiji' || model.payments[form.key[1]].method === 'TaijiToken' || model.payments[form.key[1]].method === 'Bitcoin' || model.payments[form.key[1]].method === 'Ethereum'"
+        },
+        {
+          "key": "payments[].acceptMethods",
+          "condition": "model.payments[form.key[1]].method === 'OnPickup' || model.payments[form.key[1]].method === 'OnDelivery'"
+        }
+      ]
+    }
+  ]
+}

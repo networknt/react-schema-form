@@ -1,0 +1,173 @@
+{
+  "schema": {
+    "type": "object",
+    "title": "Config Detail",
+    "properties": {
+        "name": {
+          "title": "API Name",
+          "type": "string"
+        },
+        "version": {
+          "title": "API Version",
+          "type": "string"
+        },
+        "group": {
+          "title": "Maven Group",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "rootPackage": {
+          "title": "Root Package",
+          "type": "string"
+        },
+        "handlerPackage": {
+          "title": "Handler Package",
+          "type": "string"
+        },
+        "modelPackage": {
+          "title": "Model Package",
+          "type": "string"
+        },
+        "overwriteHandler": {
+          "title": "Overwrite Handler",
+          "type": "boolean",
+          "default": true
+        },
+        "overwriteHandlerTest": {
+          "title": "Overwrite Handler Test",
+          "type": "boolean",
+          "default": true
+        },
+        "overwriteModel": {
+          "title": "Overwrite Model",
+          "type": "boolean",
+          "default": true
+        },
+        "httpPort": {
+          "title": "HTTP Port",
+          "type": "integer",
+          "default": 8080
+        },
+        "enableHttp": {
+          "title": "Enable HTTP",
+          "type": "boolean",
+          "default": false
+        },
+        "httpsPort": {
+          "title": "HTTPS Port",
+          "type": "integer",
+          "default": 8443
+        },
+        "enableHttps": {
+          "title": "Enable HTTPS",
+          "type": "boolean",
+          "default": true
+        },
+        "enableRegistry": {
+          "title": "Enable Registry",
+          "type": "boolean",
+          "default": false
+        },
+        "eclipseIDE": {
+          "title": "Eclipse IDE",
+          "type": "boolean",
+          "default": false
+        },
+        "supportDb": {
+          "title": "Support Database",
+          "type": "boolean",
+          "default": false
+        },
+        "dbInfo": {
+          "type": "object",
+          "title": "Database Info",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Database Name",
+              "default": "mysql"
+            },
+            "driverClassName": {
+              "type": "string",
+              "title": "Driver Class Name",
+              "default": "jdbc:mysql://mysqldb:3306/oauth2?useSSL=false"
+            },
+            "username": {
+              "type": "string",
+              "title": "Username"
+            },
+            "password": {
+              "type": "string",
+              "title": "Password"
+            }
+          }
+        },
+        "supportH2ForTest": {
+          "title": "Support H2 Test",
+          "type": "boolean",
+          "default": false
+        },
+        "supportClient": {
+          "title": "Support Client",
+          "type": "boolean",
+          "default": false
+        },
+        "dockerOrganization": {
+          "title": "Docker Organization",
+          "type": "string",
+          "default": "networknt"
+        }
+    },
+    "required": [
+      "name",
+      "version",
+      "groupId",
+      "artifactId",
+      "rootPackage",
+      "handlerPackage",
+      "modelPackage",
+      "overwriteHandler",
+      "overwriteHandlerTest",
+      "overwriteModel",
+      "httpPort",
+      "enableHttp",
+      "httpsPort",
+      "enableHttps",
+      "enableRegistry",
+      "eclipseIDE",
+      "supportDb",
+      "supportH2ForTest",
+      "supportClient",
+      "dockerOrganization"
+    ]
+  },
+  "form": [
+    "name",
+    "version",
+    "groupId",
+    "artifactId",
+    "rootPackage",
+    "handlerPackage",
+    "modelPackage",
+    "overwriteHandler",
+    "overwriteHandlerTest",
+    "overwriteModel",
+    "httpPort",
+    "enableHttp",
+    "httpsPort",
+    "enableHttps",
+    "enableRegistry",
+    "eclipseIDE",
+    "supportDb",
+    {
+      "key": "dbInfo",
+      "condition": "model.supportDb"
+    },
+    "supportH2ForTest",
+    "supportClient",
+    "dockerOrganization"
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schema": {
+    "title": "Quiz",
+    "type": "object",
+    "properties": {
+      "quizName": {
+        "title": "Quiz Name",
+        "type": "string"
+      },
+      "quizType": {
+        "title": "Quiz Type",
+        "type": "string"
+      },
+      "purpose": {
+        "title": "Quiz Purpose",
+        "type": "string"
+      },
+      "category": {
+        "title": "Quiz Category",
+        "type": "string"
+      },
+      "subCategory": {
+        "title": "Quiz Sub Category",
+        "type": "string"
+      },
+      "question": {
+        "title": "Question",
+        "type": "string"
+      },
+      "answerType": {
+        "type": "string",
+        "title": "Answer Type",
+        "default": "single",
+        "enum": [
+          "single",
+          "multiple",
+          "text",
+          "image",
+          "audio",
+          "video"
+        ]
+      },
+      "answerOptions": {
+        "type": "array",
+        "maxItems": 6,
+        "minItems": 2,
+        "items": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "stirng",
+              "title": "Content"
+            },
+            "correct": {
+              "type": "boolean",
+              "default": false,
+              "title": "Correct?"
+            }
+          }
+        }
+      },
+      "active": {
+        "title": "Active",
+        "type": "string",
+        "enum": [
+          "Y",
+          "N"
+        ]
+      }
+    },
+    "required": [
+      "quizName",
+      "quizType",
+      "purpose",
+      "category",
+      "subCategory",
+      "active",
+      "question",
+      "answerType",
+      "answerOptions"
+    ]
+  },
+  "form": [
+    "quizName",
+    "quizType",
+    "purpose",
+    "category",
+    "subCategory",
+    "active",
+    {
+      "key": "question",
+      "type": "markdown"
+    },
+    "answerType",
+    {
+      "key": "answerOptions",
+      "type": "array",
+      "items": [
+        {
+          "key": "answerOptions[].correct",
+          "type": "checkbox"
+        },
+        
+        {
+          "key": "answerOptions[].content",
+          "type": "markdown"
+        }
+      ]
+    }
+  ]
+}

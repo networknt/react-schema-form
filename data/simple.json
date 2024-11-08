@@ -18,6 +18,7 @@
       "environment": {
         "type": "string",
         "title": "Environment",
+        "default": "LOCAL",
         "enum": [
           "LOCAL",
           "SIT1",

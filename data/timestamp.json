@@ -6,22 +6,19 @@
             "name": {
                 "type": "string",
                 "minLength": 3
-              },
-            "date": {
-                "title": "Birthday",
+            },
+            "timestamp": {
+                "title": "Timestamp",
                 "type": "string"
             }
         },
-        "required": [
-            "name",
-            "date"
-          ]
+        "required": ["name", "timestamp"]
     },
     "form": [
         "name",
         {
-            "key": "date",
-            "type": "date"
+            "key": "timestamp",
+            "type": "timestamp"
         }
     ]
 }
