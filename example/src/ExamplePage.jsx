@@ -303,6 +303,7 @@ class ExamplePage extends React.Component {
                             extensions={[json()]} 
                             onChange={this.onFormChange}
                         />
+                        <h3>Schema</h3>
                         <CodeMirror 
                             value={schemaJson} 
                             height="300px" 
