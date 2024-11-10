@@ -18,6 +18,7 @@ import Array from './Array'
 import FieldSet from './FieldSet'
 import TripleBoolean from './TripleBoolean'
 import Taxonomy from './Taxonomy'
+import DynaSelect from './DynaSelect'
 
 const formatDate = (date) => {
   let value =
@@ -47,7 +48,8 @@ class SchemaForm extends Component {
     tBoolean: TripleBoolean,
     fieldset: FieldSet,
     tuple: FieldSet,
-    multiselect: MultiSelect
+    multiselect: MultiSelect,
+    dynaselect: DynaSelect
   }
 
   constructor(props) {
