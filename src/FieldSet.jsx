@@ -1,22 +1,24 @@
-// @flow
-/**
- * Created by steve on 11/09/15.
- */
-import React from 'react'
-import FormControl from '@mui/material/FormControl'
-import FormLabel from '@mui/material/FormLabel'
-import withStyles from '@mui/styles/withStyles';
-import classNames from 'classnames'
+import React from 'react';
+import { styled } from '@mui/system';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import classNames from 'classnames';
 
-const styles = (theme) => ({
-  root: {
-    marginTop: theme.spacing(1)
+const PREFIX = 'FieldSet';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  fields: `${PREFIX}-fields`,
+};
+
+const StyledFormControl = styled(FormControl)(({ theme }) => ({
+  [`&.${classes.root}`]: {
+    marginTop: theme.spacing(1),
   },
-  fields: {
-    marginLeft: theme.spacing(1)
-  }
-})
-
+  [`& .${classes.fields}`]: {
+    marginLeft: theme.spacing(1),
+  },
+}));
 
 const FieldSet = ({
   form,
@@ -25,26 +27,22 @@ const FieldSet = ({
   model,
   onChange,
   classes,
-  localization: { getLocalizedString }
+  localization: { getLocalizedString },
 }) => {
   const forms = form.items.map((f, index) =>
     builder(f, model, index, mapper, onChange, builder)
-  )
-  const className = classNames(classes.root, form.htmlClass)
+  );
+  const className = classNames(classes.root, form.htmlClass);
 
   return (
-    <FormControl
-      component='fieldset'
-      className={className}
-      style={form.style}
-      {...form.otherProps}
-    >
+    <StyledFormControl component="fieldset" className={className} style={form.style} {...form.otherProps}>
       <FormLabel component='legend' required={form.required}>
         {form.title && getLocalizedString(form.title)}
       </FormLabel>
       <div className={classes.fields}>{forms}</div>
-    </FormControl>
+    </StyledFormControl>
+
   )
 }
 
-export default withStyles(styles)(FieldSet)
+export default FieldSet

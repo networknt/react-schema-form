@@ -1,28 +1,33 @@
-// @flow
-import React, { Component } from 'react'
-import FormControl from '@mui/material/FormControl'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormLabel from '@mui/material/FormLabel'
-import RadioGroup from '@mui/material/RadioGroup'
-import Radio from '@mui/material/Radio'
-import withStyles from '@mui/styles/withStyles';
-import ComposedComponent from './ComposedComponent'
+import React, { Component } from 'react';
+import { styled } from '@mui/system';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
+import ComposedComponent from './ComposedComponent';
 
-const styles = (theme) => ({
-  formControl: {
-    marginTop: theme.spacing(1)
+const PREFIX = 'Radios';
+
+const classes = {
+  formControl: `${PREFIX}-formControl`,
+  group: `${PREFIX}-group`,
+};
+
+const StyledFormControl = styled(FormControl)(({ theme }) => ({
+  [`&.${classes.formControl}`]: {
+    marginTop: theme.spacing(1),
   },
-  group: {
-    margin: theme.spacing(1, 0)
-  }
-})
-
+  [`& .${classes.group}`]: {
+    margin: theme.spacing(1, 0),
+  },
+}));
 
 class Radios extends Component {
   renderItems = (form) => {
     const {
-      localization: { getLocalizedString }
-    } = this.props
+      localization: { getLocalizedString },
+    } = this.props;
     return form.titleMap.map((item, index) => (
       <FormControlLabel
         // eslint-disable-next-line react/no-array-index-key
@@ -32,24 +37,23 @@ class Radios extends Component {
         value={item.value}
         disabled={form.readonly}
       />
-    ))
-  }
+    ));
+  };
 
   render() {
     const {
-      classes,
       form,
       value,
       onChangeValidate,
-      localization: { getLocalizedString }
-    } = this.props
+      localization: { getLocalizedString },
+    } = this.props;
     return (
-      <FormControl
-        component='fieldset'
+      <StyledFormControl
+        component="fieldset"
         className={classes.formControl}
         {...form.otherProps}
       >
-        <FormLabel component='legend' required={form.required}>
+        <FormLabel component="legend" required={form.required}>
           {form.title && getLocalizedString(form.title)}
         </FormLabel>
         <RadioGroup
@@ -60,9 +64,9 @@ class Radios extends Component {
         >
           {this.renderItems(form)}
         </RadioGroup>
-      </FormControl>
-    )
+      </StyledFormControl>
+    );
   }
 }
 
-export default ComposedComponent(withStyles(styles)(Radios))
+export default ComposedComponent(Radios);

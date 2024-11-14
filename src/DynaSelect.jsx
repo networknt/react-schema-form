@@ -132,6 +132,7 @@ function DynaSelect(props) {
       <div>
         <Autocomplete
             multiple={multiple}
+            disabled={disabled}
             getOptionLabel={(option) => option.label || ""}
             value={v}
             onChange={onChange}
