@@ -7,10 +7,11 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/main.js"),
+      entry: resolve(__dirname, "src/index.js"),
       name: "react-schema-form",
       fileName: "react-schema-form",
     },
+    sourcemap: true,
     rollupOptions: {
       external: [
         "react", 

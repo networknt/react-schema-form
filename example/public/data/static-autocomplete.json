@@ -1,102 +1,187 @@
 {
-    "schema": {
-      "type": "object",
-      "title": "React Component Autocomplete Demo Static Single",
-      "properties": {
-        "name":  {
-          "title": "Name",
-          "type": "string",
-          "default": "Steve"
-        },
-        "environment": {
-          "type": "string",
-          "title": "Environment",
-          "default": "LOCAL",
-          "enum": [
-            "LOCAL",
-            "SIT1",
-            "SIT2",
-            "SIT3",
-            "UAT1",
-            "UAT2"
-          ]
-        },
-        "stringarraysingle": {
-          "type": "array",
-          "title": "Single String Array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "stringcat": {
-          "type": "string",
-          "title": "Joined Strings"
-        },
-        "stringarraymultiple": {
-          "type": "array",
-          "title": "Multiple String Array",
-          "items": {
-            "type": "string"
-          }
+  "schema": {
+    "type": "object",
+    "title": "React Component Autocomplete Demo Static Single",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "Steve"
+      },
+      "host": {
+        "title": "Host",
+        "type": "string"
+      },
+      "environment": {
+        "type": "string",
+        "title": "Environment",
+        "default": "LOCAL",
+        "enum": [
+          "LOCAL",
+          "SIT1",
+          "SIT2",
+          "SIT3",
+          "UAT1",
+          "UAT2"
+        ]
+      },
+      "stringarraysingle": {
+        "type": "array",
+        "title": "Single String Array",
+        "items": {
+          "type": "string"
         }
       },
-      "required": ["name", "environment"]
-    },
-    "form": [
-      "name",
-      {
-        "key": "environment",
-        "type": "dynaselect",
-        "multiple": false,
-        "options": [
-          {"id": "LOCAL", "label": "Local"},
-          {"id": "SIT1", "label": "SIT1"},
-          {"id": "SIT2", "label": "SIT2"},
-          {"id": "SIT3", "label": "SIT3"},
-          {"id": "UAT1", "label": "UAT1"},
-          {"id": "UAT2", "label": "UAT2"}
-        ]
+      "stringcat": {
+        "type": "string",
+        "title": "Joined Strings"
       },
-      {
-        "key": "stringarraysingle",
-        "type": "dynaselect",
-        "multiple": false,
-        "options": [
-          {"id": "id1", "label": "label1"},
-          {"id": "id2", "label": "label2"},
-          {"id": "id3", "label": "label3"},
-          {"id": "id4", "label": "label4"},
-          {"id": "id5", "label": "label5"},
-          {"id": "id6", "label": "label6"}
-        ]
-      },
-      {
-        "key": "stringcat",
-        "type": "dynaselect",
-        "multiple": true,
-        "options": [
-          {"id": "id1", "label": "label1"},
-          {"id": "id2", "label": "label2"},
-          {"id": "id3", "label": "label3"},
-          {"id": "id4", "label": "label4"},
-          {"id": "id5", "label": "label5"},
-          {"id": "id6", "label": "label6"}
-        ]
-      },
-      {
-        "key": "stringarraymultiple",
-        "type": "dynaselect",
-        "multiple": true,
-        "options": [
-          {"id": "id1", "label": "label1"},
-          {"id": "id2", "label": "label2"},
-          {"id": "id3", "label": "label3"},
-          {"id": "id4", "label": "label4"},
-          {"id": "id5", "label": "label5"},
-          {"id": "id6", "label": "label6"}
-        ]
+      "stringarraymultiple": {
+        "type": "array",
+        "title": "Multiple String Array",
+        "items": {
+          "type": "string"
+        }
       }
-
+    },
+    "required": [
+      "name",
+      "environment"
     ]
-  }
-  
+  },
+  "form": [
+    "name",
+    {
+      "key": "host",
+      "type": "dynaselect",
+      "multiple": false,
+      "action": {
+        "url": "https://localhost/portal/query?cmd=%7B%22host%22%3A%22lightapi.net%22%2C%22service%22%3A%22user%22%2C%22action%22%3A%22listHost%22%2C%22version%22%3A%220.1.0%22%7D"
+      }
+    },
+    {
+      "key": "environment",
+      "type": "dynaselect",
+      "multiple": false,
+      "options": [
+        {
+          "id": "LOCAL",
+          "label": "Local"
+        },
+        {
+          "id": "SIT1",
+          "label": "SIT1"
+        },
+        {
+          "id": "SIT2",
+          "label": "SIT2"
+        },
+        {
+          "id": "SIT3",
+          "label": "SIT3"
+        },
+        {
+          "id": "UAT1",
+          "label": "UAT1"
+        },
+        {
+          "id": "UAT2",
+          "label": "UAT2"
+        }
+      ]
+    },
+    {
+      "key": "stringarraysingle",
+      "type": "dynaselect",
+      "multiple": false,
+      "options": [
+        {
+          "id": "id1",
+          "label": "label1"
+        },
+        {
+          "id": "id2",
+          "label": "label2"
+        },
+        {
+          "id": "id3",
+          "label": "label3"
+        },
+        {
+          "id": "id4",
+          "label": "label4"
+        },
+        {
+          "id": "id5",
+          "label": "label5"
+        },
+        {
+          "id": "id6",
+          "label": "label6"
+        }
+      ]
+    },
+    {
+      "key": "stringcat",
+      "type": "dynaselect",
+      "multiple": true,
+      "options": [
+        {
+          "id": "id1",
+          "label": "label1"
+        },
+        {
+          "id": "id2",
+          "label": "label2"
+        },
+        {
+          "id": "id3",
+          "label": "label3"
+        },
+        {
+          "id": "id4",
+          "label": "label4"
+        },
+        {
+          "id": "id5",
+          "label": "label5"
+        },
+        {
+          "id": "id6",
+          "label": "label6"
+        }
+      ]
+    },
+    {
+      "key": "stringarraymultiple",
+      "type": "dynaselect",
+      "multiple": true,
+      "options": [
+        {
+          "id": "id1",
+          "label": "label1"
+        },
+        {
+          "id": "id2",
+          "label": "label2"
+        },
+        {
+          "id": "id3",
+          "label": "label3"
+        },
+        {
+          "id": "id4",
+          "label": "label4"
+        },
+        {
+          "id": "id5",
+          "label": "label5"
+        },
+        {
+          "id": "id6",
+          "label": "label6"
+        }
+      ]
+    }
+  ]
+}

@@ -27,7 +27,7 @@ function DynaSelect(props) {
           required,
           multiple,
           disabled,
-          options
+          options: propOptions,
         },
         model
       } = props
@@ -47,17 +47,17 @@ function DynaSelect(props) {
         : ''
         : url
       if (fetchUrl) {
-        console.log("fetchUrl is called", fetchUrl)
+        // console.log("fetchUrl is called", fetchUrl)
         fetchFromUrl(fetchUrl)
       }
     }, paramValues)
 
     useEffect(() => {
       if (type === 'array') {
-        console.log('onChangeValidate is called for array type', currentValue)
+        // console.log('onChangeValidate is called for array type', currentValue)
         onChangeValidate(currentValue)
       } else {
-        console.log('onChangeValidate is called for string type', currentValue)
+        // console.log('onChangeValidate is called for string type', currentValue)
         // don't set the value if the currentValue is null
         if(currentValue !== null) {
           onChangeValidate({ target: { value: currentValue } })
@@ -111,7 +111,8 @@ function DynaSelect(props) {
       err = <div style={{ color: 'red' }}>{error}</div>
     }
     let v = undefined;
-    console.log("value = ", value);
+    const options = (propOptions && propOptions.length > 0) ? propOptions : menuItems;
+    // console.log("value = ", value);
     if(multiple) {
       // multiple select
       if(Array.isArray(value)) {
@@ -127,7 +128,7 @@ function DynaSelect(props) {
         v = value ? options.find(option => option.id === value) : null;
       }
     }
-    console.log("v = ", v);		
+    // console.log("options = ", options, "menuItems = ", menuItems);		
     return (
       <div>
         <Autocomplete
@@ -136,7 +137,7 @@ function DynaSelect(props) {
             getOptionLabel={(option) => option.label || ""}
             value={v}
             onChange={onChange}
-            options={menuItems.length === 0 ? options : menuItems}
+            options={options}
             renderInput={(params) => <TextField {...params} label={required ? title + " *" : title} />}
         />
         {err}
