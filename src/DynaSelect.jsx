@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Cookies from 'universal-cookie'
-import ObjectPath from 'objectpath'
+import ObjectPath from 'object-path'
 import ComposedComponent from './ComposedComponent'
 
 String.prototype.format = function () {

@@ -1,0 +1,48 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "React Component Autocomplete Demo Static Single",
+        "properties": {
+            "name": {
+                "title": "Name",
+                "type": "string",
+                "default": "Steve"
+            },
+            "country": {
+                "title": "Country",
+                "type": "string"
+            },
+            "province": {
+                "title": "Province",
+                "type": "string"
+            }
+        },
+        "required": [
+            "name",
+            "country",
+            "province"
+        ]
+    },
+    "form": [
+        "name",
+        {
+            "key": "country",
+            "type": "dynaselect",
+            "multiple": false,
+            "action": {
+                "url": "https://localhost/r/data?name=country"
+            }
+        },
+        {
+            "key": "province",
+            "type": "dynaselect",
+            "multiple": false,
+            "action": {
+                "url": "https://localhost/r/data?name=province&rela=ctry-prov&from={0}",
+                "params": [
+                    "country"
+                ]
+            }
+        }
+    ]
+}

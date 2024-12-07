@@ -27,6 +27,7 @@
   "dependencies": {
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
+    "object-path": "^0.11.8",
     "objectpath": "^2.0.0",
     "react-checkbox-tree": "^1.8.0",
     "supports-color": "^9.4.0",
