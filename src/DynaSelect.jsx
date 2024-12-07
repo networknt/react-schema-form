@@ -86,8 +86,8 @@ function DynaSelect(props) {
 
   const fetchFromUrl = (newUrl) => {
     // Check if newUrl contains '=undefined'
-    if (newUrl.includes('=undefined')) {
-      // console.warn('fetchFromUrl: URL contains =undefined, fetch aborted:', newUrl);
+    if (newUrl.includes('=undefined') || newUrl.includes('=&') || newUrl.endsWith('=')) {
+      // console.warn('fetchFromUrl: incomplete url, fetch aborted:', newUrl);
       return;
     }
 
