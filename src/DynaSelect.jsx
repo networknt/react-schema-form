@@ -84,27 +84,33 @@ function DynaSelect(props) {
       }
     };    
 
-    const fetchFromUrl = (newUrl) => {
+  const fetchFromUrl = (newUrl) => {
+    // Check if newUrl contains '=undefined'
+    if (newUrl.includes('=undefined')) {
+      // console.warn('fetchFromUrl: URL contains =undefined, fetch aborted:', newUrl);
+      return;
+    }
+
     const cookies = new Cookies()
     const headers = { 'Content-Type': 'application/json' }
     if (cookies.get('csrf'))
-        Object.assign(headers, { 'X-CSRF-TOKEN': cookies.get('csrf') })
+      Object.assign(headers, { 'X-CSRF-TOKEN': cookies.get('csrf') })
     fetch(newUrl, { headers, credentials: 'include' })
-        .then((res) => {
+      .then((res) => {
         if (res.ok) {
-            return res.json()
+          return res.json()
         }
         return res.text().then((text) => {
-            throw new Error(text)
+          throw new Error(text)
         })
-        })
-        .then((res) => {
-          setMenuItems(res);
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-    }
+      })
+      .then((res) => {
+        setMenuItems(res);
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
 
     let err = ''
     if (error) {
