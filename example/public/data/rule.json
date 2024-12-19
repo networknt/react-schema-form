@@ -1,0 +1,249 @@
+{
+    "schema": {
+        "type": "object",
+        "properties": {
+            "hostId": {
+                "type": "string"
+            },
+            "ruleId": {
+                "type": "string"
+            },
+            "ruleType": {
+                "type": "string",
+                "enum": [
+                    "generic",
+                    "request-access",
+                    "response-filter",
+                    "request-transform",
+                    "response-transform"
+                ]
+            },
+            "visibility": {
+                "type": "string",
+                "enum": [
+                    "public",
+                    "private"
+                ]
+            },
+            "description": {
+                "type": "string"
+            },
+            "priority": {
+                "type": "integer"
+            },
+            "conditions": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "conditionId": {
+                            "type": "string"
+                        },
+                        "conditionDesc": {
+                            "type": "string"
+                        },
+                        "propertyPath": {
+                            "type": "string"
+                        },
+                        "operatorCode": {
+                            "type": "string",
+                            "enum": [
+                                "equals",
+                                "on",
+                                "before",
+                                "after",
+                                "lengthEquals",
+                                "greaterThanOrEqual",
+                                "lessThanOrEqual",
+                                "isNotNull",
+                                "isNull",
+                                "contains",
+                                "match",
+                                "notMatch",
+                                "isEmpty",
+                                "isNotEmpty",
+                                "isBlank",
+                                "isNotBlank",
+                                "lengthGreaterThan",
+                                "lengthLessThan",
+                                "inList",
+                                "greaterThan",
+                                "containsIgnoreCase",
+                                "startsWith"
+                            ]
+                        },
+                        "index": {
+                            "type": "integer"
+                        },
+                        "conditionValues": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "conditionValueId": {
+                                        "type": "string"
+                                    },
+                                    "conditionValue": {
+                                        "type": [
+                                            "string",
+                                            "integer",
+                                            "boolean"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "type": "boolean"
+                                    },
+                                    "valueTypeCode": {
+                                        "type": "string",
+                                        "enum": [
+                                            "STRING",
+                                            "INTEGER",
+                                            "BOOLEAN"
+                                        ]
+                                    },
+                                    "dateFormat": {
+                                        "type": "string"
+                                    },
+                                    "regexFlags": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "conditionValue"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "conditionId",
+                        "propertyPath",
+                        "operatorCode",
+                        "index"
+                    ]
+                }
+            },
+            "conditionExpression": {
+                "type": "string"
+            },
+            "actions": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "actionId": {
+                            "type": "string"
+                        },
+                        "actionDesc": {
+                            "type": "string"
+                        },
+                        "actionClassName": {
+                            "type": "string"
+                        },
+                        "conditionResult": {
+                            "type": "boolean"
+                        },
+                        "actionValues": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "actionValueId": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "actionValueId",
+                                    "value"
+                                ]
+                            }
+                        },
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "headerName": {
+                                    "type": "string"
+                                },
+                                "headerValue": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "headerName",
+                                "headerValue"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "actionId",
+                        "actionClassName"
+                    ]
+                }
+            }
+        },
+        "required": [
+            "hostId",
+            "ruleId",
+            "ruleType",
+            "visibility",
+            "description",
+            "conditions",
+            "actions"
+        ]
+    },
+    "form": [
+        "hostId",
+        "ruleId",
+        "ruleType",
+        "visibility",
+        "description",
+        "priority",
+        {
+            "key": "conditions",
+            "items": [
+                "conditions[].conditionId",
+                "conditions[].conditionDesc",
+                "conditions[].propertyPath",
+                "conditions[].operatorCode",
+                "conditions[].index",
+                {
+                    "key": "conditions[].conditionValues",
+                    "items": [
+                        "conditions[].conditionValues[].conditionValueId",
+                        "conditions[].conditionValues[].conditionValue",
+                        "conditions[].conditionValues[].expression",
+                        "conditions[].conditionValues[].valueTypeCode",
+                        "conditions[].conditionValues[].dateFormat",
+                        "conditions[].conditionValues[].regexFlags"
+                    ]
+                }
+            ]
+        },
+        "conditionExpression",
+        {
+            "key": "actions",
+            "items": [
+                "actions[].actionId",
+                "actions[].actionDesc",
+                "actions[].actionClassName",
+                "actions[].conditionResult",
+                {
+                    "key": "actions[].actionValues",
+                    "items": [
+                        "actions[].actionValues[].actionValueId",
+                        "actions[].actionValues[].value"
+                    ]
+                },
+                {
+                    "key": "actions[].parameters",
+                    "items": [
+                        "actions[].parameters[].headerName",
+                        "actions[].parameters[].headerValue"
+                    ]
+                }
+            ]
+        }
+    ]
+}

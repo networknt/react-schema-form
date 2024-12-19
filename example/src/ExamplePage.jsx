@@ -34,6 +34,7 @@ class ExamplePage extends React.Component {
         this.state = {
             tests : [
                 {label : "Simple", value: "data/simple.json"},
+                {label : "Yaml Rule", value: "data/rule.json"},
                 {label : "Static Autocomplete", value: "data/static-autocomplete.json"},
                 {label : "Conditional Dynaselect", value: "data/conditional-dynaselect.json"},    
                 {label : "Triple Boolean", value: "data/noanswer.json"},
