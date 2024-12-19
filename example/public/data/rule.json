@@ -152,6 +152,14 @@
                                     },
                                     "value": {
                                         "type": "string"
+                                    },
+                                    "valueTypeCode": {
+                                        "type": "string",
+                                        "enum": [
+                                            "STRING",
+                                            "INTEGER",
+                                            "BOOLEAN"
+                                        ]
                                     }
                                 },
                                 "required": [
@@ -159,21 +167,6 @@
                                     "value"
                                 ]
                             }
-                        },
-                        "parameters": {
-                            "type": "object",
-                            "properties": {
-                                "headerName": {
-                                    "type": "string"
-                                },
-                                "headerValue": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "headerName",
-                                "headerValue"
-                            ]
                         }
                     },
                     "required": [
@@ -233,14 +226,8 @@
                     "key": "actions[].actionValues",
                     "items": [
                         "actions[].actionValues[].actionValueId",
-                        "actions[].actionValues[].value"
-                    ]
-                },
-                {
-                    "key": "actions[].parameters",
-                    "items": [
-                        "actions[].parameters[].headerName",
-                        "actions[].parameters[].headerValue"
+                        "actions[].actionValues[].value",
+                        "actions[].actionValues[].valueTypeCode"
                     ]
                 }
             ]
