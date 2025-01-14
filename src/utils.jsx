@@ -6,6 +6,72 @@ import isUndefined from 'lodash/isUndefined'
 import ObjectPath from 'objectpath'
 import tv4 from 'tv4'
 
+const getValueByPath = (obj, path) => {
+  try {
+    return path.split(/[.[\]'"]/).filter(Boolean).reduce((acc, key) => acc && acc[key], obj);
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};
+
+const safeEval = (condition, scope) => {
+  try {
+    const scopeSafe = cloneDeep(scope);
+    if (!condition) {
+      return true;
+    }
+
+    // Simple regex to match: path operator constant
+    // e.g., model.abc.def[0].xyz === 'someValue'
+    const match = condition.match(/^(.*?)\s*(===|!==|>)\s*('([^']*)'|"([^"]*)'|([0-9.]+))$/);
+
+    if (!match) {
+      console.warn(`Unsupported condition format: ${condition}`);
+      return undefined;
+    }
+
+    const path = match[1].trim();
+    const operator = match[2];
+    const rawValue = match[3];
+    const stringValueSingleQuote = match[4];
+    const stringValueDoubleQuote = match[5];
+    const numberValue = match[6];
+
+    const leftValue = getValueByPath(scopeSafe, path);
+    let rightValue;
+
+    if (stringValueSingleQuote !== undefined) {
+      rightValue = stringValueSingleQuote;
+    } else if (stringValueDoubleQuote !== undefined) {
+      rightValue = stringValueDoubleQuote;
+    } else if (numberValue !== undefined) {
+      rightValue = parseFloat(numberValue);
+    } else {
+      console.warn(`Could not determine the type of the right-hand value in: ${condition}`);
+      return undefined;
+    }
+
+    switch (operator) {
+      case '===':
+        return leftValue === rightValue;
+      case '!==':
+        return leftValue !== rightValue;
+      case '>':
+        return leftValue > rightValue;
+      case '<':
+        return leftValue < rightValue;
+      default:
+        console.warn(`Unsupported operator: ${operator}`);
+        return undefined;
+    }
+
+  } catch (error) {
+    console.error("Custom evaluation error:", error);
+    return undefined;
+  }
+};
+
 const stripNullType = (type) => {
   if (Array.isArray(type) && type.length === 2) {
     if (type[0] === 'null') return type[1]
@@ -698,6 +764,7 @@ export default {
   merge,
   validate,
   validateBySchema,
+  safeEval,
   selectOrSet,
   getValueFromModel,
   getTitleByValue,

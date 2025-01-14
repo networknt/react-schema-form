@@ -93,7 +93,10 @@ class SchemaForm extends Component {
     }
 
     // Apply conditionals to review if this field must be rendered
-    if (form.condition) {
+    if (
+      form.condition &&
+      !utils.safeEval(form.condition, { model, form, ...evalContext })
+    ) {
       return null
     }
 
