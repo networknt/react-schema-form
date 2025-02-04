@@ -56,7 +56,7 @@
       "type": "dynaselect",
       "multiple": false,
       "action": {
-        "url": "https://localhost/portal/query?cmd=%7B%22host%22%3A%22lightapi.net%22%2C%22service%22%3A%22user%22%2C%22action%22%3A%22listHost%22%2C%22version%22%3A%220.1.0%22%7D"
+        "url": "https://localhost/portal/query?cmd=%7B%22host%22%3A%22lightapi.net%22%2C%22service%22%3A%22host%22%2C%22action%22%3A%22getHostLabel%22%2C%22version%22%3A%220.1.0%22%7D"
       }
     },
     {

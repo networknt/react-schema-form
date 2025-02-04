@@ -71,8 +71,8 @@ export default (ComposedComponent, defaultProps = {}) =>
       let value = null
       // use the schema type so that we can have a limited number of types to handle. This
       // gives us the flexibility to create add-ons without touching the code of main project.
+      // console.log(form.schema.type, form.type);
       const type = form.schema ? form.schema.type : form.type
-      // console.log(type)
       switch (type) {
         case 'integer':
         case 'number': {
@@ -96,8 +96,16 @@ export default (ComposedComponent, defaultProps = {}) =>
           }
           ;({ value } = e.target)
           break
+        case 'string':
+          if(form.type === 'timestamp') {
+            value = e;
+          } else {
+            ;({ value } = e.target)  
+          }
+          break;  
         default:
-          // string goes here.
+          // nothing should goes here. 
+          console.log("type = ", type);
           ;({ value } = e.target)
       }
 

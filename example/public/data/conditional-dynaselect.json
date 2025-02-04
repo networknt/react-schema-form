@@ -38,7 +38,7 @@
             "type": "dynaselect",
             "multiple": false,
             "action": {
-                "url": "https://localhost/r/data?name=province&rela=ctry-prov&from={0}",
+                "url": "https://localhost/r/data?name=province&rela=country-province&from={0}",
                 "params": [
                     "country"
                 ]
