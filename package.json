@@ -55,6 +55,7 @@
     "@uiw/react-markdown-editor": "^6.1.2",
     "@vitejs/plugin-react": "^4.3.3",
     "codemirror": "^6.0.1",
+    "dayjs": "^1.11.13",
     "eslint": "^9.13.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
@@ -84,6 +85,7 @@
     "@types/react": "^18.3.1",
     "@uiw/react-markdown-editor": "^6.1.2",
     "codemirror": "^6.0.1",
+    "dayjs": "^1.11.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
