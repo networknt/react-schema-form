@@ -1,7 +1,7 @@
 {
   "name": "react-schema-form",
   "private": false,
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "React JSON Schema Form",
   "keywords": [
     "json schema",
@@ -50,6 +50,7 @@
     "@mui/icons-material": "^6.1.6",
     "@mui/material": "^6.1.6",
     "@mui/styles": "^6.1.6",
+    "@mui/x-date-pickers": "^7.25.0",
     "@types/react": "^18.3.1",
     "@uiw/react-markdown-editor": "^6.1.2",
     "@vitejs/plugin-react": "^4.3.3",
@@ -79,6 +80,7 @@
     "@mui/icons-material": "^6.1.6",
     "@mui/material": "^6.1.6",
     "@mui/styles": "^6.1.6",
+    "@mui/x-date-pickers": "^7.25.0",
     "@types/react": "^18.3.1",
     "@uiw/react-markdown-editor": "^6.1.2",
     "codemirror": "^6.0.1",
