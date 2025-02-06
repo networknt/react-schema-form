@@ -1,6 +1,3 @@
-/**
- * Created by steve on 15/09/15.
- */
 import React, { useState, useEffect } from 'react'
 import FormLabel from '@mui/material/FormLabel'
 import FormHelperText from '@mui/material/FormHelperText'
@@ -21,7 +18,7 @@ const Markdown = (props) => {
   return (
     <React.Fragment>
       <FormLabel required={form.required}>{title}</FormLabel>
-      form.readonly ? <MarkdownEditor.Markdown source={markdownVal} /> : <MarkdownEditor value={value} onChange={(value) => setText(value)} />
+      <MarkdownEditor value={value} height={form.height} onChange={(value) => setText(value)} />
       {error ? <FormHelperText error>{error}</FormHelperText> : null}
     </React.Fragment>
   )

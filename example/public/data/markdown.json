@@ -22,6 +22,7 @@
       "key": "comment",
       "type": "markdown",
       "title": "Comment",
+      "height": "200px",
       "placeholder": "Make a comment"
     }
   ]
