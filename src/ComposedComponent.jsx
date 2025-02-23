@@ -48,16 +48,14 @@ export default (ComposedComponent, defaultProps = {}) =>
 
       const validationResult = utils.validate(
         form,
-        value || undefined,
-        getLocalizedString
+        value || undefined
       )
-
       const error = !validationResult.valid ? validationResult.error : undefined
-
+      console.log("error", error);
       return {
         value,
         valid: validationResult.valid,
-        error: (!validationResult.valid ? error.message : null) || errorText
+        error: (!validationResult.valid ? error : null) || errorText
       }
     }
 
@@ -109,11 +107,13 @@ export default (ComposedComponent, defaultProps = {}) =>
           ;({ value } = e.target)
       }
 
-      const validationResult = utils.validate(form, value, getLocalizedString)
+      const validationResult = utils.validate(form, value)
+      console.log(form, value);
+      console.log("error", validationResult.valid ? null : validationResult.error);
       this.setState({
         value,
         valid: validationResult.valid,
-        error: validationResult.valid ? null : validationResult.error.message
+        error: validationResult.valid ? null : validationResult.error
       })
 
       onChange(form.key, value)

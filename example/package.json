@@ -24,6 +24,7 @@
     "@mui/icons-material": "^6.1.6",
     "@mui/material": "^6.1.6",
     "@mui/styles": "^6.1.6",
+    "@mui/system": "^6.4.3",
     "@mui/x-date-pickers": "^7.25.0",
     "@uiw/codemirror-theme-github": "^4.23.6",
     "@uiw/react-codemirror": "^4.23.6",

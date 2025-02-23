@@ -4,7 +4,15 @@ import cloneDeep from 'lodash/cloneDeep'
 import extend from 'lodash/extend'
 import isUndefined from 'lodash/isUndefined'
 import ObjectPath from 'objectpath'
-import tv4 from 'tv4'
+import Ajv from "ajv";
+import addFormats from "ajv-formats";
+
+const ajv = new Ajv({ allErrors: true });
+addFormats(ajv);
+
+//  Cache to store compiled schemas. The KEY could be something unique about
+//  the form definition, like a form ID or a hash of the schema itself.
+const compiledSchemas = new Map();
 
 const getValueByPath = (obj, path) => {
   try {
@@ -664,62 +672,102 @@ function selectOrSet(projection, obj, valueToSet, type) {
   return value
 }
 
-const validateBySchema = (schema, value) => tv4.validateResult(value, schema)
+const compileAndCacheSchema = (schemaKey, schema) => {
+  console.log(schemaKey, schema);
 
-const validate = (form, value, getLocalizedString) => {
-  if (!form) {
-    return { valid: true }
-  }
-  const { schema } = form
-  if (!schema) {
-    return { valid: true }
-  }
-  // Input of type text and textareas will give us a viewValue of ''
-  // when empty, this is a valid value in a schema and does not count as something
-  // that breaks validation of 'required'. But for our own sanity an empty field should
-  // not validate if it's required.
-
-  if (value === '') {
-    value = undefined
+  // Check if schema is already compiled
+  if (compiledSchemas.has(schemaKey)) {
+    console.log("schemaKey is found!");
+    return compiledSchemas.get(schemaKey);
   }
 
-  // Numbers fields will give a null value, which also means empty field
-  if (form.type === 'number' && value === null) {
-    value = undefined
+  // Compile the schema
+  try {
+    const validateSchema = ajv.compile(schema);
+    compiledSchemas.set(schemaKey, validateSchema); // Store in the cache
+    return validateSchema;
+  } catch (error) {
+      console.error("Schema compilation error:", error, schemaCopy);
+      return null; 
   }
+};
 
-  if (form.type === 'number' && Number.isNaN(parseFloat(value))) {
-    value = undefined
+function simpleHash(obj) {
+  const str = JSON.stringify(obj);
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0; // Convert to 32-bit integer
   }
-
-  // Version 4 of JSON Schema has the required property not on the
-  // property itself but on the wrapping object. Since we like to test
-  // only this property we wrap it in a fake object.
-  const wrap = { type: 'object', properties: {} }
-  const propName = form.key[form.key.length - 1]
-  wrap.properties[propName] = schema
-
-  if (form.required) {
-    wrap.required = [propName]
-  }
-  const valueWrap = {}
-  if (typeof value !== 'undefined') {
-    valueWrap[propName] = value
-  }
-
-  const tv4Result = tv4.validateResult(valueWrap, wrap)
-  if (
-    tv4Result != null &&
-    !tv4Result.valid &&
-    form.validationMessage != null &&
-    typeof value !== 'undefined'
-  ) {
-    tv4Result.error.message = getLocalizedString
-      ? getLocalizedString(form.validationMessage)
-      : form.validationMessage
-  }
-  return tv4Result
+  return hash.toString(16); // Return as hex string
 }
+
+const validateBySchema = (schema, value) => {
+  if (!schema.$schema) {
+    schema.$schema = "http://json-schema.org/draft-07/schema#";
+  }
+  // get the hash as the key.
+  console.log("schema", schema);
+  let schemaKey = simpleHash(schema);
+
+  const validateSchema = compileAndCacheSchema(schemaKey, schema);
+
+  if (!validateSchema) { // compilation failed
+    return {valid: false, error: "Invalid Schema"};
+  }
+
+  // Validate the value
+  console.log("value = ", value);
+  const valid = validateSchema(value === undefined ? {} : value );
+
+  if (!valid) {
+    const error = ajv.errorsText(validateSchema.errors, {});
+    return { valid: false, error: error };
+  }
+
+  return { valid: true };
+
+}
+
+const validate = (form, value) => {
+  if (!form || !form.schema) {
+    return { valid: true };
+  }
+
+  // Handle empty values (text, textarea, and number fields)
+  if (value === "" || (form.type === "number" && (value === null || isNaN(parseFloat(value))))) {
+    value = undefined;
+  }
+
+  const schemaKey = form.key[form.key.length - 1];
+  console.log("schemaKey = ", schemaKey);
+
+  const { schema } = form;
+  const wrap = { type: "object", properties: {}, $schema: "http://json-schema.org/draft-07/schema#" };
+  const propName = form.key[form.key.length - 1];
+  wrap.properties[propName] = schema;
+  if (form.required) {
+    wrap.required = [propName];
+  }
+  console.log("wrap", wrap);
+
+  const validateSchema = compileAndCacheSchema(schemaKey, wrap); // Get pre-compiled function
+
+  if (!validateSchema) { // compilation failed
+    return {valid: false, error: "Invalid Schema"};
+  }
+
+  // Validate the value
+  console.log("value = ", value === undefined ? {} : { [form.key[form.key.length - 1]]: value });
+  const valid = validateSchema(value === undefined ? {} : { [form.key[form.key.length - 1]]: value });
+
+  if (!valid) {
+    const error = ajv.errorsText(validateSchema.errors, {});
+    return { valid: false, error: error };
+  }
+
+  return { valid: true };
+};
 
 const getValueFromModel = (model, key) => {
   let result
@@ -763,7 +811,7 @@ export default {
   stripNullType,
   merge,
   validate,
-  validateBySchema,
+  validateBySchema,  
   safeEval,
   selectOrSet,
   getValueFromModel,
