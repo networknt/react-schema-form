@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.11 - 2025-02-22
+### Added
+
+### Changed
+- fixes #270 upgrade json schema validator to ajv from tv4
+
 ## 1.0.3 - 2022-01-22
 ### Added
 
