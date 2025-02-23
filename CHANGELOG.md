@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.12 - 2025-02-22
+### Added
+
+### Changed
+- fixes #271 update the settings for ajv to support readonly
+
 ## 1.0.11 - 2025-02-22
 ### Added
 
