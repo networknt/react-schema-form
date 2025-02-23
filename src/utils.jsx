@@ -7,7 +7,7 @@ import ObjectPath from 'objectpath'
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv({ allErrors: true, strict: false, keywords: ["readonly"], });
 addFormats(ajv);
 
 //  Cache to store compiled schemas. The KEY could be something unique about
@@ -18,7 +18,7 @@ const getValueByPath = (obj, path) => {
   try {
     return path.split(/[.[\]'"]/).filter(Boolean).reduce((acc, key) => acc && acc[key], obj);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return undefined;
   }
 };
@@ -673,11 +673,9 @@ function selectOrSet(projection, obj, valueToSet, type) {
 }
 
 const compileAndCacheSchema = (schemaKey, schema) => {
-  console.log(schemaKey, schema);
 
   // Check if schema is already compiled
   if (compiledSchemas.has(schemaKey)) {
-    console.log("schemaKey is found!");
     return compiledSchemas.get(schemaKey);
   }
 
@@ -687,7 +685,7 @@ const compileAndCacheSchema = (schemaKey, schema) => {
     compiledSchemas.set(schemaKey, validateSchema); // Store in the cache
     return validateSchema;
   } catch (error) {
-      console.error("Schema compilation error:", error, schemaCopy);
+      // console.error("Schema compilation error:", error, schema);
       return null; 
   }
 };
@@ -707,7 +705,6 @@ const validateBySchema = (schema, value) => {
     schema.$schema = "http://json-schema.org/draft-07/schema#";
   }
   // get the hash as the key.
-  console.log("schema", schema);
   let schemaKey = simpleHash(schema);
 
   const validateSchema = compileAndCacheSchema(schemaKey, schema);
@@ -717,7 +714,6 @@ const validateBySchema = (schema, value) => {
   }
 
   // Validate the value
-  console.log("value = ", value);
   const valid = validateSchema(value === undefined ? {} : value );
 
   if (!valid) {
@@ -740,7 +736,6 @@ const validate = (form, value) => {
   }
 
   const schemaKey = form.key[form.key.length - 1];
-  console.log("schemaKey = ", schemaKey);
 
   const { schema } = form;
   const wrap = { type: "object", properties: {}, $schema: "http://json-schema.org/draft-07/schema#" };
@@ -749,7 +744,6 @@ const validate = (form, value) => {
   if (form.required) {
     wrap.required = [propName];
   }
-  console.log("wrap", wrap);
 
   const validateSchema = compileAndCacheSchema(schemaKey, wrap); // Get pre-compiled function
 
@@ -758,7 +752,6 @@ const validate = (form, value) => {
   }
 
   // Validate the value
-  console.log("value = ", value === undefined ? {} : { [form.key[form.key.length - 1]]: value });
   const valid = validateSchema(value === undefined ? {} : { [form.key[form.key.length - 1]]: value });
 
   if (!valid) {
