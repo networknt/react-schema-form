@@ -11,7 +11,7 @@ class Timestamp extends React.Component {
     const { model, form, value, setDefault } = this.props;
     const { key } = form;
     const d = new Date();
-    const currentTimestamp = d.toISOString().substring(0, 16);
+    const currentTimestamp = d.toISOString();
     setDefault(key, model, form, value || currentTimestamp);
   }
 
