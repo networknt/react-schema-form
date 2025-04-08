@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.13 - 2025-04-08
+### Added
+
+### Changed
+- fixes #272 update timestamp format to support OffsetDateTime in java
+
 ## 1.0.12 - 2025-02-22
 ### Added
 
