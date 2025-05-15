@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.14 - 2025-05-14
+### Added
+
+### Changed
+- fixes #273 remove the logic to set the default for timestamp
+
 ## 1.0.13 - 2025-04-08
 ### Added
 
