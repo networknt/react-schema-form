@@ -14,10 +14,10 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       external: [
-        "react", 
-        "react-dom", 
-        "@babel/runtime", 
-        "@codemirror/autocomplete", 
+        "react",
+        "react-dom",
+        "@babel/runtime",
+        "@codemirror/autocomplete",
         "@codemirror/language",
         "@codemirror/lint",
         "@codemirror/search",
@@ -35,7 +35,7 @@ export default defineConfig({
       ],
       output: {
         globals: {
-          react: "React",
+          "react": "React",
           "react-dom": "React-dom",
           "@babel/runtime": "BabelRuntime",
           "@codemirror/autocomplete": "CodeMirrorAutocomplete",
@@ -56,5 +56,5 @@ export default defineConfig({
         },
       },
     },
-  },  
+  },
 })
