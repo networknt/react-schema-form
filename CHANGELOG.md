@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.15 - 2026-01-18
+### Added
+
+### Changed
+- fixes #275 update to change HOC to react hook for components
+- fixes #274  upgrade to react 19 and mui 7
+
+
 ## 1.0.14 - 2025-05-14
 ### Added
 
