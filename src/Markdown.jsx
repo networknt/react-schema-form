@@ -1,27 +1,36 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import FormLabel from '@mui/material/FormLabel'
 import FormHelperText from '@mui/material/FormHelperText'
 import MarkdownEditor from '@uiw/react-markdown-editor';
-
-import ComposedComponent from './ComposedComponent'
-
+import useSchemaField from './useSchemaField'
 
 const Markdown = (props) => {
-  const { model, form, value, error, setDefault, onChangeValidate } = props
+  const {
+    model,
+    form,
+    setDefault,
+    localization: { getLocalizedString }
+  } = props
+  const { value, valid, error, onChangeValidate } = useSchemaField(props)
   const { key, title } = form
-  setDefault(key, model, form, value)
-  const [selectedTab, setSelectedTab] = useState('write')
-  const [text, setText] = useState(value)
+
   useEffect(() => {
-    onChangeValidate({ target: { value: text } })
-  }, [text])
+    setDefault(key, model, form, value)
+  }, [])
+
   return (
     <React.Fragment>
-      <FormLabel required={form.required}>{title}</FormLabel>
-      <MarkdownEditor value={value} height={form.height} onChange={(value) => setText(value)} />
-      {error ? <FormHelperText error>{error}</FormHelperText> : null}
+      <FormLabel required={form.required}>
+        {title && getLocalizedString(title)}
+      </FormLabel>
+      <MarkdownEditor
+        value={value || ''}
+        height={form.height}
+        onChange={(v) => onChangeValidate(null, v)}
+      />
+      {!valid ? <FormHelperText error>{error}</FormHelperText> : null}
     </React.Fragment>
   )
 }
 
-export default ComposedComponent(Markdown)
+export default Markdown

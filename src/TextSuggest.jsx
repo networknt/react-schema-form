@@ -1,76 +1,71 @@
-/* eslint-disable */
-// temporary disable eslint in this unfinished file because it blocks tests
-/**
- * Created by XaviTorello on 30/05/18
- */
-import React from "react";
-import ComposedComponent from "./ComposedComponent";
+import React, { useEffect } from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import useSchemaField from './useSchemaField';
 
-const dataSourceConfig = {
-    text: "name",
-    value: "value"
+const TextSuggest = (props) => {
+    const {
+        model,
+        form,
+        setDefault,
+        localization: { getLocalizedString },
+    } = props;
+    const { value, valid, error, onChangeValidate } = useSchemaField(props);
+    const { key, title, placeholder, readonly, titleMap } = form;
+
+    useEffect(() => {
+        setDefault(key, model, form, value);
+    }, []);
+
+    const options = titleMap || [];
+
+    const handleChange = (event, newValue) => {
+        // newValue will be an item from titleMap: { name: '...', value: '...' }
+        // or just a string if it's a simple array.
+        const val = newValue && typeof newValue === 'object' ? newValue.value : newValue;
+        onChangeValidate(null, val);
+    };
+
+    const getOptionLabel = (option) => {
+        if (typeof option === 'object' && option !== null) {
+            return getLocalizedString(option.name || option.value || '');
+        }
+        return getLocalizedString(option || '');
+    };
+
+    // Find the current selected option object from titleMap based on value
+    const selectedOption = options.find((opt) => {
+        if (typeof opt === 'object' && opt !== null) {
+            return opt.value === value;
+        }
+        return opt === value;
+    }) || null;
+
+    return (
+        <div className={form.htmlClass}>
+            <Autocomplete
+                options={options}
+                getOptionLabel={getOptionLabel}
+                value={selectedOption}
+                onChange={handleChange}
+                disabled={readonly}
+                fullWidth
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label={title && getLocalizedString(title)}
+                        placeholder={placeholder && getLocalizedString(placeholder)}
+                        helperText={(error || form.description) && getLocalizedString(error || form.description)}
+                        error={!valid}
+                        required={form.required}
+                        style={form.style || { width: '100%' }}
+                        {...form.otherProps}
+                    />
+                )}
+                {...form.otherProps}
+            />
+        </div>
+    );
 };
 
-class TextSuggest extends React.Component {
-    handleUpdate = (newValue, index) => {
-        const { key } = this.props.form;
-        const { type } = this.props.form.schema;
-        return this.props.onChange(
-            key,
-            newValue[dataSourceConfig.value],
-            type,
-            this.props.form
-        );
-    };
-
-    handleInit = init_value => {
-        if (!this.props.form.schema || !this.props.form.schema.enum)
-            return init_value.toString();
-
-        const names =
-            this.props.form.schema.enumNames || this.props.form.schema.enum;
-        const values = this.props.form.schema.enum;
-
-        const init_value_name = names[values.indexOf(init_value)];
-
-        // this.handleUpdate({[dataSourceConfig['value']]: init_value, [dataSourceConfig['text']]: init_value_name})
-
-        return init_value_name || init_value.toString();
-    };
-
-    render() {
-        // assign the filter, by default case insensitive
-        const filter = (filter => {
-            switch (filter) {
-                case "fuzzy":
-                    return AutoComplete.fuzzyFilter;
-                default:
-                    return AutoComplete.caseInsensitiveFilter;
-            }
-        })(this.props.form.filter);
-
-        const value = this.props.value && this.handleInit(this.props.value);
-
-        return (
-            <div className={this.props.form.htmlClass}>
-                <AutoComplete
-                    type={this.props.form.type}
-                    floatingLabelText={this.props.form.title}
-                    hintText={this.props.form.placeholder}
-                    errorText={this.props.error}
-                    onNewRequest={this.handleUpdate}
-                    disabled={this.props.form.readonly}
-                    style={this.props.form.style || { width: "100%" }}
-                    openOnFocus
-                    searchText={value}
-                    dataSource={this.props.form.titleMap || ["Loading..."]}
-                    filter={filter}
-                    maxSearchResults={this.props.form.maxSearchResults || 5}
-                    dataSourceConfig={dataSourceConfig}
-                />
-            </div>
-        );
-    }
-}
-
-export default ComposedComponent(TextSuggest);
+export default TextSuggest;

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { styled } from '@mui/system';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
-import ComposedComponent from './ComposedComponent';
+import useSchemaField from './useSchemaField';
 
 const PREFIX = 'Radios';
 
@@ -23,50 +23,43 @@ const StyledFormControl = styled(FormControl)(({ theme }) => ({
   },
 }));
 
-class Radios extends Component {
-  renderItems = (form) => {
-    const {
-      localization: { getLocalizedString },
-    } = this.props;
-    return form.titleMap.map((item, index) => (
-      <FormControlLabel
-        // eslint-disable-next-line react/no-array-index-key
-        key={index}
-        control={<Radio />}
-        label={item.name && getLocalizedString(item.name)}
-        value={item.value}
-        disabled={form.readonly}
-      />
-    ));
-  };
+const Radios = (props) => {
+  const {
+    form,
+    localization: { getLocalizedString },
+  } = props;
+  const { value, onChangeValidate } = useSchemaField(props);
 
-  render() {
-    const {
-      form,
-      value,
-      onChangeValidate,
-      localization: { getLocalizedString },
-    } = this.props;
-    return (
-      <StyledFormControl
-        component="fieldset"
-        className={classes.formControl}
-        {...form.otherProps}
+  const renderItems = (currentForm) => currentForm.titleMap.map((item, index) => (
+    <FormControlLabel
+      // eslint-disable-next-line react/no-array-index-key
+      key={index}
+      control={<Radio />}
+      label={item.name && getLocalizedString(item.name)}
+      value={item.value}
+      disabled={currentForm.readonly}
+    />
+  ));
+
+  return (
+    <StyledFormControl
+      component="fieldset"
+      className={classes.formControl}
+      {...form.otherProps}
+    >
+      <FormLabel component="legend" required={form.required}>
+        {form.title && getLocalizedString(form.title)}
+      </FormLabel>
+      <RadioGroup
+        value={value}
+        name={form.title}
+        onChange={onChangeValidate}
+        className={classes.group}
       >
-        <FormLabel component="legend" required={form.required}>
-          {form.title && getLocalizedString(form.title)}
-        </FormLabel>
-        <RadioGroup
-          value={value}
-          name={form.title}
-          onChange={onChangeValidate}
-          className={classes.group}
-        >
-          {this.renderItems(form)}
-        </RadioGroup>
-      </StyledFormControl>
-    );
-  }
-}
+        {renderItems(form)}
+      </RadioGroup>
+    </StyledFormControl>
+  );
+};
 
-export default ComposedComponent(Radios);
+export default Radios;

@@ -1,50 +1,38 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import MenuItem from '@mui/material/MenuItem'
 import MuiSelect from '@mui/material/Select'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
-import ComposedComponent from './ComposedComponent'
-import utils from './utils'
+import useSchemaField from './useSchemaField'
 
 function Select(props) {
   const {
     model,
     form,
-    error,
     setDefault,
-    onChange,
-    onChangeValidate,
     localization: { getLocalizedString },
     form: {
       key,
       schema: { isObject, enum: values, findFn, displayFn, noLocalization }
     }
   } = props
-
-  let defaultValue =
-    form && form.selectProps && form.selectProps.multiple ? [] : ''
-  if (props.form.default) {
-    defaultValue = props.form.default
-  } else if (props.form.schema && props.form.schema.default) {
-    defaultValue = props.form.schema.default
-  }
-  const [currentValue, setCurrentValue] = useState(
-    utils.getValueFromModel(model, form.key) || defaultValue
-  )
+  const { value, valid, error, onChangeValidate } = useSchemaField(props)
 
   useEffect(() => {
-    setDefault(key, model, form, currentValue)
+    setDefault(key, model, form, value)
   }, [])
 
   const onSelected = (event) => {
-    const selectedValue = event.target.value
-    setCurrentValue(selectedValue)
     if (isObject) {
+      const selectedValue = event.target.value
       const item = values.find((each) =>
         findFn ? findFn(each, selectedValue) : each === selectedValue
       )
-      onChange(key, item)
+      // We need to bypass the hook's onChangeValidate because it expects an event or raw value
+      // and we want to pass the whole object.
+      // Actually, if we pass the object to onChangeValidate, it might work if the type is 'object'
+      onChangeValidate(item)
     } else {
       onChangeValidate(event)
     }
@@ -76,12 +64,12 @@ function Select(props) {
   }
 
   return (
-    <FormControl fullWidth error={!!error} {...form.otherProps}>
+    <FormControl fullWidth error={!valid} {...form.otherProps}>
       <InputLabel required={form.required} {...form.labelProps}>
         {form.title && getLocalizedString(form.title)}
       </InputLabel>
       <MuiSelect
-        value={currentValue}
+        value={value || (form && form.selectProps && form.selectProps.multiple ? [] : '')}
         placeholder={form.placeholder && getLocalizedString(form.placeholder)}
         disabled={form.readonly}
         onChange={onSelected}
@@ -97,4 +85,4 @@ function Select(props) {
   )
 }
 
-export default ComposedComponent(Select)
+export default Select

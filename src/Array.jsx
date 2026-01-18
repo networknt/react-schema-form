@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { styled } from '@mui/system';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -7,7 +7,7 @@ import DeleteIcon from '@mui/icons-material/Close';
 import cloneDeep from 'lodash/cloneDeep';
 import FormLabel from '@mui/material/FormLabel';
 import utils from './utils';
-import ComposedComponent from './ComposedComponent';
+import useSchemaField from './useSchemaField';
 
 const PREFIX = 'ArrayComponent';
 
@@ -41,81 +41,72 @@ const Root = styled('div')(({ theme }) => ({
   },
 }));
 
+let SEQUENCE = 1;
+const ITEM_ID = Symbol('_SCHEMAFORM_ITEM_ID');
 
-class ArrayComponent extends Component {
-  static assignItemId(item) {
-    let newItem = null;
-    if (item && typeof item === 'object' && Array.isArray(item)) {
-      newItem = [...item];
-    } else if (item && typeof item === 'object' && !item[ArrayComponent.ITEM_ID]) {
-      newItem = { ...item };
-    }
-
-    if (newItem) {
-      // define hidden property with internal id
-      Object.defineProperty(newItem, ArrayComponent.ITEM_ID, {
-        enumerable: false,
-        writable: true,
-      });
-      ArrayComponent.SEQUENCE += 1;
-      newItem[ArrayComponent.ITEM_ID] = ArrayComponent.SEQUENCE;
-      return newItem;
-    }
-
-    return item;
+const assignItemId = (item) => {
+  let newItem = null;
+  if (item && typeof item === 'object' && Array.isArray(item)) {
+    newItem = [...item];
+  } else if (item && typeof item === 'object' && !item[ITEM_ID]) {
+    newItem = { ...item };
   }
 
-  static setIndex = (index) => (form) => {
-    if (form.key) {
-      // todo fix mutable object
-      // eslint-disable-next-line no-param-reassign
-      form.key[form.key.indexOf('')] = index;
-    }
-  };
-
-  static copyWithIndex = (form, index) => {
-    const copy = cloneDeep(form);
-    copy.arrayIndex = index;
-    utils.traverseForm(copy, ArrayComponent.setIndex(index));
-    return copy;
-  };
-
-  SEQUENCE = 1;
-
-  constructor(props) {
-    super(props);
-    const { form, model } = this.props;
-    // we have the model here for the entire form, get the model for this array only
-    // and add to the state. if is empty, add an entry by calling onAppend directly.
-    this.state = {
-      model: utils.selectOrSet(form.key, model) || [],
-    };
+  if (newItem) {
+    // define hidden property with internal id
+    Object.defineProperty(newItem, ITEM_ID, {
+      enumerable: false,
+      writable: true,
+    });
+    SEQUENCE += 1;
+    newItem[ITEM_ID] = SEQUENCE;
+    return newItem;
   }
 
-  static getDerivedStateFromProps(props, state) {
-    const { form } = props;
-    const propsKey = form.key;
-    if (props.form && propsKey === state.formKey && props.model && props.model[propsKey] === state.model) {
-      return null; // nothing changed
-    }
-    const model = utils.selectOrSet(propsKey, props.model) || [];
-    return {
-      formKey: propsKey,
-      model: model.map(ArrayComponent.assignItemId),
-    };
-  }
+  return item;
+};
 
-  componentDidMount() {
-    const { form, model } = this.props;
+const setIndex = (index) => (form) => {
+  if (form.key) {
+    // eslint-disable-next-line no-param-reassign
+    form.key[form.key.indexOf('')] = index;
+  }
+};
+
+const copyWithIndex = (form, index) => {
+  const copy = cloneDeep(form);
+  copy.arrayIndex = index;
+  utils.traverseForm(copy, setIndex(index));
+  return copy;
+};
+
+const ArrayComponent = (props) => {
+  const {
+    form,
+    builder,
+    model,
+    mapper,
+    onChange,
+    setDefault,
+    options,
+    localization: { getLocalizedString },
+  } = props;
+
+  const { value, onChangeValidate } = useSchemaField(props);
+  const arrayModel = (value || []).map(assignItemId);
+
+  useEffect(() => {
+    setDefault(form.key, model, form, value);
+  }, []);
+
+  useEffect(() => {
     // Always start with one empty form unless configured otherwise.
-    if (form.startEmpty !== true && model.length === 0) {
-      this.onAppend();
+    if (form.startEmpty !== true && arrayModel.length === 0) {
+      onAppend();
     }
-  }
+  }, []);
 
-  onAppend = () => {
-    const { form, options, onChangeValidate } = this.props;
-    const { model } = this.state;
+  const onAppend = () => {
     let empty;
     if (form && form.schema && form.schema.items) {
       const { items } = form.schema;
@@ -127,8 +118,6 @@ class ArrayComponent extends Component {
           empty = typeof items.default !== 'undefined' ? items.default : empty;
 
           // Check for defaults further down in the schema.
-          // If the default instance sets the new array item to something falsy, i.e. null
-          // then there is no need to go further down.
           if (empty) {
             utils.traverseSchema(items, (prop, path) => {
               if (typeof prop.default !== 'undefined') {
@@ -147,82 +136,71 @@ class ArrayComponent extends Component {
         empty = items.default || empty;
       }
     }
-    const newModel = model;
-    ArrayComponent.assignItemId(empty);
+    const newModel = [...arrayModel];
+    assignItemId(empty);
     newModel.push(empty);
-    this.setState({
-      model: newModel,
-    });
-    onChangeValidate(model);
+    onChangeValidate(null, newModel);
   };
 
-  onDelete = (index) => () => {
-    const { model } = this.state;
-    const { onChangeValidate } = this.props;
-    const newModel = model;
+  const onDelete = (index) => () => {
+    const newModel = [...arrayModel];
     newModel.splice(index, 1);
-    this.setState({
-      model: newModel,
-    });
-    onChangeValidate(model);
+    onChangeValidate(null, newModel);
   };
 
-  getAddButton = () => {
-    const { form } = this.props;
-
+  const getAddButton = () => {
     const AddButton =
       form.AddButton ||
-      ((props) => (
-        <Button className={classes.addButton} variant="contained" color="primary" {...props} />
+      ((buttonProps) => (
+        <Button
+          className={classes.addButton}
+          variant="contained"
+          color="primary"
+          {...buttonProps}
+        />
       ));
-    return <AddButton onClick={this.onAppend}>{form.add || 'Add'}</AddButton>;
+    return (
+      <AddButton onClick={onAppend}>{form.add || 'Add'}</AddButton>
+    );
   };
 
-  static ITEM_ID = Symbol('_SCHEMAFORM_ITEM_ID');
-
-  render() {
-    const {
-      form,
-      builder,
-      model,
-      mapper,
-      onChange,
-      localization: { getLocalizedString },
-    } = this.props;
-
-    const { model: stateModel } = this.state;
-    const arrays = [];
-
-    for (let i = 0; i < stateModel.length; i += 1) {
-      const item = stateModel[i];
-      const forms = form.items.map((eachForm, index) => {
-        const copy = ArrayComponent.copyWithIndex(eachForm, i);
-        return builder(copy, model, index, mapper, onChange, builder, {
-          arrayIndex: i,
-        });
+  const arrays = [];
+  for (let i = 0; i < arrayModel.length; i += 1) {
+    const item = arrayModel[i];
+    const forms = form.items.map((eachForm, index) => {
+      const copy = copyWithIndex(eachForm, i);
+      return builder(copy, model, index, mapper, onChange, builder, {
+        arrayIndex: i,
       });
-      arrays.push(
-        <Card className={classes.arrayItem} key={(item && item[ArrayComponent.ITEM_ID]) || i}>
-          <div className={classes.elementsContainer}>{forms}</div>
-          <IconButton onClick={this.onDelete(i)} className={classes.deleteItemButton} size="large">
-            <DeleteIcon fontSize="small" />
-          </IconButton>
-        </Card>
-      );
-    }
-    return (
-      <Root>
-        <div style={{ display: 'flex' }}>
-          <FormLabel required={form.required} className={classes.title}>
-            {form.title && getLocalizedString(form.title)}
-          </FormLabel>
-          {this.getAddButton()}
-        </div>
-        <div>{arrays}</div>
-      </Root>
+    });
+    arrays.push(
+      <Card
+        className={classes.arrayItem}
+        key={(item && item[ITEM_ID]) || i}
+      >
+        <div className={classes.elementsContainer}>{forms}</div>
+        <IconButton
+          onClick={onDelete(i)}
+          className={classes.deleteItemButton}
+          size="large"
+        >
+          <DeleteIcon fontSize="small" />
+        </IconButton>
+      </Card>
     );
   }
-}
 
-export default ComposedComponent(ArrayComponent);
+  return (
+    <Root>
+      <div style={{ display: 'flex' }}>
+        <FormLabel required={form.required} className={classes.title}>
+          {form.title && getLocalizedString(form.title)}
+        </FormLabel>
+        {getAddButton()}
+      </div>
+      <div>{arrays}</div>
+    </Root>
+  );
+};
 
+export default ArrayComponent;

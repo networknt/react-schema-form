@@ -1,21 +1,17 @@
-/**
- * Created by steve on 20/09/15.
- */
 import React from 'react'
 import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import ComposedComponent from './ComposedComponent'
+import useSchemaField from './useSchemaField'
 
 function FormCheckbox(props) {
   const {
     model,
     form,
-    value,
     setDefault,
-    localization: { getLocalizedString },
-    onChangeValidate
+    localization: { getLocalizedString }
   } = props
+  const { value, onChangeValidate } = useSchemaField(props)
   const { key } = form
   setDefault(key, model, form, value)
   return (
@@ -38,4 +34,4 @@ function FormCheckbox(props) {
   )
 }
 
-export default ComposedComponent(FormCheckbox)
+export default FormCheckbox

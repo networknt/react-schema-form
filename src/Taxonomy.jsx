@@ -13,18 +13,19 @@ import FolderIcon from '@mui/icons-material/Folder'
 import FolderOpenIcon from '@mui/icons-material/FolderOpen'
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
 import Cookies from 'universal-cookie'
-import ComposedComponent from './ComposedComponent'
+import useSchemaField from './useSchemaField'
 
 function Taxonomy(props) {
-  const { model, form, value, error, setDefault, onChangeValidate } = props
+  const { model, form, setDefault, localization: { getLocalizedString } } = props
+  const { value, valid, error, onChangeValidate } = useSchemaField(props)
   const { key, title, action } = form
-  setDefault(key, model, form, value)
-  const [taxonomies, setTaxonomies] = useState(value || []) // an array of values
+
+  useEffect(() => {
+    setDefault(key, model, form, value)
+  }, [])
+
   const [expanded, setExpended] = useState([])
   const [terms, setTerms] = useState([]) // the entire category
-  useEffect(() => {
-    onChangeValidate(taxonomies)
-  }, [taxonomies])
 
   const fetchCateogry = (url) => {
     const cookies = new Cookies()
@@ -49,46 +50,49 @@ function Taxonomy(props) {
   }
 
   useEffect(() => {
-    const { url } = action
-    fetchCateogry(url)
+    if (action && action.url) {
+      fetchCateogry(action.url)
+    }
   }, [])
 
   const icons = {
-    check: <CheckBoxIcon className='rct-icon rct-icon-check' />,
-    uncheck: <CheckBoxOutlineBlankIcon className='rct-icon rct-icon-uncheck' />,
+    check: <CheckBoxIcon className="rct-icon rct-icon-check" />,
+    uncheck: <CheckBoxOutlineBlankIcon className="rct-icon rct-icon-uncheck" />,
     halfCheck: (
-      <IndeterminateCheckBoxIcon className='rct-icon rct-icon-half-check' />
+      <IndeterminateCheckBoxIcon className="rct-icon rct-icon-half-check" />
     ),
     expandClose: (
-      <ChevronRightIcon className='rct-icon rct-icon-expand-close' />
+      <ChevronRightIcon className="rct-icon rct-icon-expand-close" />
     ),
     expandOpen: (
-      <KeyboardArrowDownIcon className='rct-icon rct-icon-expand-open' />
+      <KeyboardArrowDownIcon className="rct-icon rct-icon-expand-open" />
     ),
-    expandAll: <AddBoxIcon className='rct-icon rct-icon-expand-all' />,
+    expandAll: <AddBoxIcon className="rct-icon rct-icon-expand-all" />,
     collapseAll: (
-      <IndeterminateCheckBoxIcon className='rct-icon rct-icon-collapse-all' />
+      <IndeterminateCheckBoxIcon className="rct-icon rct-icon-collapse-all" />
     ),
-    parentClose: <FolderIcon className='rct-icon rct-icon-parent-close' />,
-    parentOpen: <FolderOpenIcon className='rct-icon rct-icon-parent-open' />,
-    leaf: <InsertDriveFileIcon className='rct-icon rct-icon-leaf-close' />
+    parentClose: <FolderIcon className="rct-icon rct-icon-parent-close" />,
+    parentOpen: <FolderOpenIcon className="rct-icon rct-icon-parent-open" />,
+    leaf: <InsertDriveFileIcon className="rct-icon rct-icon-leaf-close" />
   }
 
   return (
     <React.Fragment>
-      <FormLabel required={form.required}>{title}</FormLabel>
+      <FormLabel required={form.required}>
+        {title && getLocalizedString(title)}
+      </FormLabel>
       <CheckboxTree
         nodes={terms}
-        checked={taxonomies}
+        checked={value || []}
         expanded={expanded}
-        onCheck={(checked) => setTaxonomies(checked)}
+        onCheck={(checked) => onChangeValidate(null, checked)}
         onExpand={(expanded) => setExpended(expanded)}
         icons={icons}
         noCascade
       />
-      {error ? <FormHelperText error>{error}</FormHelperText> : null}
+      {!valid ? <FormHelperText error>{error}</FormHelperText> : null}
     </React.Fragment>
   )
 }
 
-export default ComposedComponent(Taxonomy)
+export default Taxonomy

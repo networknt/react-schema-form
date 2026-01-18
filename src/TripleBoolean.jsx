@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Card,
   Button,
@@ -7,48 +7,31 @@ import {
   FormGroup
 } from '@mui/material'
 import FormLabel from '@mui/material/FormLabel'
-import ComposedComponent from './ComposedComponent'
+import useSchemaField from './useSchemaField'
 
+const divStyle = {
+  padding: '20px'
+}
 
-/**
- * There is no default number picker as part of Material-UI.
- * Instead, use a TextField and validate.
- */
-class TripleBoolean extends Component {
-  static getDerivedStateFromProps(nextProps) {
-    return {
-      yesChecked: nextProps.value === 'yes',
-      noChecked: nextProps.value === 'no'
-    }
-  }
+const TripleBoolean = (props) => {
+  const {
+    form: { title, yesLabel, noLabel, clearButtonLabel, required, key },
+    model,
+    setDefault,
+    localization: { getLocalizedString }
+  } = props
+  const { value, onChangeValidate } = useSchemaField(props)
 
-  divStyle = {
-    padding: '20px'
-  }
+  useEffect(() => {
+    setDefault(key, model, props.form, value)
+  }, [])
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      yesChecked: false,
-      noChecked: false
-    }
+  const yesChecked = value === 'yes'
+  const noChecked = value === 'no'
 
-    const { model, form, value, setDefault } = this.props
-    const { key } = form
-
-    setDefault(key, model, form, value)
-  }
-
-  displaySwitch() {
-    const {
-      form: { title, yesLabel, noLabel, clearButtonLabel, required },
-      onChangeValidate,
-      value,
-      localization: { getLocalizedString }
-    } = this.props
-    const { yesChecked, noChecked } = this.state
-    return (
-      <div style={this.divStyle}>
+  return (
+    <Card>
+      <div style={divStyle}>
         <FormLabel required={required}>
           {title && getLocalizedString(title)}
         </FormLabel>
@@ -79,9 +62,9 @@ class TripleBoolean extends Component {
         </FormGroup>
         {value === 'yes' || value === 'no' ? (
           <Button
-            id='temp'
-            variant='text'
-            color='primary'
+            id="temp"
+            variant="text"
+            color="primary"
             onClick={(e) => onChangeValidate(e, 'unanswered')}
           >
             {clearButtonLabel
@@ -92,12 +75,8 @@ class TripleBoolean extends Component {
           ''
         )}
       </div>
-    )
-  }
-
-  render() {
-    return <Card>{this.displaySwitch()}</Card>
-  }
+    </Card>
+  )
 }
 
-export default ComposedComponent(TripleBoolean)
+export default TripleBoolean

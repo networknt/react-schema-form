@@ -1,11 +1,6 @@
-// @flow
-/**
- * Created by steve on 15/09/15.
- */
 import React from 'react'
-import ComposedComponent from './ComposedComponent'
 import Text from './Text'
-
+import useSchemaField from './useSchemaField'
 
 /**
  * There is no default number picker as part of Material-UI.
@@ -14,10 +9,10 @@ import Text from './Text'
 const NumberComponent = (props) => {
   const {
     form,
-    value,
-    localization: { getLocalizedNumber },
-    onChangeValidate
+    localization: { getLocalizedNumber }
   } = props
+  const { value, valid, error, onChangeValidate } = useSchemaField(props)
+
   let inputValue = value || value === 0 ? value : ''
   if (form.useLocalizer) inputValue = getLocalizedNumber(inputValue)
 
@@ -43,9 +38,11 @@ const NumberComponent = (props) => {
       {...props}
       form={{ ...form, type: 'string' }}
       value={inputValue}
-      otherProps={{ onChange }}
+      valid={valid}
+      error={error}
+      onChangeValidate={onChange}
     />
   )
 }
 
-export default ComposedComponent(NumberComponent)
+export default NumberComponent

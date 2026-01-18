@@ -1,7 +1,8 @@
-/**
- * Created by steve on 22/12/15.
- */
-import ComposedComponent from './ComposedComponent'
+import React from 'react'
 import NativeDateField from './NativeDateField'
 
-export default ComposedComponent(NativeDateField, { type: 'date' })
+const DateComponent = (props) => {
+    return <NativeDateField type="date" {...props} />
+}
+
+export default DateComponent

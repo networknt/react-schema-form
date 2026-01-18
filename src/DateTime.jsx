@@ -1,4 +1,8 @@
-import ComposedComponent from './ComposedComponent'
+import React from 'react'
 import NativeDateField from './NativeDateField'
 
-export default ComposedComponent(NativeDateField, { type: 'datetime-local' })
+const DateTimeComponent = (props) => {
+    return <NativeDateField type="datetime-local" {...props} />
+}
+
+export default DateTimeComponent

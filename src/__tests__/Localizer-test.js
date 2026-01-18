@@ -6,7 +6,7 @@ import SchemaForm from '../SchemaForm'
 
 configure({ adapter: new Adapter() })
 
-jest.dontMock('../ComposedComponent')
+jest.dontMock('../utils')
 jest.dontMock('../utils')
 jest.dontMock('lodash')
 

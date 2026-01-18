@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Cookies from 'universal-cookie';
 import ObjectPath from 'object-path';
-import ComposedComponent from './ComposedComponent';
+import useSchemaField from './useSchemaField';
 
 String.prototype.format = function () {
   var formatted = this;
@@ -17,9 +17,6 @@ String.prototype.format = function () {
 
 function DynaSelect(props) {
   const {
-    value,
-    error,
-    onChangeValidate,
     form: {
       schema: { type },
       action,
@@ -28,11 +25,18 @@ function DynaSelect(props) {
       multiple,
       disabled,
       options: propOptions,
+      key
     },
     model,
+    setDefault
   } = props;
-  const emptyValue = type === 'array' ? [] : '';
-  const [currentValue, setCurrentValue] = useState(value || emptyValue);
+
+  const { value, valid, error, onChangeValidate } = useSchemaField(props);
+
+  useEffect(() => {
+    setDefault(key, model, props.form, value)
+  }, [])
+
   const [menuItems, setMenuItems] = useState([]);
   const { url, params } = action || {};
   const paramValues =
@@ -47,47 +51,31 @@ function DynaSelect(props) {
         : ''
       : url;
     if (fetchUrl) {
-      // console.log("fetchUrl is called", fetchUrl);
       fetchFromUrl(fetchUrl);
     }
   }, paramValues);
 
-  useEffect(() => {
-    if (type === 'array') {
-      // console.log('onChangeValidate is called for array type', currentValue);
-      onChangeValidate(currentValue);
-    } else {
-      // console.log('onChangeValidate is called for string type', currentValue);
-      // don't set the value if the currentValue is null
-      if (currentValue !== null) {
-        onChangeValidate({ target: { value: currentValue } });
-      }
-    }
-  }, [currentValue]);
-
-  const onChange = (event, value) => {
+  const onChange = (event, newValue) => {
+    let resultValue = null;
     if (type !== 'array') {
       if (multiple) {
-        // concat all the ids as a string
-        const newValue = value.map((v) => v.id).join(',');
-        setCurrentValue(newValue);
+        resultValue = newValue.map((v) => v.id).join(',');
       } else {
-        setCurrentValue(value.id);
+        resultValue = newValue ? newValue.id : '';
       }
     } else {
-      // this is an array of strings.
       if (multiple) {
-        setCurrentValue(value.map((v) => v.id));
+        resultValue = newValue.map((v) => v.id);
       } else {
-        setCurrentValue([value.id]);
+        resultValue = newValue ? [newValue.id] : [];
       }
     }
+    onChangeValidate(null, resultValue);
   };
 
   const fetchFromUrl = (newUrl) => {
     // Check if newUrl contains '=undefined'
     if (newUrl.includes('=undefined') || newUrl.includes('=&') || newUrl.endsWith('=')) {
-      // console.warn('fetchFromUrl: incomplete url, fetch aborted:', newUrl);
       return;
     }
 
@@ -112,43 +100,37 @@ function DynaSelect(props) {
       });
   };
 
-  let err = '';
-  if (error) {
-    err = <div style={{ color: 'red' }}>{error}</div>;
-  }
-  let v = undefined;
   const options = (propOptions && propOptions.length > 0) ? propOptions : menuItems;
-  // console.log("value = ", value);
+  let v = undefined;
+
   if (multiple) {
-    // multiple select
     if (Array.isArray(value)) {
       v = value ? options.filter(option => value.includes(option.id)) : [];
     } else {
-      v = value ? options.filter(option => value.split(',').includes(option.id)) : [];
+      v = value ? options.filter(option => (value || '').split(',').includes(option.id)) : [];
     }
   } else {
-    // single select
     if (Array.isArray(value)) {
       v = value.length === 1 ? options.find((option) => option.id === value[0]) : null;
     } else {
       v = value ? options.find(option => option.id === value) : null;
     }
   }
-  // console.log("options = ", options, "menuItems = ", menuItems);		
+
   return (
     <div>
       <Autocomplete
         multiple={multiple}
         disabled={disabled}
         getOptionLabel={(option) => option.label || ''}
-        value={v || (multiple ? [] : '')}
+        value={v || (multiple ? [] : null)}
         onChange={onChange}
         options={options}
         renderInput={(params) => <TextField {...params} label={required ? title + ' *' : title} />}
       />
-      {err}
+      {!valid ? <div style={{ color: 'red' }}>{error}</div> : null}
     </div>
   )
 }
 
-export default ComposedComponent(DynaSelect)
+export default DynaSelect;

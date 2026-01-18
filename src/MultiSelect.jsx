@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { styled } from '@mui/system';
 import MenuItem from '@mui/material/MenuItem';
 import MuiSelect from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
-import ComposedComponent from './ComposedComponent';
+import useSchemaField from './useSchemaField';
 import utils from './utils';
 
 const PREFIX = 'MultiSelect';
@@ -49,84 +49,64 @@ const MenuProps = {
   },
 };
 
+const MultiSelect = (props) => {
+  const {
+    form,
+    localization: { getLocalizedString },
+  } = props;
+  const { value, onChangeValidate } = useSchemaField(props);
+  const currentValue = value || [];
 
-class MultiSelect extends Component {
-  constructor(props) {
-    super(props);
-    const { model, form } = this.props;
-    this.state = {
-      currentValue: utils.getValueFromModel(model, form.key) || [],
-    };
-  }
-
-  static getDerivedStateFromProps(props) {
-    const { model, form } = props;
-    if (model && form.key) {
-      return {
-        currentValue: utils.getValueFromModel(model, form.key) || [],
-      };
-    }
-    return null;
-  }
-
-  onSelected = (event) => {
-    const { onChangeValidate } = this.props;
-    const currentValue = event.target.value;
-    this.setState({ currentValue });
-    onChangeValidate(currentValue);
+  const onSelected = (event) => {
+    onChangeValidate(event.target.value);
   };
 
-  render() {
-    const {
-      form,
-      localization: { getLocalizedString },
-    } = this.props;
-    const { currentValue } = this.state;
-    const getTitle = utils.getTitleByValue.bind(this, form.titleMap);
-    const menuItems = form.titleMap.map((item) => (
-      <MenuItem
-        key={item.value}
-        value={item.value}
-        className={
-          currentValue.indexOf(item.value) === -1
-            ? classes.menuItem
-            : classes.selectedMenuItem
-        }
-      >
-        {item.name && getLocalizedString(item.name)}
-      </MenuItem>
-    ));
-    return (
-      <Root className={classes.root}>
-        <FormControl fullWidth {...form.otherProps}>
-          <InputLabel required={form.required}>
-            {form.title && getLocalizedString(form.title)}
-          </InputLabel>
-          <MuiSelect
-            multiple
-            value={currentValue || ''}
-            placeholder={form.placeholder && getLocalizedString(form.placeholder)}
-            disabled={form.readonly}
-            onChange={this.onSelected}
-            MenuProps={MenuProps}
-            renderValue={(selected) => (
-              <div className={classes.chips}>
-                {selected.map((value) => (
-                  <Chip
-                    key={value}
-                    label={getTitle(value) && getLocalizedString(getTitle(value))}
-                    className={classes.chip}
-                  />
-                ))}
-              </div>
-            )}
-          >
-            {menuItems}
-          </MuiSelect>
-        </FormControl>
-      </Root>
-    );
-  }
-}
+  const getTitle = utils.getTitleByValue.bind(null, form.titleMap);
 
-export default ComposedComponent(MultiSelect);
+  const menuItems = form.titleMap.map((item) => (
+    <MenuItem
+      key={item.value}
+      value={item.value}
+      className={
+        currentValue.indexOf(item.value) === -1
+          ? classes.menuItem
+          : classes.selectedMenuItem
+      }
+    >
+      {item.name && getLocalizedString(item.name)}
+    </MenuItem>
+  ));
+
+  return (
+    <Root className={classes.root}>
+      <FormControl fullWidth {...form.otherProps}>
+        <InputLabel required={form.required}>
+          {form.title && getLocalizedString(form.title)}
+        </InputLabel>
+        <MuiSelect
+          multiple
+          value={currentValue}
+          placeholder={form.placeholder && getLocalizedString(form.placeholder)}
+          disabled={form.readonly}
+          onChange={onSelected}
+          MenuProps={MenuProps}
+          renderValue={(selected) => (
+            <div className={classes.chips}>
+              {selected.map((val) => (
+                <Chip
+                  key={val}
+                  label={getTitle(val) && getLocalizedString(getTitle(val))}
+                  className={classes.chip}
+                />
+              ))}
+            </div>
+          )}
+        >
+          {menuItems}
+        </MuiSelect>
+      </FormControl>
+    </Root>
+  );
+};
+
+export default MultiSelect;
