@@ -1,7 +1,7 @@
 {
   "name": "react-schema-form",
   "private": false,
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "React JSON Schema Form",
   "keywords": [
     "json schema",
@@ -29,7 +29,7 @@
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "classnames": "^2.5.1",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "object-path": "^0.11.8",
     "objectpath": "^2.0.0",
     "react-checkbox-tree": "^1.8.0",
