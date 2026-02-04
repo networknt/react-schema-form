@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.16 - 2026-02-03
+### Added
+
+### Changed
+- fixes #276 upgrade lodash to 4.17.23
+
+
 ## 1.0.15 - 2026-01-18
 ### Added
 
