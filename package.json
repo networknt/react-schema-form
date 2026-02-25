@@ -26,7 +26,7 @@
     "deploy": "gh-pages -d example/dist"
   },
   "dependencies": {
-    "ajv": "^8.17.1",
+    "ajv": "^8.18.0",
     "ajv-formats": "^3.0.1",
     "classnames": "^2.5.1",
     "lodash": "^4.17.23",
