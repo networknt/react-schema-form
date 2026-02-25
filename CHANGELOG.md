@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.17 - 2026-02-25
+### Added
+
+### Changed
+- fixes #277 upgrade ajv to 8.18.0 to resolve a security vulnerability
+
+
 ## 1.0.16 - 2026-02-03
 ### Added
 
