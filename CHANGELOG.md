@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.18 - 2026-02-26
+### Added
+
+### Changed
+- fixes #278 The calendar button is missing for timestamp field
+
 ## 1.0.17 - 2026-02-25
 ### Added
 
