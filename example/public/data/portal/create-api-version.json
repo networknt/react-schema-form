@@ -1,0 +1,83 @@
+{
+  "schema": {
+    "type": "object",
+    "required": [
+      "hostId",
+      "apiId",
+      "apiVersion",
+      "apiType",
+      "serviceId"
+    ],
+    "properties": {
+      "hostId": {
+        "title": "Host Id",
+        "type": "string",
+        "readonly": true
+      },
+      "apiId": {
+        "title": "Api Id",
+        "type": "string"
+      },
+      "apiVersion": {
+        "title": "Api Version",
+        "type": "string"
+      },
+      "apiType": {
+        "title": "Api Type",
+        "type": "string"
+      },
+      "serviceId": {
+        "title": "Service Id",
+        "type": "string"
+      },
+      "apiVersionDesc": {
+        "title": "Api Version Desc",
+        "type": "string"
+      },
+      "specLink": {
+        "title": "Spec Link",
+        "type": "string"
+      },
+      "spec": {
+        "title": "Spec",
+        "type": "string"
+      },
+      "transportConfig": {
+        "title": "Transport Config",
+        "default": "{\"transport\": \"streamable http\", \"url\": \"http://example.com:8080/mcp\"}",
+        "type": "string"
+      }
+    }
+  },
+  "form": [
+    "hostId",
+    "apiId",
+    "apiVersion",
+    {
+      "key": "apiType",
+      "type": "dynaselect",
+      "multiple": false,
+      "action": {
+        "url": "https://localhost/r/data?name=api_type"
+      }
+    },
+    "serviceId",
+    {
+      "key": "apiVersionDesc",
+      "type": "textarea",
+      "rows": 5
+    },
+    "specLink",
+    {
+      "key": "spec",
+      "type": "textarea",
+      "rows": 5
+    },
+    {
+      "key": "transportConfig",
+      "condition": "model.apiType === 'mcp'",
+      "type": "textarea",
+      "rows": 5
+    }
+  ]
+}

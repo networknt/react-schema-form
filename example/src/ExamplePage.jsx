@@ -70,7 +70,9 @@ class ExamplePage extends React.Component {
                 {label : "Portal Category", value: "data/portal/category.json"},
                 {label : "MapRoot Restaurant", value: "data/maproot/restaurant.json"},
                 {label : "MapRoot Payment", value: "data/maproot/payment.json"},
-                {label : "MapRoot Pickup", value: "data/maproot/pickup.json"}
+                {label : "MapRoot Pickup", value: "data/maproot/pickup.json"},
+                {label : "Create API Version", value: "data/portal/create-api-version.json"},
+
             ],
             validationResult: {},
             schema: {},
