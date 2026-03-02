@@ -23,7 +23,7 @@ const examples = {
 class ExamplePage extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.tempModel = {
             comments: [
                 { name: "1" },
@@ -53,6 +53,7 @@ class ExamplePage extends React.Component {
                 {label : "Readonly", value: "data/readonly.json"},
                 {label : "Array", value: "data/array.json"},
                 {label : "Object", value: "data/object.json"},
+                { label: "File", value: "data/file.json" },
                 {label : "Select", value: "selectLabel"},
                 {label : "ArraySelect", value: "data/arrayselect.json"},
                 {label : "htmlClass", value: "data/htmlclass.json"},
@@ -72,7 +73,6 @@ class ExamplePage extends React.Component {
                 {label : "MapRoot Payment", value: "data/maproot/payment.json"},
                 {label : "MapRoot Pickup", value: "data/maproot/pickup.json"},
                 {label : "Create API Version", value: "data/portal/create-api-version.json"},
-
             ],
             validationResult: {},
             schema: {},
@@ -89,8 +89,8 @@ class ExamplePage extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         // Prevent unnecessary re-renders
-        if (prevState.model === this.state.model && 
-            prevState.form === this.state.form && 
+        if (prevState.model === this.state.model &&
+            prevState.form === this.state.form &&
             prevState.schema === this.state.schema) {
             return;
         }
@@ -135,7 +135,7 @@ class ExamplePage extends React.Component {
             } else {
                 const response = await fetch(value);
                 const { form, schema, model } = await response.json();
-                
+
                 // Update state only if component is still mounted
                 if (this._isMounted) {
                     this.setState({
@@ -152,7 +152,7 @@ class ExamplePage extends React.Component {
             }
         } catch (error) {
             console.error('Error loading form data:', error);
-            this.setState({ 
+            this.setState({
                 isLoading: false,
                 error: 'Failed to load form data'
             });
@@ -207,7 +207,7 @@ class ExamplePage extends React.Component {
 
     renderSchemaForm = () => {
         const { schema, form, model, localization, showErrors } = this.state;
-        
+
         if (!form || form.length === 0) return null;
 
         return (
@@ -300,21 +300,21 @@ class ExamplePage extends React.Component {
                             </Select>
                         </FormControl>
                         <h3>Form</h3>
-                        <CodeMirror 
-                            value={formJson} 
-                            height="300px" 
-                            width="800px" 
-                            theme={githubLight} 
-                            extensions={[json()]} 
+                        <CodeMirror
+                            value={formJson}
+                            height="300px"
+                            width="800px"
+                            theme={githubLight}
+                            extensions={[json()]}
                             onChange={this.onFormChange}
                         />
                         <h3>Schema</h3>
-                        <CodeMirror 
-                            value={schemaJson} 
-                            height="300px" 
-                            width="800px" 
-                            theme={githubLight} 
-                            extensions={[json()]} 
+                        <CodeMirror
+                            value={schemaJson}
+                            height="300px"
+                            width="800px"
+                            theme={githubLight}
+                            extensions={[json()]}
                             onChange={this.onSchemaChange}
                         />
                     </div>
