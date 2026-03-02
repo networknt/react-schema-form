@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.19 - 2026-03-02
+### Added
+
+### Changed
+- fixes #282 Add file upload component with base64 encoding
+
 ## 1.0.18 - 2026-02-26
 ### Added
 
