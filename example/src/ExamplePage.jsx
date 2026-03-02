@@ -23,7 +23,7 @@ const examples = {
 class ExamplePage extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.tempModel = {
             comments: [
                 { name: "1" },
@@ -32,45 +32,46 @@ class ExamplePage extends React.Component {
         };
 
         this.state = {
-            tests : [
-                {label : "Simple", value: "data/simple.json"},
-                {label : "Yaml Rule", value: "data/rule.json"},
-                {label : "Static Autocomplete", value: "data/static-autocomplete.json"},
-                {label : "Conditional Dynaselect", value: "data/conditional-dynaselect.json"},    
-                {label : "Triple Boolean", value: "data/noanswer.json"},
-                {label : "Simple Array", value: "data/simplearray.json"},
-                {label : "Basic JSON Schema Type", value: "data/types.json"},
-                {label : "Checkbox", value: "data/checkbox.json"},
-                {label : "Basic Radios", value: "data/radio.json"},
-                {label : "Condition", value: "data/condition.json"},
-                {label : "Help", value: "data/help.json"},
-                {label : "Kitchen Sink", value: "data/kitchenSink.json"},
-                {label : "Login", value: "data/login.json"},
-                {label : "Date", value: "data/date.json"},
-                {label : "Number", value: "data/number.json"},
-                {label : "Timestamp", value: "data/timestamp.json"},
-                {label : "Subjects", value: "data/subjects.json"},
-                {label : "Readonly", value: "data/readonly.json"},
-                {label : "Array", value: "data/array.json"},
-                {label : "Object", value: "data/object.json"},
-                {label : "Select", value: "selectLabel"},
-                {label : "ArraySelect", value: "data/arrayselect.json"},
-                {label : "htmlClass", value: "data/htmlclass.json"},
-                {label : "Tuples", value: "data/tuple.json"},
-                {label : "Advanced Tuples", value: "data/tuple-advanced.json"},
-                {label : "Conditional Array", value: "data/conditionalarray.json"},
-                {label : "Markdown", value: "data/markdown.json"},
-                {label : "Taxonomy", value: "data/taxonomy.json"},
-                {label : "Test - Date Capture", value: "data/tests/datecapture.json"},
-                {label : "Test - Localizer", value: "localizer"},
-                {label : "Portal Config", value: "data/portal/config-detail.json"},
-                {label : "Portal Quiz", value: "data/portal/quiz.json"},
-                {label : "Schema Form", value: "data/portal/schema-form.json"},
-                {label : "Logger Config", value: "data/portal/logger-config.json"},
-                {label : "Portal Category", value: "data/portal/category.json"},
-                {label : "MapRoot Restaurant", value: "data/maproot/restaurant.json"},
-                {label : "MapRoot Payment", value: "data/maproot/payment.json"},
-                {label : "MapRoot Pickup", value: "data/maproot/pickup.json"}
+            tests: [
+                { label: "Simple", value: "data/simple.json" },
+                { label: "Yaml Rule", value: "data/rule.json" },
+                { label: "Static Autocomplete", value: "data/static-autocomplete.json" },
+                { label: "Conditional Dynaselect", value: "data/conditional-dynaselect.json" },
+                { label: "Triple Boolean", value: "data/noanswer.json" },
+                { label: "Simple Array", value: "data/simplearray.json" },
+                { label: "Basic JSON Schema Type", value: "data/types.json" },
+                { label: "Checkbox", value: "data/checkbox.json" },
+                { label: "Basic Radios", value: "data/radio.json" },
+                { label: "Condition", value: "data/condition.json" },
+                { label: "Help", value: "data/help.json" },
+                { label: "Kitchen Sink", value: "data/kitchenSink.json" },
+                { label: "Login", value: "data/login.json" },
+                { label: "Date", value: "data/date.json" },
+                { label: "Number", value: "data/number.json" },
+                { label: "Timestamp", value: "data/timestamp.json" },
+                { label: "Subjects", value: "data/subjects.json" },
+                { label: "Readonly", value: "data/readonly.json" },
+                { label: "Array", value: "data/array.json" },
+                { label: "Object", value: "data/object.json" },
+                { label: "File", value: "data/file.json" },
+                { label: "Select", value: "selectLabel" },
+                { label: "ArraySelect", value: "data/arrayselect.json" },
+                { label: "htmlClass", value: "data/htmlclass.json" },
+                { label: "Tuples", value: "data/tuple.json" },
+                { label: "Advanced Tuples", value: "data/tuple-advanced.json" },
+                { label: "Conditional Array", value: "data/conditionalarray.json" },
+                { label: "Markdown", value: "data/markdown.json" },
+                { label: "Taxonomy", value: "data/taxonomy.json" },
+                { label: "Test - Date Capture", value: "data/tests/datecapture.json" },
+                { label: "Test - Localizer", value: "localizer" },
+                { label: "Portal Config", value: "data/portal/config-detail.json" },
+                { label: "Portal Quiz", value: "data/portal/quiz.json" },
+                { label: "Schema Form", value: "data/portal/schema-form.json" },
+                { label: "Logger Config", value: "data/portal/logger-config.json" },
+                { label: "Portal Category", value: "data/portal/category.json" },
+                { label: "MapRoot Restaurant", value: "data/maproot/restaurant.json" },
+                { label: "MapRoot Payment", value: "data/maproot/payment.json" },
+                { label: "MapRoot Pickup", value: "data/maproot/pickup.json" }
             ],
             validationResult: {},
             schema: {},
@@ -87,8 +88,8 @@ class ExamplePage extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         // Prevent unnecessary re-renders
-        if (prevState.model === this.state.model && 
-            prevState.form === this.state.form && 
+        if (prevState.model === this.state.model &&
+            prevState.form === this.state.form &&
             prevState.schema === this.state.schema) {
             return;
         }
@@ -133,7 +134,7 @@ class ExamplePage extends React.Component {
             } else {
                 const response = await fetch(value);
                 const { form, schema, model } = await response.json();
-                
+
                 // Update state only if component is still mounted
                 if (this._isMounted) {
                     this.setState({
@@ -150,7 +151,7 @@ class ExamplePage extends React.Component {
             }
         } catch (error) {
             console.error('Error loading form data:', error);
-            this.setState({ 
+            this.setState({
                 isLoading: false,
                 error: 'Failed to load form data'
             });
@@ -205,7 +206,7 @@ class ExamplePage extends React.Component {
 
     renderSchemaForm = () => {
         const { schema, form, model, localization, showErrors } = this.state;
-        
+
         if (!form || form.length === 0) return null;
 
         return (
@@ -298,21 +299,21 @@ class ExamplePage extends React.Component {
                             </Select>
                         </FormControl>
                         <h3>Form</h3>
-                        <CodeMirror 
-                            value={formJson} 
-                            height="300px" 
-                            width="800px" 
-                            theme={githubLight} 
-                            extensions={[json()]} 
+                        <CodeMirror
+                            value={formJson}
+                            height="300px"
+                            width="800px"
+                            theme={githubLight}
+                            extensions={[json()]}
                             onChange={this.onFormChange}
                         />
                         <h3>Schema</h3>
-                        <CodeMirror 
-                            value={schemaJson} 
-                            height="300px" 
-                            width="800px" 
-                            theme={githubLight} 
-                            extensions={[json()]} 
+                        <CodeMirror
+                            value={schemaJson}
+                            height="300px"
+                            width="800px"
+                            theme={githubLight}
+                            extensions={[json()]}
                             onChange={this.onSchemaChange}
                         />
                     </div>
