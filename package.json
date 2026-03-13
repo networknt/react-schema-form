@@ -1,5 +1,8 @@
 {
   "name": "react-schema-form",
+  "resolutions": {
+    "vite": "^7.3.0"
+  },
   "private": false,
   "version": "1.0.19",
   "description": "React JSON Schema Form",
