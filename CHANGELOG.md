@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.20 - 2026-03-13
+### Added
+
+### Changed
+- fixes #285 remove @mui/styles after upgrading to mui 7
+
 ## 1.0.19 - 2026-03-02
 ### Added
 
