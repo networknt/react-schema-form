@@ -3,7 +3,6 @@
   "resolutions": {
     "vite": "^7.3.0"
   },
-  "private": false,
   "version": "1.0.20",
   "description": "React JSON Schema Form",
   "keywords": [
@@ -104,5 +103,6 @@
       "import": "./dist/react-schema-form.js",
       "require": "./dist/react-schema-form.umd.cjs"
     }
-  }
+  },
+  "packageManager": "yarn@4.13.0"
 }
