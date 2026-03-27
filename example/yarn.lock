@@ -2355,12 +2355,12 @@ __metadata:
   linkType: hard
 
 "brace-expansion@npm:^1.1.7":
-  version: 1.1.12
-  resolution: "brace-expansion@npm:1.1.12"
+  version: 1.1.13
+  resolution: "brace-expansion@npm:1.1.13"
   dependencies:
     balanced-match: "npm:^1.0.0"
     concat-map: "npm:0.0.1"
-  checksum: 10c0/975fecac2bb7758c062c20d0b3b6288c7cc895219ee25f0a64a9de662dbac981ff0b6e89909c3897c1f84fa353113a721923afdec5f8b2350255b097f12b1f73
+  checksum: 10c0/384c61bb329b6adfdcc0cbbdd108dc19fb5f3e84ae15a02a74f94c6c791b5a9b035aae73b2a51929a8a478e2f0f212a771eb6a8b5b514cccfb8d0c9f2ce8cbd8
   languageName: node
   linkType: hard
 
@@ -5530,7 +5530,7 @@ __metadata:
 
 "react-schema-form@file:..::locator=example%40workspace%3A.":
   version: 1.0.20
-  resolution: "react-schema-form@file:..#..::hash=e50f8c&locator=example%40workspace%3A."
+  resolution: "react-schema-form@file:..#..::hash=affae5&locator=example%40workspace%3A."
   dependencies:
     ajv: "npm:^8.18.0"
     ajv-formats: "npm:^3.0.1"
@@ -5562,7 +5562,7 @@ __metadata:
     dayjs: ^1.11.13
     react: ^19.2.3
     react-dom: ^19.2.3
-  checksum: 10c0/a3ab4977ade1b1bafa89d3e68e69621c41a597286ce687b04db87a6633e80d8c92b2ea2056ed3fdb6a380faa0b4b4a9fb93ef3cc35cec3e5715efb0fae1c3378
+  checksum: 10c0/af2dc05a6805bc807a6a8f214c4bd025c1f9610aa69dc9f30a4282ffb93abc652417c18f7296a88aaa0f7d9b093f9144a8675d190d991ca51871edab069c806c
   languageName: node
   linkType: hard
 
