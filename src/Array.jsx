@@ -45,22 +45,15 @@ let SEQUENCE = 1;
 const ITEM_ID = Symbol('_SCHEMAFORM_ITEM_ID');
 
 const assignItemId = (item) => {
-  let newItem = null;
-  if (item && typeof item === 'object' && Array.isArray(item)) {
-    newItem = [...item];
-  } else if (item && typeof item === 'object' && !item[ITEM_ID]) {
-    newItem = { ...item };
-  }
-
-  if (newItem) {
-    // define hidden property with internal id
-    Object.defineProperty(newItem, ITEM_ID, {
+  if (item && typeof item === 'object' && !item[ITEM_ID]) {
+    Object.defineProperty(item, ITEM_ID, {
       enumerable: false,
+      configurable: true,
       writable: true,
+      value: undefined,
     });
     SEQUENCE += 1;
-    newItem[ITEM_ID] = SEQUENCE;
-    return newItem;
+    item[ITEM_ID] = SEQUENCE;
   }
 
   return item;
