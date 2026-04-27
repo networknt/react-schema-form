@@ -16,7 +16,10 @@
   ],
   "author": "Steve Hu, Nicholas Azar, Xavi Torelló, Greg Taschuk, Gene Sumchenko, Dmytro V. Dogadailo, Naeem Baghi",
   "license": "MIT",
-  "repository": "https://github.com/networknt/react-schema-form.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/networknt/react-schema-form.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
