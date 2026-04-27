@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.22 - 2026-04-27
+### Added
+
+### Changed
+- Apply DynaSelect width styles to the outer wrapper so dropdown fields match text input width inside flex array rows.
+
 ## 1.0.21 - 2026-04-27
 ### Added
 

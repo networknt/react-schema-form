@@ -117,8 +117,10 @@ function DynaSelect(props) {
     }
   }
 
+  const { style, className, otherProps } = props.form;
+
   return (
-    <div>
+    <div style={style} className={className}>
       <Autocomplete
         multiple={multiple}
         disabled={disabled}
@@ -126,9 +128,8 @@ function DynaSelect(props) {
         value={v || (multiple ? [] : null)}
         onChange={onChange}
         options={options}
-        style={props.form.style}
-        className={props.form.className}
-        {...props.form.otherProps}
+        fullWidth
+        {...otherProps}
         renderInput={(params) => (
           <TextField
             {...params}
