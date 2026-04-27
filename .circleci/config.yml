@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.0
+      - image: cimg/node:24.11
     working_directory: ~/repo
     steps:
       - checkout
@@ -14,17 +14,21 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
+      - run: corepack enable
       - run: yarn install --ignore-engines
+      - run: ./node_modules/.bin/vite build
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
   test:
     docker:
-      - image: circleci/node:10.0
+      - image: cimg/node:24.11
     steps:
       - checkout
-      - run: yarn run test
+      - run: corepack enable
+      - run: yarn install --ignore-engines
+      - run: ./node_modules/.bin/vitest run
 workflows:
   version: 2
   build_lint_test:
