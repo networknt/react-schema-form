@@ -1,6 +1,6 @@
 {
   "name": "react-schema-form",
-  "resolutions": {
+  "overrides": {
     "vite": "^7.3.0"
   },
   "version": "1.0.21",
@@ -24,7 +24,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "cd example && yarn install && yarn build",
+    "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/dist"
   },
   "dependencies": {
@@ -104,5 +104,5 @@
       "require": "./dist/react-schema-form.umd.cjs"
     }
   },
-  "packageManager": "yarn@4.13.0"
+  "packageManager": "npm@11.6.2"
 }
