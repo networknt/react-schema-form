@@ -126,7 +126,16 @@ function DynaSelect(props) {
         value={v || (multiple ? [] : null)}
         onChange={onChange}
         options={options}
-        renderInput={(params) => <TextField {...params} label={required ? title + ' *' : title} />}
+        style={props.form.style}
+        className={props.form.className}
+        {...props.form.otherProps}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            fullWidth
+            label={required ? title + ' *' : title}
+          />
+        )}
       />
       {!valid ? <div style={{ color: 'red' }}>{error}</div> : null}
     </div>
