@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.21 - 2026-04-27
+### Added
+
+### Changed
+- fixes #296 fix focus -loss bug in array rending and update DynaSelect with fullWidth
+
 ## 1.0.20 - 2026-03-13
 ### Added
 
