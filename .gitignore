@@ -30,3 +30,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.gitnexus
+.claude/
+AGENTS.md
+CLAUDE.md
