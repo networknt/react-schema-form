@@ -76,6 +76,30 @@ React-schema-form implements the form format as defined by the json-schema-form 
 
 The documentation for that format is located at the [json-schema-form wiki](https://github.com/json-schema-form/json-schema-form/wiki/Documentation).
 
+## DynaSelect option grouping
+
+`dynaselect` can render grouped dropdown options when the fetched or static options include group metadata.
+
+```json
+{
+  "key": "apiTags",
+  "type": "dynaselect",
+  "multiple": true,
+  "groupByKey": "groupLabel",
+  "groupSortKey": "groupSortOrder",
+  "optionSortKey": "tagSortOrder",
+  "optionValueKey": "value"
+}
+```
+
+The option payload remains a flat list, for example:
+
+```json
+[
+  { "id": "tag-uuid", "value": "openapi", "label": "openapi", "groupLabel": "Protocol / Spec", "groupSortOrder": 10, "tagSortOrder": 10 }
+]
+```
+
 # Customization
 react-schema-form provides most fields including FieldSet and Array and they might cover most use cases; however, you might have requirement that needs something that is not built in. In this case, you
 can implement your own field and inject it into the generic mapper for the builder to leverage your component. By passing a mapper as a props to the SchemaForm, you can replace built in component with

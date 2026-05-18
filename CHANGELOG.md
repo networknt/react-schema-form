@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.0.23 - 2026-05-18
+### Added
+- Add optional DynaSelect grouping with `groupByKey`, `groupSortKey`, and `optionSortKey`, plus `optionValueKey` for choosing the stored option field.
+
+### Changed
+
 ## 1.0.22 - 2026-04-27
 ### Added
 

@@ -25,6 +25,12 @@ function DynaSelect(props) {
       multiple,
       disabled,
       options: propOptions,
+      groupByKey,
+      groupFallbackLabel,
+      groupSortKey,
+      optionSortKey,
+      optionValueKey,
+      optionLabelKey,
       key
     },
     model,
@@ -55,19 +61,43 @@ function DynaSelect(props) {
     }
   }, paramValues);
 
+  const getOptionValue = (option, path) => path ? ObjectPath.get(option, path) : undefined;
+  const valueKey = optionValueKey || 'id';
+  const labelKey = optionLabelKey || 'label';
+  const getOptionStoredValue = (option) => getOptionValue(option, valueKey);
+  const getOptionDisplayLabel = (option) => {
+    const label = getOptionValue(option, labelKey);
+    return label !== undefined && label !== null ? String(label) : '';
+  };
+  const optionMatches = (option, selectedValue) => String(getOptionStoredValue(option)) === String(selectedValue);
+  const uniqueValues = (values) => {
+    const seenValues = new Set();
+    return values.filter((value) => {
+      const normalizedValue = String(value);
+      if (seenValues.has(normalizedValue)) {
+        return false;
+      }
+      seenValues.add(normalizedValue);
+      return true;
+    });
+  };
+
   const onChange = (event, newValue) => {
     let resultValue = null;
+    const selectedValues = Array.isArray(newValue)
+      ? uniqueValues(newValue.map(getOptionStoredValue).filter((v) => v !== undefined && v !== null))
+      : [];
     if (type !== 'array') {
       if (multiple) {
-        resultValue = newValue.map((v) => v.id).join(',');
+        resultValue = selectedValues.join(',');
       } else {
-        resultValue = newValue ? newValue.id : '';
+        resultValue = newValue ? getOptionStoredValue(newValue) : '';
       }
     } else {
       if (multiple) {
-        resultValue = newValue.map((v) => v.id);
+        resultValue = selectedValues;
       } else {
-        resultValue = newValue ? [newValue.id] : [];
+        resultValue = newValue ? [getOptionStoredValue(newValue)] : [];
       }
     }
     onChangeValidate(null, resultValue);
@@ -101,19 +131,59 @@ function DynaSelect(props) {
   };
 
   const options = (propOptions && propOptions.length > 0) ? propOptions : menuItems;
+  const hasGroupValues = groupByKey && options.some((option) => {
+    const group = getOptionValue(option, groupByKey);
+    return group !== undefined && group !== null && group !== '';
+  });
+  const getGroupLabel = (option) => {
+    const group = getOptionValue(option, groupByKey);
+    return group !== undefined && group !== null && group !== '' ? String(group) : (groupFallbackLabel || 'Ungrouped');
+  };
+  const compareValues = (a, b) => {
+    if (a === b) return 0;
+    if (a === undefined || a === null || a === '') return 1;
+    if (b === undefined || b === null || b === '') return -1;
+    if (typeof a === 'number' && typeof b === 'number') return a - b;
+    return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: 'base' });
+  };
+  const sortedOptions = hasGroupValues ? [...options].sort((a, b) => {
+    if (groupSortKey) {
+      const groupSortCompare = compareValues(getOptionValue(a, groupSortKey), getOptionValue(b, groupSortKey));
+      if (groupSortCompare !== 0) return groupSortCompare;
+    }
+    const groupLabelCompare = compareValues(getGroupLabel(a), getGroupLabel(b));
+    if (groupLabelCompare !== 0) return groupLabelCompare;
+    return compareValues(
+      getOptionValue(a, optionSortKey) ?? getOptionDisplayLabel(a),
+      getOptionValue(b, optionSortKey) ?? getOptionDisplayLabel(b)
+    );
+  }) : options;
+  const getSelectedOptions = (selectedValues) => {
+    const seenValues = new Set();
+    return selectedValues.reduce((selectedOptions, selectedValue) => {
+      const normalizedValue = String(selectedValue);
+      if (seenValues.has(normalizedValue)) {
+        return selectedOptions;
+      }
+      seenValues.add(normalizedValue);
+      const option = sortedOptions.find(candidate => optionMatches(candidate, selectedValue));
+      return option ? [...selectedOptions, option] : selectedOptions;
+    }, []);
+  };
   let v = undefined;
 
   if (multiple) {
     if (Array.isArray(value)) {
-      v = value ? options.filter(option => value.includes(option.id)) : [];
+      v = value ? getSelectedOptions(value) : [];
     } else {
-      v = value ? options.filter(option => (value || '').split(',').includes(option.id)) : [];
+      const selectedValues = (value || '').split(',');
+      v = value ? getSelectedOptions(selectedValues) : [];
     }
   } else {
     if (Array.isArray(value)) {
-      v = value.length === 1 ? options.find((option) => option.id === value[0]) : null;
+      v = value.length === 1 ? sortedOptions.find((option) => optionMatches(option, value[0])) : null;
     } else {
-      v = value ? options.find(option => option.id === value) : null;
+      v = value ? sortedOptions.find(option => optionMatches(option, value)) : null;
     }
   }
 
@@ -124,10 +194,11 @@ function DynaSelect(props) {
       <Autocomplete
         multiple={multiple}
         disabled={disabled}
-        getOptionLabel={(option) => option.label || ''}
+        getOptionLabel={getOptionDisplayLabel}
         value={v || (multiple ? [] : null)}
         onChange={onChange}
-        options={options}
+        options={sortedOptions}
+        groupBy={hasGroupValues ? getGroupLabel : undefined}
         fullWidth
         {...otherProps}
         renderInput={(params) => (
