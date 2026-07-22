@@ -1,5 +1,6 @@
 import {
   StructuredDataError,
+  assertStructuredRoot,
   formatStructuredValue,
   normalizeStructuredValue,
   parseStructuredText,
@@ -165,7 +166,7 @@ export function receiveExternalStructuredValue(state, value, {
   try {
     normalized = normalizeStructuredValue(value, options)
     if (normalized !== undefined) {
-      draftsFor(normalized, options)
+      assertStructuredRoot(normalized, options.schema)
     }
   } catch (error) {
     return structuredDraftReducer(state, { error, type: 'EXTERNAL_FAILURE' })

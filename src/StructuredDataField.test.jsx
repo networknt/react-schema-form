@@ -25,7 +25,7 @@ const objectSchema = {
   },
 }
 
-const structuredForm = [{ key: 'settings', type: 'structured' }]
+const structuredForm = [{ key: 'settings', tabs: ['json', 'yaml'], type: 'structured' }]
 
 function renderStructured({
   form = structuredForm,
@@ -105,7 +105,7 @@ describe('StructuredDataField', () => {
     const onModelChange = vi.fn()
     render(
       <SchemaForm
-        form={[{ key: 'operations', type: 'structured' }]}
+        form={[{ key: 'operations', tabs: ['json', 'yaml'], type: 'structured' }]}
         model={{ operations: ['chat'] }}
         onModelChange={onModelChange}
         schema={{
@@ -147,6 +147,46 @@ describe('StructuredDataField', () => {
 
     expect(onModelChange).toHaveBeenCalledTimes(1)
     expect(onModelChange.mock.calls[0][1]).toEqual({ enabled: true })
+  })
+
+  it.each([
+    [['object', 'null'], {}, '{"value":1}', { value: 1 }, 'object'],
+    [['array', 'null'], [], '["value"]', ['value'], 'array'],
+    [['object', 'null'], {}, 'null', null, 'null'],
+  ])('reports the resolved committed type for nullable schema %j', async (
+    type,
+    initialValue,
+    text,
+    expectedValue,
+    expectedType,
+  ) => {
+    const user = userEvent.setup()
+    const onModelChange = vi.fn()
+    render(
+      <SchemaForm
+        form={[{ key: 'data', tabs: ['json', 'yaml'], type: 'structured' }]}
+        model={{ data: initialValue }}
+        onModelChange={onModelChange}
+        schema={{
+          type: 'object',
+          properties: {
+            data: { title: 'Data', type },
+          },
+        }}
+      />,
+    )
+
+    fireEvent.change(screen.getByRole('textbox', { name: 'Data JSON editor' }), {
+      target: { value: text },
+    })
+    await user.click(screen.getByRole('button', { name: 'Apply' }))
+
+    expect(onModelChange).toHaveBeenCalledWith(
+      ['data'],
+      expectedValue,
+      expectedType,
+      expect.any(Object),
+    )
   })
 
   it('keeps syntax-invalid and schema-invalid drafts out of the model', async () => {
@@ -232,7 +272,7 @@ describe('StructuredDataField', () => {
   it('supports keyboard tab navigation and read-only copying', async () => {
     const user = userEvent.setup()
     renderStructured({
-      form: [{ key: 'settings', type: 'structured', readonly: true }],
+      form: [{ key: 'settings', tabs: ['json', 'yaml'], type: 'structured', readonly: true }],
     })
 
     const jsonTab = screen.getByRole('tab', { name: 'JSON' })
@@ -249,7 +289,12 @@ describe('StructuredDataField', () => {
     function Editor({ label, onChange, value }) {
       return <textarea aria-label={`Custom ${label}`} onChange={onChange} value={value} />
     }
-    const form = [{ key: 'settings', type: 'structured', EditorComponent: Editor }]
+    const form = [{
+      key: 'settings',
+      tabs: ['json', 'yaml'],
+      type: 'structured',
+      EditorComponent: Editor,
+    }]
     const first = renderStructured({ form })
     expect(screen.getByRole('textbox', { name: 'Custom Settings JSON editor' }))
       .toBeInTheDocument()

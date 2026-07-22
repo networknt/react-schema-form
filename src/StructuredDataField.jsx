@@ -9,6 +9,7 @@ import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import TextField from '@mui/material/TextField'
 import utils from './utils'
+import StructuredFormView from './StructuredFormView'
 import {
   applyStructuredDraft,
   createStructuredDraftState,
@@ -20,7 +21,28 @@ import {
   structuredDraftReducer,
 } from './structuredDataState'
 
-const formats = ['json', 'yaml']
+const textFormats = ['json', 'yaml']
+const defaultTabs = ['form', ...textFormats]
+
+function uniqueTabs(tabs) {
+  const requested = Array.isArray(tabs) ? tabs : defaultTabs
+  const supported = requested.filter((tab) => defaultTabs.includes(tab))
+  return [...new Set(supported.length > 0 ? supported : defaultTabs)]
+}
+
+function generatedFormAvailable(form) {
+  const { schema } = form
+  if (schema.items?.enum) return Array.isArray(form.titleMap) && form.titleMap.length > 0
+  if (schema.type === 'array' || schema.type?.includes?.('array')) {
+    return Array.isArray(form.items) && form.items.length > 0
+  }
+  return Array.isArray(form.items) && form.items.length > 0
+}
+
+function resolvedValueType(value) {
+  if (value === null) return 'null'
+  return Array.isArray(value) ? 'array' : 'object'
+}
 
 function modelValue(form, model) {
   if (!model || !form.key) return undefined
@@ -77,22 +99,47 @@ function StructuredDataField(props) {
     () => ({ ...(form.codecOptions || {}), schema }),
     [form.codecOptions, schema],
   )
-  const defaultFormat = formats.includes(form.defaultTab) ? form.defaultTab : 'json'
+  const requestedTabs = uniqueTabs(form.tabs)
   const value = configuredValue(form, model)
+  const initialFormAvailable = generatedFormAvailable(form)
+    && value !== undefined
+    && value !== null
+  let initialEnabledTabs = requestedTabs.filter((tab) => tab !== 'form' || initialFormAvailable)
+  if (initialEnabledTabs.length === 0) initialEnabledTabs = textFormats
+  const initialTab = initialEnabledTabs.includes(form.defaultTab)
+    ? form.defaultTab
+    : initialEnabledTabs[0]
+  const defaultFormat = textFormats.includes(initialTab)
+    ? initialTab
+    : requestedTabs.find((tab) => textFormats.includes(tab)) || 'json'
   const [state, setState] = useState(() => createStructuredDraftState({
     activeFormat: defaultFormat,
     codecOptions,
     schema,
     value,
   }))
+  const [activeTab, setActiveTab] = useState(initialTab)
   const reactId = useId().replaceAll(':', '')
   const title = form.title && getLocalizedString(form.title)
   const readOnly = Boolean(form.readonly || form.readOnly || schema?.readonly || schema?.readOnly)
-  const activeDirty = state.dirty[state.activeFormat]
+  const formAvailable = generatedFormAvailable(form)
+    && state.canonicalValue !== undefined
+    && state.canonicalValue !== null
+  let enabledTabs = requestedTabs.filter((tab) => tab !== 'form' || formAvailable)
+  let displayedTabs = requestedTabs
+  if (enabledTabs.length === 0) {
+    displayedTabs = [...new Set([...requestedTabs, ...textFormats])]
+    enabledTabs = textFormats
+  }
+  const activeDirty = textFormats.includes(activeTab) && state.dirty[activeTab]
   const hasDirtyDraft = Object.values(state.dirty).some(Boolean)
   const visibleError = state.error?.message || (showErrors ? errorText : null)
   const helperId = `${reactId}-structured-helper`
   const FieldEditor = EditorComponent || form.EditorComponent || DefaultEditor
+
+  useEffect(() => {
+    if (!enabledTabs.includes(activeTab)) setActiveTab(enabledTabs[0])
+  }, [activeTab, enabledTabs])
 
   useEffect(() => {
     const currentModelValue = modelValue(form, model)
@@ -111,12 +158,15 @@ function StructuredDataField(props) {
     }))
   }, [codecOptions, schema, value])
 
-  const selectFormat = (_event, format) => {
-    if (hasDirtyDraft || !formats.includes(format)) return
-    setState((current) => structuredDraftReducer(current, {
-      format,
-      type: 'SET_ACTIVE_FORMAT',
-    }))
+  const selectTab = (_event, tab) => {
+    if (hasDirtyDraft || !enabledTabs.includes(tab)) return
+    if (textFormats.includes(tab)) {
+      setState((current) => structuredDraftReducer(current, {
+        format: tab,
+        type: 'SET_ACTIVE_FORMAT',
+      }))
+    }
+    setActiveTab(tab)
   }
 
   const changeDraft = (change) => {
@@ -133,7 +183,12 @@ function StructuredDataField(props) {
     })
     setState(next)
     if (next.phase === 'applied') {
-      onChange(form.key, next.canonicalValue, schema.type, form)
+      onChange(
+        form.key,
+        next.canonicalValue,
+        resolvedValueType(next.canonicalValue),
+        form,
+      )
     } else if (form.onDraftError) {
       form.onDraftError(next.error, { form, format: state.activeFormat })
     }
@@ -175,37 +230,47 @@ function StructuredDataField(props) {
       {title ? <FormLabel component="legend">{title}</FormLabel> : null}
       <Tabs
         aria-label={`${title || 'Structured data'} format`}
-        onChange={selectFormat}
+        onChange={selectTab}
         selectionFollowsFocus
-        value={state.activeFormat}
+        value={activeTab}
       >
-        {formats.map((format) => (
+        {displayedTabs.map((tab) => (
           <Tab
-            aria-controls={`${reactId}-${format}-panel`}
-            disabled={hasDirtyDraft && state.activeFormat !== format}
-            id={`${reactId}-${format}-tab`}
-            key={format}
-            label={`${format.toUpperCase()}${state.dirty[format] ? ' *' : ''}`}
-            value={format}
+            aria-controls={`${reactId}-${tab}-panel`}
+            disabled={(tab === 'form' && !formAvailable)
+              || (hasDirtyDraft && activeTab !== tab)}
+            id={`${reactId}-${tab}-tab`}
+            key={tab}
+            label={`${tab === 'form' ? 'Form' : tab.toUpperCase()}${state.dirty[tab] ? ' *' : ''}`}
+            value={tab}
           />
         ))}
       </Tabs>
-      {formats.map((format) => (
+      {displayedTabs.map((tab) => (
         <Box
-          aria-labelledby={`${reactId}-${format}-tab`}
-          hidden={state.activeFormat !== format}
-          id={`${reactId}-${format}-panel`}
-          key={format}
+          aria-labelledby={`${reactId}-${tab}-tab`}
+          hidden={activeTab !== tab}
+          id={`${reactId}-${tab}-panel`}
+          key={tab}
           role="tabpanel"
           sx={{ pt: 2 }}
         >
-          {state.activeFormat === format
+          {activeTab === tab && tab === 'form' && formAvailable
+            ? <StructuredFormView {...props} form={form} />
+            : null}
+          {activeTab === tab && textFormats.includes(tab)
             ? (renderEditor || form.renderEditor
                 ? (renderEditor || form.renderEditor)(editorProps)
                 : <FieldEditor {...editorProps} />)
             : null}
         </Box>
       ))}
+      {requestedTabs.includes('form') && !formAvailable ? (
+        <Alert severity="info" sx={{ mt: 1 }}>
+          Form view is unavailable until this schema provides generated controls and the value
+          is an object or array. Use JSON or YAML to edit or initialize it.
+        </Alert>
+      ) : null}
       {state.hasPendingExternalValue ? (
         <Alert severity="warning" sx={{ mt: 1 }}>
           The source value changed while this draft was being edited.
@@ -220,7 +285,7 @@ function StructuredDataField(props) {
           The source value could not be loaded. The last valid draft was preserved.
         </Alert>
       ) : null}
-      {!readOnly ? (
+      {!readOnly && textFormats.includes(activeTab) ? (
         <Box sx={{ display: 'flex', gap: 1, mt: 1 }}>
           <Button disabled={!activeDirty} onClick={applyDraft} variant="contained">
             Apply

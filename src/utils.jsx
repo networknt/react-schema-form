@@ -292,6 +292,7 @@ const defaultFormDefinition = (name, schema, options) => {
 const fieldset = (name, schema, options) => {
   if (stripNullType(schema.type) === 'object') {
     const f = stdFormObj(name, schema, options)
+    f.key = options.path
     f.type = 'fieldset'
     f.items = []
     options.lookup[ObjectPath.stringify(options.path)] = f
@@ -512,11 +513,13 @@ const traverseForm = (form, fn) => {
     })
   }
 
-  if (form.tabs) {
+  if (Array.isArray(form.tabs)) {
     form.tabs.forEach((tab) => {
-      tab.items.forEach((f) => {
-        traverseForm(f, fn)
-      })
+      if (Array.isArray(tab?.items)) {
+        tab.items.forEach((f) => {
+          traverseForm(f, fn)
+        })
+      }
     })
   }
 }
@@ -591,9 +594,11 @@ const merge = (schema, form, ignore, options, readonly) => {
       }
 
       // if its has tabs, merge them also!
-      if (obj && obj.tabs) {
+      if (obj && Array.isArray(obj.tabs)) {
         obj.tabs.forEach((tab) => {
-          tab.items = merge(schema, tab.items, ignore, options, obj.readonly)
+          if (Array.isArray(tab?.items)) {
+            tab.items = merge(schema, tab.items, ignore, options, obj.readonly)
+          }
         })
       }
 

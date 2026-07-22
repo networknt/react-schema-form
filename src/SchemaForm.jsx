@@ -90,7 +90,7 @@ class SchemaForm extends Component {
   }
 
   builder(form, model, index, mapper, onChange, builder) {
-    const { errors, showErrors, evalContext } = this.props
+    const { errors, showErrors, evalContext, option } = this.props
     const Field = mapper[form.type]
     if (!Field) {
       return null
@@ -119,6 +119,7 @@ class SchemaForm extends Component {
         builder={builder}
         errorText={error}
         localization={this.getLocalization()}
+        options={option}
         showErrors={showErrors}
       />
     )

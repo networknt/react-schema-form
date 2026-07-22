@@ -31,10 +31,10 @@ const Root = styled('div')(({ theme }) => ({
     margin: theme.spacing(0.25),
   },
   [`& .${classes.menuItem}`]: {
-    fontWeight: theme.typography.fontWeightRegular,
+    fontWeight: theme.typography?.fontWeightRegular || 400,
   },
   [`& .${classes.selectedMenuItem}`]: {
-    fontWeight: theme.typography.fontWeightMedium,
+    fontWeight: theme.typography?.fontWeightMedium || 500,
   },
 }));
 

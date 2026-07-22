@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { styled } from '@mui/system';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -42,21 +42,9 @@ const Root = styled('div')(({ theme }) => ({
 }));
 
 let SEQUENCE = 1;
-const ITEM_ID = Symbol('_SCHEMAFORM_ITEM_ID');
-
-const assignItemId = (item) => {
-  if (item && typeof item === 'object' && !item[ITEM_ID]) {
-    Object.defineProperty(item, ITEM_ID, {
-      enumerable: false,
-      configurable: true,
-      writable: true,
-      value: undefined,
-    });
-    SEQUENCE += 1;
-    item[ITEM_ID] = SEQUENCE;
-  }
-
-  return item;
+const nextItemId = () => {
+  SEQUENCE += 1;
+  return SEQUENCE;
 };
 
 const setIndex = (index) => (form) => {
@@ -86,7 +74,14 @@ const ArrayComponent = (props) => {
   } = props;
 
   const { value, onChangeValidate } = useSchemaField(props);
-  const arrayModel = (value || []).map(assignItemId);
+  const arrayModel = value || [];
+  const itemIds = useRef([]);
+  while (itemIds.current.length < arrayModel.length) {
+    itemIds.current.push(nextItemId());
+  }
+  if (itemIds.current.length > arrayModel.length) {
+    itemIds.current.length = arrayModel.length;
+  }
 
   useEffect(() => {
     setDefault(form.key, model, form, value);
@@ -130,7 +125,7 @@ const ArrayComponent = (props) => {
       }
     }
     const newModel = [...arrayModel];
-    assignItemId(empty);
+    itemIds.current.push(nextItemId());
     newModel.push(empty);
     onChangeValidate(null, newModel);
   };
@@ -138,6 +133,7 @@ const ArrayComponent = (props) => {
   const onDelete = (index) => () => {
     const newModel = [...arrayModel];
     newModel.splice(index, 1);
+    itemIds.current.splice(index, 1);
     onChangeValidate(null, newModel);
   };
 
@@ -159,7 +155,6 @@ const ArrayComponent = (props) => {
 
   const arrays = [];
   for (let i = 0; i < arrayModel.length; i += 1) {
-    const item = arrayModel[i];
     const forms = form.items.map((eachForm, index) => {
       const copy = copyWithIndex(eachForm, i);
       return builder(copy, model, index, mapper, onChange, builder, {
@@ -169,7 +164,7 @@ const ArrayComponent = (props) => {
     arrays.push(
       <Card
         className={classes.arrayItem}
-        key={(item && item[ITEM_ID]) || i}
+        key={itemIds.current[i]}
       >
         <div className={classes.elementsContainer}>{forms}</div>
         <IconButton
