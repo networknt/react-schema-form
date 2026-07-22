@@ -251,6 +251,8 @@ export function assertStructuredRoot(value, schema) {
   const supportsNull = types.includes('null')
   const unsupportedTypes = types.filter((type) => !structuredTypes.includes(type) && type !== 'null')
 
+  // An explicit schema must select one container type, optionally plus null.
+  // An omitted type remains permissive so standalone codec callers can handle either container.
   if (structuredTypes.length === 0
     || (schema?.type && (structuredTypes.length !== 1 || unsupportedTypes.length > 0))) {
     throw new StructuredDataError(

@@ -20,6 +20,7 @@ import TripleBoolean from './TripleBoolean'
 import Taxonomy from './Taxonomy'
 import DynaSelect from './DynaSelect'
 import File from './File'
+import StructuredDataField from './StructuredDataField'
 
 const formatDate = (date) => {
   let value =
@@ -51,7 +52,8 @@ class SchemaForm extends Component {
     tuple: FieldSet,
     multiselect: MultiSelect,
     dynaselect: DynaSelect,
-    file: File
+    file: File,
+    structured: StructuredDataField
   }
 
   constructor(props) {

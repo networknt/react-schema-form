@@ -1,4 +1,5 @@
 import {
+  StructuredDataError,
   formatStructuredValue,
   normalizeStructuredValue,
   parseStructuredText,
@@ -19,6 +20,7 @@ function cleanState(state, canonicalValue, phase, options) {
     dirty: { json: false, yaml: false },
     drafts: draftsFor(canonicalValue, options),
     error: null,
+    errorSource: null,
     hasPendingExternalValue: false,
     pendingExternalValue: undefined,
     phase,
@@ -32,16 +34,27 @@ export function createStructuredDraftState({
   value,
 } = {}) {
   const options = { ...codecOptions, allowUndefined: true, schema }
-  const canonicalValue = normalizeStructuredValue(value, options)
-  return {
+  const initial = {
     activeFormat,
-    canonicalValue,
+    canonicalValue: undefined,
     dirty: { json: false, yaml: false },
-    drafts: draftsFor(canonicalValue, options),
+    drafts: { json: '', yaml: '' },
     error: null,
+    errorSource: null,
     hasPendingExternalValue: false,
     pendingExternalValue: undefined,
     phase: 'clean',
+  }
+  try {
+    const canonicalValue = normalizeStructuredValue(value, options)
+    return cleanState(initial, canonicalValue, 'clean', options)
+  } catch (error) {
+    return {
+      ...initial,
+      error,
+      errorSource: 'external',
+      phase: 'invalid',
+    }
   }
 }
 
@@ -56,10 +69,16 @@ export function structuredDraftReducer(state, action) {
         dirty: { ...state.dirty, [action.format]: true },
         drafts: { ...state.drafts, [action.format]: action.text },
         error: null,
+        errorSource: null,
         phase: 'dirty',
       }
     case 'APPLY_FAILURE':
-      return { ...state, error: action.error, phase: 'invalid' }
+      return {
+        ...state,
+        error: action.error,
+        errorSource: 'draft',
+        phase: 'invalid',
+      }
     case 'APPLY_SUCCESS':
       return cleanState(state, action.value, 'applied', action.options)
     case 'RESET':
@@ -69,8 +88,19 @@ export function structuredDraftReducer(state, action) {
     case 'EXTERNAL_CONFLICT':
       return {
         ...state,
+        error: state.errorSource === 'external' ? null : state.error,
+        errorSource: state.errorSource === 'external' ? null : state.errorSource,
         hasPendingExternalValue: true,
         pendingExternalValue: action.value,
+        phase: 'external-change',
+      }
+    case 'EXTERNAL_FAILURE':
+      return {
+        ...state,
+        error: action.error,
+        errorSource: 'external',
+        hasPendingExternalValue: false,
+        pendingExternalValue: undefined,
         phase: 'external-change',
       }
     case 'RELOAD_EXTERNAL':
@@ -81,6 +111,7 @@ export function structuredDraftReducer(state, action) {
         canonicalValue: action.value,
         hasPendingExternalValue: false,
         pendingExternalValue: undefined,
+        errorSource: state.error ? 'draft' : null,
         phase: state.error ? 'invalid' : 'dirty',
       }
     default:
@@ -100,10 +131,18 @@ export function applyStructuredDraft(state, {
   codecOptions = {},
   format = state.activeFormat,
   schema,
+  validate,
 } = {}) {
   const options = optionsFor(schema, codecOptions)
   try {
     const value = parseStructuredText(format, state.drafts[format], options)
+    const validation = validate?.(value)
+    if (validation === false || validation?.valid === false) {
+      throw new StructuredDataError(
+        'SCHEMA_VALIDATION',
+        validation?.error || 'The value does not satisfy its JSON schema',
+      )
+    }
     return structuredDraftReducer(state, { options, type: 'APPLY_SUCCESS', value })
   } catch (error) {
     return structuredDraftReducer(state, { error, type: 'APPLY_FAILURE' })
@@ -122,12 +161,20 @@ export function receiveExternalStructuredValue(state, value, {
   schema,
 } = {}) {
   const options = optionsFor(schema, codecOptions)
-  const normalized = normalizeStructuredValue(value, options)
+  let normalized
+  try {
+    normalized = normalizeStructuredValue(value, options)
+    if (normalized !== undefined) {
+      draftsFor(normalized, options)
+    }
+  } catch (error) {
+    return structuredDraftReducer(state, { error, type: 'EXTERNAL_FAILURE' })
+  }
   if (structuredValuesEqual(normalized, state.canonicalValue)) return state
 
-  const hasDraft = state.phase === 'dirty'
-    || state.phase === 'invalid'
-    || state.phase === 'external-change'
+  const hasDraft = Object.values(state.dirty).some(Boolean)
+    || state.errorSource === 'draft'
+    || state.hasPendingExternalValue
   return structuredDraftReducer(state, {
     options,
     type: hasDraft ? 'EXTERNAL_CONFLICT' : 'EXTERNAL_CLEAN',

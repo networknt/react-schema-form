@@ -35,7 +35,23 @@ describe('structuredDataState', () => {
     expect(dirty).toMatchObject({ canonicalValue: { count: 1 }, phase: 'dirty' })
     expect(invalid).toMatchObject({ canonicalValue: { count: 1 }, phase: 'invalid' })
     expect(invalid.error.code).toBe('SYNTAX_ERROR')
+    expect(invalid.errorSource).toBe('draft')
     expect(invalid.drafts.json).toBe('{"count":')
+  })
+
+  it('keeps schema-invalid drafts out of the canonical value', () => {
+    const initial = createStructuredDraftState({ schema, value: { count: 1 } })
+    const dirty = editStructuredDraft(initial, 'json', '{"count": 0}')
+    const invalid = applyStructuredDraft(dirty, {
+      schema,
+      validate: () => ({ valid: false, error: 'count must be positive' }),
+    })
+
+    expect(invalid).toMatchObject({ canonicalValue: { count: 1 }, phase: 'invalid' })
+    expect(invalid.error).toMatchObject({
+      code: 'SCHEMA_VALIDATION',
+      message: 'count must be positive',
+    })
   })
 
   it('applies a valid draft as typed data and synchronizes both formats', () => {
@@ -76,6 +92,49 @@ describe('structuredDataState', () => {
 
     expect(updated).toMatchObject({ canonicalValue: { count: 2 }, phase: 'clean' })
     expect(updated.drafts.yaml).toContain('count: 2')
+  })
+
+  it('contains invalid initial and external values and recovers on valid input', () => {
+    const invalidInitial = createStructuredDraftState({ schema, value: [] })
+    expect(invalidInitial).toMatchObject({
+      canonicalValue: undefined,
+      errorSource: 'external',
+      phase: 'invalid',
+    })
+    expect(invalidInitial.error.code).toBe('WRONG_ROOT_TYPE')
+
+    const clean = receiveExternalStructuredValue(invalidInitial, { count: 1 }, { schema })
+    const rejected = receiveExternalStructuredValue(clean, new Date(), { schema })
+    expect(rejected).toMatchObject({
+      canonicalValue: { count: 1 },
+      errorSource: 'external',
+      hasPendingExternalValue: false,
+      phase: 'external-change',
+    })
+    expect(rejected.error.code).toBe('UNSUPPORTED_VALUE')
+
+    const recovered = receiveExternalStructuredValue(rejected, { count: 2 }, { schema })
+    expect(recovered).toMatchObject({
+      canonicalValue: { count: 2 },
+      error: null,
+      phase: 'clean',
+    })
+  })
+
+  it('does not discard a dirty draft after an invalid then valid external update', () => {
+    const initial = createStructuredDraftState({ schema, value: { count: 1 } })
+    const dirty = editStructuredDraft(initial, 'json', '{"count": 3}')
+    const rejected = receiveExternalStructuredValue(dirty, [], { schema })
+    const conflicted = receiveExternalStructuredValue(rejected, { count: 2 }, { schema })
+
+    expect(conflicted).toMatchObject({
+      canonicalValue: { count: 1 },
+      error: null,
+      hasPendingExternalValue: true,
+      pendingExternalValue: { count: 2 },
+      phase: 'external-change',
+    })
+    expect(conflicted.drafts.json).toBe('{"count": 3}')
   })
 
   it('preserves dirty text when an external value changes until reload', () => {
