@@ -89,7 +89,7 @@ class SchemaForm extends Component {
 
   builder(form, model, index, mapper, onChange, builder) {
     const { errors, showErrors, evalContext } = this.props
-    const Field = this.mapper[form.type]
+    const Field = mapper[form.type]
     if (!Field) {
       return null
     }
@@ -135,10 +135,7 @@ class SchemaForm extends Component {
     } = this.props
     const merged = utils.merge(schema, form, ignore, option)
 
-    let mergedMapper = this.mapper
-    if (mapper) {
-      mergedMapper = merge(this.mapper, mapper)
-    }
+    const mergedMapper = mapper ? merge({}, this.mapper, mapper) : this.mapper
     const forms = merged.map((formPart, index) =>
       this.builder(
         formPart,

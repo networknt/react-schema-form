@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 import utils from './utils'
 
-test('validate right schema and right value', () => {
+test('rejects a value that violates the conditional schema', () => {
   const schema = {
     "title": "Create Product Version Form",
     "type": "object",
@@ -82,9 +82,7 @@ test('validate right schema and right value', () => {
     "productVersion": "2.10.0"
   }  
   const valid = utils.validateBySchema(schema, data)
-  console.log("valid", valid);
-  console.log("error", valid.error);
-      
+  expect(valid.valid).toBe(false)
+  expect(valid.error).toContain('releaseType')
 }
 )
-

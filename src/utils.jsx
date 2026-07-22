@@ -41,7 +41,6 @@ const safeEval = (condition, scope) => {
 
     const path = match[1].trim();
     const operator = match[2];
-    const rawValue = match[3];
     const stringValueSingleQuote = match[4];
     const stringValueDoubleQuote = match[5];
     const numberValue = match[6];

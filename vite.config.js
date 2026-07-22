@@ -5,6 +5,12 @@ import { resolve } from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.js'],
+    include: ['src/**/*.test.{js,jsx}'],
+    restoreMocks: true,
+  },
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.js"),

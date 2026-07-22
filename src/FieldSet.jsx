@@ -6,16 +6,16 @@ import classNames from 'classnames';
 
 const PREFIX = 'FieldSet';
 
-const classes = {
+const fieldSetClasses = {
   root: `${PREFIX}-root`,
   fields: `${PREFIX}-fields`,
 };
 
 const StyledFormControl = styled(FormControl)(({ theme }) => ({
-  [`&.${classes.root}`]: {
+  [`&.${fieldSetClasses.root}`]: {
     marginTop: theme.spacing(1),
   },
-  [`& .${classes.fields}`]: {
+  [`& .${fieldSetClasses.fields}`]: {
     marginLeft: theme.spacing(1),
   },
 }));
@@ -26,20 +26,19 @@ const FieldSet = ({
   builder,
   model,
   onChange,
-  classes,
   localization: { getLocalizedString },
 }) => {
   const forms = form.items.map((f, index) =>
     builder(f, model, index, mapper, onChange, builder)
   );
-  const className = classNames(classes.root, form.htmlClass);
+  const className = classNames(fieldSetClasses.root, form.htmlClass);
 
   return (
     <StyledFormControl component="fieldset" className={className} style={form.style} {...form.otherProps}>
       <FormLabel component='legend' required={form.required}>
         {form.title && getLocalizedString(form.title)}
       </FormLabel>
-      <div className={classes.fields}>{forms}</div>
+      <div className={fieldSetClasses.fields}>{forms}</div>
     </StyledFormControl>
 
   )
