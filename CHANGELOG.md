@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.1.0 - 2026-07-21
+### Added
+- Add the `structured` field with synchronized Form, JSON, and safe YAML tabs for object and array schemas.
+- Export the structured-data codec, limits, errors, and `StructuredDataField` for custom integrations.
+- Add structured-data examples for closed/open objects, primitive/object arrays, invalid drafts, and read-only values.
+- Add a clean-tarball verification gate for ESM rendering and CommonJS loading.
+
+### Changed
+- Preserve array-row identity without mutating model objects during controlled updates.
+- Stabilize fieldset and custom mapper extension points used by generated structured forms.
+- Harden structured parsing with size, depth, node, alias, unsafe-key, and YAML safety limits.
+- Generate Node-loadable ESM and CommonJS/UMD artifacts with external-module interop and a verified bundle-local `self` compatibility shim.
+
 ## 1.0.23 - 2026-05-18
 ### Added
 - Add optional DynaSelect grouping with `groupByKey`, `groupSortKey`, and `optionSortKey`, plus `optionValueKey` for choosing the stored option field.

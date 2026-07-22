@@ -3,7 +3,7 @@
   "overrides": {
     "vite": "^7.3.0"
   },
-  "version": "1.0.23",
+  "version": "1.1.0",
   "description": "React JSON Schema Form",
   "keywords": [
     "json schema",
@@ -25,6 +25,7 @@
     "dev": "vite",
     "test": "vitest",
     "build": "vite build",
+    "verify:package": "npm run build && node scripts/verify-package.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "cd example && npm install && npm run build",

@@ -1,10 +1,27 @@
-For development, everytime you run `npm start`, a file named form.entry.js will be generated based on the latest code. 
+# react-schema-form example
 
-To rebuild the example for production form.entry.js, use the following command. 
+The example app loads selectable JSON fixtures from `public/data` and renders them with the
+workspace version of `react-schema-form`.
 
+```sh
+npm install
+npm run dev
 ```
-webpack -p
+
+Create the production build with:
+
+```sh
+npm run build
 ```
 
-It will generate a dist directory with three files. Copy these files to the gh-pages branch and remove the dist folder. 
+The structured-data examples cover:
 
+- a closed object with generated Form controls;
+- an open object that falls back to JSON/YAML;
+- a primitive array;
+- an array of objects;
+- invalid draft and Reset behavior;
+- a read-only structured value.
+
+Select an example whose name starts with `Structured -` in the example picker. The model preview
+shows that successful edits remain typed objects or arrays rather than JSON/YAML strings.

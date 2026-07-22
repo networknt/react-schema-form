@@ -58,6 +58,132 @@ _onChange: function() {
     });
 }
 ```
+
+## Structured object and array fields
+
+Use `type: "structured"` for a schema property whose value must remain a JSON-compatible
+object or array. The default UI provides Form, JSON, and YAML tabs. Form reuses the normal
+schema-generated controls and the effective mapper, so mapper overrides, nested fields,
+defaults, conditions, and read-only descendants continue to work.
+
+```js
+const schema = {
+  type: 'object',
+  properties: {
+    provider: {
+      type: 'object',
+      additionalProperties: false,
+      required: ['name'],
+      properties: {
+        name: { type: 'string', title: 'Provider name' },
+        retries: { type: 'integer', minimum: 0, default: 3 },
+      },
+    },
+  },
+}
+
+const form = [{
+  key: 'provider',
+  type: 'structured',
+  tabs: ['form', 'json', 'yaml'],
+  defaultTab: 'form',
+  editorRows: 14,
+}]
+
+const model = { provider: { name: 'primary', retries: 3 } }
+```
+
+The same configuration can be placed in the schema when a separate form definition is not
+needed:
+
+```js
+const schema = {
+  type: 'object',
+  properties: {
+    provider: {
+      type: 'object',
+      'x-schema-form': {
+        type: 'structured',
+        tabs: ['form', 'json', 'yaml'],
+        defaultTab: 'form',
+      },
+      properties: {
+        name: { type: 'string', title: 'Provider name' },
+      },
+    },
+  },
+}
+```
+
+### Configuration
+
+| Option | Behavior |
+| --- | --- |
+| `tabs` | Ordered subset of `form`, `json`, and `yaml`. Defaults to all three. |
+| `defaultTab` | Initial enabled tab. Falls back to the first enabled tab. |
+| `editorRows` | Row count for the default multiline JSON/YAML editor. Defaults to 12. |
+| `codecOptions` | Overrides `maxInputBytes`, `maxDepth`, `maxNodes`, or `maxAliasCount`. |
+| `EditorComponent` | Component used instead of the default multiline editor. |
+| `renderEditor` | Render callback alternative to `EditorComponent`. |
+| `onDraftError` | Callback receiving a parse or validation error and `{ form, format }`. |
+
+`EditorComponent` and `renderEditor` receive `value`, `onChange`, `format`, `label`,
+`readOnly`, `rows`, `error`, and `ariaDescribedBy`. `onChange` accepts either a text string
+or a normal input change event.
+
+```js
+const form = [{
+  key: 'provider',
+  type: 'structured',
+  EditorComponent: MyCodeEditor,
+}]
+```
+
+### Synchronization and validation
+
+- Form edits update the typed model immediately and regenerate the JSON and YAML text.
+- JSON/YAML edits remain local drafts until Apply succeeds. Parsing, structured-root checks,
+  and AJV schema validation all run before `onModelChange` receives the object, array, or null.
+- Invalid drafts preserve the last valid model. Reset restores the active text editor from that
+  value.
+- A dirty JSON/YAML draft locks tab switching so edits cannot be silently discarded.
+- If the parent supplies a different value while a text draft is dirty, Reload accepts the
+  external value and Keep Draft preserves the local text for another Apply attempt.
+- Formatting, key ordering, YAML comments, anchors, and the user's original quoting style are
+  not preserved after Apply. The component preserves semantic JSON-compatible data, then
+  regenerates both text representations.
+
+Form is disabled for `null`, an uninitialized value, or an open object with no named properties.
+Use JSON or YAML to initialize nullable values and to edit arbitrary additional properties.
+
+### Safe YAML and resource limits
+
+YAML uses the YAML 1.2 core schema and accepts exactly one document. Duplicate keys, merge
+keys, custom tags, unsupported node types, unsafe object keys (`__proto__`, `constructor`, and
+`prototype`), cycles, non-finite numbers, and non-JSON values are rejected. Aliases are bounded
+before conversion to protect against expansion attacks.
+
+The defaults are:
+
+| Limit | Default |
+| --- | ---: |
+| Input size | 1 MiB |
+| Nesting depth | 100 |
+| Normalized nodes | 10,000 |
+| YAML aliases | 20 |
+
+Treat the structured field as a configuration-data editor, not an unbounded document editor.
+Applications may lower these limits with `codecOptions`; raising them should be based on measured
+payload requirements.
+
+## Peer dependencies
+
+The package declares React, React DOM, MUI, Emotion, MUI X date pickers, CodeMirror, Day.js, and
+the markdown editor as peers because the corresponding built-in fields integrate with them.
+Install the peer versions reported by your package manager and keep a single compatible React,
+MUI, and Emotion instance in the application. npm 7 and newer normally installs peers
+automatically; warnings indicate a missing or incompatible host version and should be resolved
+rather than suppressed.
 # Examples
 
 There are some simple forms in the demo to show how each fields to be rendered.

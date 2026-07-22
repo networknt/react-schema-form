@@ -1,0 +1,47 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "snapshot": {
+        "additionalProperties": false,
+        "description": "All tabs remain available for inspection, while Form controls and text editors are read-only.",
+        "readOnly": true,
+        "title": "Read-only snapshot",
+        "type": "object",
+        "properties": {
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "status": {
+            "enum": ["draft", "published"],
+            "title": "Status",
+            "type": "string"
+          },
+          "labels": {
+            "title": "Labels",
+            "type": "array",
+            "items": {
+              "title": "Label",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "snapshot",
+      "readonly": true,
+      "type": "structured"
+    }
+  ],
+  "model": {
+    "snapshot": {
+      "revision": 12,
+      "status": "published",
+      "labels": ["production", "approved"]
+    }
+  }
+}

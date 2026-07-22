@@ -1,0 +1,26 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "modalities": {
+        "description": "Add and edit primitive array items in Form, JSON, or YAML.",
+        "title": "Modalities",
+        "type": "array",
+        "items": {
+          "minLength": 1,
+          "title": "Modality",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "modalities",
+      "type": "structured"
+    }
+  ],
+  "model": {
+    "modalities": ["text", "image"]
+  }
+}

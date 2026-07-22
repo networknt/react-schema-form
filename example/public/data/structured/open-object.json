@@ -1,0 +1,27 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "metadata": {
+        "additionalProperties": true,
+        "description": "Open-ended objects use JSON or YAML because their keys cannot be generated ahead of time.",
+        "title": "Open metadata",
+        "type": "object"
+      }
+    }
+  },
+  "form": [
+    {
+      "defaultTab": "json",
+      "key": "metadata",
+      "type": "structured"
+    }
+  ],
+  "model": {
+    "metadata": {
+      "owner": "platform",
+      "region": "ca-central-1",
+      "features": ["chat", "embedding"]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "limits": {
+        "additionalProperties": false,
+        "description": "In JSON or YAML, enter invalid syntax or set maxTokens to 0. Apply remains blocked and Reset restores the last valid value.",
+        "title": "Invalid draft and reset",
+        "type": "object",
+        "required": ["maxTokens"],
+        "properties": {
+          "maxTokens": {
+            "maximum": 32768,
+            "minimum": 1,
+            "title": "Maximum tokens",
+            "type": "integer"
+          },
+          "temperature": {
+            "maximum": 2,
+            "minimum": 0,
+            "title": "Temperature",
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "defaultTab": "json",
+      "editorRows": 10,
+      "key": "limits",
+      "type": "structured"
+    }
+  ],
+  "model": {
+    "limits": {
+      "maxTokens": 4096,
+      "temperature": 0.7
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "operations": {
+        "description": "Array rows retain their order and focus during controlled model updates.",
+        "title": "Operations",
+        "type": "array",
+        "items": {
+          "additionalProperties": false,
+          "type": "object",
+          "required": ["name", "path"],
+          "properties": {
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "path": {
+              "pattern": "^/",
+              "title": "Path",
+              "type": "string"
+            },
+            "streaming": {
+              "title": "Streaming",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "operations",
+      "type": "structured"
+    }
+  ],
+  "model": {
+    "operations": [
+      {
+        "name": "chat",
+        "path": "/v1/chat/completions",
+        "streaming": true
+      },
+      {
+        "name": "embeddings",
+        "path": "/v1/embeddings",
+        "streaming": false
+      }
+    ]
+  }
+}

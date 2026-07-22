@@ -1,0 +1,64 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "provider": {
+        "additionalProperties": false,
+        "title": "Provider configuration",
+        "type": "object",
+        "required": ["name", "endpoint"],
+        "properties": {
+          "name": {
+            "enum": ["openai", "anthropic", "local"],
+            "title": "Provider",
+            "type": "string"
+          },
+          "endpoint": {
+            "format": "uri",
+            "title": "Endpoint",
+            "type": "string"
+          },
+          "retries": {
+            "default": 3,
+            "minimum": 0,
+            "title": "Retries",
+            "type": "integer"
+          },
+          "transport": {
+            "additionalProperties": false,
+            "title": "Transport",
+            "type": "object",
+            "properties": {
+              "tls": {
+                "title": "Use TLS",
+                "type": "boolean"
+              },
+              "timeoutSeconds": {
+                "minimum": 1,
+                "title": "Timeout seconds",
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "provider",
+      "type": "structured"
+    }
+  ],
+  "model": {
+    "provider": {
+      "name": "openai",
+      "endpoint": "https://api.example.com/v1",
+      "retries": 3,
+      "transport": {
+        "tls": true,
+        "timeoutSeconds": 30
+      }
+    }
+  }
+}

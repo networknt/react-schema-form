@@ -40,6 +40,8 @@ export default defineConfig({
         "codemirror"
       ],
       output: {
+        intro: 'var self = typeof globalThis !== "undefined" ? globalThis : this;',
+        interop: "auto",
         globals: {
           "react": "React",
           "react-dom": "React-dom",
