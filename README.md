@@ -27,11 +27,11 @@ Clone the project and run
 cd react-schema-form
 npm install
 cd example
-yarn
-npm start
+npm install
+npm run dev
 ```
 
-Then open localhost:8080 in a browser.
+Then open the URL printed by Vite in a browser.
 
 # Installation
 
