@@ -10,9 +10,9 @@ const defaultValue = (props) => {
 
     // check if there is a default value
     if (value === null || value === undefined) {
-        if (props.form.default) {
+        if (props.form.default !== undefined) {
             value = props.form.default
-        } else if (props.form.schema && props.form.schema.default) {
+        } else if (props.form.schema && props.form.schema.default !== undefined) {
             value = props.form.schema.default
         }
     }
@@ -30,7 +30,7 @@ const getValidationState = (props) => {
         }
     }
 
-    const validationResult = utils.validate(form, value || undefined)
+    const validationResult = utils.validate(form, value ?? undefined)
     const error = !validationResult.valid ? validationResult.error : undefined
     return {
         value,

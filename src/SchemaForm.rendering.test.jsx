@@ -174,4 +174,73 @@ describe('SchemaForm rendering extension points', () => {
 
     expect(screen.queryByLabelText('Advanced details')).not.toBeInTheDocument()
   })
+
+  it('renders and validates required integer fields whose value is zero', () => {
+    const schema = {
+      type: 'object',
+      properties: {
+        inputMicrosPerMillion: {
+          title: 'Input Micros Per Million Tokens',
+          type: 'integer',
+          minimum: 0
+        },
+        outputMicrosPerMillion: {
+          title: 'Output Micros Per Million Tokens',
+          type: 'integer',
+          minimum: 0
+        },
+        cachedInputMicrosPerMillion: {
+          title: 'Cached Input Micros Per Million Tokens',
+          type: 'integer',
+          minimum: 0
+        }
+      },
+      required: [
+        'inputMicrosPerMillion',
+        'outputMicrosPerMillion',
+        'cachedInputMicrosPerMillion'
+      ]
+    }
+    const model = {
+      inputMicrosPerMillion: 0,
+      outputMicrosPerMillion: 0,
+      cachedInputMicrosPerMillion: 0
+    }
+
+    render(
+      <SchemaForm
+        schema={schema}
+        model={model}
+        onModelChange={noop}
+        showErrors
+      />
+    )
+
+    for (const label of [
+      'Input Micros Per Million Tokens',
+      'Output Micros Per Million Tokens',
+      'Cached Input Micros Per Million Tokens'
+    ]) {
+      const field = screen.getByLabelText(new RegExp(`^${label}`))
+      expect(field).toHaveValue('0')
+      expect(field).toBeValid()
+    }
+  })
+
+  it('applies a numeric default whose value is zero', () => {
+    render(
+      <SchemaForm
+        schema={{
+          type: 'object',
+          properties: {
+            rate: { title: 'Rate', type: 'integer', default: 0 }
+          }
+        }}
+        model={{}}
+        onModelChange={noop}
+      />
+    )
+
+    expect(screen.getByLabelText('Rate')).toHaveValue('0')
+  })
 })

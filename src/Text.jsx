@@ -30,7 +30,7 @@ function Text(props) {
       }
       error={!valid}
       onChange={onChangeValidate}
-      value={value || ''}
+      value={value ?? ''}
       disabled={form.readonly}
       fullWidth
       required={form.required}

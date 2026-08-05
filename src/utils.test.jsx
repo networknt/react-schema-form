@@ -86,3 +86,19 @@ test('rejects a value that violates the conditional schema', () => {
   expect(valid.error).toContain('releaseType')
 }
 )
+
+test('retains zero-valued numeric bounds in generated forms', () => {
+  const result = utils.getDefaults({
+    type: 'object',
+    properties: {
+      rate: {
+        title: 'Rate',
+        type: 'integer',
+        minimum: 0,
+        maximum: 0
+      }
+    }
+  })
+
+  expect(result.form[0]).toMatchObject({ minimum: 0, maximum: 0 })
+})

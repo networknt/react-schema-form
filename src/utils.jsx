@@ -138,10 +138,10 @@ const stdFormObj = (name, schema, options) => {
   if (schema.readOnly || schema.readonly) {
     f.readonly = true
   }
-  if (schema.minimum) {
+  if (schema.minimum !== undefined) {
     f.minimum = schema.minimum + (schema.exclusiveMinimum ? 1 : 0)
   }
-  if (schema.maximum) {
+  if (schema.maximum !== undefined) {
     f.maximum = schema.maximum - (schema.exclusiveMaximum ? 1 : 0)
   }
 
