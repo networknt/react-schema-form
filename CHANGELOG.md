@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+## 1.1.1 - 2026-08-05
+
+### Changed
+- fixes #316 some form fields do not preserve numberic zero values
+- Merge pull request #315 from networknt/dependabot/npm_and_yarn/undici-7.29.0
+- Merge pull request #314 from networknt/dependabot/npm_and_yarn/example/postcss-8.5.25
+- Merge pull request #313 from networknt/dependabot/npm_and_yarn/fast-uri-3.1.5
+- Merge pull request #312 from networknt/dependabot/npm_and_yarn/postcss-8.5.25
+- Bump postcss from 8.5.12 to 8.5.25
+- fixes #311 upgrade dependencies for example to resolve security vulnerabilities
+- fixes #310 Replaced CircleCI with GitHub Actions
+
+
 ## 1.1.0 - 2026-07-21
 ### Added
 - Add the `structured` field with synchronized Form, JSON, and safe YAML tabs for object and array schemas.
