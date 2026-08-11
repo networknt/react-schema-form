@@ -102,3 +102,21 @@ test('retains zero-valued numeric bounds in generated forms', () => {
 
   expect(result.form[0]).toMatchObject({ minimum: 0, maximum: 0 })
 })
+
+test('caches field validators by complete schema instead of repeated leaf key', () => {
+  const stringResult = utils.validate({
+    key: ['a', 'timeout'],
+    type: 'text',
+    schema: { type: 'string' }
+  }, 'slow')
+  const integerResult = utils.validate({
+    key: ['b', 'timeout'],
+    type: 'number',
+    schema: { type: 'integer', minimum: 100 }
+  }, 5)
+
+  expect(stringResult).toEqual({ valid: true })
+  expect(integerResult.valid).toBe(false)
+  expect(integerResult.error).toContain('>= 100')
+  expect(integerResult.error).not.toContain('must be string')
+})

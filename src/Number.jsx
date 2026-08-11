@@ -1,6 +1,10 @@
 import React from 'react'
 import Text from './Text'
 import useSchemaField from './useSchemaField'
+import utils from './utils'
+
+const INTEGER_PATTERN = /^-?\d+$/
+const NUMBER_PATTERN = /^-?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/
 
 /**
  * There is no default number picker as part of Material-UI.
@@ -13,24 +17,33 @@ const NumberComponent = (props) => {
   } = props
   const { value, valid, error, onChangeValidate } = useSchemaField(props)
 
-  let inputValue = value || value === 0 ? value : ''
+  let inputValue = Object.is(value, -0)
+    ? '-0'
+    : value || value === 0 ? value : ''
   if (form.useLocalizer) inputValue = getLocalizedNumber(inputValue)
 
   const onChange = (e) => {
-    const type = form.schema ? form.schema.type : form.type
+    const schemaType = form.schema ? form.schema.type : form.type
+    const type = utils.stripNullType(schemaType)
+    const input = e.target.value
+    const trimmedInput = input.trim()
     let enteredValue = null
-    if (type === 'integer') {
-      enteredValue = parseInt(e.target.value, 10)
+    if (trimmedInput === '') {
+      enteredValue = null
+    } else if (type === 'integer') {
+      const parsed = Number(trimmedInput)
+      enteredValue = INTEGER_PATTERN.test(trimmedInput) && Number.isSafeInteger(parsed)
+        ? parsed
+        : input
     } else if (type === 'number') {
-      const values = e.target.value.split('.')
-      if (values.length < 2) {
-        enteredValue = parseInt(e.target.value, 10)
-      } else if (values.length > 1) {
-        if (values[1].length > 0) enteredValue = parseFloat(e.target.value)
-        else enteredValue = `${parseInt(values[0], 10)}.`
-      }
+      const parsed = Number(trimmedInput)
+      const unsafeInteger = INTEGER_PATTERN.test(trimmedInput) && !Number.isSafeInteger(parsed)
+      enteredValue = NUMBER_PATTERN.test(trimmedInput) && Number.isFinite(parsed)
+        && !trimmedInput.endsWith('.') && !unsafeInteger
+        ? parsed
+        : input
     }
-    onChangeValidate(enteredValue)
+    onChangeValidate(null, enteredValue)
   }
 
   return (

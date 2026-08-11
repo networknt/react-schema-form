@@ -1,9 +1,31 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import SchemaForm from './SchemaForm'
+import utils from './utils'
 
 const noop = () => {}
+
+function ControlledSchemaForm({ schema, initialModel, onModelChange, ...formProps }) {
+  const [model, setModel] = React.useState(initialModel)
+  const handleModelChange = (key, value) => {
+    onModelChange(key, value)
+    setModel((current) => {
+      const next = structuredClone(current)
+      utils.selectOrSet(key, next, value)
+      return next
+    })
+  }
+
+  return (
+    <SchemaForm
+      schema={schema}
+      model={model}
+      onModelChange={handleModelChange}
+      {...formProps}
+    />
+  )
+}
 
 describe('SchemaForm rendering extension points', () => {
   it('renders nested object fieldsets without requiring injected style classes', () => {
@@ -242,5 +264,224 @@ describe('SchemaForm rendering extension points', () => {
     )
 
     expect(screen.getByLabelText('Rate')).toHaveValue('0')
+  })
+
+  it('applies defaults to absent values without replacing explicit null', () => {
+    const onModelChange = vi.fn()
+    render(
+      <SchemaForm
+        schema={{
+          type: 'object',
+          properties: {
+            nullableName: {
+              title: 'Nullable name',
+              type: ['string', 'null'],
+              default: 'fallback'
+            },
+            missingName: {
+              title: 'Missing name',
+              type: 'string',
+              default: 'created'
+            }
+          }
+        }}
+        model={{ nullableName: null }}
+        onModelChange={onModelChange}
+      />
+    )
+
+    expect(screen.getByLabelText('Nullable name')).toHaveValue('')
+    expect(screen.getByLabelText('Missing name')).toHaveValue('created')
+    expect(onModelChange).toHaveBeenCalledWith(
+      ['missingName'],
+      'created',
+      'text',
+      expect.any(Object)
+    )
+    expect(onModelChange).not.toHaveBeenCalledWith(
+      ['nullableName'],
+      'fallback',
+      expect.anything(),
+      expect.anything()
+    )
+  })
+
+  it('feeds nested controlled changes back into the matching model path', () => {
+    const onModelChange = vi.fn()
+    render(
+      <ControlledSchemaForm
+        schema={{
+          type: 'object',
+          properties: {
+            limits: {
+              title: 'Limits',
+              type: 'object',
+              properties: {
+                requestLimit: {
+                  title: 'Request limit',
+                  type: ['integer', 'null']
+                }
+              }
+            }
+          }
+        }}
+        initialModel={{ limits: { requestLimit: 12 } }}
+        onModelChange={onModelChange}
+      />
+    )
+
+    const requestLimit = screen.getByLabelText('Request limit')
+    fireEvent.change(requestLimit, { target: { value: '' } })
+
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['limits', 'requestLimit'],
+      null
+    )
+    expect(requestLimit).toHaveValue('')
+  })
+
+  it('parses and clears nullable integer and number fields', () => {
+    const onModelChange = vi.fn()
+    render(
+      <ControlledSchemaForm
+        schema={{
+          type: 'object',
+          properties: {
+            tokenLimit: {
+              title: 'Token limit',
+              type: ['integer', 'null'],
+              default: 5
+            },
+            samplingRate: {
+              title: 'Sampling rate',
+              type: ['null', 'number']
+            },
+            retryCount: {
+              title: 'Retry count',
+              type: 'integer'
+            }
+          }
+        }}
+        initialModel={{ tokenLimit: 5, samplingRate: null, retryCount: 7 }}
+        onModelChange={onModelChange}
+        showErrors
+      />
+    )
+
+    const tokenLimit = screen.getByLabelText('Token limit')
+    const samplingRate = screen.getByLabelText('Sampling rate')
+    const retryCount = screen.getByLabelText('Retry count')
+
+    fireEvent.change(tokenLimit, { target: { value: '4096' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['tokenLimit'],
+      4096
+    )
+    expect(tokenLimit).toHaveValue('4096')
+
+    fireEvent.change(samplingRate, { target: { value: '0.25' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['samplingRate'],
+      0.25
+    )
+    expect(samplingRate).toHaveValue('0.25')
+
+    fireEvent.change(tokenLimit, { target: { value: '' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['tokenLimit'],
+      null
+    )
+    expect(tokenLimit).toHaveValue('')
+
+    fireEvent.change(tokenLimit, { target: { value: '-' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['tokenLimit'],
+      '-'
+    )
+    expect(tokenLimit).toHaveValue('-')
+    expect(tokenLimit).toBeInvalid()
+
+    fireEvent.change(tokenLimit, { target: { value: '-7' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['tokenLimit'],
+      -7
+    )
+    expect(tokenLimit).toHaveValue('-7')
+    expect(tokenLimit).toBeValid()
+
+    fireEvent.change(samplingRate, { target: { value: ' ' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['samplingRate'],
+      null
+    )
+    expect(samplingRate).toHaveValue('')
+
+    fireEvent.change(samplingRate, { target: { value: ' 42 ' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['samplingRate'],
+      42
+    )
+    expect(samplingRate).toHaveValue('42')
+    expect(samplingRate).toBeValid()
+
+    for (const invalid of ['abc', '0x10', 'Infinity']) {
+      fireEvent.change(samplingRate, { target: { value: invalid } })
+      expect(onModelChange).toHaveBeenLastCalledWith(
+        ['samplingRate'],
+        invalid
+      )
+      expect(samplingRate).toHaveValue(invalid)
+      expect(samplingRate).toBeInvalid()
+    }
+
+    fireEvent.change(samplingRate, { target: { value: '-' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['samplingRate'],
+      '-'
+    )
+    expect(samplingRate).toHaveValue('-')
+    expect(samplingRate).toBeInvalid()
+
+    fireEvent.change(samplingRate, { target: { value: '-0' } })
+    expect(onModelChange.mock.calls.at(-1)[0]).toEqual(['samplingRate'])
+    expect(Object.is(onModelChange.mock.calls.at(-1)[1], -0)).toBe(true)
+    expect(samplingRate).toHaveValue('-0')
+
+    fireEvent.change(samplingRate, { target: { value: '-0.' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['samplingRate'],
+      '-0.'
+    )
+    expect(samplingRate).toHaveValue('-0.')
+
+    fireEvent.change(samplingRate, { target: { value: '-0.2' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['samplingRate'],
+      -0.2
+    )
+    expect(samplingRate).toHaveValue('-0.2')
+
+    fireEvent.change(samplingRate, { target: { value: '-0.25' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['samplingRate'],
+      -0.25
+    )
+    expect(samplingRate).toHaveValue('-0.25')
+    expect(samplingRate).toBeValid()
+
+    fireEvent.change(retryCount, { target: { value: '12345678901234567' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['retryCount'],
+      '12345678901234567'
+    )
+    expect(retryCount).toHaveValue('12345678901234567')
+    expect(retryCount).toBeInvalid()
+
+    fireEvent.change(retryCount, { target: { value: '' } })
+    expect(onModelChange).toHaveBeenLastCalledWith(
+      ['retryCount'],
+      null
+    )
+    expect(retryCount).toHaveValue('')
   })
 })

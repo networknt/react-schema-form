@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
+- Preserve explicit `null` model values instead of replacing them with schema
+  defaults; defaults now apply only to absent values.
+- Support nullable numeric schemas, controlled clearing, finite JSON-style
+  numeric parsing, and visible validation for incomplete or invalid input.
+- Isolate compiled field validators by complete schema when nested fields reuse
+  the same leaf property name.
 
 ## 1.1.1 - 2026-08-05
 

@@ -9,7 +9,7 @@ const defaultValue = (props) => {
         value = utils.selectOrSet(props.form.key, props.model)
 
     // check if there is a default value
-    if (value === null || value === undefined) {
+    if (value === undefined) {
         if (props.form.default !== undefined) {
             value = props.form.default
         } else if (props.form.schema && props.form.schema.default !== undefined) {

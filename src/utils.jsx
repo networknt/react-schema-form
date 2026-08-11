@@ -735,11 +735,9 @@ const validate = (form, value) => {
   }
 
   // Handle empty values (text, textarea, and number fields)
-  if (value === "" || (form.type === "number" && (value === null || isNaN(parseFloat(value))))) {
+  if (value === "" || (form.type === "number" && value === null)) {
     value = undefined;
   }
-
-  const schemaKey = form.key[form.key.length - 1];
 
   const { schema } = form;
   const wrap = { type: "object", properties: {}, $schema: "http://json-schema.org/draft-07/schema#" };
@@ -748,6 +746,7 @@ const validate = (form, value) => {
   if (form.required) {
     wrap.required = [propName];
   }
+  const schemaKey = simpleHash(wrap);
 
   const validateSchema = compileAndCacheSchema(schemaKey, wrap); // Get pre-compiled function
 

@@ -67,7 +67,7 @@ class SchemaForm extends Component {
     const currentValue = utils.selectOrSet(key, model)
 
     // If current value is not setted and exist a default, apply the default over the model
-    if (isNil(currentValue) && !isNil(value))
+    if (currentValue === undefined && !isNil(value))
       onModelChange(key, value, form.type, form)
   }
 
